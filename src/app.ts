@@ -1,9 +1,13 @@
 //import express from "express"; 
 // if above is not supported by your project environment then follow as below
 import * as express from "express";
+import { SERVER_PORT } from './config/env.config';
+
 
 
 const app = express();
+
+console.log(SERVER_PORT);
 
 app.get("/", (req, res)=> {
   res.send("Hello");
