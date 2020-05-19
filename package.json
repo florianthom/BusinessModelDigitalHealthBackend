@@ -20,6 +20,7 @@
   "homepage": "https://github.com/FlorianTh2/BusinessModelDigitalHealthBackend#readme",
   "dependencies": {
     "apollo-server-express": "^2.13.1",
+    "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "dotenv-cli": "^3.1.0",
     "env-var": "^6.1.1",
