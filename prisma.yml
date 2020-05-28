@@ -1,0 +1,17 @@
+endpoint: https://canvasprisma-9a0fe0d5ce.herokuapp.com/BusinessModelDigitalHealthBackend/dev
+datamodel: ./src/prisma/datamodel.prisma
+secret: ${env:MY_SECRET}
+
+
+generate:
+  - generator: typescript-client
+    output: ./src/generated/prisma-client/
+  - generator: graphql-schema
+    output: ./src/generated/schema/prisma.graphql
+
+seed:
+  run: ts-node ./src/prisma/seed.ts
+
+hooks:
+  post-deploy:
+    - prisma generate
