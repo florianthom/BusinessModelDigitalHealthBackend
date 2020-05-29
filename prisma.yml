@@ -1,6 +1,6 @@
 endpoint: https://canvasprisma-9a0fe0d5ce.herokuapp.com/BusinessModelDigitalHealthBackend/dev
 datamodel: ./src/prisma/datamodel.prisma
-secret: ${env:MY_SECRET}
+secret: ${env:MY_SECRET_PRISMA_YML}
 
 
 generate:

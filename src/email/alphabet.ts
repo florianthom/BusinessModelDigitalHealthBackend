@@ -1,0 +1,1 @@
+export const Alphabet = `ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890!§*-`;

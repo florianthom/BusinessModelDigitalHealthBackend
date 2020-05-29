@@ -1,21 +1,29 @@
-# import * from './generated/schema/prisma.graphql'
+# import * from '../generated/schema/prisma.graphql'
 
 type Query {
   """User login"""
   login(email: String!, password: String!): AuthPayload!
+  
   """Check if email address is free"""
   checkEmailAddress(email: String!): Boolean!
+
+  getProject(id: ID!) : Project!
+
+  getAllProjects: [Project!]!
 }
 
 type Mutation {
   """User registration"""
   registrate(data: NewUser!): User!
+  
   """Delete User"""
   deleteUser: User
 }
 
+"""
 type Subscription {
 }
+"""
 
 type AuthPayload {
   token: String!,
