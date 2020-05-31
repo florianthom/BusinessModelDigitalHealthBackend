@@ -2,7 +2,7 @@
   "name": "businessmodeldigitalhealthbackend",
   "version": "1.0.0",
   "description": "",
-  "main": "lib/index.js",
+  "main": "lib/app.js",
   "scripts": {
     "start": "node lib/app.js",
     "dev": "npm run build && dotenv -- nodemon src/app.ts",
