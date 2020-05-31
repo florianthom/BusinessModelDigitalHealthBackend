@@ -1,14 +1,14 @@
 //import express from "express"; 
 // if above is not supported by your project environment then follow as below
-import * as express from "express";
-import { SERVER_PORT } from './config/env.config';
 import { ApolloServer, gql } from 'apollo-server-express';
+import * as express from 'express';
 import * as http from 'http';
+import { prisma, User } from './generated/prisma-client/index';
 import { importSchema } from 'graphql-import';
-import * as testRoutes from "./routes/tests";
-import { prisma, User } from './generated/prisma-client';
 import { operationAuthorized, verifyToken } from './auth/Authorization';
 import { Resolver } from './resolvers/Resolvers';
+import { SERVER_PORT } from './config/env.config';
+
 
 
 const PORT = (process.env.PORT) ? process.env.PORT : SERVER_PORT;
@@ -29,15 +29,15 @@ const server: ApolloServer = new ApolloServer({
       {
           header.authToken = req.headers.authorization;
       }
-
-      const authRequired = (connection) ? operationAuthorized(connection.query) : operationAuthorized(req.body.query);
-
+      
+      const authRequired = false;
+      // auth disabled for development
+      //const authRequired = (connection) ? operationAuthorized(connection.query) : operationAuthorized(req.body.query);
       const response = {
           db: prisma,
           req: req,
           userId: verifyToken(header, authRequired)
       };
-
       return response;
   },
 
@@ -70,4 +70,19 @@ const httpServer = http.createServer(app);
 server.installSubscriptionHandlers(httpServer);
 
 // http://localhost:5000/graphql
+// {
+//     "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNqcDl2ZzY3YzAwMGkwOTUxMWo5cWlveXAiLCJpYXQiOjE1NDM5MzU5MjMsImV4cCI6MTU0NjUyNzkyM30.jzJTQdS2EDQdMF2gFiMrC2xboHXbSBB5lQQ0mOVLTcg"
+// }
 httpServer.listen(PORT, () => console.log("Server started on port " + PORT));
+
+/* 
+
+query {
+  login (email: "hi", password: "asdf"){
+    user {
+      firstName
+    }
+  }
+}
+
+*/

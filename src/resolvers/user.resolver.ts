@@ -16,7 +16,8 @@ export const UserQuery = {
                 throw Error('Wrong password');
             }
 
-/* 
+/*
+            // commented because for now i dont know whether we want to restrict login if not verified
             if (!user.verified)
             {
                 throw Error('Email is not verified');
@@ -37,6 +38,18 @@ export const UserQuery = {
             return !!(await ctx.db.user({ email }));
         }
     },
+
+    getUser: {
+        resolve: (root, args, ctx, info) => {
+            return ctx.db.user({id: args.id})
+        }
+    },
+
+    getAllUsers: {
+        resolve: (root, args, ctx, info) => {
+            return ctx.db.users();
+        }
+    }
 };
 
 

@@ -7,6 +7,10 @@ type Query {
   """Check if email address is free"""
   checkEmailAddress(email: String!): Boolean!
 
+  getUser(id: ID!) : User!
+
+  getAllUsers: [User!]!
+
   getProject(id: ID!) : Project!
 
   getAllProjects: [Project!]!
