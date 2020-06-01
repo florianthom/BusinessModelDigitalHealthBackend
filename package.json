@@ -2,11 +2,15 @@
   "name": "businessmodeldigitalhealthbackend",
   "version": "1.0.0",
   "description": "",
+  "engines": {
+    "node": "12.16.x"
+  },
   "main": "lib/app.js",
   "scripts": {
     "start": "node lib/app.js",
     "dev": "npm run build && dotenv -- nodemon src/app.ts",
-    "build": "tsc -p ."
+    "build": "tsc -p .",
+    "postinstall": "npm run build"
   },
   "repository": {
     "type": "git",
