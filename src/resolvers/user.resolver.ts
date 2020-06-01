@@ -2,8 +2,8 @@ import { AuthPayload } from '../types/customTypes';
 import * as jwt from 'jsonwebtoken';
 import { TOKEN_EXPIRY_TIME, TOKEN_SECRET } from '../config/env.config';
 import { generateSHA512Hash } from '../auth/Cryptography';
-import { createHtml, createVerification } from '../email/MailCreator';
-import { sendMail } from '../email/Email';
+import { createHtml, createVerification } from '../email/mailCreator';
+import { sendMail } from '../email/email';
 
 
 export const UserQuery = {

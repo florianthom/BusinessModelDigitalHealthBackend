@@ -1,5 +1,5 @@
 import { VERIFICATIONCODELENGTH } from '../config/env.config';
-import { Alphabet } from './Alphabet';
+import { Alphabet } from './alphabet';
 
 export const createVerification = () => {
     let code = '';
