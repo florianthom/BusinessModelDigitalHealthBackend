@@ -6,7 +6,7 @@ import * as http from 'http';
 import { prisma, User } from './generated/prisma-client/index';
 import { importSchema } from 'graphql-import';
 import { operationAuthorized, verifyToken } from './auth/Authorization';
-import { Resolver } from './resolvers/Resolvers';
+import { Resolver } from './resolvers/resolvers';
 import { SERVER_PORT } from './config/env.config';
 
 
