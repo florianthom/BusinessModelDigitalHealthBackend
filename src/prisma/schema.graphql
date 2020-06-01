@@ -14,6 +14,22 @@ type Query {
   getProject(id: ID!) : Project!
 
   getAllProjects: [Project!]!
+
+  getCanvas(id: ID!) : Canvas!
+
+  getAllCanvases: [Canvas!]!
+
+  getPattern(id: ID!) : Pattern!
+
+  getAllPattern: [Pattern!]!
+
+  getTable(id: ID!) : Table!
+
+  getAllTables: [Table!]!
+
+  getCompany: Company!
+
+  getAllCompanies: [Company!]!
 }
 
 type Mutation {
@@ -22,6 +38,12 @@ type Mutation {
   
   """Delete User"""
   deleteUser: User
+
+  createProject(name: String): Project!
+
+  updateProject(projectId: ID!, data: ProjectUpdateInput!): Project!
+
+  deleteProject(projectId: ID!): Project!
 }
 
 """
@@ -34,12 +56,10 @@ type AuthPayload {
   user: User!
 }
 
-input GrantAccess {
-  email: String!
-  role: Role!
-}
 
 input NewUser {
+  firstName: String!,
+  lastName: String!,
+  email: String!,
   password: String!
-  email: String!
 }

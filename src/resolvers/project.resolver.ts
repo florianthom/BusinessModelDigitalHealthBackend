@@ -18,5 +18,47 @@ export const ProjectQuery = {
 };
 
 
+
 export const ProjectMutation = {
+
+/* 
+    mutation{
+        createProject(
+          name: "testProjectPlayground"
+        ){
+          name
+        }
+      }
+ */
+
+    createProject: {
+        resolve: async (root, args, ctx, info) => {
+            const userId = ctx.userId;
+            return await ctx.db.createProject({
+                user_id: {connect: {id: userId}},
+                name: args.name, // projectName
+                createdBy: {connect: {id: userId}},
+                updatedBy: {connect: {id: userId}}
+            })
+        }
+    },
+
+    updateProject: {
+        resolve: async (root, args, ctx, info) => {
+            const userId = ctx.userId;
+            return ctx.db.updateProject({
+                data: args.data,
+                where: {id: args.projectId}
+            });
+        }
+    },
+
+    deleteProject: {
+        resolve: (root, args,ctx, info) => {
+            return ctx.db.deleteProject({
+                id: args.projectId
+            });
+
+        }
+    }
 };

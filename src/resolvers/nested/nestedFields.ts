@@ -1,17 +1,13 @@
-/* 
-import { Access } from './Access';
-import { Container } from './Container';
-import { PostIt } from './PostIt';
-import { Template } from './Template';
-import { TextField } from './TextField';
-import { User } from './User';
+import {Canvas} from "./canvas";
+import {User} from "./user";
+import {Project} from "./project";
+import {Table} from "./table";
+import {Company} from "./company";
 
 export const NestedFields = {
-    Access,
-    Container,
-    PostIt,
-    Template,
-    TextField,
-    User
+    Canvas,
+    User,
+    Project,
+    Table,
+    Company
 };
- */

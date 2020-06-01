@@ -36,7 +36,7 @@ const server: ApolloServer = new ApolloServer({
       const response = {
           db: prisma,
           req: req,
-          userId: verifyToken(header, authRequired)
+          userId: "ckarcrczl00080776jzr3qcyh" // verifyToken(header, authRequired)
       };
       return response;
   },
@@ -75,13 +75,19 @@ server.installSubscriptionHandlers(httpServer);
 // }
 httpServer.listen(PORT, () => console.log("Server started on port " + PORT));
 
-/* 
+/*
 
 query {
   login (email: "hi", password: "asdf"){
     user {
       firstName
     }
+  }
+}
+
+query {
+	getProject(id: "ckarcrd6q000g0776u88x800o"){
+    
   }
 }
 

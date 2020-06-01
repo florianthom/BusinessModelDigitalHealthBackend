@@ -7,6 +7,18 @@ import { sendMail } from '../email/email';
 
 
 export const UserQuery = {
+    
+/* 
+    query {
+        login(
+          email: "thom.florian.97@googlemail.com",
+          password: "graphql"
+        ){
+          token
+        }
+      }
+ */
+
     login: {
         resolve: async (root, {email, password}, ctx) => {
             const user = await ctx.db.user({ email: email });
@@ -54,6 +66,21 @@ export const UserQuery = {
 
 
 export const UserMutation = {
+
+/* 
+    mutation {
+        registrate( data: {
+          firstName: "testPlayground1",
+          lastName: "testPlayground1",
+          email: "alice1@prisma.io",
+          password: "graphql"
+        }){
+          id
+          email
+        }
+      }
+*/
+
     registrate: {
         resolve: async (root, {data}, ctx) => {
             const verificationCode = createVerification();
@@ -61,12 +88,12 @@ export const UserMutation = {
             const htmlContent = createHtml(
                             ctx.req.protocol,
                             ctx.req.get('host'),
-                            data.username,
+                            data.firstName,
                             verificationCode
             );
 
             const newUser = await ctx.db.createUser({
-                firstName: data.firstname,
+                firstName: data.firstName,
                 lastName: data.lastName,
                 email: data.email,
                 password: generateSHA512Hash(data.password),
