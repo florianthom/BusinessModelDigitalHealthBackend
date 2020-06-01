@@ -7,9 +7,11 @@
   },
   "main": "lib/app.js",
   "scripts": {
+    "build": "tsc",
+    "serve": "npm run build && npm run start",
+    "serve-dev": "npm run build && dotenv -- nodemon -e ts",
     "start": "node lib/app.js",
-    "dev": "npm run build && dotenv -- nodemon src/app.ts",
-    "build": "tsc -p .",
+    "test": "echo \"Error: no test specified\" && exit 1",
     "postinstall": "npm run build"
   },
   "repository": {
