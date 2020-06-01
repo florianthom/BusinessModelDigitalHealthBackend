@@ -1,5 +1,25 @@
 {
   "compilerOptions": {
+    "lib": ["es2016", "dom", "esnext.asynciterable"],
+    "rootDir": "./src",
+    "module": "commonjs",
+    "noImplicitReturns": false,
+    "outDir": "lib",
+    "target": "es2017",
+    "sourceMap": true,
+    "skipLibCheck": true
+  },
+  "compileOnSave": true,
+  "include": ["src"],
+  "exclude": [
+    "node_modules"
+  ]
+}
+
+
+
+/* {
+  "compilerOptions": {
     "target": "es2017",
     "rootDir": "./src",
     "outDir": "./lib",
@@ -11,7 +31,7 @@
     //"moduleResolution": "node"
   },
   "compileOnSave": true
-}
+} */
 
 
 // default file generated with tsc --inti
