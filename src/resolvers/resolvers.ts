@@ -5,6 +5,8 @@ import {PatternQuery, PatternMutation} from "./pattern.resolver";
 import {NestedFields} from "./nested/nestedFields";
 import {TableQuery, TableMutation} from "./table.resolver";
 import {CompanyQuery, CompanyMutation} from "./company.resolver";
+import {KeyPartnerQuery, KeyPartnerMutation} from "./keyPartner.resolver";
+import {RevenueStreamQuery, RevenueStreamMutation} from "./revenueStream.resolver";
 
 const Query = {
     ...UserQuery,
@@ -12,7 +14,9 @@ const Query = {
     ...CanvasQuery,
     ...PatternQuery,
     ...TableQuery,
-    ...CompanyQuery
+    ...CompanyQuery,
+    ...KeyPartnerQuery,
+    ...RevenueStreamQuery
 }
 
 const Mutation = {
@@ -21,7 +25,9 @@ const Mutation = {
     ...CanvasMutation,
     ...PatternMutation,
     ...TableMutation,
-    ...CompanyMutation
+    ...CompanyMutation,
+    ...KeyPartnerMutation,
+    ...RevenueStreamMutation
 
 }
 

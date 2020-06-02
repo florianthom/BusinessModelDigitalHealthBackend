@@ -43,10 +43,27 @@ export const ProjectMutation = {
         }
     },
 
+    /* 
+        mutation{
+            updateProject(
+            projectId: "ckarcrdby000o0776q2zfq0lt",
+            data: {
+                name: "newProjectName",
+                updatedBy: {connect: {
+                id: "ckarcrczl00080776jzr3qcyh"
+                }
+                }
+            }
+            ){
+            name
+            }
+        }
+    */
+
     updateProject: {
         resolve: async (root, args, ctx, info) => {
             const userId = ctx.userId;
-            return ctx.db.updateProject({
+            return await ctx.db.updateProject({
                 data: args.data,
                 where: {id: args.projectId}
             });
@@ -54,8 +71,8 @@ export const ProjectMutation = {
     },
 
     deleteProject: {
-        resolve: (root, args,ctx, info) => {
-            return ctx.db.deleteProject({
+        resolve: async (root, args,ctx, info) => {
+            return await ctx.db.deleteProject({
                 id: args.projectId
             });
 

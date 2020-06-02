@@ -27,9 +27,23 @@ type Query {
 
   getAllTables: [Table!]!
 
-  getCompany: Company!
+  getCompany(id: ID!): Company!
 
   getAllCompanies: [Company!]!
+
+  getKeyPartner(id: ID!): KeyPartner!
+
+  getAllKeyPartners: [KeyPartner!]!
+
+  getRevenueStream(id: ID!): RevenueStream!
+
+  getAllRevenueStreams: [RevenueStream!]!
+
+  createCompany(data: CompanyCreateInput!): Company!
+
+  updateCompany(companyId: ID!, data: CompanyUpdateInput!): Company!
+
+  deleteCompany(companyId: ID!): Company!
 }
 
 type Mutation {
@@ -44,6 +58,31 @@ type Mutation {
   updateProject(projectId: ID!, data: ProjectUpdateInput!): Project!
 
   deleteProject(projectId: ID!): Project!
+
+  createCanvas(data: CanvasCreateInput!): Canvas!
+
+  updateCanvas(canvasId: ID!, data: CanvasUpdateInput!): Canvas!
+
+  deleteCanvas(canvasId: ID!): Canvas!
+
+  createKeyPartner(data: KeyPartnerCreateInput!): KeyPartner!
+
+  updateKeyPartner(keyPartnerId: ID!, data: KeyPartnerUpdateInput!): KeyPartner!
+
+  deleteKeyPartner(keyPartnerId: ID!): KeyPartner!
+
+  createRevenueStream(data: RevenueStreamCreateInput!): RevenueStream!
+  
+  updateRevenueStream(revenueStreamId: ID!, data: RevenueStreamUpdateInput!): RevenueStream!
+
+  deleteRevenueStream(revenueStreamId: ID!):RevenueStream!
+
+  createPattern(data: PatternCreateInput!): Pattern!
+
+  updatePattern(patternId: ID!, data: PatternUpdateInput!):Pattern!
+
+  deletePattern(patternId: ID!):Pattern!
+  
 }
 
 """
