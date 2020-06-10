@@ -30,13 +30,14 @@ const server: ApolloServer = new ApolloServer({
           header.authToken = req.headers.authorization;
       }
       
-      const authRequired = false;
       // auth disabled for development
-      //const authRequired = (connection) ? operationAuthorized(connection.query) : operationAuthorized(req.body.query);
+      // const authRequired = false;
+      const authRequired = (connection) ? operationAuthorized(connection.query) : operationAuthorized(req.body.query);
+      console.log(authRequired);
       const response = {
           db: prisma,
           req: req,
-          userId: "ckarcrczl00080776jzr3qcyh" // verifyToken(header, authRequired)
+          userId: "ckarcrczl00080776jzr3qcyh" // "ckarcrczl00080776jzr3qcyh" // verifyToken(header, authRequired)
       };
       return response;
   },

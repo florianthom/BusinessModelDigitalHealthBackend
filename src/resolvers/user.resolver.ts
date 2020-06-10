@@ -28,18 +28,13 @@ export const UserQuery = {
                 throw Error('Wrong password');
             }
 
-/*
-            // commented because for now i dont know whether we want to restrict login if not verified
-            if (!user.verified)
-            {
-                throw Error('Email is not verified');
-            }
- */
-
+            let token = jwt.sign({ userId: user.id }, TOKEN_SECRET, { expiresIn: TOKEN_EXPIRY_TIME })
             const authPayload: AuthPayload = {
                 user,
-                token: jwt.sign({ userId: user.id }, TOKEN_SECRET, { expiresIn: TOKEN_EXPIRY_TIME })
+                token: token
             };
+
+            console.log("\n\n\n\n Token: " + token +  "\n\n\n\n");
 
             return authPayload;
         }

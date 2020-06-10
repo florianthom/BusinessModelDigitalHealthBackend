@@ -7,13 +7,11 @@ const WHITELIST = [
     'registrate',
     'checkUsername',
     'checkEmailAddress',
+    '__Schema',
+
 /*     
-    'getTemplate',
-    'getAllTemplates',
-    'createTemplate',
- */
-    '__Schema'
-    ];
+    "getAllCanvases"
+ */    ];
 
 export const verifyToken = (authHeader: {authToken: string}, tokenRequired = true) => {
     if (authHeader.authToken) {
@@ -21,15 +19,21 @@ export const verifyToken = (authHeader: {authToken: string}, tokenRequired = tru
         try {
             const decoded = jwt.verify(token, TOKEN_SECRET);
             return decoded.userId;
-        } catch (err) {
-            throw new AuthenticationError('Failed to verify token');
+        }
+        catch (err)
+        {
+            console.log()
+            if (tokenRequired)
+            {
+                throw new AuthenticationError('Failed to verify token');
+            }
         }
     }
-    if (tokenRequired) {
+
+    if (tokenRequired)
+    {
         throw new AuthenticationError('No permission, access denied');
-    } /* else {
-        console.log('Connection without token allowed');
-    } */
+    }
 };
 
 export const operationAuthorized = (request: any): boolean => {
