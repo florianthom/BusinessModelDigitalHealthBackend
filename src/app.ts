@@ -15,46 +15,43 @@ const PORT = (process.env.PORT) ? process.env.PORT : SERVER_PORT;
 const app = express();
 
 const server: ApolloServer = new ApolloServer({
-  typeDefs: gql(importSchema("./src/prisma/schema.graphql")),
+    typeDefs: gql(importSchema("./src/prisma/schema.graphql")),
+    resolvers: Resolver,
+    // connection-object for apollo / prisma / graphql subscriptions
+    context: ({req, connection,res}) => {
+        let header = { authToken: "" };
+        if (connection)
+        {
+            header = connection.context;
+        } else
+        {
+            header.authToken = req.headers.authorization;
+        } 
+        // auth disabled for development
+        // const authRequired = false;
+        const authRequired = (connection) ? operationAuthorized(connection.query) : operationAuthorized(req.body.query);
+        console.log("auth required?: " + authRequired);
+        const response = {
+            db: prisma,
+            req: req,
+            userId: verifyToken(header, authRequired) // "ckarcrczl00080776jzr3qcyh" // verifyToken(header, authRequired)
+        };
+        return response;
+    },
 
-  resolvers: Resolver,
+    subscriptions: {
+        onConnect: (connectionParams: any) => {
+            console.log('Connection initiated');
+            return { authToken: connectionParams.Authorization };
+        },
+        onDisconnect: () => {
+            console.log('Web Socket were disconnected');
+        }
+    },
 
-  // connection-object for apollo / prisma / graphql subscriptions
-  context: ({req, connection,res}) => {
-      let header = { authToken: "" };
-      if (connection)
-      {
-          header = connection.context;
-      } else
-      {
-          header.authToken = req.headers.authorization;
-      }
-      
-      // auth disabled for development
-      // const authRequired = false;
-      const authRequired = (connection) ? operationAuthorized(connection.query) : operationAuthorized(req.body.query);
-      console.log(authRequired);
-      const response = {
-          db: prisma,
-          req: req,
-          userId: "ckarcrczl00080776jzr3qcyh" // "ckarcrczl00080776jzr3qcyh" // verifyToken(header, authRequired)
-      };
-      return response;
-  },
+    playground: true,
 
-  subscriptions: {
-      onConnect: (connectionParams: any) => {
-          console.log('Connection initiated');
-          return { authToken: connectionParams.Authorization };
-      },
-      onDisconnect: () => {
-          console.log('Web Socket were disconnected');
-      }
-  },
-
-  playground: true,
-
-  introspection: true
+    introspection: true
 });
 
 // request without router class

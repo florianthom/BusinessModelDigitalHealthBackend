@@ -1,6 +1,8 @@
 // prisma seed -r
 
 import { prisma } from '../generated/prisma-client';
+import { generateSHA512Hash } from '../auth/Cryptography';
+
 
 // create example user with example relation
 // create example company with example pattern and example relations
@@ -10,7 +12,7 @@ let testUser1 =  await prisma.createUser({
     firstName: 'firstnameTest1',
     lastName: 'lastnameTest1',
     email: 'test1@test1.de',
-    password: 'test1',
+    password: generateSHA512Hash('test1'),
     role: "ADMIN",
     project_ids: {}
 })
