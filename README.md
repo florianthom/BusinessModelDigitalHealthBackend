@@ -6,3 +6,7 @@ BusinessModelDigitalHealth-Backend
 // npm install -g prisma
 // npm install -g typescript
 // npm install -g ts-node
+
+// prisma reset
+// prisma deploy
+// prisma generate

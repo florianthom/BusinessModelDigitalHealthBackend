@@ -17,7 +17,7 @@ type User {
   verified: Boolean! @default(value: false)
   phoneNumber: String
   
-  updatedBy: User @relation(name: "UserRecourdUpdatedBy", link: INLINE)
+  updatedBy: User @relation(name: "UserRecordUpdatedBy", link: INLINE)
   createdAt: DateTime! @createdAt
   updatedAt:  DateTime! @updatedAt
 }
@@ -32,8 +32,8 @@ type Project{
 
   name: String!
 
-  createdBy: User! @relation(name: "ProjectRecourdCreatedBy", link: INLINE)
-  updatedBy: User! @relation(name: "ProjectRecourdUpdatedBy", link: INLINE)
+  createdBy: User! @relation(name: "ProjectRecordCreatedBy", link: INLINE)
+  updatedBy: User! @relation(name: "ProjectRecordUpdatedBy", link: INLINE)
   createdAt: DateTime! @createdAt
   updatedAt:  DateTime! @updatedAt
 }
@@ -42,14 +42,14 @@ type Canvas{
   id: ID! @id
 
   project_id: Project! @relation(name: "CanvasByProject", link: INLINE, onDelete: SET_NULL)
+  strategy_id: Strategy @relation(name: "CanvasByStrategy", link: INLINE, onDelete: SET_NULL)
   pattern_ids: [Pattern!]! @relation(name: "PatternByCanvas", onDelete: SET_NULL)
   table_id: Table! @relation(link: INLINE, , onDelete: CASCADE)
 
-
   name: String!
 
-  createdBy: User! @relation(name: "CanvasRecourdCreatedBy", link: INLINE)
-  updatedBy: User! @relation(name: "CanvasRecourdUpdatedBy", link: INLINE)
+  createdBy: User! @relation(name: "CanvasRecordCreatedBy", link: INLINE)
+  updatedBy: User! @relation(name: "CanvasRecordUpdatedBy", link: INLINE)
   createdAt: DateTime! @createdAt
   updatedAt:  DateTime! @updatedAt
 }
@@ -62,12 +62,52 @@ type Pattern{
   canvas_ids: [Canvas!]! @relation(name: "PatternByCanvas", onDelete: SET_NULL)
   table_id: Table! @relation(link: INLINE, , onDelete: CASCADE)
   company_ids: [Company!]! @relation(name: "CompanyByPattern", onDelete: SET_NULL)
+  strategy_pattern_ids: [StrategyPattern!]! @relation(name: "PatternByStrategyPattern", onDelete: SET_NULL)
+
+  name: String!
+  description: String
+  actorWeight: Int
+  valuePropositionWeight: Int
+  valueCreationWeight: Int
+  valueDeliveryWeight: Int
+  revenueWeight: Int
+  expenseWeight: Int
+  networkEffectWeight: Int
+  regulatoryWeight: Int
+  technicalInfrastractureWeight: Int
+
+
+
+  createdBy: User! @relation(name: "PatternRecordCreatedBy", link: INLINE)
+  updatedBy: User! @relation(name: "PatternRecordUpdatedBy", link: INLINE)
+  createdAt: DateTime! @createdAt
+  updatedAt:  DateTime! @updatedAt
+}
+
+
+type Strategy{
+  id: ID! @id
+
+  canvas_ids: [Canvas!]! @relation(name: "CanvasByStrategy", onDelete: CASCADE)
+  strategy_pattern_ids: [StrategyPattern!]! @relation(name: "StrategyByStrategyPattern", onDelete: SET_NULL)
 
   name: String!
   description: String
 
-  createdBy: User! @relation(name: "PatternRecourdCreatedBy", link: INLINE)
-  updatedBy: User! @relation(name: "PatternRecourdUpdatedBy", link: INLINE)
+  createdBy: User! @relation(name: "StrategyRecordCreatedBy", link: INLINE)
+  updatedBy: User! @relation(name: "StrategyRecordUpdatedBy", link: INLINE)
+  createdAt: DateTime! @createdAt
+  updatedAt:  DateTime! @updatedAt
+}
+
+type StrategyPattern{
+  id: ID! @id
+
+  strategy_id: Strategy! @relation(name: "StrategyByStrategyPattern", link: INLINE, onDelete: SET_NULL)
+  pattern_id: Pattern! @relation(name: "PatternByStrategyPattern", link: INLINE, onDelete: SET_NULL)
+
+  weight: Int!
+
   createdAt: DateTime! @createdAt
   updatedAt:  DateTime! @updatedAt
 }
@@ -76,15 +116,15 @@ type Pattern{
 type Table{
   id: ID! @id
 
-  key_partner_entry_ids: [KeyPartner!]! @relation(name: "KeyPartnerByTable", onDelete: SET_NULL)
-  reventue_stream_entry_ids: [RevenueStream!]! @relation(name: "RevenueStreamByTable", onDelete: SET_NULL)
-  key_activity_entry_ids: [KeyActitvity!]! @relation(name: "KeyActitvityByTable", onDelete: SET_NULL)
-  customer_relationship_entry_ids: [CustomerRelationship!]! @relation(name: "CustomerRelationshipByTable", onDelete: SET_NULL)
+  actor_entry_ids: [Actor!]! @relation(name: "ActorByTable", onDelete: SET_NULL)
   value_proposition_entry_ids: [ValueProposition!]! @relation(name: "ValuePropositionByTable", onDelete: SET_NULL)
-  cost_structure_entry_ids: [CostStructure!]! @relation(name: "CostStructureByTable", onDelete: SET_NULL)
-  customer_segment_entry_ids: [CustomerSegment!]! @relation(name: "CustomerSegmentByTable", onDelete: SET_NULL)
-  key_resource_entry_ids: [KeyResource!]! @relation(name: "KeyResourceByTable", onDelete: SET_NULL)
-  channel_entry_ids: [Channel!]! @relation(name: "ChannelByTable", onDelete: SET_NULL)
+  value_creation_entry_ids: [ValueCreation!]! @relation(name: "ValueCreationByTable", onDelete: SET_NULL)
+  value_delivery_entry_ids: [ValueDelivery!]! @relation(name: "ValueDeliveryByTable", onDelete: SET_NULL)
+  revenue_entry_ids: [Revenue!]! @relation(name: "RevenueByTable", onDelete: SET_NULL)
+  expense_entry_ids: [Expense!]! @relation(name: "ExpenseByTable", onDelete: SET_NULL)
+  network_effect_entry_ids: [NetworkEffect!]! @relation(name: "NetworkEffectByTable", onDelete: SET_NULL)
+  technical_infrastructure_entry_ids: [TechnicalInfrastracture!]! @relation(name: "TechnicalInfrastractureByTable", onDelete: SET_NULL)
+  regulatory_entry_ids: [Regulatory!]! @relation(name: "RegulatoryByTable", onDelete: SET_NULL)
 }
 
 
@@ -105,58 +145,16 @@ type Company{
 
 """Table section"""
 
-type KeyPartner{
+type Actor{
   id: ID! @id
 
-  table_ids: [Table!]! @relation(name: "KeyPartnerByTable", onDelete: SET_NULL)
+  table_ids: [Table!]! @relation(name: "ActorByTable", onDelete: SET_NULL)
 
   text: String!
   note: String
 
-  createdBy: User! @relation(name: "KeyPartnerEntryCreatedBy", link: INLINE)
-  updatedBy: User! @relation(name: "KeyPartnerEntryUpdatedBy", link: INLINE)
-  createdAt: DateTime! @createdAt
-  updatedAt:  DateTime! @updatedAt
-}
-
-type RevenueStream{
-  id: ID! @id
-
-  table_ids: [Table!]! @relation(name: "RevenueStreamByTable", onDelete: SET_NULL)
-
-  text: String!
-  note: String
-
-  createdBy: User! @relation(name: "RevenueStreamEntryCreatedBy", link: INLINE)
-  updatedBy: User! @relation(name: "RevenueStreamEntryUpdatedBy", link: INLINE)
-  createdAt: DateTime! @createdAt
-  updatedAt:  DateTime! @updatedAt
-}
-
-type KeyActitvity{
-  id: ID! @id
-
-  table_ids: [Table!]! @relation(name: "KeyActitvityByTable", onDelete: SET_NULL)
-
-  text: String!
-  note: String
-
-  createdBy: User! @relation(name: "KeyActitvityEntryCreatedBy", link: INLINE)
-  updatedBy: User! @relation(name: "KeyActitvityEntryUpdatedBy"link: INLINE)
-  createdAt: DateTime! @createdAt
-  updatedAt:  DateTime! @updatedAt
-}
-
-type CustomerRelationship{
-  id: ID! @id
-
-  table_ids: [Table!]! @relation(name: "CustomerRelationshipByTable", onDelete: SET_NULL)
-
-  text: String!
-  note: String
-
-  createdBy: User! @relation(name: "CustomerRelationshipEntryCreatedBy", link: INLINE)
-  updatedBy: User! @relation(name: "CustomerRelationshipEntryUpdatedBy", link: INLINE)
+  createdBy: User! @relation(name: "ActorEntryCreatedBy", link: INLINE)
+  updatedBy: User! @relation(name: "ActorEntryUpdatedBy", link: INLINE)
   createdAt: DateTime! @createdAt
   updatedAt:  DateTime! @updatedAt
 }
@@ -175,58 +173,100 @@ type ValueProposition{
   updatedAt:  DateTime! @updatedAt
 }
 
-type CostStructure{
+type ValueCreation{
   id: ID! @id
 
-  table_ids: [Table!]! @relation(name: "CostStructureByTable", onDelete: SET_NULL)
+  table_ids: [Table!]! @relation(name: "ValueCreationByTable", onDelete: SET_NULL)
 
   text: String!
   note: String
 
-  createdBy: User! @relation(name: "CostStructureEntryCreatedBy", link: INLINE)
-  updatedBy: User! @relation(name: "CostStructureEntryUpdatedBy", link: INLINE)
+  createdBy: User! @relation(name: "ValueCreationEntryCreatedBy", link: INLINE)
+  updatedBy: User! @relation(name: "ValueCreationEntryUpdatedBy"link: INLINE)
   createdAt: DateTime! @createdAt
   updatedAt:  DateTime! @updatedAt
 }
 
-type CustomerSegment{
+type ValueDelivery{
   id: ID! @id
 
-  table_ids: [Table!]! @relation(name: "CustomerSegmentByTable", onDelete: SET_NULL)
+  table_ids: [Table!]! @relation(name: "ValueDeliveryByTable", onDelete: SET_NULL)
 
   text: String!
   note: String
 
-  createdBy: User! @relation(name: "CustomerSegmentEntryCreatedBy", link: INLINE)
-  updatedBy: User! @relation(name: "CustomerSegmentEntryUpdatedBy", link: INLINE)
+  createdBy: User! @relation(name: "ValueDeliveryEntryCreatedBy", link: INLINE)
+  updatedBy: User! @relation(name: "ValueDeliveryEntryUpdatedBy", link: INLINE)
   createdAt: DateTime! @createdAt
   updatedAt:  DateTime! @updatedAt
 }
 
-type KeyResource{
+type Revenue{
   id: ID! @id
 
-  table_ids: [Table!]! @relation(name: "KeyResourceByTable", onDelete: SET_NULL)
+  table_ids: [Table!]! @relation(name: "RevenueByTable", onDelete: SET_NULL)
 
   text: String!
   note: String
 
-  createdBy: User! @relation(name: "KeyResourceEntryCreatedBy", link: INLINE)
-  updatedBy: User! @relation(name: "KeyResourceEntryUpdatedBy", link: INLINE)
+  createdBy: User! @relation(name: "RevenueEntryCreatedBy", link: INLINE)
+  updatedBy: User! @relation(name: "RevenueEntryUpdatedBy", link: INLINE)
   createdAt: DateTime! @createdAt
   updatedAt:  DateTime! @updatedAt
 }
 
-type Channel{
+type Expense{
   id: ID! @id
 
-  table_ids: [Table!]! @relation(name: "ChannelByTable", onDelete: SET_NULL)
+  table_ids: [Table!]! @relation(name: "ExpenseByTable", onDelete: SET_NULL)
 
   text: String!
   note: String
 
-  createdBy: User! @relation(name: "ChannelEntryCreatedBy", link: INLINE)
-  updatedBy: User! @relation(name: "ChannelEntryUpdatedBy", link: INLINE)
+  createdBy: User! @relation(name: "ExpenseEntryCreatedBy", link: INLINE)
+  updatedBy: User! @relation(name: "ExpenseEntryUpdatedBy", link: INLINE)
+  createdAt: DateTime! @createdAt
+  updatedAt:  DateTime! @updatedAt
+}
+
+type NetworkEffect{
+  id: ID! @id
+
+  table_ids: [Table!]! @relation(name: "NetworkEffectByTable", onDelete: SET_NULL)
+
+  text: String!
+  note: String
+
+  createdBy: User! @relation(name: "NetworkEffectEntryCreatedBy", link: INLINE)
+  updatedBy: User! @relation(name: "NetworkEffectEntryUpdatedBy", link: INLINE)
+  createdAt: DateTime! @createdAt
+  updatedAt:  DateTime! @updatedAt
+}
+
+type TechnicalInfrastracture{
+  id: ID! @id
+
+  table_ids: [Table!]! @relation(name: "TechnicalInfrastractureByTable", onDelete: SET_NULL)
+
+  text: String!
+  note: String
+
+  createdBy: User! @relation(name: "TechnicalInfrastrctureEntryCreatedBy", link: INLINE)
+  updatedBy: User! @relation(name: "TechnicalInfrastractureEntryUpdatedBy", link: INLINE)
+  createdAt: DateTime! @createdAt
+  updatedAt:  DateTime! @updatedAt
+}
+
+type Regulatory{
+  id: ID! @id
+
+  table_ids: [Table!]! @relation(name: "RegulatoryByTable", onDelete: SET_NULL)
+
+  text: String!
+  note: String
+
+  createdBy: User! @relation(name: "RegulatoryEntryCreatedBy", link: INLINE)
+  updatedBy: User! @relation(name: "RegulatoryEntryUpdatedBy", link: INLINE)
   createdAt: DateTime! @createdAt
   updatedAt:  DateTime! @updatedAt
 }

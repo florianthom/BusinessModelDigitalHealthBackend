@@ -1,3 +1,29 @@
+// start app + localhost:5000/graphql
+// (prisma playground funktioniert irgendwie nicht richtig -> die anfragen sind da irgendwie nicht sichtbar)
+//
+// query {
+//   login (email: "test1@test1.de", password: "test1"){
+//     token,
+//     user {
+//       firstName
+//     }
+//   }
+// }
+
+// prisma token -> funktioniert nicht -> token muss mit "richtiger query geholt werden"
+
+// "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJja2VsNXh2ZXIwZTg2MDc4NHJlbGw0OXJpIiwiaWF0IjoxNTk5MDQzMzc1LCJleHAiOjE1OTkwODY1NzV9.NFzJZwxHZGo6SEaEpMjg5D1_K4gedFrnpxdU16CGIWw"
+// {"Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJja2VsNXh2ZXIwZTg2MDc4NHJlbGw0OXJpIiwiaWF0IjoxNTk5MTEzMzQzLCJleHAiOjE1OTkxNTY1NDN9.E19Dy2PLOoBqp6r89EJOhL_lJCxNIeqCj5S1fY7Pq50"}
+
+
+// query {
+//   getAllPattern
+//   {
+//     name
+//   }
+// }
+
+
 //import express from "express"; 
 // if above is not supported by your project environment then follow as below
 import { ApolloServer, gql } from 'apollo-server-express';
@@ -8,7 +34,6 @@ import { importSchema } from 'graphql-import';
 import { operationAuthorized, verifyToken } from './auth/Authorization';
 import { Resolver } from './resolvers/resolvers';
 import { SERVER_PORT } from './config/env.config';
-
 
 
 const PORT = (process.env.PORT) ? process.env.PORT : SERVER_PORT;

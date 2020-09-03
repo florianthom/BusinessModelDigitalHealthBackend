@@ -16,22 +16,24 @@ export type AtLeastOne<T, U = { [K in keyof T]: Pick<T, K> }> = Partial<T> &
 export type Maybe<T> = T | undefined | null;
 
 export interface Exists {
+  actor: (where?: ActorWhereInput) => Promise<boolean>;
   canvas: (where?: CanvasWhereInput) => Promise<boolean>;
-  channel: (where?: ChannelWhereInput) => Promise<boolean>;
   company: (where?: CompanyWhereInput) => Promise<boolean>;
-  costStructure: (where?: CostStructureWhereInput) => Promise<boolean>;
-  customerRelationship: (
-    where?: CustomerRelationshipWhereInput
-  ) => Promise<boolean>;
-  customerSegment: (where?: CustomerSegmentWhereInput) => Promise<boolean>;
-  keyActitvity: (where?: KeyActitvityWhereInput) => Promise<boolean>;
-  keyPartner: (where?: KeyPartnerWhereInput) => Promise<boolean>;
-  keyResource: (where?: KeyResourceWhereInput) => Promise<boolean>;
+  expense: (where?: ExpenseWhereInput) => Promise<boolean>;
+  networkEffect: (where?: NetworkEffectWhereInput) => Promise<boolean>;
   pattern: (where?: PatternWhereInput) => Promise<boolean>;
   project: (where?: ProjectWhereInput) => Promise<boolean>;
-  revenueStream: (where?: RevenueStreamWhereInput) => Promise<boolean>;
+  regulatory: (where?: RegulatoryWhereInput) => Promise<boolean>;
+  revenue: (where?: RevenueWhereInput) => Promise<boolean>;
+  strategy: (where?: StrategyWhereInput) => Promise<boolean>;
+  strategyPattern: (where?: StrategyPatternWhereInput) => Promise<boolean>;
   table: (where?: TableWhereInput) => Promise<boolean>;
+  technicalInfrastracture: (
+    where?: TechnicalInfrastractureWhereInput
+  ) => Promise<boolean>;
   user: (where?: UserWhereInput) => Promise<boolean>;
+  valueCreation: (where?: ValueCreationWhereInput) => Promise<boolean>;
+  valueDelivery: (where?: ValueDeliveryWhereInput) => Promise<boolean>;
   valueProposition: (where?: ValuePropositionWhereInput) => Promise<boolean>;
 }
 
@@ -54,6 +56,25 @@ export interface Prisma {
    * Queries
    */
 
+  actor: (where: ActorWhereUniqueInput) => ActorNullablePromise;
+  actors: (args?: {
+    where?: ActorWhereInput;
+    orderBy?: ActorOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<Actor>;
+  actorsConnection: (args?: {
+    where?: ActorWhereInput;
+    orderBy?: ActorOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => ActorConnectionPromise;
   canvas: (where: CanvasWhereUniqueInput) => CanvasNullablePromise;
   canvases: (args?: {
     where?: CanvasWhereInput;
@@ -73,25 +94,6 @@ export interface Prisma {
     first?: Int;
     last?: Int;
   }) => CanvasConnectionPromise;
-  channel: (where: ChannelWhereUniqueInput) => ChannelNullablePromise;
-  channels: (args?: {
-    where?: ChannelWhereInput;
-    orderBy?: ChannelOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => FragmentableArray<Channel>;
-  channelsConnection: (args?: {
-    where?: ChannelWhereInput;
-    orderBy?: ChannelOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => ChannelConnectionPromise;
   company: (where: CompanyWhereUniqueInput) => CompanyNullablePromise;
   companies: (args?: {
     where?: CompanyWhereInput;
@@ -111,130 +113,46 @@ export interface Prisma {
     first?: Int;
     last?: Int;
   }) => CompanyConnectionPromise;
-  costStructure: (
-    where: CostStructureWhereUniqueInput
-  ) => CostStructureNullablePromise;
-  costStructures: (args?: {
-    where?: CostStructureWhereInput;
-    orderBy?: CostStructureOrderByInput;
+  expense: (where: ExpenseWhereUniqueInput) => ExpenseNullablePromise;
+  expenses: (args?: {
+    where?: ExpenseWhereInput;
+    orderBy?: ExpenseOrderByInput;
     skip?: Int;
     after?: String;
     before?: String;
     first?: Int;
     last?: Int;
-  }) => FragmentableArray<CostStructure>;
-  costStructuresConnection: (args?: {
-    where?: CostStructureWhereInput;
-    orderBy?: CostStructureOrderByInput;
+  }) => FragmentableArray<Expense>;
+  expensesConnection: (args?: {
+    where?: ExpenseWhereInput;
+    orderBy?: ExpenseOrderByInput;
     skip?: Int;
     after?: String;
     before?: String;
     first?: Int;
     last?: Int;
-  }) => CostStructureConnectionPromise;
-  customerRelationship: (
-    where: CustomerRelationshipWhereUniqueInput
-  ) => CustomerRelationshipNullablePromise;
-  customerRelationships: (args?: {
-    where?: CustomerRelationshipWhereInput;
-    orderBy?: CustomerRelationshipOrderByInput;
+  }) => ExpenseConnectionPromise;
+  networkEffect: (
+    where: NetworkEffectWhereUniqueInput
+  ) => NetworkEffectNullablePromise;
+  networkEffects: (args?: {
+    where?: NetworkEffectWhereInput;
+    orderBy?: NetworkEffectOrderByInput;
     skip?: Int;
     after?: String;
     before?: String;
     first?: Int;
     last?: Int;
-  }) => FragmentableArray<CustomerRelationship>;
-  customerRelationshipsConnection: (args?: {
-    where?: CustomerRelationshipWhereInput;
-    orderBy?: CustomerRelationshipOrderByInput;
+  }) => FragmentableArray<NetworkEffect>;
+  networkEffectsConnection: (args?: {
+    where?: NetworkEffectWhereInput;
+    orderBy?: NetworkEffectOrderByInput;
     skip?: Int;
     after?: String;
     before?: String;
     first?: Int;
     last?: Int;
-  }) => CustomerRelationshipConnectionPromise;
-  customerSegment: (
-    where: CustomerSegmentWhereUniqueInput
-  ) => CustomerSegmentNullablePromise;
-  customerSegments: (args?: {
-    where?: CustomerSegmentWhereInput;
-    orderBy?: CustomerSegmentOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => FragmentableArray<CustomerSegment>;
-  customerSegmentsConnection: (args?: {
-    where?: CustomerSegmentWhereInput;
-    orderBy?: CustomerSegmentOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => CustomerSegmentConnectionPromise;
-  keyActitvity: (
-    where: KeyActitvityWhereUniqueInput
-  ) => KeyActitvityNullablePromise;
-  keyActitvities: (args?: {
-    where?: KeyActitvityWhereInput;
-    orderBy?: KeyActitvityOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => FragmentableArray<KeyActitvity>;
-  keyActitvitiesConnection: (args?: {
-    where?: KeyActitvityWhereInput;
-    orderBy?: KeyActitvityOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => KeyActitvityConnectionPromise;
-  keyPartner: (where: KeyPartnerWhereUniqueInput) => KeyPartnerNullablePromise;
-  keyPartners: (args?: {
-    where?: KeyPartnerWhereInput;
-    orderBy?: KeyPartnerOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => FragmentableArray<KeyPartner>;
-  keyPartnersConnection: (args?: {
-    where?: KeyPartnerWhereInput;
-    orderBy?: KeyPartnerOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => KeyPartnerConnectionPromise;
-  keyResource: (
-    where: KeyResourceWhereUniqueInput
-  ) => KeyResourceNullablePromise;
-  keyResources: (args?: {
-    where?: KeyResourceWhereInput;
-    orderBy?: KeyResourceOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => FragmentableArray<KeyResource>;
-  keyResourcesConnection: (args?: {
-    where?: KeyResourceWhereInput;
-    orderBy?: KeyResourceOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => KeyResourceConnectionPromise;
+  }) => NetworkEffectConnectionPromise;
   pattern: (where: PatternWhereUniqueInput) => PatternNullablePromise;
   patterns: (args?: {
     where?: PatternWhereInput;
@@ -273,27 +191,84 @@ export interface Prisma {
     first?: Int;
     last?: Int;
   }) => ProjectConnectionPromise;
-  revenueStream: (
-    where: RevenueStreamWhereUniqueInput
-  ) => RevenueStreamNullablePromise;
-  revenueStreams: (args?: {
-    where?: RevenueStreamWhereInput;
-    orderBy?: RevenueStreamOrderByInput;
+  regulatory: (where: RegulatoryWhereUniqueInput) => RegulatoryNullablePromise;
+  regulatories: (args?: {
+    where?: RegulatoryWhereInput;
+    orderBy?: RegulatoryOrderByInput;
     skip?: Int;
     after?: String;
     before?: String;
     first?: Int;
     last?: Int;
-  }) => FragmentableArray<RevenueStream>;
-  revenueStreamsConnection: (args?: {
-    where?: RevenueStreamWhereInput;
-    orderBy?: RevenueStreamOrderByInput;
+  }) => FragmentableArray<Regulatory>;
+  regulatoriesConnection: (args?: {
+    where?: RegulatoryWhereInput;
+    orderBy?: RegulatoryOrderByInput;
     skip?: Int;
     after?: String;
     before?: String;
     first?: Int;
     last?: Int;
-  }) => RevenueStreamConnectionPromise;
+  }) => RegulatoryConnectionPromise;
+  revenue: (where: RevenueWhereUniqueInput) => RevenueNullablePromise;
+  revenues: (args?: {
+    where?: RevenueWhereInput;
+    orderBy?: RevenueOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<Revenue>;
+  revenuesConnection: (args?: {
+    where?: RevenueWhereInput;
+    orderBy?: RevenueOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => RevenueConnectionPromise;
+  strategy: (where: StrategyWhereUniqueInput) => StrategyNullablePromise;
+  strategies: (args?: {
+    where?: StrategyWhereInput;
+    orderBy?: StrategyOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<Strategy>;
+  strategiesConnection: (args?: {
+    where?: StrategyWhereInput;
+    orderBy?: StrategyOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => StrategyConnectionPromise;
+  strategyPattern: (
+    where: StrategyPatternWhereUniqueInput
+  ) => StrategyPatternNullablePromise;
+  strategyPatterns: (args?: {
+    where?: StrategyPatternWhereInput;
+    orderBy?: StrategyPatternOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<StrategyPattern>;
+  strategyPatternsConnection: (args?: {
+    where?: StrategyPatternWhereInput;
+    orderBy?: StrategyPatternOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => StrategyPatternConnectionPromise;
   table: (where: TableWhereUniqueInput) => TableNullablePromise;
   tables: (args?: {
     where?: TableWhereInput;
@@ -313,6 +288,27 @@ export interface Prisma {
     first?: Int;
     last?: Int;
   }) => TableConnectionPromise;
+  technicalInfrastracture: (
+    where: TechnicalInfrastractureWhereUniqueInput
+  ) => TechnicalInfrastractureNullablePromise;
+  technicalInfrastractures: (args?: {
+    where?: TechnicalInfrastractureWhereInput;
+    orderBy?: TechnicalInfrastractureOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<TechnicalInfrastracture>;
+  technicalInfrastracturesConnection: (args?: {
+    where?: TechnicalInfrastractureWhereInput;
+    orderBy?: TechnicalInfrastractureOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => TechnicalInfrastractureConnectionPromise;
   user: (where: UserWhereUniqueInput) => UserNullablePromise;
   users: (args?: {
     where?: UserWhereInput;
@@ -332,6 +328,48 @@ export interface Prisma {
     first?: Int;
     last?: Int;
   }) => UserConnectionPromise;
+  valueCreation: (
+    where: ValueCreationWhereUniqueInput
+  ) => ValueCreationNullablePromise;
+  valueCreations: (args?: {
+    where?: ValueCreationWhereInput;
+    orderBy?: ValueCreationOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<ValueCreation>;
+  valueCreationsConnection: (args?: {
+    where?: ValueCreationWhereInput;
+    orderBy?: ValueCreationOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => ValueCreationConnectionPromise;
+  valueDelivery: (
+    where: ValueDeliveryWhereUniqueInput
+  ) => ValueDeliveryNullablePromise;
+  valueDeliveries: (args?: {
+    where?: ValueDeliveryWhereInput;
+    orderBy?: ValueDeliveryOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<ValueDelivery>;
+  valueDeliveriesConnection: (args?: {
+    where?: ValueDeliveryWhereInput;
+    orderBy?: ValueDeliveryOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => ValueDeliveryConnectionPromise;
   valueProposition: (
     where: ValuePropositionWhereUniqueInput
   ) => ValuePropositionNullablePromise;
@@ -359,6 +397,22 @@ export interface Prisma {
    * Mutations
    */
 
+  createActor: (data: ActorCreateInput) => ActorPromise;
+  updateActor: (args: {
+    data: ActorUpdateInput;
+    where: ActorWhereUniqueInput;
+  }) => ActorPromise;
+  updateManyActors: (args: {
+    data: ActorUpdateManyMutationInput;
+    where?: ActorWhereInput;
+  }) => BatchPayloadPromise;
+  upsertActor: (args: {
+    where: ActorWhereUniqueInput;
+    create: ActorCreateInput;
+    update: ActorUpdateInput;
+  }) => ActorPromise;
+  deleteActor: (where: ActorWhereUniqueInput) => ActorPromise;
+  deleteManyActors: (where?: ActorWhereInput) => BatchPayloadPromise;
   createCanvas: (data: CanvasCreateInput) => CanvasPromise;
   updateCanvas: (args: {
     data: CanvasUpdateInput;
@@ -375,22 +429,6 @@ export interface Prisma {
   }) => CanvasPromise;
   deleteCanvas: (where: CanvasWhereUniqueInput) => CanvasPromise;
   deleteManyCanvases: (where?: CanvasWhereInput) => BatchPayloadPromise;
-  createChannel: (data: ChannelCreateInput) => ChannelPromise;
-  updateChannel: (args: {
-    data: ChannelUpdateInput;
-    where: ChannelWhereUniqueInput;
-  }) => ChannelPromise;
-  updateManyChannels: (args: {
-    data: ChannelUpdateManyMutationInput;
-    where?: ChannelWhereInput;
-  }) => BatchPayloadPromise;
-  upsertChannel: (args: {
-    where: ChannelWhereUniqueInput;
-    create: ChannelCreateInput;
-    update: ChannelUpdateInput;
-  }) => ChannelPromise;
-  deleteChannel: (where: ChannelWhereUniqueInput) => ChannelPromise;
-  deleteManyChannels: (where?: ChannelWhereInput) => BatchPayloadPromise;
   createCompany: (data: CompanyCreateInput) => CompanyPromise;
   updateCompany: (args: {
     data: CompanyUpdateInput;
@@ -407,123 +445,41 @@ export interface Prisma {
   }) => CompanyPromise;
   deleteCompany: (where: CompanyWhereUniqueInput) => CompanyPromise;
   deleteManyCompanies: (where?: CompanyWhereInput) => BatchPayloadPromise;
-  createCostStructure: (data: CostStructureCreateInput) => CostStructurePromise;
-  updateCostStructure: (args: {
-    data: CostStructureUpdateInput;
-    where: CostStructureWhereUniqueInput;
-  }) => CostStructurePromise;
-  updateManyCostStructures: (args: {
-    data: CostStructureUpdateManyMutationInput;
-    where?: CostStructureWhereInput;
+  createExpense: (data: ExpenseCreateInput) => ExpensePromise;
+  updateExpense: (args: {
+    data: ExpenseUpdateInput;
+    where: ExpenseWhereUniqueInput;
+  }) => ExpensePromise;
+  updateManyExpenses: (args: {
+    data: ExpenseUpdateManyMutationInput;
+    where?: ExpenseWhereInput;
   }) => BatchPayloadPromise;
-  upsertCostStructure: (args: {
-    where: CostStructureWhereUniqueInput;
-    create: CostStructureCreateInput;
-    update: CostStructureUpdateInput;
-  }) => CostStructurePromise;
-  deleteCostStructure: (
-    where: CostStructureWhereUniqueInput
-  ) => CostStructurePromise;
-  deleteManyCostStructures: (
-    where?: CostStructureWhereInput
-  ) => BatchPayloadPromise;
-  createCustomerRelationship: (
-    data: CustomerRelationshipCreateInput
-  ) => CustomerRelationshipPromise;
-  updateCustomerRelationship: (args: {
-    data: CustomerRelationshipUpdateInput;
-    where: CustomerRelationshipWhereUniqueInput;
-  }) => CustomerRelationshipPromise;
-  updateManyCustomerRelationships: (args: {
-    data: CustomerRelationshipUpdateManyMutationInput;
-    where?: CustomerRelationshipWhereInput;
+  upsertExpense: (args: {
+    where: ExpenseWhereUniqueInput;
+    create: ExpenseCreateInput;
+    update: ExpenseUpdateInput;
+  }) => ExpensePromise;
+  deleteExpense: (where: ExpenseWhereUniqueInput) => ExpensePromise;
+  deleteManyExpenses: (where?: ExpenseWhereInput) => BatchPayloadPromise;
+  createNetworkEffect: (data: NetworkEffectCreateInput) => NetworkEffectPromise;
+  updateNetworkEffect: (args: {
+    data: NetworkEffectUpdateInput;
+    where: NetworkEffectWhereUniqueInput;
+  }) => NetworkEffectPromise;
+  updateManyNetworkEffects: (args: {
+    data: NetworkEffectUpdateManyMutationInput;
+    where?: NetworkEffectWhereInput;
   }) => BatchPayloadPromise;
-  upsertCustomerRelationship: (args: {
-    where: CustomerRelationshipWhereUniqueInput;
-    create: CustomerRelationshipCreateInput;
-    update: CustomerRelationshipUpdateInput;
-  }) => CustomerRelationshipPromise;
-  deleteCustomerRelationship: (
-    where: CustomerRelationshipWhereUniqueInput
-  ) => CustomerRelationshipPromise;
-  deleteManyCustomerRelationships: (
-    where?: CustomerRelationshipWhereInput
-  ) => BatchPayloadPromise;
-  createCustomerSegment: (
-    data: CustomerSegmentCreateInput
-  ) => CustomerSegmentPromise;
-  updateCustomerSegment: (args: {
-    data: CustomerSegmentUpdateInput;
-    where: CustomerSegmentWhereUniqueInput;
-  }) => CustomerSegmentPromise;
-  updateManyCustomerSegments: (args: {
-    data: CustomerSegmentUpdateManyMutationInput;
-    where?: CustomerSegmentWhereInput;
-  }) => BatchPayloadPromise;
-  upsertCustomerSegment: (args: {
-    where: CustomerSegmentWhereUniqueInput;
-    create: CustomerSegmentCreateInput;
-    update: CustomerSegmentUpdateInput;
-  }) => CustomerSegmentPromise;
-  deleteCustomerSegment: (
-    where: CustomerSegmentWhereUniqueInput
-  ) => CustomerSegmentPromise;
-  deleteManyCustomerSegments: (
-    where?: CustomerSegmentWhereInput
-  ) => BatchPayloadPromise;
-  createKeyActitvity: (data: KeyActitvityCreateInput) => KeyActitvityPromise;
-  updateKeyActitvity: (args: {
-    data: KeyActitvityUpdateInput;
-    where: KeyActitvityWhereUniqueInput;
-  }) => KeyActitvityPromise;
-  updateManyKeyActitvities: (args: {
-    data: KeyActitvityUpdateManyMutationInput;
-    where?: KeyActitvityWhereInput;
-  }) => BatchPayloadPromise;
-  upsertKeyActitvity: (args: {
-    where: KeyActitvityWhereUniqueInput;
-    create: KeyActitvityCreateInput;
-    update: KeyActitvityUpdateInput;
-  }) => KeyActitvityPromise;
-  deleteKeyActitvity: (
-    where: KeyActitvityWhereUniqueInput
-  ) => KeyActitvityPromise;
-  deleteManyKeyActitvities: (
-    where?: KeyActitvityWhereInput
-  ) => BatchPayloadPromise;
-  createKeyPartner: (data: KeyPartnerCreateInput) => KeyPartnerPromise;
-  updateKeyPartner: (args: {
-    data: KeyPartnerUpdateInput;
-    where: KeyPartnerWhereUniqueInput;
-  }) => KeyPartnerPromise;
-  updateManyKeyPartners: (args: {
-    data: KeyPartnerUpdateManyMutationInput;
-    where?: KeyPartnerWhereInput;
-  }) => BatchPayloadPromise;
-  upsertKeyPartner: (args: {
-    where: KeyPartnerWhereUniqueInput;
-    create: KeyPartnerCreateInput;
-    update: KeyPartnerUpdateInput;
-  }) => KeyPartnerPromise;
-  deleteKeyPartner: (where: KeyPartnerWhereUniqueInput) => KeyPartnerPromise;
-  deleteManyKeyPartners: (where?: KeyPartnerWhereInput) => BatchPayloadPromise;
-  createKeyResource: (data: KeyResourceCreateInput) => KeyResourcePromise;
-  updateKeyResource: (args: {
-    data: KeyResourceUpdateInput;
-    where: KeyResourceWhereUniqueInput;
-  }) => KeyResourcePromise;
-  updateManyKeyResources: (args: {
-    data: KeyResourceUpdateManyMutationInput;
-    where?: KeyResourceWhereInput;
-  }) => BatchPayloadPromise;
-  upsertKeyResource: (args: {
-    where: KeyResourceWhereUniqueInput;
-    create: KeyResourceCreateInput;
-    update: KeyResourceUpdateInput;
-  }) => KeyResourcePromise;
-  deleteKeyResource: (where: KeyResourceWhereUniqueInput) => KeyResourcePromise;
-  deleteManyKeyResources: (
-    where?: KeyResourceWhereInput
+  upsertNetworkEffect: (args: {
+    where: NetworkEffectWhereUniqueInput;
+    create: NetworkEffectCreateInput;
+    update: NetworkEffectUpdateInput;
+  }) => NetworkEffectPromise;
+  deleteNetworkEffect: (
+    where: NetworkEffectWhereUniqueInput
+  ) => NetworkEffectPromise;
+  deleteManyNetworkEffects: (
+    where?: NetworkEffectWhereInput
   ) => BatchPayloadPromise;
   createPattern: (data: PatternCreateInput) => PatternPromise;
   updatePattern: (args: {
@@ -557,25 +513,75 @@ export interface Prisma {
   }) => ProjectPromise;
   deleteProject: (where: ProjectWhereUniqueInput) => ProjectPromise;
   deleteManyProjects: (where?: ProjectWhereInput) => BatchPayloadPromise;
-  createRevenueStream: (data: RevenueStreamCreateInput) => RevenueStreamPromise;
-  updateRevenueStream: (args: {
-    data: RevenueStreamUpdateInput;
-    where: RevenueStreamWhereUniqueInput;
-  }) => RevenueStreamPromise;
-  updateManyRevenueStreams: (args: {
-    data: RevenueStreamUpdateManyMutationInput;
-    where?: RevenueStreamWhereInput;
+  createRegulatory: (data: RegulatoryCreateInput) => RegulatoryPromise;
+  updateRegulatory: (args: {
+    data: RegulatoryUpdateInput;
+    where: RegulatoryWhereUniqueInput;
+  }) => RegulatoryPromise;
+  updateManyRegulatories: (args: {
+    data: RegulatoryUpdateManyMutationInput;
+    where?: RegulatoryWhereInput;
   }) => BatchPayloadPromise;
-  upsertRevenueStream: (args: {
-    where: RevenueStreamWhereUniqueInput;
-    create: RevenueStreamCreateInput;
-    update: RevenueStreamUpdateInput;
-  }) => RevenueStreamPromise;
-  deleteRevenueStream: (
-    where: RevenueStreamWhereUniqueInput
-  ) => RevenueStreamPromise;
-  deleteManyRevenueStreams: (
-    where?: RevenueStreamWhereInput
+  upsertRegulatory: (args: {
+    where: RegulatoryWhereUniqueInput;
+    create: RegulatoryCreateInput;
+    update: RegulatoryUpdateInput;
+  }) => RegulatoryPromise;
+  deleteRegulatory: (where: RegulatoryWhereUniqueInput) => RegulatoryPromise;
+  deleteManyRegulatories: (where?: RegulatoryWhereInput) => BatchPayloadPromise;
+  createRevenue: (data: RevenueCreateInput) => RevenuePromise;
+  updateRevenue: (args: {
+    data: RevenueUpdateInput;
+    where: RevenueWhereUniqueInput;
+  }) => RevenuePromise;
+  updateManyRevenues: (args: {
+    data: RevenueUpdateManyMutationInput;
+    where?: RevenueWhereInput;
+  }) => BatchPayloadPromise;
+  upsertRevenue: (args: {
+    where: RevenueWhereUniqueInput;
+    create: RevenueCreateInput;
+    update: RevenueUpdateInput;
+  }) => RevenuePromise;
+  deleteRevenue: (where: RevenueWhereUniqueInput) => RevenuePromise;
+  deleteManyRevenues: (where?: RevenueWhereInput) => BatchPayloadPromise;
+  createStrategy: (data: StrategyCreateInput) => StrategyPromise;
+  updateStrategy: (args: {
+    data: StrategyUpdateInput;
+    where: StrategyWhereUniqueInput;
+  }) => StrategyPromise;
+  updateManyStrategies: (args: {
+    data: StrategyUpdateManyMutationInput;
+    where?: StrategyWhereInput;
+  }) => BatchPayloadPromise;
+  upsertStrategy: (args: {
+    where: StrategyWhereUniqueInput;
+    create: StrategyCreateInput;
+    update: StrategyUpdateInput;
+  }) => StrategyPromise;
+  deleteStrategy: (where: StrategyWhereUniqueInput) => StrategyPromise;
+  deleteManyStrategies: (where?: StrategyWhereInput) => BatchPayloadPromise;
+  createStrategyPattern: (
+    data: StrategyPatternCreateInput
+  ) => StrategyPatternPromise;
+  updateStrategyPattern: (args: {
+    data: StrategyPatternUpdateInput;
+    where: StrategyPatternWhereUniqueInput;
+  }) => StrategyPatternPromise;
+  updateManyStrategyPatterns: (args: {
+    data: StrategyPatternUpdateManyMutationInput;
+    where?: StrategyPatternWhereInput;
+  }) => BatchPayloadPromise;
+  upsertStrategyPattern: (args: {
+    where: StrategyPatternWhereUniqueInput;
+    create: StrategyPatternCreateInput;
+    update: StrategyPatternUpdateInput;
+  }) => StrategyPatternPromise;
+  deleteStrategyPattern: (
+    where: StrategyPatternWhereUniqueInput
+  ) => StrategyPatternPromise;
+  deleteManyStrategyPatterns: (
+    where?: StrategyPatternWhereInput
   ) => BatchPayloadPromise;
   createTable: (data: TableCreateInput) => TablePromise;
   updateTable: (args: {
@@ -589,6 +595,28 @@ export interface Prisma {
   }) => TablePromise;
   deleteTable: (where: TableWhereUniqueInput) => TablePromise;
   deleteManyTables: (where?: TableWhereInput) => BatchPayloadPromise;
+  createTechnicalInfrastracture: (
+    data: TechnicalInfrastractureCreateInput
+  ) => TechnicalInfrastracturePromise;
+  updateTechnicalInfrastracture: (args: {
+    data: TechnicalInfrastractureUpdateInput;
+    where: TechnicalInfrastractureWhereUniqueInput;
+  }) => TechnicalInfrastracturePromise;
+  updateManyTechnicalInfrastractures: (args: {
+    data: TechnicalInfrastractureUpdateManyMutationInput;
+    where?: TechnicalInfrastractureWhereInput;
+  }) => BatchPayloadPromise;
+  upsertTechnicalInfrastracture: (args: {
+    where: TechnicalInfrastractureWhereUniqueInput;
+    create: TechnicalInfrastractureCreateInput;
+    update: TechnicalInfrastractureUpdateInput;
+  }) => TechnicalInfrastracturePromise;
+  deleteTechnicalInfrastracture: (
+    where: TechnicalInfrastractureWhereUniqueInput
+  ) => TechnicalInfrastracturePromise;
+  deleteManyTechnicalInfrastractures: (
+    where?: TechnicalInfrastractureWhereInput
+  ) => BatchPayloadPromise;
   createUser: (data: UserCreateInput) => UserPromise;
   updateUser: (args: {
     data: UserUpdateInput;
@@ -605,6 +633,46 @@ export interface Prisma {
   }) => UserPromise;
   deleteUser: (where: UserWhereUniqueInput) => UserPromise;
   deleteManyUsers: (where?: UserWhereInput) => BatchPayloadPromise;
+  createValueCreation: (data: ValueCreationCreateInput) => ValueCreationPromise;
+  updateValueCreation: (args: {
+    data: ValueCreationUpdateInput;
+    where: ValueCreationWhereUniqueInput;
+  }) => ValueCreationPromise;
+  updateManyValueCreations: (args: {
+    data: ValueCreationUpdateManyMutationInput;
+    where?: ValueCreationWhereInput;
+  }) => BatchPayloadPromise;
+  upsertValueCreation: (args: {
+    where: ValueCreationWhereUniqueInput;
+    create: ValueCreationCreateInput;
+    update: ValueCreationUpdateInput;
+  }) => ValueCreationPromise;
+  deleteValueCreation: (
+    where: ValueCreationWhereUniqueInput
+  ) => ValueCreationPromise;
+  deleteManyValueCreations: (
+    where?: ValueCreationWhereInput
+  ) => BatchPayloadPromise;
+  createValueDelivery: (data: ValueDeliveryCreateInput) => ValueDeliveryPromise;
+  updateValueDelivery: (args: {
+    data: ValueDeliveryUpdateInput;
+    where: ValueDeliveryWhereUniqueInput;
+  }) => ValueDeliveryPromise;
+  updateManyValueDeliveries: (args: {
+    data: ValueDeliveryUpdateManyMutationInput;
+    where?: ValueDeliveryWhereInput;
+  }) => BatchPayloadPromise;
+  upsertValueDelivery: (args: {
+    where: ValueDeliveryWhereUniqueInput;
+    create: ValueDeliveryCreateInput;
+    update: ValueDeliveryUpdateInput;
+  }) => ValueDeliveryPromise;
+  deleteValueDelivery: (
+    where: ValueDeliveryWhereUniqueInput
+  ) => ValueDeliveryPromise;
+  deleteManyValueDeliveries: (
+    where?: ValueDeliveryWhereInput
+  ) => BatchPayloadPromise;
   createValueProposition: (
     data: ValuePropositionCreateInput
   ) => ValuePropositionPromise;
@@ -636,48 +704,54 @@ export interface Prisma {
 }
 
 export interface Subscription {
+  actor: (
+    where?: ActorSubscriptionWhereInput
+  ) => ActorSubscriptionPayloadSubscription;
   canvas: (
     where?: CanvasSubscriptionWhereInput
   ) => CanvasSubscriptionPayloadSubscription;
-  channel: (
-    where?: ChannelSubscriptionWhereInput
-  ) => ChannelSubscriptionPayloadSubscription;
   company: (
     where?: CompanySubscriptionWhereInput
   ) => CompanySubscriptionPayloadSubscription;
-  costStructure: (
-    where?: CostStructureSubscriptionWhereInput
-  ) => CostStructureSubscriptionPayloadSubscription;
-  customerRelationship: (
-    where?: CustomerRelationshipSubscriptionWhereInput
-  ) => CustomerRelationshipSubscriptionPayloadSubscription;
-  customerSegment: (
-    where?: CustomerSegmentSubscriptionWhereInput
-  ) => CustomerSegmentSubscriptionPayloadSubscription;
-  keyActitvity: (
-    where?: KeyActitvitySubscriptionWhereInput
-  ) => KeyActitvitySubscriptionPayloadSubscription;
-  keyPartner: (
-    where?: KeyPartnerSubscriptionWhereInput
-  ) => KeyPartnerSubscriptionPayloadSubscription;
-  keyResource: (
-    where?: KeyResourceSubscriptionWhereInput
-  ) => KeyResourceSubscriptionPayloadSubscription;
+  expense: (
+    where?: ExpenseSubscriptionWhereInput
+  ) => ExpenseSubscriptionPayloadSubscription;
+  networkEffect: (
+    where?: NetworkEffectSubscriptionWhereInput
+  ) => NetworkEffectSubscriptionPayloadSubscription;
   pattern: (
     where?: PatternSubscriptionWhereInput
   ) => PatternSubscriptionPayloadSubscription;
   project: (
     where?: ProjectSubscriptionWhereInput
   ) => ProjectSubscriptionPayloadSubscription;
-  revenueStream: (
-    where?: RevenueStreamSubscriptionWhereInput
-  ) => RevenueStreamSubscriptionPayloadSubscription;
+  regulatory: (
+    where?: RegulatorySubscriptionWhereInput
+  ) => RegulatorySubscriptionPayloadSubscription;
+  revenue: (
+    where?: RevenueSubscriptionWhereInput
+  ) => RevenueSubscriptionPayloadSubscription;
+  strategy: (
+    where?: StrategySubscriptionWhereInput
+  ) => StrategySubscriptionPayloadSubscription;
+  strategyPattern: (
+    where?: StrategyPatternSubscriptionWhereInput
+  ) => StrategyPatternSubscriptionPayloadSubscription;
   table: (
     where?: TableSubscriptionWhereInput
   ) => TableSubscriptionPayloadSubscription;
+  technicalInfrastracture: (
+    where?: TechnicalInfrastractureSubscriptionWhereInput
+  ) => TechnicalInfrastractureSubscriptionPayloadSubscription;
   user: (
     where?: UserSubscriptionWhereInput
   ) => UserSubscriptionPayloadSubscription;
+  valueCreation: (
+    where?: ValueCreationSubscriptionWhereInput
+  ) => ValueCreationSubscriptionPayloadSubscription;
+  valueDelivery: (
+    where?: ValueDeliverySubscriptionWhereInput
+  ) => ValueDeliverySubscriptionPayloadSubscription;
   valueProposition: (
     where?: ValuePropositionSubscriptionWhereInput
   ) => ValuePropositionSubscriptionPayloadSubscription;
@@ -693,77 +767,9 @@ export interface ClientConstructor<T> {
 
 export type Role = "USER" | "ADMIN";
 
-export type ProjectOrderByInput =
-  | "id_ASC"
-  | "id_DESC"
-  | "name_ASC"
-  | "name_DESC"
-  | "createdAt_ASC"
-  | "createdAt_DESC"
-  | "updatedAt_ASC"
-  | "updatedAt_DESC";
-
-export type CanvasOrderByInput =
-  | "id_ASC"
-  | "id_DESC"
-  | "name_ASC"
-  | "name_DESC"
-  | "createdAt_ASC"
-  | "createdAt_DESC"
-  | "updatedAt_ASC"
-  | "updatedAt_DESC";
-
-export type PatternOrderByInput =
-  | "id_ASC"
-  | "id_DESC"
-  | "name_ASC"
-  | "name_DESC"
-  | "description_ASC"
-  | "description_DESC"
-  | "createdAt_ASC"
-  | "createdAt_DESC"
-  | "updatedAt_ASC"
-  | "updatedAt_DESC";
-
-export type KeyPartnerOrderByInput =
-  | "id_ASC"
-  | "id_DESC"
-  | "text_ASC"
-  | "text_DESC"
-  | "note_ASC"
-  | "note_DESC"
-  | "createdAt_ASC"
-  | "createdAt_DESC"
-  | "updatedAt_ASC"
-  | "updatedAt_DESC";
-
 export type TableOrderByInput = "id_ASC" | "id_DESC";
 
-export type RevenueStreamOrderByInput =
-  | "id_ASC"
-  | "id_DESC"
-  | "text_ASC"
-  | "text_DESC"
-  | "note_ASC"
-  | "note_DESC"
-  | "createdAt_ASC"
-  | "createdAt_DESC"
-  | "updatedAt_ASC"
-  | "updatedAt_DESC";
-
-export type KeyActitvityOrderByInput =
-  | "id_ASC"
-  | "id_DESC"
-  | "text_ASC"
-  | "text_DESC"
-  | "note_ASC"
-  | "note_DESC"
-  | "createdAt_ASC"
-  | "createdAt_DESC"
-  | "updatedAt_ASC"
-  | "updatedAt_DESC";
-
-export type CustomerRelationshipOrderByInput =
+export type ActorOrderByInput =
   | "id_ASC"
   | "id_DESC"
   | "text_ASC"
@@ -787,55 +793,163 @@ export type ValuePropositionOrderByInput =
   | "updatedAt_ASC"
   | "updatedAt_DESC";
 
-export type CostStructureOrderByInput =
+export type ProjectOrderByInput =
   | "id_ASC"
   | "id_DESC"
-  | "text_ASC"
-  | "text_DESC"
-  | "note_ASC"
-  | "note_DESC"
+  | "name_ASC"
+  | "name_DESC"
   | "createdAt_ASC"
   | "createdAt_DESC"
   | "updatedAt_ASC"
   | "updatedAt_DESC";
 
-export type CustomerSegmentOrderByInput =
+export type CanvasOrderByInput =
   | "id_ASC"
   | "id_DESC"
-  | "text_ASC"
-  | "text_DESC"
-  | "note_ASC"
-  | "note_DESC"
+  | "name_ASC"
+  | "name_DESC"
   | "createdAt_ASC"
   | "createdAt_DESC"
   | "updatedAt_ASC"
   | "updatedAt_DESC";
 
-export type KeyResourceOrderByInput =
+export type StrategyPatternOrderByInput =
   | "id_ASC"
   | "id_DESC"
-  | "text_ASC"
-  | "text_DESC"
-  | "note_ASC"
-  | "note_DESC"
-  | "createdAt_ASC"
-  | "createdAt_DESC"
-  | "updatedAt_ASC"
-  | "updatedAt_DESC";
-
-export type ChannelOrderByInput =
-  | "id_ASC"
-  | "id_DESC"
-  | "text_ASC"
-  | "text_DESC"
-  | "note_ASC"
-  | "note_DESC"
+  | "weight_ASC"
+  | "weight_DESC"
   | "createdAt_ASC"
   | "createdAt_DESC"
   | "updatedAt_ASC"
   | "updatedAt_DESC";
 
 export type CompanyOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "name_ASC"
+  | "name_DESC"
+  | "description_ASC"
+  | "description_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC";
+
+export type PatternOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "name_ASC"
+  | "name_DESC"
+  | "description_ASC"
+  | "description_DESC"
+  | "actorWeight_ASC"
+  | "actorWeight_DESC"
+  | "valuePropositionWeight_ASC"
+  | "valuePropositionWeight_DESC"
+  | "valueCreationWeight_ASC"
+  | "valueCreationWeight_DESC"
+  | "valueDeliveryWeight_ASC"
+  | "valueDeliveryWeight_DESC"
+  | "revenueWeight_ASC"
+  | "revenueWeight_DESC"
+  | "expenseWeight_ASC"
+  | "expenseWeight_DESC"
+  | "networkEffectWeight_ASC"
+  | "networkEffectWeight_DESC"
+  | "regulatoryWeight_ASC"
+  | "regulatoryWeight_DESC"
+  | "technicalInfrastractureWeight_ASC"
+  | "technicalInfrastractureWeight_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC";
+
+export type ValueCreationOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "text_ASC"
+  | "text_DESC"
+  | "note_ASC"
+  | "note_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC";
+
+export type ValueDeliveryOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "text_ASC"
+  | "text_DESC"
+  | "note_ASC"
+  | "note_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC";
+
+export type RevenueOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "text_ASC"
+  | "text_DESC"
+  | "note_ASC"
+  | "note_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC";
+
+export type ExpenseOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "text_ASC"
+  | "text_DESC"
+  | "note_ASC"
+  | "note_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC";
+
+export type NetworkEffectOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "text_ASC"
+  | "text_DESC"
+  | "note_ASC"
+  | "note_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC";
+
+export type TechnicalInfrastractureOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "text_ASC"
+  | "text_DESC"
+  | "note_ASC"
+  | "note_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC";
+
+export type RegulatoryOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "text_ASC"
+  | "text_DESC"
+  | "note_ASC"
+  | "note_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC";
+
+export type StrategyOrderByInput =
   | "id_ASC"
   | "id_DESC"
   | "name_ASC"
@@ -873,11 +987,11 @@ export type UserOrderByInput =
 
 export type MutationType = "CREATED" | "UPDATED" | "DELETED";
 
-export type CanvasWhereUniqueInput = AtLeastOne<{
+export type ActorWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
 }>;
 
-export interface ProjectWhereInput {
+export interface TableWhereInput {
   id?: Maybe<ID_Input>;
   id_not?: Maybe<ID_Input>;
   id_in?: Maybe<ID_Input[] | ID_Input>;
@@ -892,24 +1006,90 @@ export interface ProjectWhereInput {
   id_not_starts_with?: Maybe<ID_Input>;
   id_ends_with?: Maybe<ID_Input>;
   id_not_ends_with?: Maybe<ID_Input>;
-  user_id?: Maybe<UserWhereInput>;
-  canvas_ids_every?: Maybe<CanvasWhereInput>;
-  canvas_ids_some?: Maybe<CanvasWhereInput>;
-  canvas_ids_none?: Maybe<CanvasWhereInput>;
-  name?: Maybe<String>;
-  name_not?: Maybe<String>;
-  name_in?: Maybe<String[] | String>;
-  name_not_in?: Maybe<String[] | String>;
-  name_lt?: Maybe<String>;
-  name_lte?: Maybe<String>;
-  name_gt?: Maybe<String>;
-  name_gte?: Maybe<String>;
-  name_contains?: Maybe<String>;
-  name_not_contains?: Maybe<String>;
-  name_starts_with?: Maybe<String>;
-  name_not_starts_with?: Maybe<String>;
-  name_ends_with?: Maybe<String>;
-  name_not_ends_with?: Maybe<String>;
+  actor_entry_ids_every?: Maybe<ActorWhereInput>;
+  actor_entry_ids_some?: Maybe<ActorWhereInput>;
+  actor_entry_ids_none?: Maybe<ActorWhereInput>;
+  value_proposition_entry_ids_every?: Maybe<ValuePropositionWhereInput>;
+  value_proposition_entry_ids_some?: Maybe<ValuePropositionWhereInput>;
+  value_proposition_entry_ids_none?: Maybe<ValuePropositionWhereInput>;
+  value_creation_entry_ids_every?: Maybe<ValueCreationWhereInput>;
+  value_creation_entry_ids_some?: Maybe<ValueCreationWhereInput>;
+  value_creation_entry_ids_none?: Maybe<ValueCreationWhereInput>;
+  value_delivery_entry_ids_every?: Maybe<ValueDeliveryWhereInput>;
+  value_delivery_entry_ids_some?: Maybe<ValueDeliveryWhereInput>;
+  value_delivery_entry_ids_none?: Maybe<ValueDeliveryWhereInput>;
+  revenue_entry_ids_every?: Maybe<RevenueWhereInput>;
+  revenue_entry_ids_some?: Maybe<RevenueWhereInput>;
+  revenue_entry_ids_none?: Maybe<RevenueWhereInput>;
+  expense_entry_ids_every?: Maybe<ExpenseWhereInput>;
+  expense_entry_ids_some?: Maybe<ExpenseWhereInput>;
+  expense_entry_ids_none?: Maybe<ExpenseWhereInput>;
+  network_effect_entry_ids_every?: Maybe<NetworkEffectWhereInput>;
+  network_effect_entry_ids_some?: Maybe<NetworkEffectWhereInput>;
+  network_effect_entry_ids_none?: Maybe<NetworkEffectWhereInput>;
+  technical_infrastructure_entry_ids_every?: Maybe<
+    TechnicalInfrastractureWhereInput
+  >;
+  technical_infrastructure_entry_ids_some?: Maybe<
+    TechnicalInfrastractureWhereInput
+  >;
+  technical_infrastructure_entry_ids_none?: Maybe<
+    TechnicalInfrastractureWhereInput
+  >;
+  regulatory_entry_ids_every?: Maybe<RegulatoryWhereInput>;
+  regulatory_entry_ids_some?: Maybe<RegulatoryWhereInput>;
+  regulatory_entry_ids_none?: Maybe<RegulatoryWhereInput>;
+  AND?: Maybe<TableWhereInput[] | TableWhereInput>;
+  OR?: Maybe<TableWhereInput[] | TableWhereInput>;
+  NOT?: Maybe<TableWhereInput[] | TableWhereInput>;
+}
+
+export interface ActorWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  table_ids_every?: Maybe<TableWhereInput>;
+  table_ids_some?: Maybe<TableWhereInput>;
+  table_ids_none?: Maybe<TableWhereInput>;
+  text?: Maybe<String>;
+  text_not?: Maybe<String>;
+  text_in?: Maybe<String[] | String>;
+  text_not_in?: Maybe<String[] | String>;
+  text_lt?: Maybe<String>;
+  text_lte?: Maybe<String>;
+  text_gt?: Maybe<String>;
+  text_gte?: Maybe<String>;
+  text_contains?: Maybe<String>;
+  text_not_contains?: Maybe<String>;
+  text_starts_with?: Maybe<String>;
+  text_not_starts_with?: Maybe<String>;
+  text_ends_with?: Maybe<String>;
+  text_not_ends_with?: Maybe<String>;
+  note?: Maybe<String>;
+  note_not?: Maybe<String>;
+  note_in?: Maybe<String[] | String>;
+  note_not_in?: Maybe<String[] | String>;
+  note_lt?: Maybe<String>;
+  note_lte?: Maybe<String>;
+  note_gt?: Maybe<String>;
+  note_gte?: Maybe<String>;
+  note_contains?: Maybe<String>;
+  note_not_contains?: Maybe<String>;
+  note_starts_with?: Maybe<String>;
+  note_not_starts_with?: Maybe<String>;
+  note_ends_with?: Maybe<String>;
+  note_not_ends_with?: Maybe<String>;
   createdBy?: Maybe<UserWhereInput>;
   updatedBy?: Maybe<UserWhereInput>;
   createdAt?: Maybe<DateTimeInput>;
@@ -928,9 +1108,9 @@ export interface ProjectWhereInput {
   updatedAt_lte?: Maybe<DateTimeInput>;
   updatedAt_gt?: Maybe<DateTimeInput>;
   updatedAt_gte?: Maybe<DateTimeInput>;
-  AND?: Maybe<ProjectWhereInput[] | ProjectWhereInput>;
-  OR?: Maybe<ProjectWhereInput[] | ProjectWhereInput>;
-  NOT?: Maybe<ProjectWhereInput[] | ProjectWhereInput>;
+  AND?: Maybe<ActorWhereInput[] | ActorWhereInput>;
+  OR?: Maybe<ActorWhereInput[] | ActorWhereInput>;
+  NOT?: Maybe<ActorWhereInput[] | ActorWhereInput>;
 }
 
 export interface UserWhereInput {
@@ -1063,6 +1243,62 @@ export interface UserWhereInput {
   NOT?: Maybe<UserWhereInput[] | UserWhereInput>;
 }
 
+export interface ProjectWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  user_id?: Maybe<UserWhereInput>;
+  canvas_ids_every?: Maybe<CanvasWhereInput>;
+  canvas_ids_some?: Maybe<CanvasWhereInput>;
+  canvas_ids_none?: Maybe<CanvasWhereInput>;
+  name?: Maybe<String>;
+  name_not?: Maybe<String>;
+  name_in?: Maybe<String[] | String>;
+  name_not_in?: Maybe<String[] | String>;
+  name_lt?: Maybe<String>;
+  name_lte?: Maybe<String>;
+  name_gt?: Maybe<String>;
+  name_gte?: Maybe<String>;
+  name_contains?: Maybe<String>;
+  name_not_contains?: Maybe<String>;
+  name_starts_with?: Maybe<String>;
+  name_not_starts_with?: Maybe<String>;
+  name_ends_with?: Maybe<String>;
+  name_not_ends_with?: Maybe<String>;
+  createdBy?: Maybe<UserWhereInput>;
+  updatedBy?: Maybe<UserWhereInput>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
+  AND?: Maybe<ProjectWhereInput[] | ProjectWhereInput>;
+  OR?: Maybe<ProjectWhereInput[] | ProjectWhereInput>;
+  NOT?: Maybe<ProjectWhereInput[] | ProjectWhereInput>;
+}
+
 export interface CanvasWhereInput {
   id?: Maybe<ID_Input>;
   id_not?: Maybe<ID_Input>;
@@ -1079,6 +1315,7 @@ export interface CanvasWhereInput {
   id_ends_with?: Maybe<ID_Input>;
   id_not_ends_with?: Maybe<ID_Input>;
   project_id?: Maybe<ProjectWhereInput>;
+  strategy_id?: Maybe<StrategyWhereInput>;
   pattern_ids_every?: Maybe<PatternWhereInput>;
   pattern_ids_some?: Maybe<PatternWhereInput>;
   pattern_ids_none?: Maybe<PatternWhereInput>;
@@ -1120,7 +1357,7 @@ export interface CanvasWhereInput {
   NOT?: Maybe<CanvasWhereInput[] | CanvasWhereInput>;
 }
 
-export interface PatternWhereInput {
+export interface StrategyWhereInput {
   id?: Maybe<ID_Input>;
   id_not?: Maybe<ID_Input>;
   id_in?: Maybe<ID_Input[] | ID_Input>;
@@ -1138,10 +1375,9 @@ export interface PatternWhereInput {
   canvas_ids_every?: Maybe<CanvasWhereInput>;
   canvas_ids_some?: Maybe<CanvasWhereInput>;
   canvas_ids_none?: Maybe<CanvasWhereInput>;
-  table_id?: Maybe<TableWhereInput>;
-  company_ids_every?: Maybe<CompanyWhereInput>;
-  company_ids_some?: Maybe<CompanyWhereInput>;
-  company_ids_none?: Maybe<CompanyWhereInput>;
+  strategy_pattern_ids_every?: Maybe<StrategyPatternWhereInput>;
+  strategy_pattern_ids_some?: Maybe<StrategyPatternWhereInput>;
+  strategy_pattern_ids_none?: Maybe<StrategyPatternWhereInput>;
   name?: Maybe<String>;
   name_not?: Maybe<String>;
   name_in?: Maybe<String[] | String>;
@@ -1188,12 +1424,206 @@ export interface PatternWhereInput {
   updatedAt_lte?: Maybe<DateTimeInput>;
   updatedAt_gt?: Maybe<DateTimeInput>;
   updatedAt_gte?: Maybe<DateTimeInput>;
+  AND?: Maybe<StrategyWhereInput[] | StrategyWhereInput>;
+  OR?: Maybe<StrategyWhereInput[] | StrategyWhereInput>;
+  NOT?: Maybe<StrategyWhereInput[] | StrategyWhereInput>;
+}
+
+export interface StrategyPatternWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  strategy_id?: Maybe<StrategyWhereInput>;
+  pattern_id?: Maybe<PatternWhereInput>;
+  weight?: Maybe<Int>;
+  weight_not?: Maybe<Int>;
+  weight_in?: Maybe<Int[] | Int>;
+  weight_not_in?: Maybe<Int[] | Int>;
+  weight_lt?: Maybe<Int>;
+  weight_lte?: Maybe<Int>;
+  weight_gt?: Maybe<Int>;
+  weight_gte?: Maybe<Int>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
+  AND?: Maybe<StrategyPatternWhereInput[] | StrategyPatternWhereInput>;
+  OR?: Maybe<StrategyPatternWhereInput[] | StrategyPatternWhereInput>;
+  NOT?: Maybe<StrategyPatternWhereInput[] | StrategyPatternWhereInput>;
+}
+
+export interface PatternWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  canvas_ids_every?: Maybe<CanvasWhereInput>;
+  canvas_ids_some?: Maybe<CanvasWhereInput>;
+  canvas_ids_none?: Maybe<CanvasWhereInput>;
+  table_id?: Maybe<TableWhereInput>;
+  company_ids_every?: Maybe<CompanyWhereInput>;
+  company_ids_some?: Maybe<CompanyWhereInput>;
+  company_ids_none?: Maybe<CompanyWhereInput>;
+  strategy_pattern_ids_every?: Maybe<StrategyPatternWhereInput>;
+  strategy_pattern_ids_some?: Maybe<StrategyPatternWhereInput>;
+  strategy_pattern_ids_none?: Maybe<StrategyPatternWhereInput>;
+  name?: Maybe<String>;
+  name_not?: Maybe<String>;
+  name_in?: Maybe<String[] | String>;
+  name_not_in?: Maybe<String[] | String>;
+  name_lt?: Maybe<String>;
+  name_lte?: Maybe<String>;
+  name_gt?: Maybe<String>;
+  name_gte?: Maybe<String>;
+  name_contains?: Maybe<String>;
+  name_not_contains?: Maybe<String>;
+  name_starts_with?: Maybe<String>;
+  name_not_starts_with?: Maybe<String>;
+  name_ends_with?: Maybe<String>;
+  name_not_ends_with?: Maybe<String>;
+  description?: Maybe<String>;
+  description_not?: Maybe<String>;
+  description_in?: Maybe<String[] | String>;
+  description_not_in?: Maybe<String[] | String>;
+  description_lt?: Maybe<String>;
+  description_lte?: Maybe<String>;
+  description_gt?: Maybe<String>;
+  description_gte?: Maybe<String>;
+  description_contains?: Maybe<String>;
+  description_not_contains?: Maybe<String>;
+  description_starts_with?: Maybe<String>;
+  description_not_starts_with?: Maybe<String>;
+  description_ends_with?: Maybe<String>;
+  description_not_ends_with?: Maybe<String>;
+  actorWeight?: Maybe<Int>;
+  actorWeight_not?: Maybe<Int>;
+  actorWeight_in?: Maybe<Int[] | Int>;
+  actorWeight_not_in?: Maybe<Int[] | Int>;
+  actorWeight_lt?: Maybe<Int>;
+  actorWeight_lte?: Maybe<Int>;
+  actorWeight_gt?: Maybe<Int>;
+  actorWeight_gte?: Maybe<Int>;
+  valuePropositionWeight?: Maybe<Int>;
+  valuePropositionWeight_not?: Maybe<Int>;
+  valuePropositionWeight_in?: Maybe<Int[] | Int>;
+  valuePropositionWeight_not_in?: Maybe<Int[] | Int>;
+  valuePropositionWeight_lt?: Maybe<Int>;
+  valuePropositionWeight_lte?: Maybe<Int>;
+  valuePropositionWeight_gt?: Maybe<Int>;
+  valuePropositionWeight_gte?: Maybe<Int>;
+  valueCreationWeight?: Maybe<Int>;
+  valueCreationWeight_not?: Maybe<Int>;
+  valueCreationWeight_in?: Maybe<Int[] | Int>;
+  valueCreationWeight_not_in?: Maybe<Int[] | Int>;
+  valueCreationWeight_lt?: Maybe<Int>;
+  valueCreationWeight_lte?: Maybe<Int>;
+  valueCreationWeight_gt?: Maybe<Int>;
+  valueCreationWeight_gte?: Maybe<Int>;
+  valueDeliveryWeight?: Maybe<Int>;
+  valueDeliveryWeight_not?: Maybe<Int>;
+  valueDeliveryWeight_in?: Maybe<Int[] | Int>;
+  valueDeliveryWeight_not_in?: Maybe<Int[] | Int>;
+  valueDeliveryWeight_lt?: Maybe<Int>;
+  valueDeliveryWeight_lte?: Maybe<Int>;
+  valueDeliveryWeight_gt?: Maybe<Int>;
+  valueDeliveryWeight_gte?: Maybe<Int>;
+  revenueWeight?: Maybe<Int>;
+  revenueWeight_not?: Maybe<Int>;
+  revenueWeight_in?: Maybe<Int[] | Int>;
+  revenueWeight_not_in?: Maybe<Int[] | Int>;
+  revenueWeight_lt?: Maybe<Int>;
+  revenueWeight_lte?: Maybe<Int>;
+  revenueWeight_gt?: Maybe<Int>;
+  revenueWeight_gte?: Maybe<Int>;
+  expenseWeight?: Maybe<Int>;
+  expenseWeight_not?: Maybe<Int>;
+  expenseWeight_in?: Maybe<Int[] | Int>;
+  expenseWeight_not_in?: Maybe<Int[] | Int>;
+  expenseWeight_lt?: Maybe<Int>;
+  expenseWeight_lte?: Maybe<Int>;
+  expenseWeight_gt?: Maybe<Int>;
+  expenseWeight_gte?: Maybe<Int>;
+  networkEffectWeight?: Maybe<Int>;
+  networkEffectWeight_not?: Maybe<Int>;
+  networkEffectWeight_in?: Maybe<Int[] | Int>;
+  networkEffectWeight_not_in?: Maybe<Int[] | Int>;
+  networkEffectWeight_lt?: Maybe<Int>;
+  networkEffectWeight_lte?: Maybe<Int>;
+  networkEffectWeight_gt?: Maybe<Int>;
+  networkEffectWeight_gte?: Maybe<Int>;
+  regulatoryWeight?: Maybe<Int>;
+  regulatoryWeight_not?: Maybe<Int>;
+  regulatoryWeight_in?: Maybe<Int[] | Int>;
+  regulatoryWeight_not_in?: Maybe<Int[] | Int>;
+  regulatoryWeight_lt?: Maybe<Int>;
+  regulatoryWeight_lte?: Maybe<Int>;
+  regulatoryWeight_gt?: Maybe<Int>;
+  regulatoryWeight_gte?: Maybe<Int>;
+  technicalInfrastractureWeight?: Maybe<Int>;
+  technicalInfrastractureWeight_not?: Maybe<Int>;
+  technicalInfrastractureWeight_in?: Maybe<Int[] | Int>;
+  technicalInfrastractureWeight_not_in?: Maybe<Int[] | Int>;
+  technicalInfrastractureWeight_lt?: Maybe<Int>;
+  technicalInfrastractureWeight_lte?: Maybe<Int>;
+  technicalInfrastractureWeight_gt?: Maybe<Int>;
+  technicalInfrastractureWeight_gte?: Maybe<Int>;
+  createdBy?: Maybe<UserWhereInput>;
+  updatedBy?: Maybe<UserWhereInput>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
   AND?: Maybe<PatternWhereInput[] | PatternWhereInput>;
   OR?: Maybe<PatternWhereInput[] | PatternWhereInput>;
   NOT?: Maybe<PatternWhereInput[] | PatternWhereInput>;
 }
 
-export interface TableWhereInput {
+export interface CompanyWhereInput {
   id?: Maybe<ID_Input>;
   id_not?: Maybe<ID_Input>;
   id_in?: Maybe<ID_Input[] | ID_Input>;
@@ -1208,86 +1638,37 @@ export interface TableWhereInput {
   id_not_starts_with?: Maybe<ID_Input>;
   id_ends_with?: Maybe<ID_Input>;
   id_not_ends_with?: Maybe<ID_Input>;
-  key_partner_entry_ids_every?: Maybe<KeyPartnerWhereInput>;
-  key_partner_entry_ids_some?: Maybe<KeyPartnerWhereInput>;
-  key_partner_entry_ids_none?: Maybe<KeyPartnerWhereInput>;
-  reventue_stream_entry_ids_every?: Maybe<RevenueStreamWhereInput>;
-  reventue_stream_entry_ids_some?: Maybe<RevenueStreamWhereInput>;
-  reventue_stream_entry_ids_none?: Maybe<RevenueStreamWhereInput>;
-  key_activity_entry_ids_every?: Maybe<KeyActitvityWhereInput>;
-  key_activity_entry_ids_some?: Maybe<KeyActitvityWhereInput>;
-  key_activity_entry_ids_none?: Maybe<KeyActitvityWhereInput>;
-  customer_relationship_entry_ids_every?: Maybe<CustomerRelationshipWhereInput>;
-  customer_relationship_entry_ids_some?: Maybe<CustomerRelationshipWhereInput>;
-  customer_relationship_entry_ids_none?: Maybe<CustomerRelationshipWhereInput>;
-  value_proposition_entry_ids_every?: Maybe<ValuePropositionWhereInput>;
-  value_proposition_entry_ids_some?: Maybe<ValuePropositionWhereInput>;
-  value_proposition_entry_ids_none?: Maybe<ValuePropositionWhereInput>;
-  cost_structure_entry_ids_every?: Maybe<CostStructureWhereInput>;
-  cost_structure_entry_ids_some?: Maybe<CostStructureWhereInput>;
-  cost_structure_entry_ids_none?: Maybe<CostStructureWhereInput>;
-  customer_segment_entry_ids_every?: Maybe<CustomerSegmentWhereInput>;
-  customer_segment_entry_ids_some?: Maybe<CustomerSegmentWhereInput>;
-  customer_segment_entry_ids_none?: Maybe<CustomerSegmentWhereInput>;
-  key_resource_entry_ids_every?: Maybe<KeyResourceWhereInput>;
-  key_resource_entry_ids_some?: Maybe<KeyResourceWhereInput>;
-  key_resource_entry_ids_none?: Maybe<KeyResourceWhereInput>;
-  channel_entry_ids_every?: Maybe<ChannelWhereInput>;
-  channel_entry_ids_some?: Maybe<ChannelWhereInput>;
-  channel_entry_ids_none?: Maybe<ChannelWhereInput>;
-  AND?: Maybe<TableWhereInput[] | TableWhereInput>;
-  OR?: Maybe<TableWhereInput[] | TableWhereInput>;
-  NOT?: Maybe<TableWhereInput[] | TableWhereInput>;
-}
-
-export interface KeyPartnerWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  table_ids_every?: Maybe<TableWhereInput>;
-  table_ids_some?: Maybe<TableWhereInput>;
-  table_ids_none?: Maybe<TableWhereInput>;
-  text?: Maybe<String>;
-  text_not?: Maybe<String>;
-  text_in?: Maybe<String[] | String>;
-  text_not_in?: Maybe<String[] | String>;
-  text_lt?: Maybe<String>;
-  text_lte?: Maybe<String>;
-  text_gt?: Maybe<String>;
-  text_gte?: Maybe<String>;
-  text_contains?: Maybe<String>;
-  text_not_contains?: Maybe<String>;
-  text_starts_with?: Maybe<String>;
-  text_not_starts_with?: Maybe<String>;
-  text_ends_with?: Maybe<String>;
-  text_not_ends_with?: Maybe<String>;
-  note?: Maybe<String>;
-  note_not?: Maybe<String>;
-  note_in?: Maybe<String[] | String>;
-  note_not_in?: Maybe<String[] | String>;
-  note_lt?: Maybe<String>;
-  note_lte?: Maybe<String>;
-  note_gt?: Maybe<String>;
-  note_gte?: Maybe<String>;
-  note_contains?: Maybe<String>;
-  note_not_contains?: Maybe<String>;
-  note_starts_with?: Maybe<String>;
-  note_not_starts_with?: Maybe<String>;
-  note_ends_with?: Maybe<String>;
-  note_not_ends_with?: Maybe<String>;
-  createdBy?: Maybe<UserWhereInput>;
-  updatedBy?: Maybe<UserWhereInput>;
+  pattern_ids_every?: Maybe<PatternWhereInput>;
+  pattern_ids_some?: Maybe<PatternWhereInput>;
+  pattern_ids_none?: Maybe<PatternWhereInput>;
+  name?: Maybe<String>;
+  name_not?: Maybe<String>;
+  name_in?: Maybe<String[] | String>;
+  name_not_in?: Maybe<String[] | String>;
+  name_lt?: Maybe<String>;
+  name_lte?: Maybe<String>;
+  name_gt?: Maybe<String>;
+  name_gte?: Maybe<String>;
+  name_contains?: Maybe<String>;
+  name_not_contains?: Maybe<String>;
+  name_starts_with?: Maybe<String>;
+  name_not_starts_with?: Maybe<String>;
+  name_ends_with?: Maybe<String>;
+  name_not_ends_with?: Maybe<String>;
+  description?: Maybe<String>;
+  description_not?: Maybe<String>;
+  description_in?: Maybe<String[] | String>;
+  description_not_in?: Maybe<String[] | String>;
+  description_lt?: Maybe<String>;
+  description_lte?: Maybe<String>;
+  description_gt?: Maybe<String>;
+  description_gte?: Maybe<String>;
+  description_contains?: Maybe<String>;
+  description_not_contains?: Maybe<String>;
+  description_starts_with?: Maybe<String>;
+  description_not_starts_with?: Maybe<String>;
+  description_ends_with?: Maybe<String>;
+  description_not_ends_with?: Maybe<String>;
   createdAt?: Maybe<DateTimeInput>;
   createdAt_not?: Maybe<DateTimeInput>;
   createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
@@ -1304,220 +1685,9 @@ export interface KeyPartnerWhereInput {
   updatedAt_lte?: Maybe<DateTimeInput>;
   updatedAt_gt?: Maybe<DateTimeInput>;
   updatedAt_gte?: Maybe<DateTimeInput>;
-  AND?: Maybe<KeyPartnerWhereInput[] | KeyPartnerWhereInput>;
-  OR?: Maybe<KeyPartnerWhereInput[] | KeyPartnerWhereInput>;
-  NOT?: Maybe<KeyPartnerWhereInput[] | KeyPartnerWhereInput>;
-}
-
-export interface RevenueStreamWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  table_ids_every?: Maybe<TableWhereInput>;
-  table_ids_some?: Maybe<TableWhereInput>;
-  table_ids_none?: Maybe<TableWhereInput>;
-  text?: Maybe<String>;
-  text_not?: Maybe<String>;
-  text_in?: Maybe<String[] | String>;
-  text_not_in?: Maybe<String[] | String>;
-  text_lt?: Maybe<String>;
-  text_lte?: Maybe<String>;
-  text_gt?: Maybe<String>;
-  text_gte?: Maybe<String>;
-  text_contains?: Maybe<String>;
-  text_not_contains?: Maybe<String>;
-  text_starts_with?: Maybe<String>;
-  text_not_starts_with?: Maybe<String>;
-  text_ends_with?: Maybe<String>;
-  text_not_ends_with?: Maybe<String>;
-  note?: Maybe<String>;
-  note_not?: Maybe<String>;
-  note_in?: Maybe<String[] | String>;
-  note_not_in?: Maybe<String[] | String>;
-  note_lt?: Maybe<String>;
-  note_lte?: Maybe<String>;
-  note_gt?: Maybe<String>;
-  note_gte?: Maybe<String>;
-  note_contains?: Maybe<String>;
-  note_not_contains?: Maybe<String>;
-  note_starts_with?: Maybe<String>;
-  note_not_starts_with?: Maybe<String>;
-  note_ends_with?: Maybe<String>;
-  note_not_ends_with?: Maybe<String>;
-  createdBy?: Maybe<UserWhereInput>;
-  updatedBy?: Maybe<UserWhereInput>;
-  createdAt?: Maybe<DateTimeInput>;
-  createdAt_not?: Maybe<DateTimeInput>;
-  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_lt?: Maybe<DateTimeInput>;
-  createdAt_lte?: Maybe<DateTimeInput>;
-  createdAt_gt?: Maybe<DateTimeInput>;
-  createdAt_gte?: Maybe<DateTimeInput>;
-  updatedAt?: Maybe<DateTimeInput>;
-  updatedAt_not?: Maybe<DateTimeInput>;
-  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  updatedAt_lt?: Maybe<DateTimeInput>;
-  updatedAt_lte?: Maybe<DateTimeInput>;
-  updatedAt_gt?: Maybe<DateTimeInput>;
-  updatedAt_gte?: Maybe<DateTimeInput>;
-  AND?: Maybe<RevenueStreamWhereInput[] | RevenueStreamWhereInput>;
-  OR?: Maybe<RevenueStreamWhereInput[] | RevenueStreamWhereInput>;
-  NOT?: Maybe<RevenueStreamWhereInput[] | RevenueStreamWhereInput>;
-}
-
-export interface KeyActitvityWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  table_ids_every?: Maybe<TableWhereInput>;
-  table_ids_some?: Maybe<TableWhereInput>;
-  table_ids_none?: Maybe<TableWhereInput>;
-  text?: Maybe<String>;
-  text_not?: Maybe<String>;
-  text_in?: Maybe<String[] | String>;
-  text_not_in?: Maybe<String[] | String>;
-  text_lt?: Maybe<String>;
-  text_lte?: Maybe<String>;
-  text_gt?: Maybe<String>;
-  text_gte?: Maybe<String>;
-  text_contains?: Maybe<String>;
-  text_not_contains?: Maybe<String>;
-  text_starts_with?: Maybe<String>;
-  text_not_starts_with?: Maybe<String>;
-  text_ends_with?: Maybe<String>;
-  text_not_ends_with?: Maybe<String>;
-  note?: Maybe<String>;
-  note_not?: Maybe<String>;
-  note_in?: Maybe<String[] | String>;
-  note_not_in?: Maybe<String[] | String>;
-  note_lt?: Maybe<String>;
-  note_lte?: Maybe<String>;
-  note_gt?: Maybe<String>;
-  note_gte?: Maybe<String>;
-  note_contains?: Maybe<String>;
-  note_not_contains?: Maybe<String>;
-  note_starts_with?: Maybe<String>;
-  note_not_starts_with?: Maybe<String>;
-  note_ends_with?: Maybe<String>;
-  note_not_ends_with?: Maybe<String>;
-  createdBy?: Maybe<UserWhereInput>;
-  updatedBy?: Maybe<UserWhereInput>;
-  createdAt?: Maybe<DateTimeInput>;
-  createdAt_not?: Maybe<DateTimeInput>;
-  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_lt?: Maybe<DateTimeInput>;
-  createdAt_lte?: Maybe<DateTimeInput>;
-  createdAt_gt?: Maybe<DateTimeInput>;
-  createdAt_gte?: Maybe<DateTimeInput>;
-  updatedAt?: Maybe<DateTimeInput>;
-  updatedAt_not?: Maybe<DateTimeInput>;
-  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  updatedAt_lt?: Maybe<DateTimeInput>;
-  updatedAt_lte?: Maybe<DateTimeInput>;
-  updatedAt_gt?: Maybe<DateTimeInput>;
-  updatedAt_gte?: Maybe<DateTimeInput>;
-  AND?: Maybe<KeyActitvityWhereInput[] | KeyActitvityWhereInput>;
-  OR?: Maybe<KeyActitvityWhereInput[] | KeyActitvityWhereInput>;
-  NOT?: Maybe<KeyActitvityWhereInput[] | KeyActitvityWhereInput>;
-}
-
-export interface CustomerRelationshipWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  table_ids_every?: Maybe<TableWhereInput>;
-  table_ids_some?: Maybe<TableWhereInput>;
-  table_ids_none?: Maybe<TableWhereInput>;
-  text?: Maybe<String>;
-  text_not?: Maybe<String>;
-  text_in?: Maybe<String[] | String>;
-  text_not_in?: Maybe<String[] | String>;
-  text_lt?: Maybe<String>;
-  text_lte?: Maybe<String>;
-  text_gt?: Maybe<String>;
-  text_gte?: Maybe<String>;
-  text_contains?: Maybe<String>;
-  text_not_contains?: Maybe<String>;
-  text_starts_with?: Maybe<String>;
-  text_not_starts_with?: Maybe<String>;
-  text_ends_with?: Maybe<String>;
-  text_not_ends_with?: Maybe<String>;
-  note?: Maybe<String>;
-  note_not?: Maybe<String>;
-  note_in?: Maybe<String[] | String>;
-  note_not_in?: Maybe<String[] | String>;
-  note_lt?: Maybe<String>;
-  note_lte?: Maybe<String>;
-  note_gt?: Maybe<String>;
-  note_gte?: Maybe<String>;
-  note_contains?: Maybe<String>;
-  note_not_contains?: Maybe<String>;
-  note_starts_with?: Maybe<String>;
-  note_not_starts_with?: Maybe<String>;
-  note_ends_with?: Maybe<String>;
-  note_not_ends_with?: Maybe<String>;
-  createdBy?: Maybe<UserWhereInput>;
-  updatedBy?: Maybe<UserWhereInput>;
-  createdAt?: Maybe<DateTimeInput>;
-  createdAt_not?: Maybe<DateTimeInput>;
-  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_lt?: Maybe<DateTimeInput>;
-  createdAt_lte?: Maybe<DateTimeInput>;
-  createdAt_gt?: Maybe<DateTimeInput>;
-  createdAt_gte?: Maybe<DateTimeInput>;
-  updatedAt?: Maybe<DateTimeInput>;
-  updatedAt_not?: Maybe<DateTimeInput>;
-  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  updatedAt_lt?: Maybe<DateTimeInput>;
-  updatedAt_lte?: Maybe<DateTimeInput>;
-  updatedAt_gt?: Maybe<DateTimeInput>;
-  updatedAt_gte?: Maybe<DateTimeInput>;
-  AND?: Maybe<
-    CustomerRelationshipWhereInput[] | CustomerRelationshipWhereInput
-  >;
-  OR?: Maybe<CustomerRelationshipWhereInput[] | CustomerRelationshipWhereInput>;
-  NOT?: Maybe<
-    CustomerRelationshipWhereInput[] | CustomerRelationshipWhereInput
-  >;
+  AND?: Maybe<CompanyWhereInput[] | CompanyWhereInput>;
+  OR?: Maybe<CompanyWhereInput[] | CompanyWhereInput>;
+  NOT?: Maybe<CompanyWhereInput[] | CompanyWhereInput>;
 }
 
 export interface ValuePropositionWhereInput {
@@ -1589,7 +1759,7 @@ export interface ValuePropositionWhereInput {
   NOT?: Maybe<ValuePropositionWhereInput[] | ValuePropositionWhereInput>;
 }
 
-export interface CostStructureWhereInput {
+export interface ValueCreationWhereInput {
   id?: Maybe<ID_Input>;
   id_not?: Maybe<ID_Input>;
   id_in?: Maybe<ID_Input[] | ID_Input>;
@@ -1653,12 +1823,12 @@ export interface CostStructureWhereInput {
   updatedAt_lte?: Maybe<DateTimeInput>;
   updatedAt_gt?: Maybe<DateTimeInput>;
   updatedAt_gte?: Maybe<DateTimeInput>;
-  AND?: Maybe<CostStructureWhereInput[] | CostStructureWhereInput>;
-  OR?: Maybe<CostStructureWhereInput[] | CostStructureWhereInput>;
-  NOT?: Maybe<CostStructureWhereInput[] | CostStructureWhereInput>;
+  AND?: Maybe<ValueCreationWhereInput[] | ValueCreationWhereInput>;
+  OR?: Maybe<ValueCreationWhereInput[] | ValueCreationWhereInput>;
+  NOT?: Maybe<ValueCreationWhereInput[] | ValueCreationWhereInput>;
 }
 
-export interface CustomerSegmentWhereInput {
+export interface ValueDeliveryWhereInput {
   id?: Maybe<ID_Input>;
   id_not?: Maybe<ID_Input>;
   id_in?: Maybe<ID_Input[] | ID_Input>;
@@ -1722,12 +1892,12 @@ export interface CustomerSegmentWhereInput {
   updatedAt_lte?: Maybe<DateTimeInput>;
   updatedAt_gt?: Maybe<DateTimeInput>;
   updatedAt_gte?: Maybe<DateTimeInput>;
-  AND?: Maybe<CustomerSegmentWhereInput[] | CustomerSegmentWhereInput>;
-  OR?: Maybe<CustomerSegmentWhereInput[] | CustomerSegmentWhereInput>;
-  NOT?: Maybe<CustomerSegmentWhereInput[] | CustomerSegmentWhereInput>;
+  AND?: Maybe<ValueDeliveryWhereInput[] | ValueDeliveryWhereInput>;
+  OR?: Maybe<ValueDeliveryWhereInput[] | ValueDeliveryWhereInput>;
+  NOT?: Maybe<ValueDeliveryWhereInput[] | ValueDeliveryWhereInput>;
 }
 
-export interface KeyResourceWhereInput {
+export interface RevenueWhereInput {
   id?: Maybe<ID_Input>;
   id_not?: Maybe<ID_Input>;
   id_in?: Maybe<ID_Input[] | ID_Input>;
@@ -1791,12 +1961,12 @@ export interface KeyResourceWhereInput {
   updatedAt_lte?: Maybe<DateTimeInput>;
   updatedAt_gt?: Maybe<DateTimeInput>;
   updatedAt_gte?: Maybe<DateTimeInput>;
-  AND?: Maybe<KeyResourceWhereInput[] | KeyResourceWhereInput>;
-  OR?: Maybe<KeyResourceWhereInput[] | KeyResourceWhereInput>;
-  NOT?: Maybe<KeyResourceWhereInput[] | KeyResourceWhereInput>;
+  AND?: Maybe<RevenueWhereInput[] | RevenueWhereInput>;
+  OR?: Maybe<RevenueWhereInput[] | RevenueWhereInput>;
+  NOT?: Maybe<RevenueWhereInput[] | RevenueWhereInput>;
 }
 
-export interface ChannelWhereInput {
+export interface ExpenseWhereInput {
   id?: Maybe<ID_Input>;
   id_not?: Maybe<ID_Input>;
   id_in?: Maybe<ID_Input[] | ID_Input>;
@@ -1860,12 +2030,12 @@ export interface ChannelWhereInput {
   updatedAt_lte?: Maybe<DateTimeInput>;
   updatedAt_gt?: Maybe<DateTimeInput>;
   updatedAt_gte?: Maybe<DateTimeInput>;
-  AND?: Maybe<ChannelWhereInput[] | ChannelWhereInput>;
-  OR?: Maybe<ChannelWhereInput[] | ChannelWhereInput>;
-  NOT?: Maybe<ChannelWhereInput[] | ChannelWhereInput>;
+  AND?: Maybe<ExpenseWhereInput[] | ExpenseWhereInput>;
+  OR?: Maybe<ExpenseWhereInput[] | ExpenseWhereInput>;
+  NOT?: Maybe<ExpenseWhereInput[] | ExpenseWhereInput>;
 }
 
-export interface CompanyWhereInput {
+export interface NetworkEffectWhereInput {
   id?: Maybe<ID_Input>;
   id_not?: Maybe<ID_Input>;
   id_in?: Maybe<ID_Input[] | ID_Input>;
@@ -1880,37 +2050,39 @@ export interface CompanyWhereInput {
   id_not_starts_with?: Maybe<ID_Input>;
   id_ends_with?: Maybe<ID_Input>;
   id_not_ends_with?: Maybe<ID_Input>;
-  pattern_ids_every?: Maybe<PatternWhereInput>;
-  pattern_ids_some?: Maybe<PatternWhereInput>;
-  pattern_ids_none?: Maybe<PatternWhereInput>;
-  name?: Maybe<String>;
-  name_not?: Maybe<String>;
-  name_in?: Maybe<String[] | String>;
-  name_not_in?: Maybe<String[] | String>;
-  name_lt?: Maybe<String>;
-  name_lte?: Maybe<String>;
-  name_gt?: Maybe<String>;
-  name_gte?: Maybe<String>;
-  name_contains?: Maybe<String>;
-  name_not_contains?: Maybe<String>;
-  name_starts_with?: Maybe<String>;
-  name_not_starts_with?: Maybe<String>;
-  name_ends_with?: Maybe<String>;
-  name_not_ends_with?: Maybe<String>;
-  description?: Maybe<String>;
-  description_not?: Maybe<String>;
-  description_in?: Maybe<String[] | String>;
-  description_not_in?: Maybe<String[] | String>;
-  description_lt?: Maybe<String>;
-  description_lte?: Maybe<String>;
-  description_gt?: Maybe<String>;
-  description_gte?: Maybe<String>;
-  description_contains?: Maybe<String>;
-  description_not_contains?: Maybe<String>;
-  description_starts_with?: Maybe<String>;
-  description_not_starts_with?: Maybe<String>;
-  description_ends_with?: Maybe<String>;
-  description_not_ends_with?: Maybe<String>;
+  table_ids_every?: Maybe<TableWhereInput>;
+  table_ids_some?: Maybe<TableWhereInput>;
+  table_ids_none?: Maybe<TableWhereInput>;
+  text?: Maybe<String>;
+  text_not?: Maybe<String>;
+  text_in?: Maybe<String[] | String>;
+  text_not_in?: Maybe<String[] | String>;
+  text_lt?: Maybe<String>;
+  text_lte?: Maybe<String>;
+  text_gt?: Maybe<String>;
+  text_gte?: Maybe<String>;
+  text_contains?: Maybe<String>;
+  text_not_contains?: Maybe<String>;
+  text_starts_with?: Maybe<String>;
+  text_not_starts_with?: Maybe<String>;
+  text_ends_with?: Maybe<String>;
+  text_not_ends_with?: Maybe<String>;
+  note?: Maybe<String>;
+  note_not?: Maybe<String>;
+  note_in?: Maybe<String[] | String>;
+  note_not_in?: Maybe<String[] | String>;
+  note_lt?: Maybe<String>;
+  note_lte?: Maybe<String>;
+  note_gt?: Maybe<String>;
+  note_gte?: Maybe<String>;
+  note_contains?: Maybe<String>;
+  note_not_contains?: Maybe<String>;
+  note_starts_with?: Maybe<String>;
+  note_not_starts_with?: Maybe<String>;
+  note_ends_with?: Maybe<String>;
+  note_not_ends_with?: Maybe<String>;
+  createdBy?: Maybe<UserWhereInput>;
+  updatedBy?: Maybe<UserWhereInput>;
   createdAt?: Maybe<DateTimeInput>;
   createdAt_not?: Maybe<DateTimeInput>;
   createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
@@ -1927,12 +2099,156 @@ export interface CompanyWhereInput {
   updatedAt_lte?: Maybe<DateTimeInput>;
   updatedAt_gt?: Maybe<DateTimeInput>;
   updatedAt_gte?: Maybe<DateTimeInput>;
-  AND?: Maybe<CompanyWhereInput[] | CompanyWhereInput>;
-  OR?: Maybe<CompanyWhereInput[] | CompanyWhereInput>;
-  NOT?: Maybe<CompanyWhereInput[] | CompanyWhereInput>;
+  AND?: Maybe<NetworkEffectWhereInput[] | NetworkEffectWhereInput>;
+  OR?: Maybe<NetworkEffectWhereInput[] | NetworkEffectWhereInput>;
+  NOT?: Maybe<NetworkEffectWhereInput[] | NetworkEffectWhereInput>;
 }
 
-export type ChannelWhereUniqueInput = AtLeastOne<{
+export interface TechnicalInfrastractureWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  table_ids_every?: Maybe<TableWhereInput>;
+  table_ids_some?: Maybe<TableWhereInput>;
+  table_ids_none?: Maybe<TableWhereInput>;
+  text?: Maybe<String>;
+  text_not?: Maybe<String>;
+  text_in?: Maybe<String[] | String>;
+  text_not_in?: Maybe<String[] | String>;
+  text_lt?: Maybe<String>;
+  text_lte?: Maybe<String>;
+  text_gt?: Maybe<String>;
+  text_gte?: Maybe<String>;
+  text_contains?: Maybe<String>;
+  text_not_contains?: Maybe<String>;
+  text_starts_with?: Maybe<String>;
+  text_not_starts_with?: Maybe<String>;
+  text_ends_with?: Maybe<String>;
+  text_not_ends_with?: Maybe<String>;
+  note?: Maybe<String>;
+  note_not?: Maybe<String>;
+  note_in?: Maybe<String[] | String>;
+  note_not_in?: Maybe<String[] | String>;
+  note_lt?: Maybe<String>;
+  note_lte?: Maybe<String>;
+  note_gt?: Maybe<String>;
+  note_gte?: Maybe<String>;
+  note_contains?: Maybe<String>;
+  note_not_contains?: Maybe<String>;
+  note_starts_with?: Maybe<String>;
+  note_not_starts_with?: Maybe<String>;
+  note_ends_with?: Maybe<String>;
+  note_not_ends_with?: Maybe<String>;
+  createdBy?: Maybe<UserWhereInput>;
+  updatedBy?: Maybe<UserWhereInput>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
+  AND?: Maybe<
+    TechnicalInfrastractureWhereInput[] | TechnicalInfrastractureWhereInput
+  >;
+  OR?: Maybe<
+    TechnicalInfrastractureWhereInput[] | TechnicalInfrastractureWhereInput
+  >;
+  NOT?: Maybe<
+    TechnicalInfrastractureWhereInput[] | TechnicalInfrastractureWhereInput
+  >;
+}
+
+export interface RegulatoryWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  table_ids_every?: Maybe<TableWhereInput>;
+  table_ids_some?: Maybe<TableWhereInput>;
+  table_ids_none?: Maybe<TableWhereInput>;
+  text?: Maybe<String>;
+  text_not?: Maybe<String>;
+  text_in?: Maybe<String[] | String>;
+  text_not_in?: Maybe<String[] | String>;
+  text_lt?: Maybe<String>;
+  text_lte?: Maybe<String>;
+  text_gt?: Maybe<String>;
+  text_gte?: Maybe<String>;
+  text_contains?: Maybe<String>;
+  text_not_contains?: Maybe<String>;
+  text_starts_with?: Maybe<String>;
+  text_not_starts_with?: Maybe<String>;
+  text_ends_with?: Maybe<String>;
+  text_not_ends_with?: Maybe<String>;
+  note?: Maybe<String>;
+  note_not?: Maybe<String>;
+  note_in?: Maybe<String[] | String>;
+  note_not_in?: Maybe<String[] | String>;
+  note_lt?: Maybe<String>;
+  note_lte?: Maybe<String>;
+  note_gt?: Maybe<String>;
+  note_gte?: Maybe<String>;
+  note_contains?: Maybe<String>;
+  note_not_contains?: Maybe<String>;
+  note_starts_with?: Maybe<String>;
+  note_not_starts_with?: Maybe<String>;
+  note_ends_with?: Maybe<String>;
+  note_not_ends_with?: Maybe<String>;
+  createdBy?: Maybe<UserWhereInput>;
+  updatedBy?: Maybe<UserWhereInput>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
+  AND?: Maybe<RegulatoryWhereInput[] | RegulatoryWhereInput>;
+  OR?: Maybe<RegulatoryWhereInput[] | RegulatoryWhereInput>;
+  NOT?: Maybe<RegulatoryWhereInput[] | RegulatoryWhereInput>;
+}
+
+export type CanvasWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
 }>;
 
@@ -1940,27 +2256,11 @@ export type CompanyWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
 }>;
 
-export type CostStructureWhereUniqueInput = AtLeastOne<{
+export type ExpenseWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
 }>;
 
-export type CustomerRelationshipWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-}>;
-
-export type CustomerSegmentWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-}>;
-
-export type KeyActitvityWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-}>;
-
-export type KeyPartnerWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-}>;
-
-export type KeyResourceWhereUniqueInput = AtLeastOne<{
+export type NetworkEffectWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
 }>;
 
@@ -1972,11 +2272,27 @@ export type ProjectWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
 }>;
 
-export type RevenueStreamWhereUniqueInput = AtLeastOne<{
+export type RegulatoryWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
+
+export type RevenueWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
+
+export type StrategyWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
+
+export type StrategyPatternWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
 }>;
 
 export type TableWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
+
+export type TechnicalInfrastractureWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
 }>;
 
@@ -1985,14 +2301,194 @@ export type UserWhereUniqueInput = AtLeastOne<{
   email?: Maybe<String>;
 }>;
 
+export type ValueCreationWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
+
+export type ValueDeliveryWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
+
 export type ValuePropositionWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
 }>;
 
-export interface CanvasCreateInput {
+export interface ActorCreateInput {
+  id?: Maybe<ID_Input>;
+  table_ids?: Maybe<TableCreateManyWithoutActor_entry_idsInput>;
+  text: String;
+  note?: Maybe<String>;
+  createdBy: UserCreateOneInput;
+  updatedBy: UserCreateOneInput;
+}
+
+export interface TableCreateManyWithoutActor_entry_idsInput {
+  create?: Maybe<
+    | TableCreateWithoutActor_entry_idsInput[]
+    | TableCreateWithoutActor_entry_idsInput
+  >;
+  connect?: Maybe<TableWhereUniqueInput[] | TableWhereUniqueInput>;
+}
+
+export interface TableCreateWithoutActor_entry_idsInput {
+  id?: Maybe<ID_Input>;
+  value_proposition_entry_ids?: Maybe<
+    ValuePropositionCreateManyWithoutTable_idsInput
+  >;
+  value_creation_entry_ids?: Maybe<
+    ValueCreationCreateManyWithoutTable_idsInput
+  >;
+  value_delivery_entry_ids?: Maybe<
+    ValueDeliveryCreateManyWithoutTable_idsInput
+  >;
+  revenue_entry_ids?: Maybe<RevenueCreateManyWithoutTable_idsInput>;
+  expense_entry_ids?: Maybe<ExpenseCreateManyWithoutTable_idsInput>;
+  network_effect_entry_ids?: Maybe<
+    NetworkEffectCreateManyWithoutTable_idsInput
+  >;
+  technical_infrastructure_entry_ids?: Maybe<
+    TechnicalInfrastractureCreateManyWithoutTable_idsInput
+  >;
+  regulatory_entry_ids?: Maybe<RegulatoryCreateManyWithoutTable_idsInput>;
+}
+
+export interface ValuePropositionCreateManyWithoutTable_idsInput {
+  create?: Maybe<
+    | ValuePropositionCreateWithoutTable_idsInput[]
+    | ValuePropositionCreateWithoutTable_idsInput
+  >;
+  connect?: Maybe<
+    ValuePropositionWhereUniqueInput[] | ValuePropositionWhereUniqueInput
+  >;
+}
+
+export interface ValuePropositionCreateWithoutTable_idsInput {
+  id?: Maybe<ID_Input>;
+  text: String;
+  note?: Maybe<String>;
+  createdBy: UserCreateOneInput;
+  updatedBy: UserCreateOneInput;
+}
+
+export interface UserCreateOneInput {
+  create?: Maybe<UserCreateInput>;
+  connect?: Maybe<UserWhereUniqueInput>;
+}
+
+export interface UserCreateInput {
+  id?: Maybe<ID_Input>;
+  project_ids?: Maybe<ProjectCreateManyWithoutUser_idInput>;
+  firstName: String;
+  lastName: String;
+  email: String;
+  role?: Maybe<Role>;
+  password: String;
+  verificationCode?: Maybe<String>;
+  verified?: Maybe<Boolean>;
+  phoneNumber?: Maybe<String>;
+  updatedBy?: Maybe<UserCreateOneWithoutUpdatedByInput>;
+}
+
+export interface ProjectCreateManyWithoutUser_idInput {
+  create?: Maybe<
+    ProjectCreateWithoutUser_idInput[] | ProjectCreateWithoutUser_idInput
+  >;
+  connect?: Maybe<ProjectWhereUniqueInput[] | ProjectWhereUniqueInput>;
+}
+
+export interface ProjectCreateWithoutUser_idInput {
+  id?: Maybe<ID_Input>;
+  canvas_ids?: Maybe<CanvasCreateManyWithoutProject_idInput>;
+  name: String;
+  createdBy: UserCreateOneInput;
+  updatedBy: UserCreateOneInput;
+}
+
+export interface CanvasCreateManyWithoutProject_idInput {
+  create?: Maybe<
+    CanvasCreateWithoutProject_idInput[] | CanvasCreateWithoutProject_idInput
+  >;
+  connect?: Maybe<CanvasWhereUniqueInput[] | CanvasWhereUniqueInput>;
+}
+
+export interface CanvasCreateWithoutProject_idInput {
+  id?: Maybe<ID_Input>;
+  strategy_id?: Maybe<StrategyCreateOneWithoutCanvas_idsInput>;
+  pattern_ids?: Maybe<PatternCreateManyWithoutCanvas_idsInput>;
+  table_id: TableCreateOneInput;
+  name: String;
+  createdBy: UserCreateOneInput;
+  updatedBy: UserCreateOneInput;
+}
+
+export interface StrategyCreateOneWithoutCanvas_idsInput {
+  create?: Maybe<StrategyCreateWithoutCanvas_idsInput>;
+  connect?: Maybe<StrategyWhereUniqueInput>;
+}
+
+export interface StrategyCreateWithoutCanvas_idsInput {
+  id?: Maybe<ID_Input>;
+  strategy_pattern_ids?: Maybe<
+    StrategyPatternCreateManyWithoutStrategy_idInput
+  >;
+  name: String;
+  description?: Maybe<String>;
+  createdBy: UserCreateOneInput;
+  updatedBy: UserCreateOneInput;
+}
+
+export interface StrategyPatternCreateManyWithoutStrategy_idInput {
+  create?: Maybe<
+    | StrategyPatternCreateWithoutStrategy_idInput[]
+    | StrategyPatternCreateWithoutStrategy_idInput
+  >;
+  connect?: Maybe<
+    StrategyPatternWhereUniqueInput[] | StrategyPatternWhereUniqueInput
+  >;
+}
+
+export interface StrategyPatternCreateWithoutStrategy_idInput {
+  id?: Maybe<ID_Input>;
+  pattern_id: PatternCreateOneWithoutStrategy_pattern_idsInput;
+  weight: Int;
+}
+
+export interface PatternCreateOneWithoutStrategy_pattern_idsInput {
+  create?: Maybe<PatternCreateWithoutStrategy_pattern_idsInput>;
+  connect?: Maybe<PatternWhereUniqueInput>;
+}
+
+export interface PatternCreateWithoutStrategy_pattern_idsInput {
+  id?: Maybe<ID_Input>;
+  canvas_ids?: Maybe<CanvasCreateManyWithoutPattern_idsInput>;
+  table_id: TableCreateOneInput;
+  company_ids?: Maybe<CompanyCreateManyWithoutPattern_idsInput>;
+  name: String;
+  description?: Maybe<String>;
+  actorWeight?: Maybe<Int>;
+  valuePropositionWeight?: Maybe<Int>;
+  valueCreationWeight?: Maybe<Int>;
+  valueDeliveryWeight?: Maybe<Int>;
+  revenueWeight?: Maybe<Int>;
+  expenseWeight?: Maybe<Int>;
+  networkEffectWeight?: Maybe<Int>;
+  regulatoryWeight?: Maybe<Int>;
+  technicalInfrastractureWeight?: Maybe<Int>;
+  createdBy: UserCreateOneInput;
+  updatedBy: UserCreateOneInput;
+}
+
+export interface CanvasCreateManyWithoutPattern_idsInput {
+  create?: Maybe<
+    CanvasCreateWithoutPattern_idsInput[] | CanvasCreateWithoutPattern_idsInput
+  >;
+  connect?: Maybe<CanvasWhereUniqueInput[] | CanvasWhereUniqueInput>;
+}
+
+export interface CanvasCreateWithoutPattern_idsInput {
   id?: Maybe<ID_Input>;
   project_id: ProjectCreateOneWithoutCanvas_idsInput;
-  pattern_ids?: Maybe<PatternCreateManyWithoutCanvas_idsInput>;
+  strategy_id?: Maybe<StrategyCreateOneWithoutCanvas_idsInput>;
   table_id: TableCreateOneInput;
   name: String;
   createdBy: UserCreateOneInput;
@@ -2048,54 +2544,6 @@ export interface UserCreateWithoutUpdatedByInput {
   phoneNumber?: Maybe<String>;
 }
 
-export interface ProjectCreateManyWithoutUser_idInput {
-  create?: Maybe<
-    ProjectCreateWithoutUser_idInput[] | ProjectCreateWithoutUser_idInput
-  >;
-  connect?: Maybe<ProjectWhereUniqueInput[] | ProjectWhereUniqueInput>;
-}
-
-export interface ProjectCreateWithoutUser_idInput {
-  id?: Maybe<ID_Input>;
-  canvas_ids?: Maybe<CanvasCreateManyWithoutProject_idInput>;
-  name: String;
-  createdBy: UserCreateOneInput;
-  updatedBy: UserCreateOneInput;
-}
-
-export interface CanvasCreateManyWithoutProject_idInput {
-  create?: Maybe<
-    CanvasCreateWithoutProject_idInput[] | CanvasCreateWithoutProject_idInput
-  >;
-  connect?: Maybe<CanvasWhereUniqueInput[] | CanvasWhereUniqueInput>;
-}
-
-export interface CanvasCreateWithoutProject_idInput {
-  id?: Maybe<ID_Input>;
-  pattern_ids?: Maybe<PatternCreateManyWithoutCanvas_idsInput>;
-  table_id: TableCreateOneInput;
-  name: String;
-  createdBy: UserCreateOneInput;
-  updatedBy: UserCreateOneInput;
-}
-
-export interface PatternCreateManyWithoutCanvas_idsInput {
-  create?: Maybe<
-    PatternCreateWithoutCanvas_idsInput[] | PatternCreateWithoutCanvas_idsInput
-  >;
-  connect?: Maybe<PatternWhereUniqueInput[] | PatternWhereUniqueInput>;
-}
-
-export interface PatternCreateWithoutCanvas_idsInput {
-  id?: Maybe<ID_Input>;
-  table_id: TableCreateOneInput;
-  company_ids?: Maybe<CompanyCreateManyWithoutPattern_idsInput>;
-  name: String;
-  description?: Maybe<String>;
-  createdBy: UserCreateOneInput;
-  updatedBy: UserCreateOneInput;
-}
-
 export interface TableCreateOneInput {
   create?: Maybe<TableCreateInput>;
   connect?: Maybe<TableWhereUniqueInput>;
@@ -2103,36 +2551,35 @@ export interface TableCreateOneInput {
 
 export interface TableCreateInput {
   id?: Maybe<ID_Input>;
-  key_partner_entry_ids?: Maybe<KeyPartnerCreateManyWithoutTable_idsInput>;
-  reventue_stream_entry_ids?: Maybe<
-    RevenueStreamCreateManyWithoutTable_idsInput
-  >;
-  key_activity_entry_ids?: Maybe<KeyActitvityCreateManyWithoutTable_idsInput>;
-  customer_relationship_entry_ids?: Maybe<
-    CustomerRelationshipCreateManyWithoutTable_idsInput
-  >;
+  actor_entry_ids?: Maybe<ActorCreateManyWithoutTable_idsInput>;
   value_proposition_entry_ids?: Maybe<
     ValuePropositionCreateManyWithoutTable_idsInput
   >;
-  cost_structure_entry_ids?: Maybe<
-    CostStructureCreateManyWithoutTable_idsInput
+  value_creation_entry_ids?: Maybe<
+    ValueCreationCreateManyWithoutTable_idsInput
   >;
-  customer_segment_entry_ids?: Maybe<
-    CustomerSegmentCreateManyWithoutTable_idsInput
+  value_delivery_entry_ids?: Maybe<
+    ValueDeliveryCreateManyWithoutTable_idsInput
   >;
-  key_resource_entry_ids?: Maybe<KeyResourceCreateManyWithoutTable_idsInput>;
-  channel_entry_ids?: Maybe<ChannelCreateManyWithoutTable_idsInput>;
+  revenue_entry_ids?: Maybe<RevenueCreateManyWithoutTable_idsInput>;
+  expense_entry_ids?: Maybe<ExpenseCreateManyWithoutTable_idsInput>;
+  network_effect_entry_ids?: Maybe<
+    NetworkEffectCreateManyWithoutTable_idsInput
+  >;
+  technical_infrastructure_entry_ids?: Maybe<
+    TechnicalInfrastractureCreateManyWithoutTable_idsInput
+  >;
+  regulatory_entry_ids?: Maybe<RegulatoryCreateManyWithoutTable_idsInput>;
 }
 
-export interface KeyPartnerCreateManyWithoutTable_idsInput {
+export interface ActorCreateManyWithoutTable_idsInput {
   create?: Maybe<
-    | KeyPartnerCreateWithoutTable_idsInput[]
-    | KeyPartnerCreateWithoutTable_idsInput
+    ActorCreateWithoutTable_idsInput[] | ActorCreateWithoutTable_idsInput
   >;
-  connect?: Maybe<KeyPartnerWhereUniqueInput[] | KeyPartnerWhereUniqueInput>;
+  connect?: Maybe<ActorWhereUniqueInput[] | ActorWhereUniqueInput>;
 }
 
-export interface KeyPartnerCreateWithoutTable_idsInput {
+export interface ActorCreateWithoutTable_idsInput {
   id?: Maybe<ID_Input>;
   text: String;
   note?: Maybe<String>;
@@ -2140,36 +2587,17 @@ export interface KeyPartnerCreateWithoutTable_idsInput {
   updatedBy: UserCreateOneInput;
 }
 
-export interface UserCreateOneInput {
-  create?: Maybe<UserCreateInput>;
-  connect?: Maybe<UserWhereUniqueInput>;
-}
-
-export interface UserCreateInput {
-  id?: Maybe<ID_Input>;
-  project_ids?: Maybe<ProjectCreateManyWithoutUser_idInput>;
-  firstName: String;
-  lastName: String;
-  email: String;
-  role?: Maybe<Role>;
-  password: String;
-  verificationCode?: Maybe<String>;
-  verified?: Maybe<Boolean>;
-  phoneNumber?: Maybe<String>;
-  updatedBy?: Maybe<UserCreateOneWithoutUpdatedByInput>;
-}
-
-export interface RevenueStreamCreateManyWithoutTable_idsInput {
+export interface ValueCreationCreateManyWithoutTable_idsInput {
   create?: Maybe<
-    | RevenueStreamCreateWithoutTable_idsInput[]
-    | RevenueStreamCreateWithoutTable_idsInput
+    | ValueCreationCreateWithoutTable_idsInput[]
+    | ValueCreationCreateWithoutTable_idsInput
   >;
   connect?: Maybe<
-    RevenueStreamWhereUniqueInput[] | RevenueStreamWhereUniqueInput
+    ValueCreationWhereUniqueInput[] | ValueCreationWhereUniqueInput
   >;
 }
 
-export interface RevenueStreamCreateWithoutTable_idsInput {
+export interface ValueCreationCreateWithoutTable_idsInput {
   id?: Maybe<ID_Input>;
   text: String;
   note?: Maybe<String>;
@@ -2177,17 +2605,17 @@ export interface RevenueStreamCreateWithoutTable_idsInput {
   updatedBy: UserCreateOneInput;
 }
 
-export interface KeyActitvityCreateManyWithoutTable_idsInput {
+export interface ValueDeliveryCreateManyWithoutTable_idsInput {
   create?: Maybe<
-    | KeyActitvityCreateWithoutTable_idsInput[]
-    | KeyActitvityCreateWithoutTable_idsInput
+    | ValueDeliveryCreateWithoutTable_idsInput[]
+    | ValueDeliveryCreateWithoutTable_idsInput
   >;
   connect?: Maybe<
-    KeyActitvityWhereUniqueInput[] | KeyActitvityWhereUniqueInput
+    ValueDeliveryWhereUniqueInput[] | ValueDeliveryWhereUniqueInput
   >;
 }
 
-export interface KeyActitvityCreateWithoutTable_idsInput {
+export interface ValueDeliveryCreateWithoutTable_idsInput {
   id?: Maybe<ID_Input>;
   text: String;
   note?: Maybe<String>;
@@ -2195,18 +2623,47 @@ export interface KeyActitvityCreateWithoutTable_idsInput {
   updatedBy: UserCreateOneInput;
 }
 
-export interface CustomerRelationshipCreateManyWithoutTable_idsInput {
+export interface RevenueCreateManyWithoutTable_idsInput {
   create?: Maybe<
-    | CustomerRelationshipCreateWithoutTable_idsInput[]
-    | CustomerRelationshipCreateWithoutTable_idsInput
+    RevenueCreateWithoutTable_idsInput[] | RevenueCreateWithoutTable_idsInput
+  >;
+  connect?: Maybe<RevenueWhereUniqueInput[] | RevenueWhereUniqueInput>;
+}
+
+export interface RevenueCreateWithoutTable_idsInput {
+  id?: Maybe<ID_Input>;
+  text: String;
+  note?: Maybe<String>;
+  createdBy: UserCreateOneInput;
+  updatedBy: UserCreateOneInput;
+}
+
+export interface ExpenseCreateManyWithoutTable_idsInput {
+  create?: Maybe<
+    ExpenseCreateWithoutTable_idsInput[] | ExpenseCreateWithoutTable_idsInput
+  >;
+  connect?: Maybe<ExpenseWhereUniqueInput[] | ExpenseWhereUniqueInput>;
+}
+
+export interface ExpenseCreateWithoutTable_idsInput {
+  id?: Maybe<ID_Input>;
+  text: String;
+  note?: Maybe<String>;
+  createdBy: UserCreateOneInput;
+  updatedBy: UserCreateOneInput;
+}
+
+export interface NetworkEffectCreateManyWithoutTable_idsInput {
+  create?: Maybe<
+    | NetworkEffectCreateWithoutTable_idsInput[]
+    | NetworkEffectCreateWithoutTable_idsInput
   >;
   connect?: Maybe<
-    | CustomerRelationshipWhereUniqueInput[]
-    | CustomerRelationshipWhereUniqueInput
+    NetworkEffectWhereUniqueInput[] | NetworkEffectWhereUniqueInput
   >;
 }
 
-export interface CustomerRelationshipCreateWithoutTable_idsInput {
+export interface NetworkEffectCreateWithoutTable_idsInput {
   id?: Maybe<ID_Input>;
   text: String;
   note?: Maybe<String>;
@@ -2214,17 +2671,18 @@ export interface CustomerRelationshipCreateWithoutTable_idsInput {
   updatedBy: UserCreateOneInput;
 }
 
-export interface ValuePropositionCreateManyWithoutTable_idsInput {
+export interface TechnicalInfrastractureCreateManyWithoutTable_idsInput {
   create?: Maybe<
-    | ValuePropositionCreateWithoutTable_idsInput[]
-    | ValuePropositionCreateWithoutTable_idsInput
+    | TechnicalInfrastractureCreateWithoutTable_idsInput[]
+    | TechnicalInfrastractureCreateWithoutTable_idsInput
   >;
   connect?: Maybe<
-    ValuePropositionWhereUniqueInput[] | ValuePropositionWhereUniqueInput
+    | TechnicalInfrastractureWhereUniqueInput[]
+    | TechnicalInfrastractureWhereUniqueInput
   >;
 }
 
-export interface ValuePropositionCreateWithoutTable_idsInput {
+export interface TechnicalInfrastractureCreateWithoutTable_idsInput {
   id?: Maybe<ID_Input>;
   text: String;
   note?: Maybe<String>;
@@ -2232,66 +2690,15 @@ export interface ValuePropositionCreateWithoutTable_idsInput {
   updatedBy: UserCreateOneInput;
 }
 
-export interface CostStructureCreateManyWithoutTable_idsInput {
+export interface RegulatoryCreateManyWithoutTable_idsInput {
   create?: Maybe<
-    | CostStructureCreateWithoutTable_idsInput[]
-    | CostStructureCreateWithoutTable_idsInput
+    | RegulatoryCreateWithoutTable_idsInput[]
+    | RegulatoryCreateWithoutTable_idsInput
   >;
-  connect?: Maybe<
-    CostStructureWhereUniqueInput[] | CostStructureWhereUniqueInput
-  >;
+  connect?: Maybe<RegulatoryWhereUniqueInput[] | RegulatoryWhereUniqueInput>;
 }
 
-export interface CostStructureCreateWithoutTable_idsInput {
-  id?: Maybe<ID_Input>;
-  text: String;
-  note?: Maybe<String>;
-  createdBy: UserCreateOneInput;
-  updatedBy: UserCreateOneInput;
-}
-
-export interface CustomerSegmentCreateManyWithoutTable_idsInput {
-  create?: Maybe<
-    | CustomerSegmentCreateWithoutTable_idsInput[]
-    | CustomerSegmentCreateWithoutTable_idsInput
-  >;
-  connect?: Maybe<
-    CustomerSegmentWhereUniqueInput[] | CustomerSegmentWhereUniqueInput
-  >;
-}
-
-export interface CustomerSegmentCreateWithoutTable_idsInput {
-  id?: Maybe<ID_Input>;
-  text: String;
-  note?: Maybe<String>;
-  createdBy: UserCreateOneInput;
-  updatedBy: UserCreateOneInput;
-}
-
-export interface KeyResourceCreateManyWithoutTable_idsInput {
-  create?: Maybe<
-    | KeyResourceCreateWithoutTable_idsInput[]
-    | KeyResourceCreateWithoutTable_idsInput
-  >;
-  connect?: Maybe<KeyResourceWhereUniqueInput[] | KeyResourceWhereUniqueInput>;
-}
-
-export interface KeyResourceCreateWithoutTable_idsInput {
-  id?: Maybe<ID_Input>;
-  text: String;
-  note?: Maybe<String>;
-  createdBy: UserCreateOneInput;
-  updatedBy: UserCreateOneInput;
-}
-
-export interface ChannelCreateManyWithoutTable_idsInput {
-  create?: Maybe<
-    ChannelCreateWithoutTable_idsInput[] | ChannelCreateWithoutTable_idsInput
-  >;
-  connect?: Maybe<ChannelWhereUniqueInput[] | ChannelWhereUniqueInput>;
-}
-
-export interface ChannelCreateWithoutTable_idsInput {
+export interface RegulatoryCreateWithoutTable_idsInput {
   id?: Maybe<ID_Input>;
   text: String;
   note?: Maybe<String>;
@@ -2313,58 +2720,188 @@ export interface CompanyCreateWithoutPattern_idsInput {
   description?: Maybe<String>;
 }
 
-export interface CanvasUpdateInput {
-  project_id?: Maybe<ProjectUpdateOneRequiredWithoutCanvas_idsInput>;
-  pattern_ids?: Maybe<PatternUpdateManyWithoutCanvas_idsInput>;
-  table_id?: Maybe<TableUpdateOneRequiredInput>;
-  name?: Maybe<String>;
+export interface PatternCreateManyWithoutCanvas_idsInput {
+  create?: Maybe<
+    PatternCreateWithoutCanvas_idsInput[] | PatternCreateWithoutCanvas_idsInput
+  >;
+  connect?: Maybe<PatternWhereUniqueInput[] | PatternWhereUniqueInput>;
+}
+
+export interface PatternCreateWithoutCanvas_idsInput {
+  id?: Maybe<ID_Input>;
+  table_id: TableCreateOneInput;
+  company_ids?: Maybe<CompanyCreateManyWithoutPattern_idsInput>;
+  strategy_pattern_ids?: Maybe<StrategyPatternCreateManyWithoutPattern_idInput>;
+  name: String;
+  description?: Maybe<String>;
+  actorWeight?: Maybe<Int>;
+  valuePropositionWeight?: Maybe<Int>;
+  valueCreationWeight?: Maybe<Int>;
+  valueDeliveryWeight?: Maybe<Int>;
+  revenueWeight?: Maybe<Int>;
+  expenseWeight?: Maybe<Int>;
+  networkEffectWeight?: Maybe<Int>;
+  regulatoryWeight?: Maybe<Int>;
+  technicalInfrastractureWeight?: Maybe<Int>;
+  createdBy: UserCreateOneInput;
+  updatedBy: UserCreateOneInput;
+}
+
+export interface StrategyPatternCreateManyWithoutPattern_idInput {
+  create?: Maybe<
+    | StrategyPatternCreateWithoutPattern_idInput[]
+    | StrategyPatternCreateWithoutPattern_idInput
+  >;
+  connect?: Maybe<
+    StrategyPatternWhereUniqueInput[] | StrategyPatternWhereUniqueInput
+  >;
+}
+
+export interface StrategyPatternCreateWithoutPattern_idInput {
+  id?: Maybe<ID_Input>;
+  strategy_id: StrategyCreateOneWithoutStrategy_pattern_idsInput;
+  weight: Int;
+}
+
+export interface StrategyCreateOneWithoutStrategy_pattern_idsInput {
+  create?: Maybe<StrategyCreateWithoutStrategy_pattern_idsInput>;
+  connect?: Maybe<StrategyWhereUniqueInput>;
+}
+
+export interface StrategyCreateWithoutStrategy_pattern_idsInput {
+  id?: Maybe<ID_Input>;
+  canvas_ids?: Maybe<CanvasCreateManyWithoutStrategy_idInput>;
+  name: String;
+  description?: Maybe<String>;
+  createdBy: UserCreateOneInput;
+  updatedBy: UserCreateOneInput;
+}
+
+export interface CanvasCreateManyWithoutStrategy_idInput {
+  create?: Maybe<
+    CanvasCreateWithoutStrategy_idInput[] | CanvasCreateWithoutStrategy_idInput
+  >;
+  connect?: Maybe<CanvasWhereUniqueInput[] | CanvasWhereUniqueInput>;
+}
+
+export interface CanvasCreateWithoutStrategy_idInput {
+  id?: Maybe<ID_Input>;
+  project_id: ProjectCreateOneWithoutCanvas_idsInput;
+  pattern_ids?: Maybe<PatternCreateManyWithoutCanvas_idsInput>;
+  table_id: TableCreateOneInput;
+  name: String;
+  createdBy: UserCreateOneInput;
+  updatedBy: UserCreateOneInput;
+}
+
+export interface ActorUpdateInput {
+  table_ids?: Maybe<TableUpdateManyWithoutActor_entry_idsInput>;
+  text?: Maybe<String>;
+  note?: Maybe<String>;
   createdBy?: Maybe<UserUpdateOneRequiredInput>;
   updatedBy?: Maybe<UserUpdateOneRequiredInput>;
 }
 
-export interface ProjectUpdateOneRequiredWithoutCanvas_idsInput {
-  create?: Maybe<ProjectCreateWithoutCanvas_idsInput>;
-  update?: Maybe<ProjectUpdateWithoutCanvas_idsDataInput>;
-  upsert?: Maybe<ProjectUpsertWithoutCanvas_idsInput>;
-  connect?: Maybe<ProjectWhereUniqueInput>;
+export interface TableUpdateManyWithoutActor_entry_idsInput {
+  create?: Maybe<
+    | TableCreateWithoutActor_entry_idsInput[]
+    | TableCreateWithoutActor_entry_idsInput
+  >;
+  delete?: Maybe<TableWhereUniqueInput[] | TableWhereUniqueInput>;
+  connect?: Maybe<TableWhereUniqueInput[] | TableWhereUniqueInput>;
+  set?: Maybe<TableWhereUniqueInput[] | TableWhereUniqueInput>;
+  disconnect?: Maybe<TableWhereUniqueInput[] | TableWhereUniqueInput>;
+  update?: Maybe<
+    | TableUpdateWithWhereUniqueWithoutActor_entry_idsInput[]
+    | TableUpdateWithWhereUniqueWithoutActor_entry_idsInput
+  >;
+  upsert?: Maybe<
+    | TableUpsertWithWhereUniqueWithoutActor_entry_idsInput[]
+    | TableUpsertWithWhereUniqueWithoutActor_entry_idsInput
+  >;
+  deleteMany?: Maybe<TableScalarWhereInput[] | TableScalarWhereInput>;
 }
 
-export interface ProjectUpdateWithoutCanvas_idsDataInput {
-  user_id?: Maybe<UserUpdateOneRequiredWithoutProject_idsInput>;
-  name?: Maybe<String>;
+export interface TableUpdateWithWhereUniqueWithoutActor_entry_idsInput {
+  where: TableWhereUniqueInput;
+  data: TableUpdateWithoutActor_entry_idsDataInput;
+}
+
+export interface TableUpdateWithoutActor_entry_idsDataInput {
+  value_proposition_entry_ids?: Maybe<
+    ValuePropositionUpdateManyWithoutTable_idsInput
+  >;
+  value_creation_entry_ids?: Maybe<
+    ValueCreationUpdateManyWithoutTable_idsInput
+  >;
+  value_delivery_entry_ids?: Maybe<
+    ValueDeliveryUpdateManyWithoutTable_idsInput
+  >;
+  revenue_entry_ids?: Maybe<RevenueUpdateManyWithoutTable_idsInput>;
+  expense_entry_ids?: Maybe<ExpenseUpdateManyWithoutTable_idsInput>;
+  network_effect_entry_ids?: Maybe<
+    NetworkEffectUpdateManyWithoutTable_idsInput
+  >;
+  technical_infrastructure_entry_ids?: Maybe<
+    TechnicalInfrastractureUpdateManyWithoutTable_idsInput
+  >;
+  regulatory_entry_ids?: Maybe<RegulatoryUpdateManyWithoutTable_idsInput>;
+}
+
+export interface ValuePropositionUpdateManyWithoutTable_idsInput {
+  create?: Maybe<
+    | ValuePropositionCreateWithoutTable_idsInput[]
+    | ValuePropositionCreateWithoutTable_idsInput
+  >;
+  delete?: Maybe<
+    ValuePropositionWhereUniqueInput[] | ValuePropositionWhereUniqueInput
+  >;
+  connect?: Maybe<
+    ValuePropositionWhereUniqueInput[] | ValuePropositionWhereUniqueInput
+  >;
+  set?: Maybe<
+    ValuePropositionWhereUniqueInput[] | ValuePropositionWhereUniqueInput
+  >;
+  disconnect?: Maybe<
+    ValuePropositionWhereUniqueInput[] | ValuePropositionWhereUniqueInput
+  >;
+  update?: Maybe<
+    | ValuePropositionUpdateWithWhereUniqueWithoutTable_idsInput[]
+    | ValuePropositionUpdateWithWhereUniqueWithoutTable_idsInput
+  >;
+  upsert?: Maybe<
+    | ValuePropositionUpsertWithWhereUniqueWithoutTable_idsInput[]
+    | ValuePropositionUpsertWithWhereUniqueWithoutTable_idsInput
+  >;
+  deleteMany?: Maybe<
+    ValuePropositionScalarWhereInput[] | ValuePropositionScalarWhereInput
+  >;
+  updateMany?: Maybe<
+    | ValuePropositionUpdateManyWithWhereNestedInput[]
+    | ValuePropositionUpdateManyWithWhereNestedInput
+  >;
+}
+
+export interface ValuePropositionUpdateWithWhereUniqueWithoutTable_idsInput {
+  where: ValuePropositionWhereUniqueInput;
+  data: ValuePropositionUpdateWithoutTable_idsDataInput;
+}
+
+export interface ValuePropositionUpdateWithoutTable_idsDataInput {
+  text?: Maybe<String>;
+  note?: Maybe<String>;
   createdBy?: Maybe<UserUpdateOneRequiredInput>;
   updatedBy?: Maybe<UserUpdateOneRequiredInput>;
 }
 
-export interface UserUpdateOneRequiredWithoutProject_idsInput {
-  create?: Maybe<UserCreateWithoutProject_idsInput>;
-  update?: Maybe<UserUpdateWithoutProject_idsDataInput>;
-  upsert?: Maybe<UserUpsertWithoutProject_idsInput>;
+export interface UserUpdateOneRequiredInput {
+  create?: Maybe<UserCreateInput>;
+  update?: Maybe<UserUpdateDataInput>;
+  upsert?: Maybe<UserUpsertNestedInput>;
   connect?: Maybe<UserWhereUniqueInput>;
 }
 
-export interface UserUpdateWithoutProject_idsDataInput {
-  firstName?: Maybe<String>;
-  lastName?: Maybe<String>;
-  email?: Maybe<String>;
-  role?: Maybe<Role>;
-  password?: Maybe<String>;
-  verificationCode?: Maybe<String>;
-  verified?: Maybe<Boolean>;
-  phoneNumber?: Maybe<String>;
-  updatedBy?: Maybe<UserUpdateOneWithoutUpdatedByInput>;
-}
-
-export interface UserUpdateOneWithoutUpdatedByInput {
-  create?: Maybe<UserCreateWithoutUpdatedByInput>;
-  update?: Maybe<UserUpdateWithoutUpdatedByDataInput>;
-  upsert?: Maybe<UserUpsertWithoutUpdatedByInput>;
-  delete?: Maybe<Boolean>;
-  disconnect?: Maybe<Boolean>;
-  connect?: Maybe<UserWhereUniqueInput>;
-}
-
-export interface UserUpdateWithoutUpdatedByDataInput {
+export interface UserUpdateDataInput {
   project_ids?: Maybe<ProjectUpdateManyWithoutUser_idInput>;
   firstName?: Maybe<String>;
   lastName?: Maybe<String>;
@@ -2374,6 +2911,7 @@ export interface UserUpdateWithoutUpdatedByDataInput {
   verificationCode?: Maybe<String>;
   verified?: Maybe<Boolean>;
   phoneNumber?: Maybe<String>;
+  updatedBy?: Maybe<UserUpdateOneWithoutUpdatedByInput>;
 }
 
 export interface ProjectUpdateManyWithoutUser_idInput {
@@ -2440,6 +2978,7 @@ export interface CanvasUpdateWithWhereUniqueWithoutProject_idInput {
 }
 
 export interface CanvasUpdateWithoutProject_idDataInput {
+  strategy_id?: Maybe<StrategyUpdateOneWithoutCanvas_idsInput>;
   pattern_ids?: Maybe<PatternUpdateManyWithoutCanvas_idsInput>;
   table_id?: Maybe<TableUpdateOneRequiredInput>;
   name?: Maybe<String>;
@@ -2447,117 +2986,154 @@ export interface CanvasUpdateWithoutProject_idDataInput {
   updatedBy?: Maybe<UserUpdateOneRequiredInput>;
 }
 
-export interface PatternUpdateManyWithoutCanvas_idsInput {
-  create?: Maybe<
-    PatternCreateWithoutCanvas_idsInput[] | PatternCreateWithoutCanvas_idsInput
-  >;
-  delete?: Maybe<PatternWhereUniqueInput[] | PatternWhereUniqueInput>;
-  connect?: Maybe<PatternWhereUniqueInput[] | PatternWhereUniqueInput>;
-  set?: Maybe<PatternWhereUniqueInput[] | PatternWhereUniqueInput>;
-  disconnect?: Maybe<PatternWhereUniqueInput[] | PatternWhereUniqueInput>;
-  update?: Maybe<
-    | PatternUpdateWithWhereUniqueWithoutCanvas_idsInput[]
-    | PatternUpdateWithWhereUniqueWithoutCanvas_idsInput
-  >;
-  upsert?: Maybe<
-    | PatternUpsertWithWhereUniqueWithoutCanvas_idsInput[]
-    | PatternUpsertWithWhereUniqueWithoutCanvas_idsInput
-  >;
-  deleteMany?: Maybe<PatternScalarWhereInput[] | PatternScalarWhereInput>;
-  updateMany?: Maybe<
-    | PatternUpdateManyWithWhereNestedInput[]
-    | PatternUpdateManyWithWhereNestedInput
-  >;
+export interface StrategyUpdateOneWithoutCanvas_idsInput {
+  create?: Maybe<StrategyCreateWithoutCanvas_idsInput>;
+  update?: Maybe<StrategyUpdateWithoutCanvas_idsDataInput>;
+  upsert?: Maybe<StrategyUpsertWithoutCanvas_idsInput>;
+  delete?: Maybe<Boolean>;
+  disconnect?: Maybe<Boolean>;
+  connect?: Maybe<StrategyWhereUniqueInput>;
 }
 
-export interface PatternUpdateWithWhereUniqueWithoutCanvas_idsInput {
-  where: PatternWhereUniqueInput;
-  data: PatternUpdateWithoutCanvas_idsDataInput;
-}
-
-export interface PatternUpdateWithoutCanvas_idsDataInput {
-  table_id?: Maybe<TableUpdateOneRequiredInput>;
-  company_ids?: Maybe<CompanyUpdateManyWithoutPattern_idsInput>;
+export interface StrategyUpdateWithoutCanvas_idsDataInput {
+  strategy_pattern_ids?: Maybe<
+    StrategyPatternUpdateManyWithoutStrategy_idInput
+  >;
   name?: Maybe<String>;
   description?: Maybe<String>;
   createdBy?: Maybe<UserUpdateOneRequiredInput>;
   updatedBy?: Maybe<UserUpdateOneRequiredInput>;
 }
 
-export interface TableUpdateOneRequiredInput {
-  create?: Maybe<TableCreateInput>;
-  update?: Maybe<TableUpdateDataInput>;
-  upsert?: Maybe<TableUpsertNestedInput>;
-  connect?: Maybe<TableWhereUniqueInput>;
-}
-
-export interface TableUpdateDataInput {
-  key_partner_entry_ids?: Maybe<KeyPartnerUpdateManyWithoutTable_idsInput>;
-  reventue_stream_entry_ids?: Maybe<
-    RevenueStreamUpdateManyWithoutTable_idsInput
-  >;
-  key_activity_entry_ids?: Maybe<KeyActitvityUpdateManyWithoutTable_idsInput>;
-  customer_relationship_entry_ids?: Maybe<
-    CustomerRelationshipUpdateManyWithoutTable_idsInput
-  >;
-  value_proposition_entry_ids?: Maybe<
-    ValuePropositionUpdateManyWithoutTable_idsInput
-  >;
-  cost_structure_entry_ids?: Maybe<
-    CostStructureUpdateManyWithoutTable_idsInput
-  >;
-  customer_segment_entry_ids?: Maybe<
-    CustomerSegmentUpdateManyWithoutTable_idsInput
-  >;
-  key_resource_entry_ids?: Maybe<KeyResourceUpdateManyWithoutTable_idsInput>;
-  channel_entry_ids?: Maybe<ChannelUpdateManyWithoutTable_idsInput>;
-}
-
-export interface KeyPartnerUpdateManyWithoutTable_idsInput {
+export interface StrategyPatternUpdateManyWithoutStrategy_idInput {
   create?: Maybe<
-    | KeyPartnerCreateWithoutTable_idsInput[]
-    | KeyPartnerCreateWithoutTable_idsInput
+    | StrategyPatternCreateWithoutStrategy_idInput[]
+    | StrategyPatternCreateWithoutStrategy_idInput
   >;
-  delete?: Maybe<KeyPartnerWhereUniqueInput[] | KeyPartnerWhereUniqueInput>;
-  connect?: Maybe<KeyPartnerWhereUniqueInput[] | KeyPartnerWhereUniqueInput>;
-  set?: Maybe<KeyPartnerWhereUniqueInput[] | KeyPartnerWhereUniqueInput>;
-  disconnect?: Maybe<KeyPartnerWhereUniqueInput[] | KeyPartnerWhereUniqueInput>;
+  delete?: Maybe<
+    StrategyPatternWhereUniqueInput[] | StrategyPatternWhereUniqueInput
+  >;
+  connect?: Maybe<
+    StrategyPatternWhereUniqueInput[] | StrategyPatternWhereUniqueInput
+  >;
+  set?: Maybe<
+    StrategyPatternWhereUniqueInput[] | StrategyPatternWhereUniqueInput
+  >;
+  disconnect?: Maybe<
+    StrategyPatternWhereUniqueInput[] | StrategyPatternWhereUniqueInput
+  >;
   update?: Maybe<
-    | KeyPartnerUpdateWithWhereUniqueWithoutTable_idsInput[]
-    | KeyPartnerUpdateWithWhereUniqueWithoutTable_idsInput
+    | StrategyPatternUpdateWithWhereUniqueWithoutStrategy_idInput[]
+    | StrategyPatternUpdateWithWhereUniqueWithoutStrategy_idInput
   >;
   upsert?: Maybe<
-    | KeyPartnerUpsertWithWhereUniqueWithoutTable_idsInput[]
-    | KeyPartnerUpsertWithWhereUniqueWithoutTable_idsInput
+    | StrategyPatternUpsertWithWhereUniqueWithoutStrategy_idInput[]
+    | StrategyPatternUpsertWithWhereUniqueWithoutStrategy_idInput
   >;
-  deleteMany?: Maybe<KeyPartnerScalarWhereInput[] | KeyPartnerScalarWhereInput>;
+  deleteMany?: Maybe<
+    StrategyPatternScalarWhereInput[] | StrategyPatternScalarWhereInput
+  >;
   updateMany?: Maybe<
-    | KeyPartnerUpdateManyWithWhereNestedInput[]
-    | KeyPartnerUpdateManyWithWhereNestedInput
+    | StrategyPatternUpdateManyWithWhereNestedInput[]
+    | StrategyPatternUpdateManyWithWhereNestedInput
   >;
 }
 
-export interface KeyPartnerUpdateWithWhereUniqueWithoutTable_idsInput {
-  where: KeyPartnerWhereUniqueInput;
-  data: KeyPartnerUpdateWithoutTable_idsDataInput;
+export interface StrategyPatternUpdateWithWhereUniqueWithoutStrategy_idInput {
+  where: StrategyPatternWhereUniqueInput;
+  data: StrategyPatternUpdateWithoutStrategy_idDataInput;
 }
 
-export interface KeyPartnerUpdateWithoutTable_idsDataInput {
-  text?: Maybe<String>;
-  note?: Maybe<String>;
+export interface StrategyPatternUpdateWithoutStrategy_idDataInput {
+  pattern_id?: Maybe<PatternUpdateOneRequiredWithoutStrategy_pattern_idsInput>;
+  weight?: Maybe<Int>;
+}
+
+export interface PatternUpdateOneRequiredWithoutStrategy_pattern_idsInput {
+  create?: Maybe<PatternCreateWithoutStrategy_pattern_idsInput>;
+  update?: Maybe<PatternUpdateWithoutStrategy_pattern_idsDataInput>;
+  upsert?: Maybe<PatternUpsertWithoutStrategy_pattern_idsInput>;
+  connect?: Maybe<PatternWhereUniqueInput>;
+}
+
+export interface PatternUpdateWithoutStrategy_pattern_idsDataInput {
+  canvas_ids?: Maybe<CanvasUpdateManyWithoutPattern_idsInput>;
+  table_id?: Maybe<TableUpdateOneRequiredInput>;
+  company_ids?: Maybe<CompanyUpdateManyWithoutPattern_idsInput>;
+  name?: Maybe<String>;
+  description?: Maybe<String>;
+  actorWeight?: Maybe<Int>;
+  valuePropositionWeight?: Maybe<Int>;
+  valueCreationWeight?: Maybe<Int>;
+  valueDeliveryWeight?: Maybe<Int>;
+  revenueWeight?: Maybe<Int>;
+  expenseWeight?: Maybe<Int>;
+  networkEffectWeight?: Maybe<Int>;
+  regulatoryWeight?: Maybe<Int>;
+  technicalInfrastractureWeight?: Maybe<Int>;
   createdBy?: Maybe<UserUpdateOneRequiredInput>;
   updatedBy?: Maybe<UserUpdateOneRequiredInput>;
 }
 
-export interface UserUpdateOneRequiredInput {
-  create?: Maybe<UserCreateInput>;
-  update?: Maybe<UserUpdateDataInput>;
-  upsert?: Maybe<UserUpsertNestedInput>;
+export interface CanvasUpdateManyWithoutPattern_idsInput {
+  create?: Maybe<
+    CanvasCreateWithoutPattern_idsInput[] | CanvasCreateWithoutPattern_idsInput
+  >;
+  delete?: Maybe<CanvasWhereUniqueInput[] | CanvasWhereUniqueInput>;
+  connect?: Maybe<CanvasWhereUniqueInput[] | CanvasWhereUniqueInput>;
+  set?: Maybe<CanvasWhereUniqueInput[] | CanvasWhereUniqueInput>;
+  disconnect?: Maybe<CanvasWhereUniqueInput[] | CanvasWhereUniqueInput>;
+  update?: Maybe<
+    | CanvasUpdateWithWhereUniqueWithoutPattern_idsInput[]
+    | CanvasUpdateWithWhereUniqueWithoutPattern_idsInput
+  >;
+  upsert?: Maybe<
+    | CanvasUpsertWithWhereUniqueWithoutPattern_idsInput[]
+    | CanvasUpsertWithWhereUniqueWithoutPattern_idsInput
+  >;
+  deleteMany?: Maybe<CanvasScalarWhereInput[] | CanvasScalarWhereInput>;
+  updateMany?: Maybe<
+    | CanvasUpdateManyWithWhereNestedInput[]
+    | CanvasUpdateManyWithWhereNestedInput
+  >;
+}
+
+export interface CanvasUpdateWithWhereUniqueWithoutPattern_idsInput {
+  where: CanvasWhereUniqueInput;
+  data: CanvasUpdateWithoutPattern_idsDataInput;
+}
+
+export interface CanvasUpdateWithoutPattern_idsDataInput {
+  project_id?: Maybe<ProjectUpdateOneRequiredWithoutCanvas_idsInput>;
+  strategy_id?: Maybe<StrategyUpdateOneWithoutCanvas_idsInput>;
+  table_id?: Maybe<TableUpdateOneRequiredInput>;
+  name?: Maybe<String>;
+  createdBy?: Maybe<UserUpdateOneRequiredInput>;
+  updatedBy?: Maybe<UserUpdateOneRequiredInput>;
+}
+
+export interface ProjectUpdateOneRequiredWithoutCanvas_idsInput {
+  create?: Maybe<ProjectCreateWithoutCanvas_idsInput>;
+  update?: Maybe<ProjectUpdateWithoutCanvas_idsDataInput>;
+  upsert?: Maybe<ProjectUpsertWithoutCanvas_idsInput>;
+  connect?: Maybe<ProjectWhereUniqueInput>;
+}
+
+export interface ProjectUpdateWithoutCanvas_idsDataInput {
+  user_id?: Maybe<UserUpdateOneRequiredWithoutProject_idsInput>;
+  name?: Maybe<String>;
+  createdBy?: Maybe<UserUpdateOneRequiredInput>;
+  updatedBy?: Maybe<UserUpdateOneRequiredInput>;
+}
+
+export interface UserUpdateOneRequiredWithoutProject_idsInput {
+  create?: Maybe<UserCreateWithoutProject_idsInput>;
+  update?: Maybe<UserUpdateWithoutProject_idsDataInput>;
+  upsert?: Maybe<UserUpsertWithoutProject_idsInput>;
   connect?: Maybe<UserWhereUniqueInput>;
 }
 
-export interface UserUpdateDataInput {
-  project_ids?: Maybe<ProjectUpdateManyWithoutUser_idInput>;
+export interface UserUpdateWithoutProject_idsDataInput {
   firstName?: Maybe<String>;
   lastName?: Maybe<String>;
   email?: Maybe<String>;
@@ -2569,142 +3145,112 @@ export interface UserUpdateDataInput {
   updatedBy?: Maybe<UserUpdateOneWithoutUpdatedByInput>;
 }
 
-export interface UserUpsertNestedInput {
-  update: UserUpdateDataInput;
-  create: UserCreateInput;
+export interface UserUpdateOneWithoutUpdatedByInput {
+  create?: Maybe<UserCreateWithoutUpdatedByInput>;
+  update?: Maybe<UserUpdateWithoutUpdatedByDataInput>;
+  upsert?: Maybe<UserUpsertWithoutUpdatedByInput>;
+  delete?: Maybe<Boolean>;
+  disconnect?: Maybe<Boolean>;
+  connect?: Maybe<UserWhereUniqueInput>;
 }
 
-export interface KeyPartnerUpsertWithWhereUniqueWithoutTable_idsInput {
-  where: KeyPartnerWhereUniqueInput;
-  update: KeyPartnerUpdateWithoutTable_idsDataInput;
-  create: KeyPartnerCreateWithoutTable_idsInput;
+export interface UserUpdateWithoutUpdatedByDataInput {
+  project_ids?: Maybe<ProjectUpdateManyWithoutUser_idInput>;
+  firstName?: Maybe<String>;
+  lastName?: Maybe<String>;
+  email?: Maybe<String>;
+  role?: Maybe<Role>;
+  password?: Maybe<String>;
+  verificationCode?: Maybe<String>;
+  verified?: Maybe<Boolean>;
+  phoneNumber?: Maybe<String>;
 }
 
-export interface KeyPartnerScalarWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  text?: Maybe<String>;
-  text_not?: Maybe<String>;
-  text_in?: Maybe<String[] | String>;
-  text_not_in?: Maybe<String[] | String>;
-  text_lt?: Maybe<String>;
-  text_lte?: Maybe<String>;
-  text_gt?: Maybe<String>;
-  text_gte?: Maybe<String>;
-  text_contains?: Maybe<String>;
-  text_not_contains?: Maybe<String>;
-  text_starts_with?: Maybe<String>;
-  text_not_starts_with?: Maybe<String>;
-  text_ends_with?: Maybe<String>;
-  text_not_ends_with?: Maybe<String>;
-  note?: Maybe<String>;
-  note_not?: Maybe<String>;
-  note_in?: Maybe<String[] | String>;
-  note_not_in?: Maybe<String[] | String>;
-  note_lt?: Maybe<String>;
-  note_lte?: Maybe<String>;
-  note_gt?: Maybe<String>;
-  note_gte?: Maybe<String>;
-  note_contains?: Maybe<String>;
-  note_not_contains?: Maybe<String>;
-  note_starts_with?: Maybe<String>;
-  note_not_starts_with?: Maybe<String>;
-  note_ends_with?: Maybe<String>;
-  note_not_ends_with?: Maybe<String>;
-  createdAt?: Maybe<DateTimeInput>;
-  createdAt_not?: Maybe<DateTimeInput>;
-  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_lt?: Maybe<DateTimeInput>;
-  createdAt_lte?: Maybe<DateTimeInput>;
-  createdAt_gt?: Maybe<DateTimeInput>;
-  createdAt_gte?: Maybe<DateTimeInput>;
-  updatedAt?: Maybe<DateTimeInput>;
-  updatedAt_not?: Maybe<DateTimeInput>;
-  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  updatedAt_lt?: Maybe<DateTimeInput>;
-  updatedAt_lte?: Maybe<DateTimeInput>;
-  updatedAt_gt?: Maybe<DateTimeInput>;
-  updatedAt_gte?: Maybe<DateTimeInput>;
-  AND?: Maybe<KeyPartnerScalarWhereInput[] | KeyPartnerScalarWhereInput>;
-  OR?: Maybe<KeyPartnerScalarWhereInput[] | KeyPartnerScalarWhereInput>;
-  NOT?: Maybe<KeyPartnerScalarWhereInput[] | KeyPartnerScalarWhereInput>;
+export interface UserUpsertWithoutUpdatedByInput {
+  update: UserUpdateWithoutUpdatedByDataInput;
+  create: UserCreateWithoutUpdatedByInput;
 }
 
-export interface KeyPartnerUpdateManyWithWhereNestedInput {
-  where: KeyPartnerScalarWhereInput;
-  data: KeyPartnerUpdateManyDataInput;
+export interface UserUpsertWithoutProject_idsInput {
+  update: UserUpdateWithoutProject_idsDataInput;
+  create: UserCreateWithoutProject_idsInput;
 }
 
-export interface KeyPartnerUpdateManyDataInput {
-  text?: Maybe<String>;
-  note?: Maybe<String>;
+export interface ProjectUpsertWithoutCanvas_idsInput {
+  update: ProjectUpdateWithoutCanvas_idsDataInput;
+  create: ProjectCreateWithoutCanvas_idsInput;
 }
 
-export interface RevenueStreamUpdateManyWithoutTable_idsInput {
+export interface TableUpdateOneRequiredInput {
+  create?: Maybe<TableCreateInput>;
+  update?: Maybe<TableUpdateDataInput>;
+  upsert?: Maybe<TableUpsertNestedInput>;
+  connect?: Maybe<TableWhereUniqueInput>;
+}
+
+export interface TableUpdateDataInput {
+  actor_entry_ids?: Maybe<ActorUpdateManyWithoutTable_idsInput>;
+  value_proposition_entry_ids?: Maybe<
+    ValuePropositionUpdateManyWithoutTable_idsInput
+  >;
+  value_creation_entry_ids?: Maybe<
+    ValueCreationUpdateManyWithoutTable_idsInput
+  >;
+  value_delivery_entry_ids?: Maybe<
+    ValueDeliveryUpdateManyWithoutTable_idsInput
+  >;
+  revenue_entry_ids?: Maybe<RevenueUpdateManyWithoutTable_idsInput>;
+  expense_entry_ids?: Maybe<ExpenseUpdateManyWithoutTable_idsInput>;
+  network_effect_entry_ids?: Maybe<
+    NetworkEffectUpdateManyWithoutTable_idsInput
+  >;
+  technical_infrastructure_entry_ids?: Maybe<
+    TechnicalInfrastractureUpdateManyWithoutTable_idsInput
+  >;
+  regulatory_entry_ids?: Maybe<RegulatoryUpdateManyWithoutTable_idsInput>;
+}
+
+export interface ActorUpdateManyWithoutTable_idsInput {
   create?: Maybe<
-    | RevenueStreamCreateWithoutTable_idsInput[]
-    | RevenueStreamCreateWithoutTable_idsInput
+    ActorCreateWithoutTable_idsInput[] | ActorCreateWithoutTable_idsInput
   >;
-  delete?: Maybe<
-    RevenueStreamWhereUniqueInput[] | RevenueStreamWhereUniqueInput
-  >;
-  connect?: Maybe<
-    RevenueStreamWhereUniqueInput[] | RevenueStreamWhereUniqueInput
-  >;
-  set?: Maybe<RevenueStreamWhereUniqueInput[] | RevenueStreamWhereUniqueInput>;
-  disconnect?: Maybe<
-    RevenueStreamWhereUniqueInput[] | RevenueStreamWhereUniqueInput
-  >;
+  delete?: Maybe<ActorWhereUniqueInput[] | ActorWhereUniqueInput>;
+  connect?: Maybe<ActorWhereUniqueInput[] | ActorWhereUniqueInput>;
+  set?: Maybe<ActorWhereUniqueInput[] | ActorWhereUniqueInput>;
+  disconnect?: Maybe<ActorWhereUniqueInput[] | ActorWhereUniqueInput>;
   update?: Maybe<
-    | RevenueStreamUpdateWithWhereUniqueWithoutTable_idsInput[]
-    | RevenueStreamUpdateWithWhereUniqueWithoutTable_idsInput
+    | ActorUpdateWithWhereUniqueWithoutTable_idsInput[]
+    | ActorUpdateWithWhereUniqueWithoutTable_idsInput
   >;
   upsert?: Maybe<
-    | RevenueStreamUpsertWithWhereUniqueWithoutTable_idsInput[]
-    | RevenueStreamUpsertWithWhereUniqueWithoutTable_idsInput
+    | ActorUpsertWithWhereUniqueWithoutTable_idsInput[]
+    | ActorUpsertWithWhereUniqueWithoutTable_idsInput
   >;
-  deleteMany?: Maybe<
-    RevenueStreamScalarWhereInput[] | RevenueStreamScalarWhereInput
-  >;
+  deleteMany?: Maybe<ActorScalarWhereInput[] | ActorScalarWhereInput>;
   updateMany?: Maybe<
-    | RevenueStreamUpdateManyWithWhereNestedInput[]
-    | RevenueStreamUpdateManyWithWhereNestedInput
+    ActorUpdateManyWithWhereNestedInput[] | ActorUpdateManyWithWhereNestedInput
   >;
 }
 
-export interface RevenueStreamUpdateWithWhereUniqueWithoutTable_idsInput {
-  where: RevenueStreamWhereUniqueInput;
-  data: RevenueStreamUpdateWithoutTable_idsDataInput;
+export interface ActorUpdateWithWhereUniqueWithoutTable_idsInput {
+  where: ActorWhereUniqueInput;
+  data: ActorUpdateWithoutTable_idsDataInput;
 }
 
-export interface RevenueStreamUpdateWithoutTable_idsDataInput {
+export interface ActorUpdateWithoutTable_idsDataInput {
   text?: Maybe<String>;
   note?: Maybe<String>;
   createdBy?: Maybe<UserUpdateOneRequiredInput>;
   updatedBy?: Maybe<UserUpdateOneRequiredInput>;
 }
 
-export interface RevenueStreamUpsertWithWhereUniqueWithoutTable_idsInput {
-  where: RevenueStreamWhereUniqueInput;
-  update: RevenueStreamUpdateWithoutTable_idsDataInput;
-  create: RevenueStreamCreateWithoutTable_idsInput;
+export interface ActorUpsertWithWhereUniqueWithoutTable_idsInput {
+  where: ActorWhereUniqueInput;
+  update: ActorUpdateWithoutTable_idsDataInput;
+  create: ActorCreateWithoutTable_idsInput;
 }
 
-export interface RevenueStreamScalarWhereInput {
+export interface ActorScalarWhereInput {
   id?: Maybe<ID_Input>;
   id_not?: Maybe<ID_Input>;
   id_in?: Maybe<ID_Input[] | ID_Input>;
@@ -2763,70 +3309,72 @@ export interface RevenueStreamScalarWhereInput {
   updatedAt_lte?: Maybe<DateTimeInput>;
   updatedAt_gt?: Maybe<DateTimeInput>;
   updatedAt_gte?: Maybe<DateTimeInput>;
-  AND?: Maybe<RevenueStreamScalarWhereInput[] | RevenueStreamScalarWhereInput>;
-  OR?: Maybe<RevenueStreamScalarWhereInput[] | RevenueStreamScalarWhereInput>;
-  NOT?: Maybe<RevenueStreamScalarWhereInput[] | RevenueStreamScalarWhereInput>;
+  AND?: Maybe<ActorScalarWhereInput[] | ActorScalarWhereInput>;
+  OR?: Maybe<ActorScalarWhereInput[] | ActorScalarWhereInput>;
+  NOT?: Maybe<ActorScalarWhereInput[] | ActorScalarWhereInput>;
 }
 
-export interface RevenueStreamUpdateManyWithWhereNestedInput {
-  where: RevenueStreamScalarWhereInput;
-  data: RevenueStreamUpdateManyDataInput;
+export interface ActorUpdateManyWithWhereNestedInput {
+  where: ActorScalarWhereInput;
+  data: ActorUpdateManyDataInput;
 }
 
-export interface RevenueStreamUpdateManyDataInput {
+export interface ActorUpdateManyDataInput {
   text?: Maybe<String>;
   note?: Maybe<String>;
 }
 
-export interface KeyActitvityUpdateManyWithoutTable_idsInput {
+export interface ValueCreationUpdateManyWithoutTable_idsInput {
   create?: Maybe<
-    | KeyActitvityCreateWithoutTable_idsInput[]
-    | KeyActitvityCreateWithoutTable_idsInput
+    | ValueCreationCreateWithoutTable_idsInput[]
+    | ValueCreationCreateWithoutTable_idsInput
   >;
-  delete?: Maybe<KeyActitvityWhereUniqueInput[] | KeyActitvityWhereUniqueInput>;
+  delete?: Maybe<
+    ValueCreationWhereUniqueInput[] | ValueCreationWhereUniqueInput
+  >;
   connect?: Maybe<
-    KeyActitvityWhereUniqueInput[] | KeyActitvityWhereUniqueInput
+    ValueCreationWhereUniqueInput[] | ValueCreationWhereUniqueInput
   >;
-  set?: Maybe<KeyActitvityWhereUniqueInput[] | KeyActitvityWhereUniqueInput>;
+  set?: Maybe<ValueCreationWhereUniqueInput[] | ValueCreationWhereUniqueInput>;
   disconnect?: Maybe<
-    KeyActitvityWhereUniqueInput[] | KeyActitvityWhereUniqueInput
+    ValueCreationWhereUniqueInput[] | ValueCreationWhereUniqueInput
   >;
   update?: Maybe<
-    | KeyActitvityUpdateWithWhereUniqueWithoutTable_idsInput[]
-    | KeyActitvityUpdateWithWhereUniqueWithoutTable_idsInput
+    | ValueCreationUpdateWithWhereUniqueWithoutTable_idsInput[]
+    | ValueCreationUpdateWithWhereUniqueWithoutTable_idsInput
   >;
   upsert?: Maybe<
-    | KeyActitvityUpsertWithWhereUniqueWithoutTable_idsInput[]
-    | KeyActitvityUpsertWithWhereUniqueWithoutTable_idsInput
+    | ValueCreationUpsertWithWhereUniqueWithoutTable_idsInput[]
+    | ValueCreationUpsertWithWhereUniqueWithoutTable_idsInput
   >;
   deleteMany?: Maybe<
-    KeyActitvityScalarWhereInput[] | KeyActitvityScalarWhereInput
+    ValueCreationScalarWhereInput[] | ValueCreationScalarWhereInput
   >;
   updateMany?: Maybe<
-    | KeyActitvityUpdateManyWithWhereNestedInput[]
-    | KeyActitvityUpdateManyWithWhereNestedInput
+    | ValueCreationUpdateManyWithWhereNestedInput[]
+    | ValueCreationUpdateManyWithWhereNestedInput
   >;
 }
 
-export interface KeyActitvityUpdateWithWhereUniqueWithoutTable_idsInput {
-  where: KeyActitvityWhereUniqueInput;
-  data: KeyActitvityUpdateWithoutTable_idsDataInput;
+export interface ValueCreationUpdateWithWhereUniqueWithoutTable_idsInput {
+  where: ValueCreationWhereUniqueInput;
+  data: ValueCreationUpdateWithoutTable_idsDataInput;
 }
 
-export interface KeyActitvityUpdateWithoutTable_idsDataInput {
+export interface ValueCreationUpdateWithoutTable_idsDataInput {
   text?: Maybe<String>;
   note?: Maybe<String>;
   createdBy?: Maybe<UserUpdateOneRequiredInput>;
   updatedBy?: Maybe<UserUpdateOneRequiredInput>;
 }
 
-export interface KeyActitvityUpsertWithWhereUniqueWithoutTable_idsInput {
-  where: KeyActitvityWhereUniqueInput;
-  update: KeyActitvityUpdateWithoutTable_idsDataInput;
-  create: KeyActitvityCreateWithoutTable_idsInput;
+export interface ValueCreationUpsertWithWhereUniqueWithoutTable_idsInput {
+  where: ValueCreationWhereUniqueInput;
+  update: ValueCreationUpdateWithoutTable_idsDataInput;
+  create: ValueCreationCreateWithoutTable_idsInput;
 }
 
-export interface KeyActitvityScalarWhereInput {
+export interface ValueCreationScalarWhereInput {
   id?: Maybe<ID_Input>;
   id_not?: Maybe<ID_Input>;
   id_in?: Maybe<ID_Input[] | ID_Input>;
@@ -2885,79 +3433,557 @@ export interface KeyActitvityScalarWhereInput {
   updatedAt_lte?: Maybe<DateTimeInput>;
   updatedAt_gt?: Maybe<DateTimeInput>;
   updatedAt_gte?: Maybe<DateTimeInput>;
-  AND?: Maybe<KeyActitvityScalarWhereInput[] | KeyActitvityScalarWhereInput>;
-  OR?: Maybe<KeyActitvityScalarWhereInput[] | KeyActitvityScalarWhereInput>;
-  NOT?: Maybe<KeyActitvityScalarWhereInput[] | KeyActitvityScalarWhereInput>;
+  AND?: Maybe<ValueCreationScalarWhereInput[] | ValueCreationScalarWhereInput>;
+  OR?: Maybe<ValueCreationScalarWhereInput[] | ValueCreationScalarWhereInput>;
+  NOT?: Maybe<ValueCreationScalarWhereInput[] | ValueCreationScalarWhereInput>;
 }
 
-export interface KeyActitvityUpdateManyWithWhereNestedInput {
-  where: KeyActitvityScalarWhereInput;
-  data: KeyActitvityUpdateManyDataInput;
+export interface ValueCreationUpdateManyWithWhereNestedInput {
+  where: ValueCreationScalarWhereInput;
+  data: ValueCreationUpdateManyDataInput;
 }
 
-export interface KeyActitvityUpdateManyDataInput {
+export interface ValueCreationUpdateManyDataInput {
   text?: Maybe<String>;
   note?: Maybe<String>;
 }
 
-export interface CustomerRelationshipUpdateManyWithoutTable_idsInput {
+export interface ValueDeliveryUpdateManyWithoutTable_idsInput {
   create?: Maybe<
-    | CustomerRelationshipCreateWithoutTable_idsInput[]
-    | CustomerRelationshipCreateWithoutTable_idsInput
+    | ValueDeliveryCreateWithoutTable_idsInput[]
+    | ValueDeliveryCreateWithoutTable_idsInput
   >;
   delete?: Maybe<
-    | CustomerRelationshipWhereUniqueInput[]
-    | CustomerRelationshipWhereUniqueInput
+    ValueDeliveryWhereUniqueInput[] | ValueDeliveryWhereUniqueInput
   >;
   connect?: Maybe<
-    | CustomerRelationshipWhereUniqueInput[]
-    | CustomerRelationshipWhereUniqueInput
+    ValueDeliveryWhereUniqueInput[] | ValueDeliveryWhereUniqueInput
+  >;
+  set?: Maybe<ValueDeliveryWhereUniqueInput[] | ValueDeliveryWhereUniqueInput>;
+  disconnect?: Maybe<
+    ValueDeliveryWhereUniqueInput[] | ValueDeliveryWhereUniqueInput
+  >;
+  update?: Maybe<
+    | ValueDeliveryUpdateWithWhereUniqueWithoutTable_idsInput[]
+    | ValueDeliveryUpdateWithWhereUniqueWithoutTable_idsInput
+  >;
+  upsert?: Maybe<
+    | ValueDeliveryUpsertWithWhereUniqueWithoutTable_idsInput[]
+    | ValueDeliveryUpsertWithWhereUniqueWithoutTable_idsInput
+  >;
+  deleteMany?: Maybe<
+    ValueDeliveryScalarWhereInput[] | ValueDeliveryScalarWhereInput
+  >;
+  updateMany?: Maybe<
+    | ValueDeliveryUpdateManyWithWhereNestedInput[]
+    | ValueDeliveryUpdateManyWithWhereNestedInput
+  >;
+}
+
+export interface ValueDeliveryUpdateWithWhereUniqueWithoutTable_idsInput {
+  where: ValueDeliveryWhereUniqueInput;
+  data: ValueDeliveryUpdateWithoutTable_idsDataInput;
+}
+
+export interface ValueDeliveryUpdateWithoutTable_idsDataInput {
+  text?: Maybe<String>;
+  note?: Maybe<String>;
+  createdBy?: Maybe<UserUpdateOneRequiredInput>;
+  updatedBy?: Maybe<UserUpdateOneRequiredInput>;
+}
+
+export interface ValueDeliveryUpsertWithWhereUniqueWithoutTable_idsInput {
+  where: ValueDeliveryWhereUniqueInput;
+  update: ValueDeliveryUpdateWithoutTable_idsDataInput;
+  create: ValueDeliveryCreateWithoutTable_idsInput;
+}
+
+export interface ValueDeliveryScalarWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  text?: Maybe<String>;
+  text_not?: Maybe<String>;
+  text_in?: Maybe<String[] | String>;
+  text_not_in?: Maybe<String[] | String>;
+  text_lt?: Maybe<String>;
+  text_lte?: Maybe<String>;
+  text_gt?: Maybe<String>;
+  text_gte?: Maybe<String>;
+  text_contains?: Maybe<String>;
+  text_not_contains?: Maybe<String>;
+  text_starts_with?: Maybe<String>;
+  text_not_starts_with?: Maybe<String>;
+  text_ends_with?: Maybe<String>;
+  text_not_ends_with?: Maybe<String>;
+  note?: Maybe<String>;
+  note_not?: Maybe<String>;
+  note_in?: Maybe<String[] | String>;
+  note_not_in?: Maybe<String[] | String>;
+  note_lt?: Maybe<String>;
+  note_lte?: Maybe<String>;
+  note_gt?: Maybe<String>;
+  note_gte?: Maybe<String>;
+  note_contains?: Maybe<String>;
+  note_not_contains?: Maybe<String>;
+  note_starts_with?: Maybe<String>;
+  note_not_starts_with?: Maybe<String>;
+  note_ends_with?: Maybe<String>;
+  note_not_ends_with?: Maybe<String>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
+  AND?: Maybe<ValueDeliveryScalarWhereInput[] | ValueDeliveryScalarWhereInput>;
+  OR?: Maybe<ValueDeliveryScalarWhereInput[] | ValueDeliveryScalarWhereInput>;
+  NOT?: Maybe<ValueDeliveryScalarWhereInput[] | ValueDeliveryScalarWhereInput>;
+}
+
+export interface ValueDeliveryUpdateManyWithWhereNestedInput {
+  where: ValueDeliveryScalarWhereInput;
+  data: ValueDeliveryUpdateManyDataInput;
+}
+
+export interface ValueDeliveryUpdateManyDataInput {
+  text?: Maybe<String>;
+  note?: Maybe<String>;
+}
+
+export interface RevenueUpdateManyWithoutTable_idsInput {
+  create?: Maybe<
+    RevenueCreateWithoutTable_idsInput[] | RevenueCreateWithoutTable_idsInput
+  >;
+  delete?: Maybe<RevenueWhereUniqueInput[] | RevenueWhereUniqueInput>;
+  connect?: Maybe<RevenueWhereUniqueInput[] | RevenueWhereUniqueInput>;
+  set?: Maybe<RevenueWhereUniqueInput[] | RevenueWhereUniqueInput>;
+  disconnect?: Maybe<RevenueWhereUniqueInput[] | RevenueWhereUniqueInput>;
+  update?: Maybe<
+    | RevenueUpdateWithWhereUniqueWithoutTable_idsInput[]
+    | RevenueUpdateWithWhereUniqueWithoutTable_idsInput
+  >;
+  upsert?: Maybe<
+    | RevenueUpsertWithWhereUniqueWithoutTable_idsInput[]
+    | RevenueUpsertWithWhereUniqueWithoutTable_idsInput
+  >;
+  deleteMany?: Maybe<RevenueScalarWhereInput[] | RevenueScalarWhereInput>;
+  updateMany?: Maybe<
+    | RevenueUpdateManyWithWhereNestedInput[]
+    | RevenueUpdateManyWithWhereNestedInput
+  >;
+}
+
+export interface RevenueUpdateWithWhereUniqueWithoutTable_idsInput {
+  where: RevenueWhereUniqueInput;
+  data: RevenueUpdateWithoutTable_idsDataInput;
+}
+
+export interface RevenueUpdateWithoutTable_idsDataInput {
+  text?: Maybe<String>;
+  note?: Maybe<String>;
+  createdBy?: Maybe<UserUpdateOneRequiredInput>;
+  updatedBy?: Maybe<UserUpdateOneRequiredInput>;
+}
+
+export interface RevenueUpsertWithWhereUniqueWithoutTable_idsInput {
+  where: RevenueWhereUniqueInput;
+  update: RevenueUpdateWithoutTable_idsDataInput;
+  create: RevenueCreateWithoutTable_idsInput;
+}
+
+export interface RevenueScalarWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  text?: Maybe<String>;
+  text_not?: Maybe<String>;
+  text_in?: Maybe<String[] | String>;
+  text_not_in?: Maybe<String[] | String>;
+  text_lt?: Maybe<String>;
+  text_lte?: Maybe<String>;
+  text_gt?: Maybe<String>;
+  text_gte?: Maybe<String>;
+  text_contains?: Maybe<String>;
+  text_not_contains?: Maybe<String>;
+  text_starts_with?: Maybe<String>;
+  text_not_starts_with?: Maybe<String>;
+  text_ends_with?: Maybe<String>;
+  text_not_ends_with?: Maybe<String>;
+  note?: Maybe<String>;
+  note_not?: Maybe<String>;
+  note_in?: Maybe<String[] | String>;
+  note_not_in?: Maybe<String[] | String>;
+  note_lt?: Maybe<String>;
+  note_lte?: Maybe<String>;
+  note_gt?: Maybe<String>;
+  note_gte?: Maybe<String>;
+  note_contains?: Maybe<String>;
+  note_not_contains?: Maybe<String>;
+  note_starts_with?: Maybe<String>;
+  note_not_starts_with?: Maybe<String>;
+  note_ends_with?: Maybe<String>;
+  note_not_ends_with?: Maybe<String>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
+  AND?: Maybe<RevenueScalarWhereInput[] | RevenueScalarWhereInput>;
+  OR?: Maybe<RevenueScalarWhereInput[] | RevenueScalarWhereInput>;
+  NOT?: Maybe<RevenueScalarWhereInput[] | RevenueScalarWhereInput>;
+}
+
+export interface RevenueUpdateManyWithWhereNestedInput {
+  where: RevenueScalarWhereInput;
+  data: RevenueUpdateManyDataInput;
+}
+
+export interface RevenueUpdateManyDataInput {
+  text?: Maybe<String>;
+  note?: Maybe<String>;
+}
+
+export interface ExpenseUpdateManyWithoutTable_idsInput {
+  create?: Maybe<
+    ExpenseCreateWithoutTable_idsInput[] | ExpenseCreateWithoutTable_idsInput
+  >;
+  delete?: Maybe<ExpenseWhereUniqueInput[] | ExpenseWhereUniqueInput>;
+  connect?: Maybe<ExpenseWhereUniqueInput[] | ExpenseWhereUniqueInput>;
+  set?: Maybe<ExpenseWhereUniqueInput[] | ExpenseWhereUniqueInput>;
+  disconnect?: Maybe<ExpenseWhereUniqueInput[] | ExpenseWhereUniqueInput>;
+  update?: Maybe<
+    | ExpenseUpdateWithWhereUniqueWithoutTable_idsInput[]
+    | ExpenseUpdateWithWhereUniqueWithoutTable_idsInput
+  >;
+  upsert?: Maybe<
+    | ExpenseUpsertWithWhereUniqueWithoutTable_idsInput[]
+    | ExpenseUpsertWithWhereUniqueWithoutTable_idsInput
+  >;
+  deleteMany?: Maybe<ExpenseScalarWhereInput[] | ExpenseScalarWhereInput>;
+  updateMany?: Maybe<
+    | ExpenseUpdateManyWithWhereNestedInput[]
+    | ExpenseUpdateManyWithWhereNestedInput
+  >;
+}
+
+export interface ExpenseUpdateWithWhereUniqueWithoutTable_idsInput {
+  where: ExpenseWhereUniqueInput;
+  data: ExpenseUpdateWithoutTable_idsDataInput;
+}
+
+export interface ExpenseUpdateWithoutTable_idsDataInput {
+  text?: Maybe<String>;
+  note?: Maybe<String>;
+  createdBy?: Maybe<UserUpdateOneRequiredInput>;
+  updatedBy?: Maybe<UserUpdateOneRequiredInput>;
+}
+
+export interface ExpenseUpsertWithWhereUniqueWithoutTable_idsInput {
+  where: ExpenseWhereUniqueInput;
+  update: ExpenseUpdateWithoutTable_idsDataInput;
+  create: ExpenseCreateWithoutTable_idsInput;
+}
+
+export interface ExpenseScalarWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  text?: Maybe<String>;
+  text_not?: Maybe<String>;
+  text_in?: Maybe<String[] | String>;
+  text_not_in?: Maybe<String[] | String>;
+  text_lt?: Maybe<String>;
+  text_lte?: Maybe<String>;
+  text_gt?: Maybe<String>;
+  text_gte?: Maybe<String>;
+  text_contains?: Maybe<String>;
+  text_not_contains?: Maybe<String>;
+  text_starts_with?: Maybe<String>;
+  text_not_starts_with?: Maybe<String>;
+  text_ends_with?: Maybe<String>;
+  text_not_ends_with?: Maybe<String>;
+  note?: Maybe<String>;
+  note_not?: Maybe<String>;
+  note_in?: Maybe<String[] | String>;
+  note_not_in?: Maybe<String[] | String>;
+  note_lt?: Maybe<String>;
+  note_lte?: Maybe<String>;
+  note_gt?: Maybe<String>;
+  note_gte?: Maybe<String>;
+  note_contains?: Maybe<String>;
+  note_not_contains?: Maybe<String>;
+  note_starts_with?: Maybe<String>;
+  note_not_starts_with?: Maybe<String>;
+  note_ends_with?: Maybe<String>;
+  note_not_ends_with?: Maybe<String>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
+  AND?: Maybe<ExpenseScalarWhereInput[] | ExpenseScalarWhereInput>;
+  OR?: Maybe<ExpenseScalarWhereInput[] | ExpenseScalarWhereInput>;
+  NOT?: Maybe<ExpenseScalarWhereInput[] | ExpenseScalarWhereInput>;
+}
+
+export interface ExpenseUpdateManyWithWhereNestedInput {
+  where: ExpenseScalarWhereInput;
+  data: ExpenseUpdateManyDataInput;
+}
+
+export interface ExpenseUpdateManyDataInput {
+  text?: Maybe<String>;
+  note?: Maybe<String>;
+}
+
+export interface NetworkEffectUpdateManyWithoutTable_idsInput {
+  create?: Maybe<
+    | NetworkEffectCreateWithoutTable_idsInput[]
+    | NetworkEffectCreateWithoutTable_idsInput
+  >;
+  delete?: Maybe<
+    NetworkEffectWhereUniqueInput[] | NetworkEffectWhereUniqueInput
+  >;
+  connect?: Maybe<
+    NetworkEffectWhereUniqueInput[] | NetworkEffectWhereUniqueInput
+  >;
+  set?: Maybe<NetworkEffectWhereUniqueInput[] | NetworkEffectWhereUniqueInput>;
+  disconnect?: Maybe<
+    NetworkEffectWhereUniqueInput[] | NetworkEffectWhereUniqueInput
+  >;
+  update?: Maybe<
+    | NetworkEffectUpdateWithWhereUniqueWithoutTable_idsInput[]
+    | NetworkEffectUpdateWithWhereUniqueWithoutTable_idsInput
+  >;
+  upsert?: Maybe<
+    | NetworkEffectUpsertWithWhereUniqueWithoutTable_idsInput[]
+    | NetworkEffectUpsertWithWhereUniqueWithoutTable_idsInput
+  >;
+  deleteMany?: Maybe<
+    NetworkEffectScalarWhereInput[] | NetworkEffectScalarWhereInput
+  >;
+  updateMany?: Maybe<
+    | NetworkEffectUpdateManyWithWhereNestedInput[]
+    | NetworkEffectUpdateManyWithWhereNestedInput
+  >;
+}
+
+export interface NetworkEffectUpdateWithWhereUniqueWithoutTable_idsInput {
+  where: NetworkEffectWhereUniqueInput;
+  data: NetworkEffectUpdateWithoutTable_idsDataInput;
+}
+
+export interface NetworkEffectUpdateWithoutTable_idsDataInput {
+  text?: Maybe<String>;
+  note?: Maybe<String>;
+  createdBy?: Maybe<UserUpdateOneRequiredInput>;
+  updatedBy?: Maybe<UserUpdateOneRequiredInput>;
+}
+
+export interface NetworkEffectUpsertWithWhereUniqueWithoutTable_idsInput {
+  where: NetworkEffectWhereUniqueInput;
+  update: NetworkEffectUpdateWithoutTable_idsDataInput;
+  create: NetworkEffectCreateWithoutTable_idsInput;
+}
+
+export interface NetworkEffectScalarWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  text?: Maybe<String>;
+  text_not?: Maybe<String>;
+  text_in?: Maybe<String[] | String>;
+  text_not_in?: Maybe<String[] | String>;
+  text_lt?: Maybe<String>;
+  text_lte?: Maybe<String>;
+  text_gt?: Maybe<String>;
+  text_gte?: Maybe<String>;
+  text_contains?: Maybe<String>;
+  text_not_contains?: Maybe<String>;
+  text_starts_with?: Maybe<String>;
+  text_not_starts_with?: Maybe<String>;
+  text_ends_with?: Maybe<String>;
+  text_not_ends_with?: Maybe<String>;
+  note?: Maybe<String>;
+  note_not?: Maybe<String>;
+  note_in?: Maybe<String[] | String>;
+  note_not_in?: Maybe<String[] | String>;
+  note_lt?: Maybe<String>;
+  note_lte?: Maybe<String>;
+  note_gt?: Maybe<String>;
+  note_gte?: Maybe<String>;
+  note_contains?: Maybe<String>;
+  note_not_contains?: Maybe<String>;
+  note_starts_with?: Maybe<String>;
+  note_not_starts_with?: Maybe<String>;
+  note_ends_with?: Maybe<String>;
+  note_not_ends_with?: Maybe<String>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
+  AND?: Maybe<NetworkEffectScalarWhereInput[] | NetworkEffectScalarWhereInput>;
+  OR?: Maybe<NetworkEffectScalarWhereInput[] | NetworkEffectScalarWhereInput>;
+  NOT?: Maybe<NetworkEffectScalarWhereInput[] | NetworkEffectScalarWhereInput>;
+}
+
+export interface NetworkEffectUpdateManyWithWhereNestedInput {
+  where: NetworkEffectScalarWhereInput;
+  data: NetworkEffectUpdateManyDataInput;
+}
+
+export interface NetworkEffectUpdateManyDataInput {
+  text?: Maybe<String>;
+  note?: Maybe<String>;
+}
+
+export interface TechnicalInfrastractureUpdateManyWithoutTable_idsInput {
+  create?: Maybe<
+    | TechnicalInfrastractureCreateWithoutTable_idsInput[]
+    | TechnicalInfrastractureCreateWithoutTable_idsInput
+  >;
+  delete?: Maybe<
+    | TechnicalInfrastractureWhereUniqueInput[]
+    | TechnicalInfrastractureWhereUniqueInput
+  >;
+  connect?: Maybe<
+    | TechnicalInfrastractureWhereUniqueInput[]
+    | TechnicalInfrastractureWhereUniqueInput
   >;
   set?: Maybe<
-    | CustomerRelationshipWhereUniqueInput[]
-    | CustomerRelationshipWhereUniqueInput
+    | TechnicalInfrastractureWhereUniqueInput[]
+    | TechnicalInfrastractureWhereUniqueInput
   >;
   disconnect?: Maybe<
-    | CustomerRelationshipWhereUniqueInput[]
-    | CustomerRelationshipWhereUniqueInput
+    | TechnicalInfrastractureWhereUniqueInput[]
+    | TechnicalInfrastractureWhereUniqueInput
   >;
   update?: Maybe<
-    | CustomerRelationshipUpdateWithWhereUniqueWithoutTable_idsInput[]
-    | CustomerRelationshipUpdateWithWhereUniqueWithoutTable_idsInput
+    | TechnicalInfrastractureUpdateWithWhereUniqueWithoutTable_idsInput[]
+    | TechnicalInfrastractureUpdateWithWhereUniqueWithoutTable_idsInput
   >;
   upsert?: Maybe<
-    | CustomerRelationshipUpsertWithWhereUniqueWithoutTable_idsInput[]
-    | CustomerRelationshipUpsertWithWhereUniqueWithoutTable_idsInput
+    | TechnicalInfrastractureUpsertWithWhereUniqueWithoutTable_idsInput[]
+    | TechnicalInfrastractureUpsertWithWhereUniqueWithoutTable_idsInput
   >;
   deleteMany?: Maybe<
-    | CustomerRelationshipScalarWhereInput[]
-    | CustomerRelationshipScalarWhereInput
+    | TechnicalInfrastractureScalarWhereInput[]
+    | TechnicalInfrastractureScalarWhereInput
   >;
   updateMany?: Maybe<
-    | CustomerRelationshipUpdateManyWithWhereNestedInput[]
-    | CustomerRelationshipUpdateManyWithWhereNestedInput
+    | TechnicalInfrastractureUpdateManyWithWhereNestedInput[]
+    | TechnicalInfrastractureUpdateManyWithWhereNestedInput
   >;
 }
 
-export interface CustomerRelationshipUpdateWithWhereUniqueWithoutTable_idsInput {
-  where: CustomerRelationshipWhereUniqueInput;
-  data: CustomerRelationshipUpdateWithoutTable_idsDataInput;
+export interface TechnicalInfrastractureUpdateWithWhereUniqueWithoutTable_idsInput {
+  where: TechnicalInfrastractureWhereUniqueInput;
+  data: TechnicalInfrastractureUpdateWithoutTable_idsDataInput;
 }
 
-export interface CustomerRelationshipUpdateWithoutTable_idsDataInput {
+export interface TechnicalInfrastractureUpdateWithoutTable_idsDataInput {
   text?: Maybe<String>;
   note?: Maybe<String>;
   createdBy?: Maybe<UserUpdateOneRequiredInput>;
   updatedBy?: Maybe<UserUpdateOneRequiredInput>;
 }
 
-export interface CustomerRelationshipUpsertWithWhereUniqueWithoutTable_idsInput {
-  where: CustomerRelationshipWhereUniqueInput;
-  update: CustomerRelationshipUpdateWithoutTable_idsDataInput;
-  create: CustomerRelationshipCreateWithoutTable_idsInput;
+export interface TechnicalInfrastractureUpsertWithWhereUniqueWithoutTable_idsInput {
+  where: TechnicalInfrastractureWhereUniqueInput;
+  update: TechnicalInfrastractureUpdateWithoutTable_idsDataInput;
+  create: TechnicalInfrastractureCreateWithoutTable_idsInput;
 }
 
-export interface CustomerRelationshipScalarWhereInput {
+export interface TechnicalInfrastractureScalarWhereInput {
   id?: Maybe<ID_Input>;
   id_not?: Maybe<ID_Input>;
   id_in?: Maybe<ID_Input[] | ID_Input>;
@@ -3017,82 +4043,72 @@ export interface CustomerRelationshipScalarWhereInput {
   updatedAt_gt?: Maybe<DateTimeInput>;
   updatedAt_gte?: Maybe<DateTimeInput>;
   AND?: Maybe<
-    | CustomerRelationshipScalarWhereInput[]
-    | CustomerRelationshipScalarWhereInput
+    | TechnicalInfrastractureScalarWhereInput[]
+    | TechnicalInfrastractureScalarWhereInput
   >;
   OR?: Maybe<
-    | CustomerRelationshipScalarWhereInput[]
-    | CustomerRelationshipScalarWhereInput
+    | TechnicalInfrastractureScalarWhereInput[]
+    | TechnicalInfrastractureScalarWhereInput
   >;
   NOT?: Maybe<
-    | CustomerRelationshipScalarWhereInput[]
-    | CustomerRelationshipScalarWhereInput
+    | TechnicalInfrastractureScalarWhereInput[]
+    | TechnicalInfrastractureScalarWhereInput
   >;
 }
 
-export interface CustomerRelationshipUpdateManyWithWhereNestedInput {
-  where: CustomerRelationshipScalarWhereInput;
-  data: CustomerRelationshipUpdateManyDataInput;
+export interface TechnicalInfrastractureUpdateManyWithWhereNestedInput {
+  where: TechnicalInfrastractureScalarWhereInput;
+  data: TechnicalInfrastractureUpdateManyDataInput;
 }
 
-export interface CustomerRelationshipUpdateManyDataInput {
+export interface TechnicalInfrastractureUpdateManyDataInput {
   text?: Maybe<String>;
   note?: Maybe<String>;
 }
 
-export interface ValuePropositionUpdateManyWithoutTable_idsInput {
+export interface RegulatoryUpdateManyWithoutTable_idsInput {
   create?: Maybe<
-    | ValuePropositionCreateWithoutTable_idsInput[]
-    | ValuePropositionCreateWithoutTable_idsInput
+    | RegulatoryCreateWithoutTable_idsInput[]
+    | RegulatoryCreateWithoutTable_idsInput
   >;
-  delete?: Maybe<
-    ValuePropositionWhereUniqueInput[] | ValuePropositionWhereUniqueInput
-  >;
-  connect?: Maybe<
-    ValuePropositionWhereUniqueInput[] | ValuePropositionWhereUniqueInput
-  >;
-  set?: Maybe<
-    ValuePropositionWhereUniqueInput[] | ValuePropositionWhereUniqueInput
-  >;
-  disconnect?: Maybe<
-    ValuePropositionWhereUniqueInput[] | ValuePropositionWhereUniqueInput
-  >;
+  delete?: Maybe<RegulatoryWhereUniqueInput[] | RegulatoryWhereUniqueInput>;
+  connect?: Maybe<RegulatoryWhereUniqueInput[] | RegulatoryWhereUniqueInput>;
+  set?: Maybe<RegulatoryWhereUniqueInput[] | RegulatoryWhereUniqueInput>;
+  disconnect?: Maybe<RegulatoryWhereUniqueInput[] | RegulatoryWhereUniqueInput>;
   update?: Maybe<
-    | ValuePropositionUpdateWithWhereUniqueWithoutTable_idsInput[]
-    | ValuePropositionUpdateWithWhereUniqueWithoutTable_idsInput
+    | RegulatoryUpdateWithWhereUniqueWithoutTable_idsInput[]
+    | RegulatoryUpdateWithWhereUniqueWithoutTable_idsInput
   >;
   upsert?: Maybe<
-    | ValuePropositionUpsertWithWhereUniqueWithoutTable_idsInput[]
-    | ValuePropositionUpsertWithWhereUniqueWithoutTable_idsInput
+    | RegulatoryUpsertWithWhereUniqueWithoutTable_idsInput[]
+    | RegulatoryUpsertWithWhereUniqueWithoutTable_idsInput
   >;
-  deleteMany?: Maybe<
-    ValuePropositionScalarWhereInput[] | ValuePropositionScalarWhereInput
-  >;
+  deleteMany?: Maybe<RegulatoryScalarWhereInput[] | RegulatoryScalarWhereInput>;
   updateMany?: Maybe<
-    | ValuePropositionUpdateManyWithWhereNestedInput[]
-    | ValuePropositionUpdateManyWithWhereNestedInput
+    | RegulatoryUpdateManyWithWhereNestedInput[]
+    | RegulatoryUpdateManyWithWhereNestedInput
   >;
 }
 
-export interface ValuePropositionUpdateWithWhereUniqueWithoutTable_idsInput {
-  where: ValuePropositionWhereUniqueInput;
-  data: ValuePropositionUpdateWithoutTable_idsDataInput;
+export interface RegulatoryUpdateWithWhereUniqueWithoutTable_idsInput {
+  where: RegulatoryWhereUniqueInput;
+  data: RegulatoryUpdateWithoutTable_idsDataInput;
 }
 
-export interface ValuePropositionUpdateWithoutTable_idsDataInput {
+export interface RegulatoryUpdateWithoutTable_idsDataInput {
   text?: Maybe<String>;
   note?: Maybe<String>;
   createdBy?: Maybe<UserUpdateOneRequiredInput>;
   updatedBy?: Maybe<UserUpdateOneRequiredInput>;
 }
 
-export interface ValuePropositionUpsertWithWhereUniqueWithoutTable_idsInput {
-  where: ValuePropositionWhereUniqueInput;
-  update: ValuePropositionUpdateWithoutTable_idsDataInput;
-  create: ValuePropositionCreateWithoutTable_idsInput;
+export interface RegulatoryUpsertWithWhereUniqueWithoutTable_idsInput {
+  where: RegulatoryWhereUniqueInput;
+  update: RegulatoryUpdateWithoutTable_idsDataInput;
+  create: RegulatoryCreateWithoutTable_idsInput;
 }
 
-export interface ValuePropositionScalarWhereInput {
+export interface RegulatoryScalarWhereInput {
   id?: Maybe<ID_Input>;
   id_not?: Maybe<ID_Input>;
   id_in?: Maybe<ID_Input[] | ID_Input>;
@@ -3151,514 +4167,17 @@ export interface ValuePropositionScalarWhereInput {
   updatedAt_lte?: Maybe<DateTimeInput>;
   updatedAt_gt?: Maybe<DateTimeInput>;
   updatedAt_gte?: Maybe<DateTimeInput>;
-  AND?: Maybe<
-    ValuePropositionScalarWhereInput[] | ValuePropositionScalarWhereInput
-  >;
-  OR?: Maybe<
-    ValuePropositionScalarWhereInput[] | ValuePropositionScalarWhereInput
-  >;
-  NOT?: Maybe<
-    ValuePropositionScalarWhereInput[] | ValuePropositionScalarWhereInput
-  >;
+  AND?: Maybe<RegulatoryScalarWhereInput[] | RegulatoryScalarWhereInput>;
+  OR?: Maybe<RegulatoryScalarWhereInput[] | RegulatoryScalarWhereInput>;
+  NOT?: Maybe<RegulatoryScalarWhereInput[] | RegulatoryScalarWhereInput>;
 }
 
-export interface ValuePropositionUpdateManyWithWhereNestedInput {
-  where: ValuePropositionScalarWhereInput;
-  data: ValuePropositionUpdateManyDataInput;
+export interface RegulatoryUpdateManyWithWhereNestedInput {
+  where: RegulatoryScalarWhereInput;
+  data: RegulatoryUpdateManyDataInput;
 }
 
-export interface ValuePropositionUpdateManyDataInput {
-  text?: Maybe<String>;
-  note?: Maybe<String>;
-}
-
-export interface CostStructureUpdateManyWithoutTable_idsInput {
-  create?: Maybe<
-    | CostStructureCreateWithoutTable_idsInput[]
-    | CostStructureCreateWithoutTable_idsInput
-  >;
-  delete?: Maybe<
-    CostStructureWhereUniqueInput[] | CostStructureWhereUniqueInput
-  >;
-  connect?: Maybe<
-    CostStructureWhereUniqueInput[] | CostStructureWhereUniqueInput
-  >;
-  set?: Maybe<CostStructureWhereUniqueInput[] | CostStructureWhereUniqueInput>;
-  disconnect?: Maybe<
-    CostStructureWhereUniqueInput[] | CostStructureWhereUniqueInput
-  >;
-  update?: Maybe<
-    | CostStructureUpdateWithWhereUniqueWithoutTable_idsInput[]
-    | CostStructureUpdateWithWhereUniqueWithoutTable_idsInput
-  >;
-  upsert?: Maybe<
-    | CostStructureUpsertWithWhereUniqueWithoutTable_idsInput[]
-    | CostStructureUpsertWithWhereUniqueWithoutTable_idsInput
-  >;
-  deleteMany?: Maybe<
-    CostStructureScalarWhereInput[] | CostStructureScalarWhereInput
-  >;
-  updateMany?: Maybe<
-    | CostStructureUpdateManyWithWhereNestedInput[]
-    | CostStructureUpdateManyWithWhereNestedInput
-  >;
-}
-
-export interface CostStructureUpdateWithWhereUniqueWithoutTable_idsInput {
-  where: CostStructureWhereUniqueInput;
-  data: CostStructureUpdateWithoutTable_idsDataInput;
-}
-
-export interface CostStructureUpdateWithoutTable_idsDataInput {
-  text?: Maybe<String>;
-  note?: Maybe<String>;
-  createdBy?: Maybe<UserUpdateOneRequiredInput>;
-  updatedBy?: Maybe<UserUpdateOneRequiredInput>;
-}
-
-export interface CostStructureUpsertWithWhereUniqueWithoutTable_idsInput {
-  where: CostStructureWhereUniqueInput;
-  update: CostStructureUpdateWithoutTable_idsDataInput;
-  create: CostStructureCreateWithoutTable_idsInput;
-}
-
-export interface CostStructureScalarWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  text?: Maybe<String>;
-  text_not?: Maybe<String>;
-  text_in?: Maybe<String[] | String>;
-  text_not_in?: Maybe<String[] | String>;
-  text_lt?: Maybe<String>;
-  text_lte?: Maybe<String>;
-  text_gt?: Maybe<String>;
-  text_gte?: Maybe<String>;
-  text_contains?: Maybe<String>;
-  text_not_contains?: Maybe<String>;
-  text_starts_with?: Maybe<String>;
-  text_not_starts_with?: Maybe<String>;
-  text_ends_with?: Maybe<String>;
-  text_not_ends_with?: Maybe<String>;
-  note?: Maybe<String>;
-  note_not?: Maybe<String>;
-  note_in?: Maybe<String[] | String>;
-  note_not_in?: Maybe<String[] | String>;
-  note_lt?: Maybe<String>;
-  note_lte?: Maybe<String>;
-  note_gt?: Maybe<String>;
-  note_gte?: Maybe<String>;
-  note_contains?: Maybe<String>;
-  note_not_contains?: Maybe<String>;
-  note_starts_with?: Maybe<String>;
-  note_not_starts_with?: Maybe<String>;
-  note_ends_with?: Maybe<String>;
-  note_not_ends_with?: Maybe<String>;
-  createdAt?: Maybe<DateTimeInput>;
-  createdAt_not?: Maybe<DateTimeInput>;
-  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_lt?: Maybe<DateTimeInput>;
-  createdAt_lte?: Maybe<DateTimeInput>;
-  createdAt_gt?: Maybe<DateTimeInput>;
-  createdAt_gte?: Maybe<DateTimeInput>;
-  updatedAt?: Maybe<DateTimeInput>;
-  updatedAt_not?: Maybe<DateTimeInput>;
-  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  updatedAt_lt?: Maybe<DateTimeInput>;
-  updatedAt_lte?: Maybe<DateTimeInput>;
-  updatedAt_gt?: Maybe<DateTimeInput>;
-  updatedAt_gte?: Maybe<DateTimeInput>;
-  AND?: Maybe<CostStructureScalarWhereInput[] | CostStructureScalarWhereInput>;
-  OR?: Maybe<CostStructureScalarWhereInput[] | CostStructureScalarWhereInput>;
-  NOT?: Maybe<CostStructureScalarWhereInput[] | CostStructureScalarWhereInput>;
-}
-
-export interface CostStructureUpdateManyWithWhereNestedInput {
-  where: CostStructureScalarWhereInput;
-  data: CostStructureUpdateManyDataInput;
-}
-
-export interface CostStructureUpdateManyDataInput {
-  text?: Maybe<String>;
-  note?: Maybe<String>;
-}
-
-export interface CustomerSegmentUpdateManyWithoutTable_idsInput {
-  create?: Maybe<
-    | CustomerSegmentCreateWithoutTable_idsInput[]
-    | CustomerSegmentCreateWithoutTable_idsInput
-  >;
-  delete?: Maybe<
-    CustomerSegmentWhereUniqueInput[] | CustomerSegmentWhereUniqueInput
-  >;
-  connect?: Maybe<
-    CustomerSegmentWhereUniqueInput[] | CustomerSegmentWhereUniqueInput
-  >;
-  set?: Maybe<
-    CustomerSegmentWhereUniqueInput[] | CustomerSegmentWhereUniqueInput
-  >;
-  disconnect?: Maybe<
-    CustomerSegmentWhereUniqueInput[] | CustomerSegmentWhereUniqueInput
-  >;
-  update?: Maybe<
-    | CustomerSegmentUpdateWithWhereUniqueWithoutTable_idsInput[]
-    | CustomerSegmentUpdateWithWhereUniqueWithoutTable_idsInput
-  >;
-  upsert?: Maybe<
-    | CustomerSegmentUpsertWithWhereUniqueWithoutTable_idsInput[]
-    | CustomerSegmentUpsertWithWhereUniqueWithoutTable_idsInput
-  >;
-  deleteMany?: Maybe<
-    CustomerSegmentScalarWhereInput[] | CustomerSegmentScalarWhereInput
-  >;
-  updateMany?: Maybe<
-    | CustomerSegmentUpdateManyWithWhereNestedInput[]
-    | CustomerSegmentUpdateManyWithWhereNestedInput
-  >;
-}
-
-export interface CustomerSegmentUpdateWithWhereUniqueWithoutTable_idsInput {
-  where: CustomerSegmentWhereUniqueInput;
-  data: CustomerSegmentUpdateWithoutTable_idsDataInput;
-}
-
-export interface CustomerSegmentUpdateWithoutTable_idsDataInput {
-  text?: Maybe<String>;
-  note?: Maybe<String>;
-  createdBy?: Maybe<UserUpdateOneRequiredInput>;
-  updatedBy?: Maybe<UserUpdateOneRequiredInput>;
-}
-
-export interface CustomerSegmentUpsertWithWhereUniqueWithoutTable_idsInput {
-  where: CustomerSegmentWhereUniqueInput;
-  update: CustomerSegmentUpdateWithoutTable_idsDataInput;
-  create: CustomerSegmentCreateWithoutTable_idsInput;
-}
-
-export interface CustomerSegmentScalarWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  text?: Maybe<String>;
-  text_not?: Maybe<String>;
-  text_in?: Maybe<String[] | String>;
-  text_not_in?: Maybe<String[] | String>;
-  text_lt?: Maybe<String>;
-  text_lte?: Maybe<String>;
-  text_gt?: Maybe<String>;
-  text_gte?: Maybe<String>;
-  text_contains?: Maybe<String>;
-  text_not_contains?: Maybe<String>;
-  text_starts_with?: Maybe<String>;
-  text_not_starts_with?: Maybe<String>;
-  text_ends_with?: Maybe<String>;
-  text_not_ends_with?: Maybe<String>;
-  note?: Maybe<String>;
-  note_not?: Maybe<String>;
-  note_in?: Maybe<String[] | String>;
-  note_not_in?: Maybe<String[] | String>;
-  note_lt?: Maybe<String>;
-  note_lte?: Maybe<String>;
-  note_gt?: Maybe<String>;
-  note_gte?: Maybe<String>;
-  note_contains?: Maybe<String>;
-  note_not_contains?: Maybe<String>;
-  note_starts_with?: Maybe<String>;
-  note_not_starts_with?: Maybe<String>;
-  note_ends_with?: Maybe<String>;
-  note_not_ends_with?: Maybe<String>;
-  createdAt?: Maybe<DateTimeInput>;
-  createdAt_not?: Maybe<DateTimeInput>;
-  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_lt?: Maybe<DateTimeInput>;
-  createdAt_lte?: Maybe<DateTimeInput>;
-  createdAt_gt?: Maybe<DateTimeInput>;
-  createdAt_gte?: Maybe<DateTimeInput>;
-  updatedAt?: Maybe<DateTimeInput>;
-  updatedAt_not?: Maybe<DateTimeInput>;
-  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  updatedAt_lt?: Maybe<DateTimeInput>;
-  updatedAt_lte?: Maybe<DateTimeInput>;
-  updatedAt_gt?: Maybe<DateTimeInput>;
-  updatedAt_gte?: Maybe<DateTimeInput>;
-  AND?: Maybe<
-    CustomerSegmentScalarWhereInput[] | CustomerSegmentScalarWhereInput
-  >;
-  OR?: Maybe<
-    CustomerSegmentScalarWhereInput[] | CustomerSegmentScalarWhereInput
-  >;
-  NOT?: Maybe<
-    CustomerSegmentScalarWhereInput[] | CustomerSegmentScalarWhereInput
-  >;
-}
-
-export interface CustomerSegmentUpdateManyWithWhereNestedInput {
-  where: CustomerSegmentScalarWhereInput;
-  data: CustomerSegmentUpdateManyDataInput;
-}
-
-export interface CustomerSegmentUpdateManyDataInput {
-  text?: Maybe<String>;
-  note?: Maybe<String>;
-}
-
-export interface KeyResourceUpdateManyWithoutTable_idsInput {
-  create?: Maybe<
-    | KeyResourceCreateWithoutTable_idsInput[]
-    | KeyResourceCreateWithoutTable_idsInput
-  >;
-  delete?: Maybe<KeyResourceWhereUniqueInput[] | KeyResourceWhereUniqueInput>;
-  connect?: Maybe<KeyResourceWhereUniqueInput[] | KeyResourceWhereUniqueInput>;
-  set?: Maybe<KeyResourceWhereUniqueInput[] | KeyResourceWhereUniqueInput>;
-  disconnect?: Maybe<
-    KeyResourceWhereUniqueInput[] | KeyResourceWhereUniqueInput
-  >;
-  update?: Maybe<
-    | KeyResourceUpdateWithWhereUniqueWithoutTable_idsInput[]
-    | KeyResourceUpdateWithWhereUniqueWithoutTable_idsInput
-  >;
-  upsert?: Maybe<
-    | KeyResourceUpsertWithWhereUniqueWithoutTable_idsInput[]
-    | KeyResourceUpsertWithWhereUniqueWithoutTable_idsInput
-  >;
-  deleteMany?: Maybe<
-    KeyResourceScalarWhereInput[] | KeyResourceScalarWhereInput
-  >;
-  updateMany?: Maybe<
-    | KeyResourceUpdateManyWithWhereNestedInput[]
-    | KeyResourceUpdateManyWithWhereNestedInput
-  >;
-}
-
-export interface KeyResourceUpdateWithWhereUniqueWithoutTable_idsInput {
-  where: KeyResourceWhereUniqueInput;
-  data: KeyResourceUpdateWithoutTable_idsDataInput;
-}
-
-export interface KeyResourceUpdateWithoutTable_idsDataInput {
-  text?: Maybe<String>;
-  note?: Maybe<String>;
-  createdBy?: Maybe<UserUpdateOneRequiredInput>;
-  updatedBy?: Maybe<UserUpdateOneRequiredInput>;
-}
-
-export interface KeyResourceUpsertWithWhereUniqueWithoutTable_idsInput {
-  where: KeyResourceWhereUniqueInput;
-  update: KeyResourceUpdateWithoutTable_idsDataInput;
-  create: KeyResourceCreateWithoutTable_idsInput;
-}
-
-export interface KeyResourceScalarWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  text?: Maybe<String>;
-  text_not?: Maybe<String>;
-  text_in?: Maybe<String[] | String>;
-  text_not_in?: Maybe<String[] | String>;
-  text_lt?: Maybe<String>;
-  text_lte?: Maybe<String>;
-  text_gt?: Maybe<String>;
-  text_gte?: Maybe<String>;
-  text_contains?: Maybe<String>;
-  text_not_contains?: Maybe<String>;
-  text_starts_with?: Maybe<String>;
-  text_not_starts_with?: Maybe<String>;
-  text_ends_with?: Maybe<String>;
-  text_not_ends_with?: Maybe<String>;
-  note?: Maybe<String>;
-  note_not?: Maybe<String>;
-  note_in?: Maybe<String[] | String>;
-  note_not_in?: Maybe<String[] | String>;
-  note_lt?: Maybe<String>;
-  note_lte?: Maybe<String>;
-  note_gt?: Maybe<String>;
-  note_gte?: Maybe<String>;
-  note_contains?: Maybe<String>;
-  note_not_contains?: Maybe<String>;
-  note_starts_with?: Maybe<String>;
-  note_not_starts_with?: Maybe<String>;
-  note_ends_with?: Maybe<String>;
-  note_not_ends_with?: Maybe<String>;
-  createdAt?: Maybe<DateTimeInput>;
-  createdAt_not?: Maybe<DateTimeInput>;
-  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_lt?: Maybe<DateTimeInput>;
-  createdAt_lte?: Maybe<DateTimeInput>;
-  createdAt_gt?: Maybe<DateTimeInput>;
-  createdAt_gte?: Maybe<DateTimeInput>;
-  updatedAt?: Maybe<DateTimeInput>;
-  updatedAt_not?: Maybe<DateTimeInput>;
-  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  updatedAt_lt?: Maybe<DateTimeInput>;
-  updatedAt_lte?: Maybe<DateTimeInput>;
-  updatedAt_gt?: Maybe<DateTimeInput>;
-  updatedAt_gte?: Maybe<DateTimeInput>;
-  AND?: Maybe<KeyResourceScalarWhereInput[] | KeyResourceScalarWhereInput>;
-  OR?: Maybe<KeyResourceScalarWhereInput[] | KeyResourceScalarWhereInput>;
-  NOT?: Maybe<KeyResourceScalarWhereInput[] | KeyResourceScalarWhereInput>;
-}
-
-export interface KeyResourceUpdateManyWithWhereNestedInput {
-  where: KeyResourceScalarWhereInput;
-  data: KeyResourceUpdateManyDataInput;
-}
-
-export interface KeyResourceUpdateManyDataInput {
-  text?: Maybe<String>;
-  note?: Maybe<String>;
-}
-
-export interface ChannelUpdateManyWithoutTable_idsInput {
-  create?: Maybe<
-    ChannelCreateWithoutTable_idsInput[] | ChannelCreateWithoutTable_idsInput
-  >;
-  delete?: Maybe<ChannelWhereUniqueInput[] | ChannelWhereUniqueInput>;
-  connect?: Maybe<ChannelWhereUniqueInput[] | ChannelWhereUniqueInput>;
-  set?: Maybe<ChannelWhereUniqueInput[] | ChannelWhereUniqueInput>;
-  disconnect?: Maybe<ChannelWhereUniqueInput[] | ChannelWhereUniqueInput>;
-  update?: Maybe<
-    | ChannelUpdateWithWhereUniqueWithoutTable_idsInput[]
-    | ChannelUpdateWithWhereUniqueWithoutTable_idsInput
-  >;
-  upsert?: Maybe<
-    | ChannelUpsertWithWhereUniqueWithoutTable_idsInput[]
-    | ChannelUpsertWithWhereUniqueWithoutTable_idsInput
-  >;
-  deleteMany?: Maybe<ChannelScalarWhereInput[] | ChannelScalarWhereInput>;
-  updateMany?: Maybe<
-    | ChannelUpdateManyWithWhereNestedInput[]
-    | ChannelUpdateManyWithWhereNestedInput
-  >;
-}
-
-export interface ChannelUpdateWithWhereUniqueWithoutTable_idsInput {
-  where: ChannelWhereUniqueInput;
-  data: ChannelUpdateWithoutTable_idsDataInput;
-}
-
-export interface ChannelUpdateWithoutTable_idsDataInput {
-  text?: Maybe<String>;
-  note?: Maybe<String>;
-  createdBy?: Maybe<UserUpdateOneRequiredInput>;
-  updatedBy?: Maybe<UserUpdateOneRequiredInput>;
-}
-
-export interface ChannelUpsertWithWhereUniqueWithoutTable_idsInput {
-  where: ChannelWhereUniqueInput;
-  update: ChannelUpdateWithoutTable_idsDataInput;
-  create: ChannelCreateWithoutTable_idsInput;
-}
-
-export interface ChannelScalarWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  text?: Maybe<String>;
-  text_not?: Maybe<String>;
-  text_in?: Maybe<String[] | String>;
-  text_not_in?: Maybe<String[] | String>;
-  text_lt?: Maybe<String>;
-  text_lte?: Maybe<String>;
-  text_gt?: Maybe<String>;
-  text_gte?: Maybe<String>;
-  text_contains?: Maybe<String>;
-  text_not_contains?: Maybe<String>;
-  text_starts_with?: Maybe<String>;
-  text_not_starts_with?: Maybe<String>;
-  text_ends_with?: Maybe<String>;
-  text_not_ends_with?: Maybe<String>;
-  note?: Maybe<String>;
-  note_not?: Maybe<String>;
-  note_in?: Maybe<String[] | String>;
-  note_not_in?: Maybe<String[] | String>;
-  note_lt?: Maybe<String>;
-  note_lte?: Maybe<String>;
-  note_gt?: Maybe<String>;
-  note_gte?: Maybe<String>;
-  note_contains?: Maybe<String>;
-  note_not_contains?: Maybe<String>;
-  note_starts_with?: Maybe<String>;
-  note_not_starts_with?: Maybe<String>;
-  note_ends_with?: Maybe<String>;
-  note_not_ends_with?: Maybe<String>;
-  createdAt?: Maybe<DateTimeInput>;
-  createdAt_not?: Maybe<DateTimeInput>;
-  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_lt?: Maybe<DateTimeInput>;
-  createdAt_lte?: Maybe<DateTimeInput>;
-  createdAt_gt?: Maybe<DateTimeInput>;
-  createdAt_gte?: Maybe<DateTimeInput>;
-  updatedAt?: Maybe<DateTimeInput>;
-  updatedAt_not?: Maybe<DateTimeInput>;
-  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  updatedAt_lt?: Maybe<DateTimeInput>;
-  updatedAt_lte?: Maybe<DateTimeInput>;
-  updatedAt_gt?: Maybe<DateTimeInput>;
-  updatedAt_gte?: Maybe<DateTimeInput>;
-  AND?: Maybe<ChannelScalarWhereInput[] | ChannelScalarWhereInput>;
-  OR?: Maybe<ChannelScalarWhereInput[] | ChannelScalarWhereInput>;
-  NOT?: Maybe<ChannelScalarWhereInput[] | ChannelScalarWhereInput>;
-}
-
-export interface ChannelUpdateManyWithWhereNestedInput {
-  where: ChannelScalarWhereInput;
-  data: ChannelUpdateManyDataInput;
-}
-
-export interface ChannelUpdateManyDataInput {
+export interface RegulatoryUpdateManyDataInput {
   text?: Maybe<String>;
   note?: Maybe<String>;
 }
@@ -3666,6 +4185,71 @@ export interface ChannelUpdateManyDataInput {
 export interface TableUpsertNestedInput {
   update: TableUpdateDataInput;
   create: TableCreateInput;
+}
+
+export interface CanvasUpsertWithWhereUniqueWithoutPattern_idsInput {
+  where: CanvasWhereUniqueInput;
+  update: CanvasUpdateWithoutPattern_idsDataInput;
+  create: CanvasCreateWithoutPattern_idsInput;
+}
+
+export interface CanvasScalarWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  name?: Maybe<String>;
+  name_not?: Maybe<String>;
+  name_in?: Maybe<String[] | String>;
+  name_not_in?: Maybe<String[] | String>;
+  name_lt?: Maybe<String>;
+  name_lte?: Maybe<String>;
+  name_gt?: Maybe<String>;
+  name_gte?: Maybe<String>;
+  name_contains?: Maybe<String>;
+  name_not_contains?: Maybe<String>;
+  name_starts_with?: Maybe<String>;
+  name_not_starts_with?: Maybe<String>;
+  name_ends_with?: Maybe<String>;
+  name_not_ends_with?: Maybe<String>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
+  AND?: Maybe<CanvasScalarWhereInput[] | CanvasScalarWhereInput>;
+  OR?: Maybe<CanvasScalarWhereInput[] | CanvasScalarWhereInput>;
+  NOT?: Maybe<CanvasScalarWhereInput[] | CanvasScalarWhereInput>;
+}
+
+export interface CanvasUpdateManyWithWhereNestedInput {
+  where: CanvasScalarWhereInput;
+  data: CanvasUpdateManyDataInput;
+}
+
+export interface CanvasUpdateManyDataInput {
+  name?: Maybe<String>;
 }
 
 export interface CompanyUpdateManyWithoutPattern_idsInput {
@@ -3782,6 +4366,243 @@ export interface CompanyUpdateManyDataInput {
   description?: Maybe<String>;
 }
 
+export interface PatternUpsertWithoutStrategy_pattern_idsInput {
+  update: PatternUpdateWithoutStrategy_pattern_idsDataInput;
+  create: PatternCreateWithoutStrategy_pattern_idsInput;
+}
+
+export interface StrategyPatternUpsertWithWhereUniqueWithoutStrategy_idInput {
+  where: StrategyPatternWhereUniqueInput;
+  update: StrategyPatternUpdateWithoutStrategy_idDataInput;
+  create: StrategyPatternCreateWithoutStrategy_idInput;
+}
+
+export interface StrategyPatternScalarWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  weight?: Maybe<Int>;
+  weight_not?: Maybe<Int>;
+  weight_in?: Maybe<Int[] | Int>;
+  weight_not_in?: Maybe<Int[] | Int>;
+  weight_lt?: Maybe<Int>;
+  weight_lte?: Maybe<Int>;
+  weight_gt?: Maybe<Int>;
+  weight_gte?: Maybe<Int>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
+  AND?: Maybe<
+    StrategyPatternScalarWhereInput[] | StrategyPatternScalarWhereInput
+  >;
+  OR?: Maybe<
+    StrategyPatternScalarWhereInput[] | StrategyPatternScalarWhereInput
+  >;
+  NOT?: Maybe<
+    StrategyPatternScalarWhereInput[] | StrategyPatternScalarWhereInput
+  >;
+}
+
+export interface StrategyPatternUpdateManyWithWhereNestedInput {
+  where: StrategyPatternScalarWhereInput;
+  data: StrategyPatternUpdateManyDataInput;
+}
+
+export interface StrategyPatternUpdateManyDataInput {
+  weight?: Maybe<Int>;
+}
+
+export interface StrategyUpsertWithoutCanvas_idsInput {
+  update: StrategyUpdateWithoutCanvas_idsDataInput;
+  create: StrategyCreateWithoutCanvas_idsInput;
+}
+
+export interface PatternUpdateManyWithoutCanvas_idsInput {
+  create?: Maybe<
+    PatternCreateWithoutCanvas_idsInput[] | PatternCreateWithoutCanvas_idsInput
+  >;
+  delete?: Maybe<PatternWhereUniqueInput[] | PatternWhereUniqueInput>;
+  connect?: Maybe<PatternWhereUniqueInput[] | PatternWhereUniqueInput>;
+  set?: Maybe<PatternWhereUniqueInput[] | PatternWhereUniqueInput>;
+  disconnect?: Maybe<PatternWhereUniqueInput[] | PatternWhereUniqueInput>;
+  update?: Maybe<
+    | PatternUpdateWithWhereUniqueWithoutCanvas_idsInput[]
+    | PatternUpdateWithWhereUniqueWithoutCanvas_idsInput
+  >;
+  upsert?: Maybe<
+    | PatternUpsertWithWhereUniqueWithoutCanvas_idsInput[]
+    | PatternUpsertWithWhereUniqueWithoutCanvas_idsInput
+  >;
+  deleteMany?: Maybe<PatternScalarWhereInput[] | PatternScalarWhereInput>;
+  updateMany?: Maybe<
+    | PatternUpdateManyWithWhereNestedInput[]
+    | PatternUpdateManyWithWhereNestedInput
+  >;
+}
+
+export interface PatternUpdateWithWhereUniqueWithoutCanvas_idsInput {
+  where: PatternWhereUniqueInput;
+  data: PatternUpdateWithoutCanvas_idsDataInput;
+}
+
+export interface PatternUpdateWithoutCanvas_idsDataInput {
+  table_id?: Maybe<TableUpdateOneRequiredInput>;
+  company_ids?: Maybe<CompanyUpdateManyWithoutPattern_idsInput>;
+  strategy_pattern_ids?: Maybe<StrategyPatternUpdateManyWithoutPattern_idInput>;
+  name?: Maybe<String>;
+  description?: Maybe<String>;
+  actorWeight?: Maybe<Int>;
+  valuePropositionWeight?: Maybe<Int>;
+  valueCreationWeight?: Maybe<Int>;
+  valueDeliveryWeight?: Maybe<Int>;
+  revenueWeight?: Maybe<Int>;
+  expenseWeight?: Maybe<Int>;
+  networkEffectWeight?: Maybe<Int>;
+  regulatoryWeight?: Maybe<Int>;
+  technicalInfrastractureWeight?: Maybe<Int>;
+  createdBy?: Maybe<UserUpdateOneRequiredInput>;
+  updatedBy?: Maybe<UserUpdateOneRequiredInput>;
+}
+
+export interface StrategyPatternUpdateManyWithoutPattern_idInput {
+  create?: Maybe<
+    | StrategyPatternCreateWithoutPattern_idInput[]
+    | StrategyPatternCreateWithoutPattern_idInput
+  >;
+  delete?: Maybe<
+    StrategyPatternWhereUniqueInput[] | StrategyPatternWhereUniqueInput
+  >;
+  connect?: Maybe<
+    StrategyPatternWhereUniqueInput[] | StrategyPatternWhereUniqueInput
+  >;
+  set?: Maybe<
+    StrategyPatternWhereUniqueInput[] | StrategyPatternWhereUniqueInput
+  >;
+  disconnect?: Maybe<
+    StrategyPatternWhereUniqueInput[] | StrategyPatternWhereUniqueInput
+  >;
+  update?: Maybe<
+    | StrategyPatternUpdateWithWhereUniqueWithoutPattern_idInput[]
+    | StrategyPatternUpdateWithWhereUniqueWithoutPattern_idInput
+  >;
+  upsert?: Maybe<
+    | StrategyPatternUpsertWithWhereUniqueWithoutPattern_idInput[]
+    | StrategyPatternUpsertWithWhereUniqueWithoutPattern_idInput
+  >;
+  deleteMany?: Maybe<
+    StrategyPatternScalarWhereInput[] | StrategyPatternScalarWhereInput
+  >;
+  updateMany?: Maybe<
+    | StrategyPatternUpdateManyWithWhereNestedInput[]
+    | StrategyPatternUpdateManyWithWhereNestedInput
+  >;
+}
+
+export interface StrategyPatternUpdateWithWhereUniqueWithoutPattern_idInput {
+  where: StrategyPatternWhereUniqueInput;
+  data: StrategyPatternUpdateWithoutPattern_idDataInput;
+}
+
+export interface StrategyPatternUpdateWithoutPattern_idDataInput {
+  strategy_id?: Maybe<
+    StrategyUpdateOneRequiredWithoutStrategy_pattern_idsInput
+  >;
+  weight?: Maybe<Int>;
+}
+
+export interface StrategyUpdateOneRequiredWithoutStrategy_pattern_idsInput {
+  create?: Maybe<StrategyCreateWithoutStrategy_pattern_idsInput>;
+  update?: Maybe<StrategyUpdateWithoutStrategy_pattern_idsDataInput>;
+  upsert?: Maybe<StrategyUpsertWithoutStrategy_pattern_idsInput>;
+  connect?: Maybe<StrategyWhereUniqueInput>;
+}
+
+export interface StrategyUpdateWithoutStrategy_pattern_idsDataInput {
+  canvas_ids?: Maybe<CanvasUpdateManyWithoutStrategy_idInput>;
+  name?: Maybe<String>;
+  description?: Maybe<String>;
+  createdBy?: Maybe<UserUpdateOneRequiredInput>;
+  updatedBy?: Maybe<UserUpdateOneRequiredInput>;
+}
+
+export interface CanvasUpdateManyWithoutStrategy_idInput {
+  create?: Maybe<
+    CanvasCreateWithoutStrategy_idInput[] | CanvasCreateWithoutStrategy_idInput
+  >;
+  delete?: Maybe<CanvasWhereUniqueInput[] | CanvasWhereUniqueInput>;
+  connect?: Maybe<CanvasWhereUniqueInput[] | CanvasWhereUniqueInput>;
+  set?: Maybe<CanvasWhereUniqueInput[] | CanvasWhereUniqueInput>;
+  disconnect?: Maybe<CanvasWhereUniqueInput[] | CanvasWhereUniqueInput>;
+  update?: Maybe<
+    | CanvasUpdateWithWhereUniqueWithoutStrategy_idInput[]
+    | CanvasUpdateWithWhereUniqueWithoutStrategy_idInput
+  >;
+  upsert?: Maybe<
+    | CanvasUpsertWithWhereUniqueWithoutStrategy_idInput[]
+    | CanvasUpsertWithWhereUniqueWithoutStrategy_idInput
+  >;
+  deleteMany?: Maybe<CanvasScalarWhereInput[] | CanvasScalarWhereInput>;
+  updateMany?: Maybe<
+    | CanvasUpdateManyWithWhereNestedInput[]
+    | CanvasUpdateManyWithWhereNestedInput
+  >;
+}
+
+export interface CanvasUpdateWithWhereUniqueWithoutStrategy_idInput {
+  where: CanvasWhereUniqueInput;
+  data: CanvasUpdateWithoutStrategy_idDataInput;
+}
+
+export interface CanvasUpdateWithoutStrategy_idDataInput {
+  project_id?: Maybe<ProjectUpdateOneRequiredWithoutCanvas_idsInput>;
+  pattern_ids?: Maybe<PatternUpdateManyWithoutCanvas_idsInput>;
+  table_id?: Maybe<TableUpdateOneRequiredInput>;
+  name?: Maybe<String>;
+  createdBy?: Maybe<UserUpdateOneRequiredInput>;
+  updatedBy?: Maybe<UserUpdateOneRequiredInput>;
+}
+
+export interface CanvasUpsertWithWhereUniqueWithoutStrategy_idInput {
+  where: CanvasWhereUniqueInput;
+  update: CanvasUpdateWithoutStrategy_idDataInput;
+  create: CanvasCreateWithoutStrategy_idInput;
+}
+
+export interface StrategyUpsertWithoutStrategy_pattern_idsInput {
+  update: StrategyUpdateWithoutStrategy_pattern_idsDataInput;
+  create: StrategyCreateWithoutStrategy_pattern_idsInput;
+}
+
+export interface StrategyPatternUpsertWithWhereUniqueWithoutPattern_idInput {
+  where: StrategyPatternWhereUniqueInput;
+  update: StrategyPatternUpdateWithoutPattern_idDataInput;
+  create: StrategyPatternCreateWithoutPattern_idInput;
+}
+
 export interface PatternUpsertWithWhereUniqueWithoutCanvas_idsInput {
   where: PatternWhereUniqueInput;
   update: PatternUpdateWithoutCanvas_idsDataInput;
@@ -3831,6 +4652,78 @@ export interface PatternScalarWhereInput {
   description_not_starts_with?: Maybe<String>;
   description_ends_with?: Maybe<String>;
   description_not_ends_with?: Maybe<String>;
+  actorWeight?: Maybe<Int>;
+  actorWeight_not?: Maybe<Int>;
+  actorWeight_in?: Maybe<Int[] | Int>;
+  actorWeight_not_in?: Maybe<Int[] | Int>;
+  actorWeight_lt?: Maybe<Int>;
+  actorWeight_lte?: Maybe<Int>;
+  actorWeight_gt?: Maybe<Int>;
+  actorWeight_gte?: Maybe<Int>;
+  valuePropositionWeight?: Maybe<Int>;
+  valuePropositionWeight_not?: Maybe<Int>;
+  valuePropositionWeight_in?: Maybe<Int[] | Int>;
+  valuePropositionWeight_not_in?: Maybe<Int[] | Int>;
+  valuePropositionWeight_lt?: Maybe<Int>;
+  valuePropositionWeight_lte?: Maybe<Int>;
+  valuePropositionWeight_gt?: Maybe<Int>;
+  valuePropositionWeight_gte?: Maybe<Int>;
+  valueCreationWeight?: Maybe<Int>;
+  valueCreationWeight_not?: Maybe<Int>;
+  valueCreationWeight_in?: Maybe<Int[] | Int>;
+  valueCreationWeight_not_in?: Maybe<Int[] | Int>;
+  valueCreationWeight_lt?: Maybe<Int>;
+  valueCreationWeight_lte?: Maybe<Int>;
+  valueCreationWeight_gt?: Maybe<Int>;
+  valueCreationWeight_gte?: Maybe<Int>;
+  valueDeliveryWeight?: Maybe<Int>;
+  valueDeliveryWeight_not?: Maybe<Int>;
+  valueDeliveryWeight_in?: Maybe<Int[] | Int>;
+  valueDeliveryWeight_not_in?: Maybe<Int[] | Int>;
+  valueDeliveryWeight_lt?: Maybe<Int>;
+  valueDeliveryWeight_lte?: Maybe<Int>;
+  valueDeliveryWeight_gt?: Maybe<Int>;
+  valueDeliveryWeight_gte?: Maybe<Int>;
+  revenueWeight?: Maybe<Int>;
+  revenueWeight_not?: Maybe<Int>;
+  revenueWeight_in?: Maybe<Int[] | Int>;
+  revenueWeight_not_in?: Maybe<Int[] | Int>;
+  revenueWeight_lt?: Maybe<Int>;
+  revenueWeight_lte?: Maybe<Int>;
+  revenueWeight_gt?: Maybe<Int>;
+  revenueWeight_gte?: Maybe<Int>;
+  expenseWeight?: Maybe<Int>;
+  expenseWeight_not?: Maybe<Int>;
+  expenseWeight_in?: Maybe<Int[] | Int>;
+  expenseWeight_not_in?: Maybe<Int[] | Int>;
+  expenseWeight_lt?: Maybe<Int>;
+  expenseWeight_lte?: Maybe<Int>;
+  expenseWeight_gt?: Maybe<Int>;
+  expenseWeight_gte?: Maybe<Int>;
+  networkEffectWeight?: Maybe<Int>;
+  networkEffectWeight_not?: Maybe<Int>;
+  networkEffectWeight_in?: Maybe<Int[] | Int>;
+  networkEffectWeight_not_in?: Maybe<Int[] | Int>;
+  networkEffectWeight_lt?: Maybe<Int>;
+  networkEffectWeight_lte?: Maybe<Int>;
+  networkEffectWeight_gt?: Maybe<Int>;
+  networkEffectWeight_gte?: Maybe<Int>;
+  regulatoryWeight?: Maybe<Int>;
+  regulatoryWeight_not?: Maybe<Int>;
+  regulatoryWeight_in?: Maybe<Int[] | Int>;
+  regulatoryWeight_not_in?: Maybe<Int[] | Int>;
+  regulatoryWeight_lt?: Maybe<Int>;
+  regulatoryWeight_lte?: Maybe<Int>;
+  regulatoryWeight_gt?: Maybe<Int>;
+  regulatoryWeight_gte?: Maybe<Int>;
+  technicalInfrastractureWeight?: Maybe<Int>;
+  technicalInfrastractureWeight_not?: Maybe<Int>;
+  technicalInfrastractureWeight_in?: Maybe<Int[] | Int>;
+  technicalInfrastractureWeight_not_in?: Maybe<Int[] | Int>;
+  technicalInfrastractureWeight_lt?: Maybe<Int>;
+  technicalInfrastractureWeight_lte?: Maybe<Int>;
+  technicalInfrastractureWeight_gt?: Maybe<Int>;
+  technicalInfrastractureWeight_gte?: Maybe<Int>;
   createdAt?: Maybe<DateTimeInput>;
   createdAt_not?: Maybe<DateTimeInput>;
   createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
@@ -3860,71 +4753,21 @@ export interface PatternUpdateManyWithWhereNestedInput {
 export interface PatternUpdateManyDataInput {
   name?: Maybe<String>;
   description?: Maybe<String>;
+  actorWeight?: Maybe<Int>;
+  valuePropositionWeight?: Maybe<Int>;
+  valueCreationWeight?: Maybe<Int>;
+  valueDeliveryWeight?: Maybe<Int>;
+  revenueWeight?: Maybe<Int>;
+  expenseWeight?: Maybe<Int>;
+  networkEffectWeight?: Maybe<Int>;
+  regulatoryWeight?: Maybe<Int>;
+  technicalInfrastractureWeight?: Maybe<Int>;
 }
 
 export interface CanvasUpsertWithWhereUniqueWithoutProject_idInput {
   where: CanvasWhereUniqueInput;
   update: CanvasUpdateWithoutProject_idDataInput;
   create: CanvasCreateWithoutProject_idInput;
-}
-
-export interface CanvasScalarWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  name?: Maybe<String>;
-  name_not?: Maybe<String>;
-  name_in?: Maybe<String[] | String>;
-  name_not_in?: Maybe<String[] | String>;
-  name_lt?: Maybe<String>;
-  name_lte?: Maybe<String>;
-  name_gt?: Maybe<String>;
-  name_gte?: Maybe<String>;
-  name_contains?: Maybe<String>;
-  name_not_contains?: Maybe<String>;
-  name_starts_with?: Maybe<String>;
-  name_not_starts_with?: Maybe<String>;
-  name_ends_with?: Maybe<String>;
-  name_not_ends_with?: Maybe<String>;
-  createdAt?: Maybe<DateTimeInput>;
-  createdAt_not?: Maybe<DateTimeInput>;
-  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_lt?: Maybe<DateTimeInput>;
-  createdAt_lte?: Maybe<DateTimeInput>;
-  createdAt_gt?: Maybe<DateTimeInput>;
-  createdAt_gte?: Maybe<DateTimeInput>;
-  updatedAt?: Maybe<DateTimeInput>;
-  updatedAt_not?: Maybe<DateTimeInput>;
-  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  updatedAt_lt?: Maybe<DateTimeInput>;
-  updatedAt_lte?: Maybe<DateTimeInput>;
-  updatedAt_gt?: Maybe<DateTimeInput>;
-  updatedAt_gte?: Maybe<DateTimeInput>;
-  AND?: Maybe<CanvasScalarWhereInput[] | CanvasScalarWhereInput>;
-  OR?: Maybe<CanvasScalarWhereInput[] | CanvasScalarWhereInput>;
-  NOT?: Maybe<CanvasScalarWhereInput[] | CanvasScalarWhereInput>;
-}
-
-export interface CanvasUpdateManyWithWhereNestedInput {
-  where: CanvasScalarWhereInput;
-  data: CanvasUpdateManyDataInput;
-}
-
-export interface CanvasUpdateManyDataInput {
-  name?: Maybe<String>;
 }
 
 export interface ProjectUpsertWithWhereUniqueWithoutUser_idInput {
@@ -3992,122 +4835,101 @@ export interface ProjectUpdateManyDataInput {
   name?: Maybe<String>;
 }
 
-export interface UserUpsertWithoutUpdatedByInput {
-  update: UserUpdateWithoutUpdatedByDataInput;
-  create: UserCreateWithoutUpdatedByInput;
+export interface UserUpsertNestedInput {
+  update: UserUpdateDataInput;
+  create: UserCreateInput;
 }
 
-export interface UserUpsertWithoutProject_idsInput {
-  update: UserUpdateWithoutProject_idsDataInput;
-  create: UserCreateWithoutProject_idsInput;
+export interface ValuePropositionUpsertWithWhereUniqueWithoutTable_idsInput {
+  where: ValuePropositionWhereUniqueInput;
+  update: ValuePropositionUpdateWithoutTable_idsDataInput;
+  create: ValuePropositionCreateWithoutTable_idsInput;
 }
 
-export interface ProjectUpsertWithoutCanvas_idsInput {
-  update: ProjectUpdateWithoutCanvas_idsDataInput;
-  create: ProjectCreateWithoutCanvas_idsInput;
-}
-
-export interface CanvasUpdateManyMutationInput {
-  name?: Maybe<String>;
-}
-
-export interface ChannelCreateInput {
+export interface ValuePropositionScalarWhereInput {
   id?: Maybe<ID_Input>;
-  table_ids?: Maybe<TableCreateManyWithoutChannel_entry_idsInput>;
-  text: String;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  text?: Maybe<String>;
+  text_not?: Maybe<String>;
+  text_in?: Maybe<String[] | String>;
+  text_not_in?: Maybe<String[] | String>;
+  text_lt?: Maybe<String>;
+  text_lte?: Maybe<String>;
+  text_gt?: Maybe<String>;
+  text_gte?: Maybe<String>;
+  text_contains?: Maybe<String>;
+  text_not_contains?: Maybe<String>;
+  text_starts_with?: Maybe<String>;
+  text_not_starts_with?: Maybe<String>;
+  text_ends_with?: Maybe<String>;
+  text_not_ends_with?: Maybe<String>;
   note?: Maybe<String>;
-  createdBy: UserCreateOneInput;
-  updatedBy: UserCreateOneInput;
+  note_not?: Maybe<String>;
+  note_in?: Maybe<String[] | String>;
+  note_not_in?: Maybe<String[] | String>;
+  note_lt?: Maybe<String>;
+  note_lte?: Maybe<String>;
+  note_gt?: Maybe<String>;
+  note_gte?: Maybe<String>;
+  note_contains?: Maybe<String>;
+  note_not_contains?: Maybe<String>;
+  note_starts_with?: Maybe<String>;
+  note_not_starts_with?: Maybe<String>;
+  note_ends_with?: Maybe<String>;
+  note_not_ends_with?: Maybe<String>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
+  AND?: Maybe<
+    ValuePropositionScalarWhereInput[] | ValuePropositionScalarWhereInput
+  >;
+  OR?: Maybe<
+    ValuePropositionScalarWhereInput[] | ValuePropositionScalarWhereInput
+  >;
+  NOT?: Maybe<
+    ValuePropositionScalarWhereInput[] | ValuePropositionScalarWhereInput
+  >;
 }
 
-export interface TableCreateManyWithoutChannel_entry_idsInput {
-  create?: Maybe<
-    | TableCreateWithoutChannel_entry_idsInput[]
-    | TableCreateWithoutChannel_entry_idsInput
-  >;
-  connect?: Maybe<TableWhereUniqueInput[] | TableWhereUniqueInput>;
+export interface ValuePropositionUpdateManyWithWhereNestedInput {
+  where: ValuePropositionScalarWhereInput;
+  data: ValuePropositionUpdateManyDataInput;
 }
 
-export interface TableCreateWithoutChannel_entry_idsInput {
-  id?: Maybe<ID_Input>;
-  key_partner_entry_ids?: Maybe<KeyPartnerCreateManyWithoutTable_idsInput>;
-  reventue_stream_entry_ids?: Maybe<
-    RevenueStreamCreateManyWithoutTable_idsInput
-  >;
-  key_activity_entry_ids?: Maybe<KeyActitvityCreateManyWithoutTable_idsInput>;
-  customer_relationship_entry_ids?: Maybe<
-    CustomerRelationshipCreateManyWithoutTable_idsInput
-  >;
-  value_proposition_entry_ids?: Maybe<
-    ValuePropositionCreateManyWithoutTable_idsInput
-  >;
-  cost_structure_entry_ids?: Maybe<
-    CostStructureCreateManyWithoutTable_idsInput
-  >;
-  customer_segment_entry_ids?: Maybe<
-    CustomerSegmentCreateManyWithoutTable_idsInput
-  >;
-  key_resource_entry_ids?: Maybe<KeyResourceCreateManyWithoutTable_idsInput>;
-}
-
-export interface ChannelUpdateInput {
-  table_ids?: Maybe<TableUpdateManyWithoutChannel_entry_idsInput>;
+export interface ValuePropositionUpdateManyDataInput {
   text?: Maybe<String>;
   note?: Maybe<String>;
-  createdBy?: Maybe<UserUpdateOneRequiredInput>;
-  updatedBy?: Maybe<UserUpdateOneRequiredInput>;
 }
 
-export interface TableUpdateManyWithoutChannel_entry_idsInput {
-  create?: Maybe<
-    | TableCreateWithoutChannel_entry_idsInput[]
-    | TableCreateWithoutChannel_entry_idsInput
-  >;
-  delete?: Maybe<TableWhereUniqueInput[] | TableWhereUniqueInput>;
-  connect?: Maybe<TableWhereUniqueInput[] | TableWhereUniqueInput>;
-  set?: Maybe<TableWhereUniqueInput[] | TableWhereUniqueInput>;
-  disconnect?: Maybe<TableWhereUniqueInput[] | TableWhereUniqueInput>;
-  update?: Maybe<
-    | TableUpdateWithWhereUniqueWithoutChannel_entry_idsInput[]
-    | TableUpdateWithWhereUniqueWithoutChannel_entry_idsInput
-  >;
-  upsert?: Maybe<
-    | TableUpsertWithWhereUniqueWithoutChannel_entry_idsInput[]
-    | TableUpsertWithWhereUniqueWithoutChannel_entry_idsInput
-  >;
-  deleteMany?: Maybe<TableScalarWhereInput[] | TableScalarWhereInput>;
-}
-
-export interface TableUpdateWithWhereUniqueWithoutChannel_entry_idsInput {
+export interface TableUpsertWithWhereUniqueWithoutActor_entry_idsInput {
   where: TableWhereUniqueInput;
-  data: TableUpdateWithoutChannel_entry_idsDataInput;
-}
-
-export interface TableUpdateWithoutChannel_entry_idsDataInput {
-  key_partner_entry_ids?: Maybe<KeyPartnerUpdateManyWithoutTable_idsInput>;
-  reventue_stream_entry_ids?: Maybe<
-    RevenueStreamUpdateManyWithoutTable_idsInput
-  >;
-  key_activity_entry_ids?: Maybe<KeyActitvityUpdateManyWithoutTable_idsInput>;
-  customer_relationship_entry_ids?: Maybe<
-    CustomerRelationshipUpdateManyWithoutTable_idsInput
-  >;
-  value_proposition_entry_ids?: Maybe<
-    ValuePropositionUpdateManyWithoutTable_idsInput
-  >;
-  cost_structure_entry_ids?: Maybe<
-    CostStructureUpdateManyWithoutTable_idsInput
-  >;
-  customer_segment_entry_ids?: Maybe<
-    CustomerSegmentUpdateManyWithoutTable_idsInput
-  >;
-  key_resource_entry_ids?: Maybe<KeyResourceUpdateManyWithoutTable_idsInput>;
-}
-
-export interface TableUpsertWithWhereUniqueWithoutChannel_entry_idsInput {
-  where: TableWhereUniqueInput;
-  update: TableUpdateWithoutChannel_entry_idsDataInput;
-  create: TableCreateWithoutChannel_entry_idsInput;
+  update: TableUpdateWithoutActor_entry_idsDataInput;
+  create: TableCreateWithoutActor_entry_idsInput;
 }
 
 export interface TableScalarWhereInput {
@@ -4130,9 +4952,34 @@ export interface TableScalarWhereInput {
   NOT?: Maybe<TableScalarWhereInput[] | TableScalarWhereInput>;
 }
 
-export interface ChannelUpdateManyMutationInput {
+export interface ActorUpdateManyMutationInput {
   text?: Maybe<String>;
   note?: Maybe<String>;
+}
+
+export interface CanvasCreateInput {
+  id?: Maybe<ID_Input>;
+  project_id: ProjectCreateOneWithoutCanvas_idsInput;
+  strategy_id?: Maybe<StrategyCreateOneWithoutCanvas_idsInput>;
+  pattern_ids?: Maybe<PatternCreateManyWithoutCanvas_idsInput>;
+  table_id: TableCreateOneInput;
+  name: String;
+  createdBy: UserCreateOneInput;
+  updatedBy: UserCreateOneInput;
+}
+
+export interface CanvasUpdateInput {
+  project_id?: Maybe<ProjectUpdateOneRequiredWithoutCanvas_idsInput>;
+  strategy_id?: Maybe<StrategyUpdateOneWithoutCanvas_idsInput>;
+  pattern_ids?: Maybe<PatternUpdateManyWithoutCanvas_idsInput>;
+  table_id?: Maybe<TableUpdateOneRequiredInput>;
+  name?: Maybe<String>;
+  createdBy?: Maybe<UserUpdateOneRequiredInput>;
+  updatedBy?: Maybe<UserUpdateOneRequiredInput>;
+}
+
+export interface CanvasUpdateManyMutationInput {
+  name?: Maybe<String>;
 }
 
 export interface CompanyCreateInput {
@@ -4154,24 +5001,18 @@ export interface PatternCreateWithoutCompany_idsInput {
   id?: Maybe<ID_Input>;
   canvas_ids?: Maybe<CanvasCreateManyWithoutPattern_idsInput>;
   table_id: TableCreateOneInput;
+  strategy_pattern_ids?: Maybe<StrategyPatternCreateManyWithoutPattern_idInput>;
   name: String;
   description?: Maybe<String>;
-  createdBy: UserCreateOneInput;
-  updatedBy: UserCreateOneInput;
-}
-
-export interface CanvasCreateManyWithoutPattern_idsInput {
-  create?: Maybe<
-    CanvasCreateWithoutPattern_idsInput[] | CanvasCreateWithoutPattern_idsInput
-  >;
-  connect?: Maybe<CanvasWhereUniqueInput[] | CanvasWhereUniqueInput>;
-}
-
-export interface CanvasCreateWithoutPattern_idsInput {
-  id?: Maybe<ID_Input>;
-  project_id: ProjectCreateOneWithoutCanvas_idsInput;
-  table_id: TableCreateOneInput;
-  name: String;
+  actorWeight?: Maybe<Int>;
+  valuePropositionWeight?: Maybe<Int>;
+  valueCreationWeight?: Maybe<Int>;
+  valueDeliveryWeight?: Maybe<Int>;
+  revenueWeight?: Maybe<Int>;
+  expenseWeight?: Maybe<Int>;
+  networkEffectWeight?: Maybe<Int>;
+  regulatoryWeight?: Maybe<Int>;
+  technicalInfrastractureWeight?: Maybe<Int>;
   createdBy: UserCreateOneInput;
   updatedBy: UserCreateOneInput;
 }
@@ -4214,52 +5055,20 @@ export interface PatternUpdateWithWhereUniqueWithoutCompany_idsInput {
 export interface PatternUpdateWithoutCompany_idsDataInput {
   canvas_ids?: Maybe<CanvasUpdateManyWithoutPattern_idsInput>;
   table_id?: Maybe<TableUpdateOneRequiredInput>;
+  strategy_pattern_ids?: Maybe<StrategyPatternUpdateManyWithoutPattern_idInput>;
   name?: Maybe<String>;
   description?: Maybe<String>;
+  actorWeight?: Maybe<Int>;
+  valuePropositionWeight?: Maybe<Int>;
+  valueCreationWeight?: Maybe<Int>;
+  valueDeliveryWeight?: Maybe<Int>;
+  revenueWeight?: Maybe<Int>;
+  expenseWeight?: Maybe<Int>;
+  networkEffectWeight?: Maybe<Int>;
+  regulatoryWeight?: Maybe<Int>;
+  technicalInfrastractureWeight?: Maybe<Int>;
   createdBy?: Maybe<UserUpdateOneRequiredInput>;
   updatedBy?: Maybe<UserUpdateOneRequiredInput>;
-}
-
-export interface CanvasUpdateManyWithoutPattern_idsInput {
-  create?: Maybe<
-    CanvasCreateWithoutPattern_idsInput[] | CanvasCreateWithoutPattern_idsInput
-  >;
-  delete?: Maybe<CanvasWhereUniqueInput[] | CanvasWhereUniqueInput>;
-  connect?: Maybe<CanvasWhereUniqueInput[] | CanvasWhereUniqueInput>;
-  set?: Maybe<CanvasWhereUniqueInput[] | CanvasWhereUniqueInput>;
-  disconnect?: Maybe<CanvasWhereUniqueInput[] | CanvasWhereUniqueInput>;
-  update?: Maybe<
-    | CanvasUpdateWithWhereUniqueWithoutPattern_idsInput[]
-    | CanvasUpdateWithWhereUniqueWithoutPattern_idsInput
-  >;
-  upsert?: Maybe<
-    | CanvasUpsertWithWhereUniqueWithoutPattern_idsInput[]
-    | CanvasUpsertWithWhereUniqueWithoutPattern_idsInput
-  >;
-  deleteMany?: Maybe<CanvasScalarWhereInput[] | CanvasScalarWhereInput>;
-  updateMany?: Maybe<
-    | CanvasUpdateManyWithWhereNestedInput[]
-    | CanvasUpdateManyWithWhereNestedInput
-  >;
-}
-
-export interface CanvasUpdateWithWhereUniqueWithoutPattern_idsInput {
-  where: CanvasWhereUniqueInput;
-  data: CanvasUpdateWithoutPattern_idsDataInput;
-}
-
-export interface CanvasUpdateWithoutPattern_idsDataInput {
-  project_id?: Maybe<ProjectUpdateOneRequiredWithoutCanvas_idsInput>;
-  table_id?: Maybe<TableUpdateOneRequiredInput>;
-  name?: Maybe<String>;
-  createdBy?: Maybe<UserUpdateOneRequiredInput>;
-  updatedBy?: Maybe<UserUpdateOneRequiredInput>;
-}
-
-export interface CanvasUpsertWithWhereUniqueWithoutPattern_idsInput {
-  where: CanvasWhereUniqueInput;
-  update: CanvasUpdateWithoutPattern_idsDataInput;
-  create: CanvasCreateWithoutPattern_idsInput;
 }
 
 export interface PatternUpsertWithWhereUniqueWithoutCompany_idsInput {
@@ -4273,614 +5082,206 @@ export interface CompanyUpdateManyMutationInput {
   description?: Maybe<String>;
 }
 
-export interface CostStructureCreateInput {
+export interface ExpenseCreateInput {
   id?: Maybe<ID_Input>;
-  table_ids?: Maybe<TableCreateManyWithoutCost_structure_entry_idsInput>;
+  table_ids?: Maybe<TableCreateManyWithoutExpense_entry_idsInput>;
   text: String;
   note?: Maybe<String>;
   createdBy: UserCreateOneInput;
   updatedBy: UserCreateOneInput;
 }
 
-export interface TableCreateManyWithoutCost_structure_entry_idsInput {
+export interface TableCreateManyWithoutExpense_entry_idsInput {
   create?: Maybe<
-    | TableCreateWithoutCost_structure_entry_idsInput[]
-    | TableCreateWithoutCost_structure_entry_idsInput
+    | TableCreateWithoutExpense_entry_idsInput[]
+    | TableCreateWithoutExpense_entry_idsInput
   >;
   connect?: Maybe<TableWhereUniqueInput[] | TableWhereUniqueInput>;
 }
 
-export interface TableCreateWithoutCost_structure_entry_idsInput {
+export interface TableCreateWithoutExpense_entry_idsInput {
   id?: Maybe<ID_Input>;
-  key_partner_entry_ids?: Maybe<KeyPartnerCreateManyWithoutTable_idsInput>;
-  reventue_stream_entry_ids?: Maybe<
-    RevenueStreamCreateManyWithoutTable_idsInput
-  >;
-  key_activity_entry_ids?: Maybe<KeyActitvityCreateManyWithoutTable_idsInput>;
-  customer_relationship_entry_ids?: Maybe<
-    CustomerRelationshipCreateManyWithoutTable_idsInput
-  >;
+  actor_entry_ids?: Maybe<ActorCreateManyWithoutTable_idsInput>;
   value_proposition_entry_ids?: Maybe<
     ValuePropositionCreateManyWithoutTable_idsInput
   >;
-  customer_segment_entry_ids?: Maybe<
-    CustomerSegmentCreateManyWithoutTable_idsInput
+  value_creation_entry_ids?: Maybe<
+    ValueCreationCreateManyWithoutTable_idsInput
   >;
-  key_resource_entry_ids?: Maybe<KeyResourceCreateManyWithoutTable_idsInput>;
-  channel_entry_ids?: Maybe<ChannelCreateManyWithoutTable_idsInput>;
+  value_delivery_entry_ids?: Maybe<
+    ValueDeliveryCreateManyWithoutTable_idsInput
+  >;
+  revenue_entry_ids?: Maybe<RevenueCreateManyWithoutTable_idsInput>;
+  network_effect_entry_ids?: Maybe<
+    NetworkEffectCreateManyWithoutTable_idsInput
+  >;
+  technical_infrastructure_entry_ids?: Maybe<
+    TechnicalInfrastractureCreateManyWithoutTable_idsInput
+  >;
+  regulatory_entry_ids?: Maybe<RegulatoryCreateManyWithoutTable_idsInput>;
 }
 
-export interface CostStructureUpdateInput {
-  table_ids?: Maybe<TableUpdateManyWithoutCost_structure_entry_idsInput>;
+export interface ExpenseUpdateInput {
+  table_ids?: Maybe<TableUpdateManyWithoutExpense_entry_idsInput>;
   text?: Maybe<String>;
   note?: Maybe<String>;
   createdBy?: Maybe<UserUpdateOneRequiredInput>;
   updatedBy?: Maybe<UserUpdateOneRequiredInput>;
 }
 
-export interface TableUpdateManyWithoutCost_structure_entry_idsInput {
+export interface TableUpdateManyWithoutExpense_entry_idsInput {
   create?: Maybe<
-    | TableCreateWithoutCost_structure_entry_idsInput[]
-    | TableCreateWithoutCost_structure_entry_idsInput
+    | TableCreateWithoutExpense_entry_idsInput[]
+    | TableCreateWithoutExpense_entry_idsInput
   >;
   delete?: Maybe<TableWhereUniqueInput[] | TableWhereUniqueInput>;
   connect?: Maybe<TableWhereUniqueInput[] | TableWhereUniqueInput>;
   set?: Maybe<TableWhereUniqueInput[] | TableWhereUniqueInput>;
   disconnect?: Maybe<TableWhereUniqueInput[] | TableWhereUniqueInput>;
   update?: Maybe<
-    | TableUpdateWithWhereUniqueWithoutCost_structure_entry_idsInput[]
-    | TableUpdateWithWhereUniqueWithoutCost_structure_entry_idsInput
+    | TableUpdateWithWhereUniqueWithoutExpense_entry_idsInput[]
+    | TableUpdateWithWhereUniqueWithoutExpense_entry_idsInput
   >;
   upsert?: Maybe<
-    | TableUpsertWithWhereUniqueWithoutCost_structure_entry_idsInput[]
-    | TableUpsertWithWhereUniqueWithoutCost_structure_entry_idsInput
+    | TableUpsertWithWhereUniqueWithoutExpense_entry_idsInput[]
+    | TableUpsertWithWhereUniqueWithoutExpense_entry_idsInput
   >;
   deleteMany?: Maybe<TableScalarWhereInput[] | TableScalarWhereInput>;
 }
 
-export interface TableUpdateWithWhereUniqueWithoutCost_structure_entry_idsInput {
+export interface TableUpdateWithWhereUniqueWithoutExpense_entry_idsInput {
   where: TableWhereUniqueInput;
-  data: TableUpdateWithoutCost_structure_entry_idsDataInput;
+  data: TableUpdateWithoutExpense_entry_idsDataInput;
 }
 
-export interface TableUpdateWithoutCost_structure_entry_idsDataInput {
-  key_partner_entry_ids?: Maybe<KeyPartnerUpdateManyWithoutTable_idsInput>;
-  reventue_stream_entry_ids?: Maybe<
-    RevenueStreamUpdateManyWithoutTable_idsInput
-  >;
-  key_activity_entry_ids?: Maybe<KeyActitvityUpdateManyWithoutTable_idsInput>;
-  customer_relationship_entry_ids?: Maybe<
-    CustomerRelationshipUpdateManyWithoutTable_idsInput
-  >;
+export interface TableUpdateWithoutExpense_entry_idsDataInput {
+  actor_entry_ids?: Maybe<ActorUpdateManyWithoutTable_idsInput>;
   value_proposition_entry_ids?: Maybe<
     ValuePropositionUpdateManyWithoutTable_idsInput
   >;
-  customer_segment_entry_ids?: Maybe<
-    CustomerSegmentUpdateManyWithoutTable_idsInput
+  value_creation_entry_ids?: Maybe<
+    ValueCreationUpdateManyWithoutTable_idsInput
   >;
-  key_resource_entry_ids?: Maybe<KeyResourceUpdateManyWithoutTable_idsInput>;
-  channel_entry_ids?: Maybe<ChannelUpdateManyWithoutTable_idsInput>;
+  value_delivery_entry_ids?: Maybe<
+    ValueDeliveryUpdateManyWithoutTable_idsInput
+  >;
+  revenue_entry_ids?: Maybe<RevenueUpdateManyWithoutTable_idsInput>;
+  network_effect_entry_ids?: Maybe<
+    NetworkEffectUpdateManyWithoutTable_idsInput
+  >;
+  technical_infrastructure_entry_ids?: Maybe<
+    TechnicalInfrastractureUpdateManyWithoutTable_idsInput
+  >;
+  regulatory_entry_ids?: Maybe<RegulatoryUpdateManyWithoutTable_idsInput>;
 }
 
-export interface TableUpsertWithWhereUniqueWithoutCost_structure_entry_idsInput {
+export interface TableUpsertWithWhereUniqueWithoutExpense_entry_idsInput {
   where: TableWhereUniqueInput;
-  update: TableUpdateWithoutCost_structure_entry_idsDataInput;
-  create: TableCreateWithoutCost_structure_entry_idsInput;
+  update: TableUpdateWithoutExpense_entry_idsDataInput;
+  create: TableCreateWithoutExpense_entry_idsInput;
 }
 
-export interface CostStructureUpdateManyMutationInput {
+export interface ExpenseUpdateManyMutationInput {
   text?: Maybe<String>;
   note?: Maybe<String>;
 }
 
-export interface CustomerRelationshipCreateInput {
+export interface NetworkEffectCreateInput {
   id?: Maybe<ID_Input>;
-  table_ids?: Maybe<TableCreateManyWithoutCustomer_relationship_entry_idsInput>;
+  table_ids?: Maybe<TableCreateManyWithoutNetwork_effect_entry_idsInput>;
   text: String;
   note?: Maybe<String>;
   createdBy: UserCreateOneInput;
   updatedBy: UserCreateOneInput;
 }
 
-export interface TableCreateManyWithoutCustomer_relationship_entry_idsInput {
+export interface TableCreateManyWithoutNetwork_effect_entry_idsInput {
   create?: Maybe<
-    | TableCreateWithoutCustomer_relationship_entry_idsInput[]
-    | TableCreateWithoutCustomer_relationship_entry_idsInput
+    | TableCreateWithoutNetwork_effect_entry_idsInput[]
+    | TableCreateWithoutNetwork_effect_entry_idsInput
   >;
   connect?: Maybe<TableWhereUniqueInput[] | TableWhereUniqueInput>;
 }
 
-export interface TableCreateWithoutCustomer_relationship_entry_idsInput {
+export interface TableCreateWithoutNetwork_effect_entry_idsInput {
   id?: Maybe<ID_Input>;
-  key_partner_entry_ids?: Maybe<KeyPartnerCreateManyWithoutTable_idsInput>;
-  reventue_stream_entry_ids?: Maybe<
-    RevenueStreamCreateManyWithoutTable_idsInput
-  >;
-  key_activity_entry_ids?: Maybe<KeyActitvityCreateManyWithoutTable_idsInput>;
+  actor_entry_ids?: Maybe<ActorCreateManyWithoutTable_idsInput>;
   value_proposition_entry_ids?: Maybe<
     ValuePropositionCreateManyWithoutTable_idsInput
   >;
-  cost_structure_entry_ids?: Maybe<
-    CostStructureCreateManyWithoutTable_idsInput
+  value_creation_entry_ids?: Maybe<
+    ValueCreationCreateManyWithoutTable_idsInput
   >;
-  customer_segment_entry_ids?: Maybe<
-    CustomerSegmentCreateManyWithoutTable_idsInput
+  value_delivery_entry_ids?: Maybe<
+    ValueDeliveryCreateManyWithoutTable_idsInput
   >;
-  key_resource_entry_ids?: Maybe<KeyResourceCreateManyWithoutTable_idsInput>;
-  channel_entry_ids?: Maybe<ChannelCreateManyWithoutTable_idsInput>;
+  revenue_entry_ids?: Maybe<RevenueCreateManyWithoutTable_idsInput>;
+  expense_entry_ids?: Maybe<ExpenseCreateManyWithoutTable_idsInput>;
+  technical_infrastructure_entry_ids?: Maybe<
+    TechnicalInfrastractureCreateManyWithoutTable_idsInput
+  >;
+  regulatory_entry_ids?: Maybe<RegulatoryCreateManyWithoutTable_idsInput>;
 }
 
-export interface CustomerRelationshipUpdateInput {
-  table_ids?: Maybe<TableUpdateManyWithoutCustomer_relationship_entry_idsInput>;
+export interface NetworkEffectUpdateInput {
+  table_ids?: Maybe<TableUpdateManyWithoutNetwork_effect_entry_idsInput>;
   text?: Maybe<String>;
   note?: Maybe<String>;
   createdBy?: Maybe<UserUpdateOneRequiredInput>;
   updatedBy?: Maybe<UserUpdateOneRequiredInput>;
 }
 
-export interface TableUpdateManyWithoutCustomer_relationship_entry_idsInput {
+export interface TableUpdateManyWithoutNetwork_effect_entry_idsInput {
   create?: Maybe<
-    | TableCreateWithoutCustomer_relationship_entry_idsInput[]
-    | TableCreateWithoutCustomer_relationship_entry_idsInput
+    | TableCreateWithoutNetwork_effect_entry_idsInput[]
+    | TableCreateWithoutNetwork_effect_entry_idsInput
   >;
   delete?: Maybe<TableWhereUniqueInput[] | TableWhereUniqueInput>;
   connect?: Maybe<TableWhereUniqueInput[] | TableWhereUniqueInput>;
   set?: Maybe<TableWhereUniqueInput[] | TableWhereUniqueInput>;
   disconnect?: Maybe<TableWhereUniqueInput[] | TableWhereUniqueInput>;
   update?: Maybe<
-    | TableUpdateWithWhereUniqueWithoutCustomer_relationship_entry_idsInput[]
-    | TableUpdateWithWhereUniqueWithoutCustomer_relationship_entry_idsInput
+    | TableUpdateWithWhereUniqueWithoutNetwork_effect_entry_idsInput[]
+    | TableUpdateWithWhereUniqueWithoutNetwork_effect_entry_idsInput
   >;
   upsert?: Maybe<
-    | TableUpsertWithWhereUniqueWithoutCustomer_relationship_entry_idsInput[]
-    | TableUpsertWithWhereUniqueWithoutCustomer_relationship_entry_idsInput
+    | TableUpsertWithWhereUniqueWithoutNetwork_effect_entry_idsInput[]
+    | TableUpsertWithWhereUniqueWithoutNetwork_effect_entry_idsInput
   >;
   deleteMany?: Maybe<TableScalarWhereInput[] | TableScalarWhereInput>;
 }
 
-export interface TableUpdateWithWhereUniqueWithoutCustomer_relationship_entry_idsInput {
+export interface TableUpdateWithWhereUniqueWithoutNetwork_effect_entry_idsInput {
   where: TableWhereUniqueInput;
-  data: TableUpdateWithoutCustomer_relationship_entry_idsDataInput;
+  data: TableUpdateWithoutNetwork_effect_entry_idsDataInput;
 }
 
-export interface TableUpdateWithoutCustomer_relationship_entry_idsDataInput {
-  key_partner_entry_ids?: Maybe<KeyPartnerUpdateManyWithoutTable_idsInput>;
-  reventue_stream_entry_ids?: Maybe<
-    RevenueStreamUpdateManyWithoutTable_idsInput
-  >;
-  key_activity_entry_ids?: Maybe<KeyActitvityUpdateManyWithoutTable_idsInput>;
+export interface TableUpdateWithoutNetwork_effect_entry_idsDataInput {
+  actor_entry_ids?: Maybe<ActorUpdateManyWithoutTable_idsInput>;
   value_proposition_entry_ids?: Maybe<
     ValuePropositionUpdateManyWithoutTable_idsInput
   >;
-  cost_structure_entry_ids?: Maybe<
-    CostStructureUpdateManyWithoutTable_idsInput
+  value_creation_entry_ids?: Maybe<
+    ValueCreationUpdateManyWithoutTable_idsInput
   >;
-  customer_segment_entry_ids?: Maybe<
-    CustomerSegmentUpdateManyWithoutTable_idsInput
+  value_delivery_entry_ids?: Maybe<
+    ValueDeliveryUpdateManyWithoutTable_idsInput
   >;
-  key_resource_entry_ids?: Maybe<KeyResourceUpdateManyWithoutTable_idsInput>;
-  channel_entry_ids?: Maybe<ChannelUpdateManyWithoutTable_idsInput>;
+  revenue_entry_ids?: Maybe<RevenueUpdateManyWithoutTable_idsInput>;
+  expense_entry_ids?: Maybe<ExpenseUpdateManyWithoutTable_idsInput>;
+  technical_infrastructure_entry_ids?: Maybe<
+    TechnicalInfrastractureUpdateManyWithoutTable_idsInput
+  >;
+  regulatory_entry_ids?: Maybe<RegulatoryUpdateManyWithoutTable_idsInput>;
 }
 
-export interface TableUpsertWithWhereUniqueWithoutCustomer_relationship_entry_idsInput {
+export interface TableUpsertWithWhereUniqueWithoutNetwork_effect_entry_idsInput {
   where: TableWhereUniqueInput;
-  update: TableUpdateWithoutCustomer_relationship_entry_idsDataInput;
-  create: TableCreateWithoutCustomer_relationship_entry_idsInput;
+  update: TableUpdateWithoutNetwork_effect_entry_idsDataInput;
+  create: TableCreateWithoutNetwork_effect_entry_idsInput;
 }
 
-export interface CustomerRelationshipUpdateManyMutationInput {
-  text?: Maybe<String>;
-  note?: Maybe<String>;
-}
-
-export interface CustomerSegmentCreateInput {
-  id?: Maybe<ID_Input>;
-  table_ids?: Maybe<TableCreateManyWithoutCustomer_segment_entry_idsInput>;
-  text: String;
-  note?: Maybe<String>;
-  createdBy: UserCreateOneInput;
-  updatedBy: UserCreateOneInput;
-}
-
-export interface TableCreateManyWithoutCustomer_segment_entry_idsInput {
-  create?: Maybe<
-    | TableCreateWithoutCustomer_segment_entry_idsInput[]
-    | TableCreateWithoutCustomer_segment_entry_idsInput
-  >;
-  connect?: Maybe<TableWhereUniqueInput[] | TableWhereUniqueInput>;
-}
-
-export interface TableCreateWithoutCustomer_segment_entry_idsInput {
-  id?: Maybe<ID_Input>;
-  key_partner_entry_ids?: Maybe<KeyPartnerCreateManyWithoutTable_idsInput>;
-  reventue_stream_entry_ids?: Maybe<
-    RevenueStreamCreateManyWithoutTable_idsInput
-  >;
-  key_activity_entry_ids?: Maybe<KeyActitvityCreateManyWithoutTable_idsInput>;
-  customer_relationship_entry_ids?: Maybe<
-    CustomerRelationshipCreateManyWithoutTable_idsInput
-  >;
-  value_proposition_entry_ids?: Maybe<
-    ValuePropositionCreateManyWithoutTable_idsInput
-  >;
-  cost_structure_entry_ids?: Maybe<
-    CostStructureCreateManyWithoutTable_idsInput
-  >;
-  key_resource_entry_ids?: Maybe<KeyResourceCreateManyWithoutTable_idsInput>;
-  channel_entry_ids?: Maybe<ChannelCreateManyWithoutTable_idsInput>;
-}
-
-export interface CustomerSegmentUpdateInput {
-  table_ids?: Maybe<TableUpdateManyWithoutCustomer_segment_entry_idsInput>;
-  text?: Maybe<String>;
-  note?: Maybe<String>;
-  createdBy?: Maybe<UserUpdateOneRequiredInput>;
-  updatedBy?: Maybe<UserUpdateOneRequiredInput>;
-}
-
-export interface TableUpdateManyWithoutCustomer_segment_entry_idsInput {
-  create?: Maybe<
-    | TableCreateWithoutCustomer_segment_entry_idsInput[]
-    | TableCreateWithoutCustomer_segment_entry_idsInput
-  >;
-  delete?: Maybe<TableWhereUniqueInput[] | TableWhereUniqueInput>;
-  connect?: Maybe<TableWhereUniqueInput[] | TableWhereUniqueInput>;
-  set?: Maybe<TableWhereUniqueInput[] | TableWhereUniqueInput>;
-  disconnect?: Maybe<TableWhereUniqueInput[] | TableWhereUniqueInput>;
-  update?: Maybe<
-    | TableUpdateWithWhereUniqueWithoutCustomer_segment_entry_idsInput[]
-    | TableUpdateWithWhereUniqueWithoutCustomer_segment_entry_idsInput
-  >;
-  upsert?: Maybe<
-    | TableUpsertWithWhereUniqueWithoutCustomer_segment_entry_idsInput[]
-    | TableUpsertWithWhereUniqueWithoutCustomer_segment_entry_idsInput
-  >;
-  deleteMany?: Maybe<TableScalarWhereInput[] | TableScalarWhereInput>;
-}
-
-export interface TableUpdateWithWhereUniqueWithoutCustomer_segment_entry_idsInput {
-  where: TableWhereUniqueInput;
-  data: TableUpdateWithoutCustomer_segment_entry_idsDataInput;
-}
-
-export interface TableUpdateWithoutCustomer_segment_entry_idsDataInput {
-  key_partner_entry_ids?: Maybe<KeyPartnerUpdateManyWithoutTable_idsInput>;
-  reventue_stream_entry_ids?: Maybe<
-    RevenueStreamUpdateManyWithoutTable_idsInput
-  >;
-  key_activity_entry_ids?: Maybe<KeyActitvityUpdateManyWithoutTable_idsInput>;
-  customer_relationship_entry_ids?: Maybe<
-    CustomerRelationshipUpdateManyWithoutTable_idsInput
-  >;
-  value_proposition_entry_ids?: Maybe<
-    ValuePropositionUpdateManyWithoutTable_idsInput
-  >;
-  cost_structure_entry_ids?: Maybe<
-    CostStructureUpdateManyWithoutTable_idsInput
-  >;
-  key_resource_entry_ids?: Maybe<KeyResourceUpdateManyWithoutTable_idsInput>;
-  channel_entry_ids?: Maybe<ChannelUpdateManyWithoutTable_idsInput>;
-}
-
-export interface TableUpsertWithWhereUniqueWithoutCustomer_segment_entry_idsInput {
-  where: TableWhereUniqueInput;
-  update: TableUpdateWithoutCustomer_segment_entry_idsDataInput;
-  create: TableCreateWithoutCustomer_segment_entry_idsInput;
-}
-
-export interface CustomerSegmentUpdateManyMutationInput {
-  text?: Maybe<String>;
-  note?: Maybe<String>;
-}
-
-export interface KeyActitvityCreateInput {
-  id?: Maybe<ID_Input>;
-  table_ids?: Maybe<TableCreateManyWithoutKey_activity_entry_idsInput>;
-  text: String;
-  note?: Maybe<String>;
-  createdBy: UserCreateOneInput;
-  updatedBy: UserCreateOneInput;
-}
-
-export interface TableCreateManyWithoutKey_activity_entry_idsInput {
-  create?: Maybe<
-    | TableCreateWithoutKey_activity_entry_idsInput[]
-    | TableCreateWithoutKey_activity_entry_idsInput
-  >;
-  connect?: Maybe<TableWhereUniqueInput[] | TableWhereUniqueInput>;
-}
-
-export interface TableCreateWithoutKey_activity_entry_idsInput {
-  id?: Maybe<ID_Input>;
-  key_partner_entry_ids?: Maybe<KeyPartnerCreateManyWithoutTable_idsInput>;
-  reventue_stream_entry_ids?: Maybe<
-    RevenueStreamCreateManyWithoutTable_idsInput
-  >;
-  customer_relationship_entry_ids?: Maybe<
-    CustomerRelationshipCreateManyWithoutTable_idsInput
-  >;
-  value_proposition_entry_ids?: Maybe<
-    ValuePropositionCreateManyWithoutTable_idsInput
-  >;
-  cost_structure_entry_ids?: Maybe<
-    CostStructureCreateManyWithoutTable_idsInput
-  >;
-  customer_segment_entry_ids?: Maybe<
-    CustomerSegmentCreateManyWithoutTable_idsInput
-  >;
-  key_resource_entry_ids?: Maybe<KeyResourceCreateManyWithoutTable_idsInput>;
-  channel_entry_ids?: Maybe<ChannelCreateManyWithoutTable_idsInput>;
-}
-
-export interface KeyActitvityUpdateInput {
-  table_ids?: Maybe<TableUpdateManyWithoutKey_activity_entry_idsInput>;
-  text?: Maybe<String>;
-  note?: Maybe<String>;
-  createdBy?: Maybe<UserUpdateOneRequiredInput>;
-  updatedBy?: Maybe<UserUpdateOneRequiredInput>;
-}
-
-export interface TableUpdateManyWithoutKey_activity_entry_idsInput {
-  create?: Maybe<
-    | TableCreateWithoutKey_activity_entry_idsInput[]
-    | TableCreateWithoutKey_activity_entry_idsInput
-  >;
-  delete?: Maybe<TableWhereUniqueInput[] | TableWhereUniqueInput>;
-  connect?: Maybe<TableWhereUniqueInput[] | TableWhereUniqueInput>;
-  set?: Maybe<TableWhereUniqueInput[] | TableWhereUniqueInput>;
-  disconnect?: Maybe<TableWhereUniqueInput[] | TableWhereUniqueInput>;
-  update?: Maybe<
-    | TableUpdateWithWhereUniqueWithoutKey_activity_entry_idsInput[]
-    | TableUpdateWithWhereUniqueWithoutKey_activity_entry_idsInput
-  >;
-  upsert?: Maybe<
-    | TableUpsertWithWhereUniqueWithoutKey_activity_entry_idsInput[]
-    | TableUpsertWithWhereUniqueWithoutKey_activity_entry_idsInput
-  >;
-  deleteMany?: Maybe<TableScalarWhereInput[] | TableScalarWhereInput>;
-}
-
-export interface TableUpdateWithWhereUniqueWithoutKey_activity_entry_idsInput {
-  where: TableWhereUniqueInput;
-  data: TableUpdateWithoutKey_activity_entry_idsDataInput;
-}
-
-export interface TableUpdateWithoutKey_activity_entry_idsDataInput {
-  key_partner_entry_ids?: Maybe<KeyPartnerUpdateManyWithoutTable_idsInput>;
-  reventue_stream_entry_ids?: Maybe<
-    RevenueStreamUpdateManyWithoutTable_idsInput
-  >;
-  customer_relationship_entry_ids?: Maybe<
-    CustomerRelationshipUpdateManyWithoutTable_idsInput
-  >;
-  value_proposition_entry_ids?: Maybe<
-    ValuePropositionUpdateManyWithoutTable_idsInput
-  >;
-  cost_structure_entry_ids?: Maybe<
-    CostStructureUpdateManyWithoutTable_idsInput
-  >;
-  customer_segment_entry_ids?: Maybe<
-    CustomerSegmentUpdateManyWithoutTable_idsInput
-  >;
-  key_resource_entry_ids?: Maybe<KeyResourceUpdateManyWithoutTable_idsInput>;
-  channel_entry_ids?: Maybe<ChannelUpdateManyWithoutTable_idsInput>;
-}
-
-export interface TableUpsertWithWhereUniqueWithoutKey_activity_entry_idsInput {
-  where: TableWhereUniqueInput;
-  update: TableUpdateWithoutKey_activity_entry_idsDataInput;
-  create: TableCreateWithoutKey_activity_entry_idsInput;
-}
-
-export interface KeyActitvityUpdateManyMutationInput {
-  text?: Maybe<String>;
-  note?: Maybe<String>;
-}
-
-export interface KeyPartnerCreateInput {
-  id?: Maybe<ID_Input>;
-  table_ids?: Maybe<TableCreateManyWithoutKey_partner_entry_idsInput>;
-  text: String;
-  note?: Maybe<String>;
-  createdBy: UserCreateOneInput;
-  updatedBy: UserCreateOneInput;
-}
-
-export interface TableCreateManyWithoutKey_partner_entry_idsInput {
-  create?: Maybe<
-    | TableCreateWithoutKey_partner_entry_idsInput[]
-    | TableCreateWithoutKey_partner_entry_idsInput
-  >;
-  connect?: Maybe<TableWhereUniqueInput[] | TableWhereUniqueInput>;
-}
-
-export interface TableCreateWithoutKey_partner_entry_idsInput {
-  id?: Maybe<ID_Input>;
-  reventue_stream_entry_ids?: Maybe<
-    RevenueStreamCreateManyWithoutTable_idsInput
-  >;
-  key_activity_entry_ids?: Maybe<KeyActitvityCreateManyWithoutTable_idsInput>;
-  customer_relationship_entry_ids?: Maybe<
-    CustomerRelationshipCreateManyWithoutTable_idsInput
-  >;
-  value_proposition_entry_ids?: Maybe<
-    ValuePropositionCreateManyWithoutTable_idsInput
-  >;
-  cost_structure_entry_ids?: Maybe<
-    CostStructureCreateManyWithoutTable_idsInput
-  >;
-  customer_segment_entry_ids?: Maybe<
-    CustomerSegmentCreateManyWithoutTable_idsInput
-  >;
-  key_resource_entry_ids?: Maybe<KeyResourceCreateManyWithoutTable_idsInput>;
-  channel_entry_ids?: Maybe<ChannelCreateManyWithoutTable_idsInput>;
-}
-
-export interface KeyPartnerUpdateInput {
-  table_ids?: Maybe<TableUpdateManyWithoutKey_partner_entry_idsInput>;
-  text?: Maybe<String>;
-  note?: Maybe<String>;
-  createdBy?: Maybe<UserUpdateOneRequiredInput>;
-  updatedBy?: Maybe<UserUpdateOneRequiredInput>;
-}
-
-export interface TableUpdateManyWithoutKey_partner_entry_idsInput {
-  create?: Maybe<
-    | TableCreateWithoutKey_partner_entry_idsInput[]
-    | TableCreateWithoutKey_partner_entry_idsInput
-  >;
-  delete?: Maybe<TableWhereUniqueInput[] | TableWhereUniqueInput>;
-  connect?: Maybe<TableWhereUniqueInput[] | TableWhereUniqueInput>;
-  set?: Maybe<TableWhereUniqueInput[] | TableWhereUniqueInput>;
-  disconnect?: Maybe<TableWhereUniqueInput[] | TableWhereUniqueInput>;
-  update?: Maybe<
-    | TableUpdateWithWhereUniqueWithoutKey_partner_entry_idsInput[]
-    | TableUpdateWithWhereUniqueWithoutKey_partner_entry_idsInput
-  >;
-  upsert?: Maybe<
-    | TableUpsertWithWhereUniqueWithoutKey_partner_entry_idsInput[]
-    | TableUpsertWithWhereUniqueWithoutKey_partner_entry_idsInput
-  >;
-  deleteMany?: Maybe<TableScalarWhereInput[] | TableScalarWhereInput>;
-}
-
-export interface TableUpdateWithWhereUniqueWithoutKey_partner_entry_idsInput {
-  where: TableWhereUniqueInput;
-  data: TableUpdateWithoutKey_partner_entry_idsDataInput;
-}
-
-export interface TableUpdateWithoutKey_partner_entry_idsDataInput {
-  reventue_stream_entry_ids?: Maybe<
-    RevenueStreamUpdateManyWithoutTable_idsInput
-  >;
-  key_activity_entry_ids?: Maybe<KeyActitvityUpdateManyWithoutTable_idsInput>;
-  customer_relationship_entry_ids?: Maybe<
-    CustomerRelationshipUpdateManyWithoutTable_idsInput
-  >;
-  value_proposition_entry_ids?: Maybe<
-    ValuePropositionUpdateManyWithoutTable_idsInput
-  >;
-  cost_structure_entry_ids?: Maybe<
-    CostStructureUpdateManyWithoutTable_idsInput
-  >;
-  customer_segment_entry_ids?: Maybe<
-    CustomerSegmentUpdateManyWithoutTable_idsInput
-  >;
-  key_resource_entry_ids?: Maybe<KeyResourceUpdateManyWithoutTable_idsInput>;
-  channel_entry_ids?: Maybe<ChannelUpdateManyWithoutTable_idsInput>;
-}
-
-export interface TableUpsertWithWhereUniqueWithoutKey_partner_entry_idsInput {
-  where: TableWhereUniqueInput;
-  update: TableUpdateWithoutKey_partner_entry_idsDataInput;
-  create: TableCreateWithoutKey_partner_entry_idsInput;
-}
-
-export interface KeyPartnerUpdateManyMutationInput {
-  text?: Maybe<String>;
-  note?: Maybe<String>;
-}
-
-export interface KeyResourceCreateInput {
-  id?: Maybe<ID_Input>;
-  table_ids?: Maybe<TableCreateManyWithoutKey_resource_entry_idsInput>;
-  text: String;
-  note?: Maybe<String>;
-  createdBy: UserCreateOneInput;
-  updatedBy: UserCreateOneInput;
-}
-
-export interface TableCreateManyWithoutKey_resource_entry_idsInput {
-  create?: Maybe<
-    | TableCreateWithoutKey_resource_entry_idsInput[]
-    | TableCreateWithoutKey_resource_entry_idsInput
-  >;
-  connect?: Maybe<TableWhereUniqueInput[] | TableWhereUniqueInput>;
-}
-
-export interface TableCreateWithoutKey_resource_entry_idsInput {
-  id?: Maybe<ID_Input>;
-  key_partner_entry_ids?: Maybe<KeyPartnerCreateManyWithoutTable_idsInput>;
-  reventue_stream_entry_ids?: Maybe<
-    RevenueStreamCreateManyWithoutTable_idsInput
-  >;
-  key_activity_entry_ids?: Maybe<KeyActitvityCreateManyWithoutTable_idsInput>;
-  customer_relationship_entry_ids?: Maybe<
-    CustomerRelationshipCreateManyWithoutTable_idsInput
-  >;
-  value_proposition_entry_ids?: Maybe<
-    ValuePropositionCreateManyWithoutTable_idsInput
-  >;
-  cost_structure_entry_ids?: Maybe<
-    CostStructureCreateManyWithoutTable_idsInput
-  >;
-  customer_segment_entry_ids?: Maybe<
-    CustomerSegmentCreateManyWithoutTable_idsInput
-  >;
-  channel_entry_ids?: Maybe<ChannelCreateManyWithoutTable_idsInput>;
-}
-
-export interface KeyResourceUpdateInput {
-  table_ids?: Maybe<TableUpdateManyWithoutKey_resource_entry_idsInput>;
-  text?: Maybe<String>;
-  note?: Maybe<String>;
-  createdBy?: Maybe<UserUpdateOneRequiredInput>;
-  updatedBy?: Maybe<UserUpdateOneRequiredInput>;
-}
-
-export interface TableUpdateManyWithoutKey_resource_entry_idsInput {
-  create?: Maybe<
-    | TableCreateWithoutKey_resource_entry_idsInput[]
-    | TableCreateWithoutKey_resource_entry_idsInput
-  >;
-  delete?: Maybe<TableWhereUniqueInput[] | TableWhereUniqueInput>;
-  connect?: Maybe<TableWhereUniqueInput[] | TableWhereUniqueInput>;
-  set?: Maybe<TableWhereUniqueInput[] | TableWhereUniqueInput>;
-  disconnect?: Maybe<TableWhereUniqueInput[] | TableWhereUniqueInput>;
-  update?: Maybe<
-    | TableUpdateWithWhereUniqueWithoutKey_resource_entry_idsInput[]
-    | TableUpdateWithWhereUniqueWithoutKey_resource_entry_idsInput
-  >;
-  upsert?: Maybe<
-    | TableUpsertWithWhereUniqueWithoutKey_resource_entry_idsInput[]
-    | TableUpsertWithWhereUniqueWithoutKey_resource_entry_idsInput
-  >;
-  deleteMany?: Maybe<TableScalarWhereInput[] | TableScalarWhereInput>;
-}
-
-export interface TableUpdateWithWhereUniqueWithoutKey_resource_entry_idsInput {
-  where: TableWhereUniqueInput;
-  data: TableUpdateWithoutKey_resource_entry_idsDataInput;
-}
-
-export interface TableUpdateWithoutKey_resource_entry_idsDataInput {
-  key_partner_entry_ids?: Maybe<KeyPartnerUpdateManyWithoutTable_idsInput>;
-  reventue_stream_entry_ids?: Maybe<
-    RevenueStreamUpdateManyWithoutTable_idsInput
-  >;
-  key_activity_entry_ids?: Maybe<KeyActitvityUpdateManyWithoutTable_idsInput>;
-  customer_relationship_entry_ids?: Maybe<
-    CustomerRelationshipUpdateManyWithoutTable_idsInput
-  >;
-  value_proposition_entry_ids?: Maybe<
-    ValuePropositionUpdateManyWithoutTable_idsInput
-  >;
-  cost_structure_entry_ids?: Maybe<
-    CostStructureUpdateManyWithoutTable_idsInput
-  >;
-  customer_segment_entry_ids?: Maybe<
-    CustomerSegmentUpdateManyWithoutTable_idsInput
-  >;
-  channel_entry_ids?: Maybe<ChannelUpdateManyWithoutTable_idsInput>;
-}
-
-export interface TableUpsertWithWhereUniqueWithoutKey_resource_entry_idsInput {
-  where: TableWhereUniqueInput;
-  update: TableUpdateWithoutKey_resource_entry_idsDataInput;
-  create: TableCreateWithoutKey_resource_entry_idsInput;
-}
-
-export interface KeyResourceUpdateManyMutationInput {
+export interface NetworkEffectUpdateManyMutationInput {
   text?: Maybe<String>;
   note?: Maybe<String>;
 }
@@ -4890,8 +5291,18 @@ export interface PatternCreateInput {
   canvas_ids?: Maybe<CanvasCreateManyWithoutPattern_idsInput>;
   table_id: TableCreateOneInput;
   company_ids?: Maybe<CompanyCreateManyWithoutPattern_idsInput>;
+  strategy_pattern_ids?: Maybe<StrategyPatternCreateManyWithoutPattern_idInput>;
   name: String;
   description?: Maybe<String>;
+  actorWeight?: Maybe<Int>;
+  valuePropositionWeight?: Maybe<Int>;
+  valueCreationWeight?: Maybe<Int>;
+  valueDeliveryWeight?: Maybe<Int>;
+  revenueWeight?: Maybe<Int>;
+  expenseWeight?: Maybe<Int>;
+  networkEffectWeight?: Maybe<Int>;
+  regulatoryWeight?: Maybe<Int>;
+  technicalInfrastractureWeight?: Maybe<Int>;
   createdBy: UserCreateOneInput;
   updatedBy: UserCreateOneInput;
 }
@@ -4900,8 +5311,18 @@ export interface PatternUpdateInput {
   canvas_ids?: Maybe<CanvasUpdateManyWithoutPattern_idsInput>;
   table_id?: Maybe<TableUpdateOneRequiredInput>;
   company_ids?: Maybe<CompanyUpdateManyWithoutPattern_idsInput>;
+  strategy_pattern_ids?: Maybe<StrategyPatternUpdateManyWithoutPattern_idInput>;
   name?: Maybe<String>;
   description?: Maybe<String>;
+  actorWeight?: Maybe<Int>;
+  valuePropositionWeight?: Maybe<Int>;
+  valueCreationWeight?: Maybe<Int>;
+  valueDeliveryWeight?: Maybe<Int>;
+  revenueWeight?: Maybe<Int>;
+  expenseWeight?: Maybe<Int>;
+  networkEffectWeight?: Maybe<Int>;
+  regulatoryWeight?: Maybe<Int>;
+  technicalInfrastractureWeight?: Maybe<Int>;
   createdBy?: Maybe<UserUpdateOneRequiredInput>;
   updatedBy?: Maybe<UserUpdateOneRequiredInput>;
 }
@@ -4909,6 +5330,15 @@ export interface PatternUpdateInput {
 export interface PatternUpdateManyMutationInput {
   name?: Maybe<String>;
   description?: Maybe<String>;
+  actorWeight?: Maybe<Int>;
+  valuePropositionWeight?: Maybe<Int>;
+  valueCreationWeight?: Maybe<Int>;
+  valueDeliveryWeight?: Maybe<Int>;
+  revenueWeight?: Maybe<Int>;
+  expenseWeight?: Maybe<Int>;
+  networkEffectWeight?: Maybe<Int>;
+  regulatoryWeight?: Maybe<Int>;
+  technicalInfrastractureWeight?: Maybe<Int>;
 }
 
 export interface ProjectCreateInput {
@@ -4932,126 +5362,385 @@ export interface ProjectUpdateManyMutationInput {
   name?: Maybe<String>;
 }
 
-export interface RevenueStreamCreateInput {
+export interface RegulatoryCreateInput {
   id?: Maybe<ID_Input>;
-  table_ids?: Maybe<TableCreateManyWithoutReventue_stream_entry_idsInput>;
+  table_ids?: Maybe<TableCreateManyWithoutRegulatory_entry_idsInput>;
   text: String;
   note?: Maybe<String>;
   createdBy: UserCreateOneInput;
   updatedBy: UserCreateOneInput;
 }
 
-export interface TableCreateManyWithoutReventue_stream_entry_idsInput {
+export interface TableCreateManyWithoutRegulatory_entry_idsInput {
   create?: Maybe<
-    | TableCreateWithoutReventue_stream_entry_idsInput[]
-    | TableCreateWithoutReventue_stream_entry_idsInput
+    | TableCreateWithoutRegulatory_entry_idsInput[]
+    | TableCreateWithoutRegulatory_entry_idsInput
   >;
   connect?: Maybe<TableWhereUniqueInput[] | TableWhereUniqueInput>;
 }
 
-export interface TableCreateWithoutReventue_stream_entry_idsInput {
+export interface TableCreateWithoutRegulatory_entry_idsInput {
   id?: Maybe<ID_Input>;
-  key_partner_entry_ids?: Maybe<KeyPartnerCreateManyWithoutTable_idsInput>;
-  key_activity_entry_ids?: Maybe<KeyActitvityCreateManyWithoutTable_idsInput>;
-  customer_relationship_entry_ids?: Maybe<
-    CustomerRelationshipCreateManyWithoutTable_idsInput
-  >;
+  actor_entry_ids?: Maybe<ActorCreateManyWithoutTable_idsInput>;
   value_proposition_entry_ids?: Maybe<
     ValuePropositionCreateManyWithoutTable_idsInput
   >;
-  cost_structure_entry_ids?: Maybe<
-    CostStructureCreateManyWithoutTable_idsInput
+  value_creation_entry_ids?: Maybe<
+    ValueCreationCreateManyWithoutTable_idsInput
   >;
-  customer_segment_entry_ids?: Maybe<
-    CustomerSegmentCreateManyWithoutTable_idsInput
+  value_delivery_entry_ids?: Maybe<
+    ValueDeliveryCreateManyWithoutTable_idsInput
   >;
-  key_resource_entry_ids?: Maybe<KeyResourceCreateManyWithoutTable_idsInput>;
-  channel_entry_ids?: Maybe<ChannelCreateManyWithoutTable_idsInput>;
+  revenue_entry_ids?: Maybe<RevenueCreateManyWithoutTable_idsInput>;
+  expense_entry_ids?: Maybe<ExpenseCreateManyWithoutTable_idsInput>;
+  network_effect_entry_ids?: Maybe<
+    NetworkEffectCreateManyWithoutTable_idsInput
+  >;
+  technical_infrastructure_entry_ids?: Maybe<
+    TechnicalInfrastractureCreateManyWithoutTable_idsInput
+  >;
 }
 
-export interface RevenueStreamUpdateInput {
-  table_ids?: Maybe<TableUpdateManyWithoutReventue_stream_entry_idsInput>;
+export interface RegulatoryUpdateInput {
+  table_ids?: Maybe<TableUpdateManyWithoutRegulatory_entry_idsInput>;
   text?: Maybe<String>;
   note?: Maybe<String>;
   createdBy?: Maybe<UserUpdateOneRequiredInput>;
   updatedBy?: Maybe<UserUpdateOneRequiredInput>;
 }
 
-export interface TableUpdateManyWithoutReventue_stream_entry_idsInput {
+export interface TableUpdateManyWithoutRegulatory_entry_idsInput {
   create?: Maybe<
-    | TableCreateWithoutReventue_stream_entry_idsInput[]
-    | TableCreateWithoutReventue_stream_entry_idsInput
+    | TableCreateWithoutRegulatory_entry_idsInput[]
+    | TableCreateWithoutRegulatory_entry_idsInput
   >;
   delete?: Maybe<TableWhereUniqueInput[] | TableWhereUniqueInput>;
   connect?: Maybe<TableWhereUniqueInput[] | TableWhereUniqueInput>;
   set?: Maybe<TableWhereUniqueInput[] | TableWhereUniqueInput>;
   disconnect?: Maybe<TableWhereUniqueInput[] | TableWhereUniqueInput>;
   update?: Maybe<
-    | TableUpdateWithWhereUniqueWithoutReventue_stream_entry_idsInput[]
-    | TableUpdateWithWhereUniqueWithoutReventue_stream_entry_idsInput
+    | TableUpdateWithWhereUniqueWithoutRegulatory_entry_idsInput[]
+    | TableUpdateWithWhereUniqueWithoutRegulatory_entry_idsInput
   >;
   upsert?: Maybe<
-    | TableUpsertWithWhereUniqueWithoutReventue_stream_entry_idsInput[]
-    | TableUpsertWithWhereUniqueWithoutReventue_stream_entry_idsInput
+    | TableUpsertWithWhereUniqueWithoutRegulatory_entry_idsInput[]
+    | TableUpsertWithWhereUniqueWithoutRegulatory_entry_idsInput
   >;
   deleteMany?: Maybe<TableScalarWhereInput[] | TableScalarWhereInput>;
 }
 
-export interface TableUpdateWithWhereUniqueWithoutReventue_stream_entry_idsInput {
+export interface TableUpdateWithWhereUniqueWithoutRegulatory_entry_idsInput {
   where: TableWhereUniqueInput;
-  data: TableUpdateWithoutReventue_stream_entry_idsDataInput;
+  data: TableUpdateWithoutRegulatory_entry_idsDataInput;
 }
 
-export interface TableUpdateWithoutReventue_stream_entry_idsDataInput {
-  key_partner_entry_ids?: Maybe<KeyPartnerUpdateManyWithoutTable_idsInput>;
-  key_activity_entry_ids?: Maybe<KeyActitvityUpdateManyWithoutTable_idsInput>;
-  customer_relationship_entry_ids?: Maybe<
-    CustomerRelationshipUpdateManyWithoutTable_idsInput
-  >;
+export interface TableUpdateWithoutRegulatory_entry_idsDataInput {
+  actor_entry_ids?: Maybe<ActorUpdateManyWithoutTable_idsInput>;
   value_proposition_entry_ids?: Maybe<
     ValuePropositionUpdateManyWithoutTable_idsInput
   >;
-  cost_structure_entry_ids?: Maybe<
-    CostStructureUpdateManyWithoutTable_idsInput
+  value_creation_entry_ids?: Maybe<
+    ValueCreationUpdateManyWithoutTable_idsInput
   >;
-  customer_segment_entry_ids?: Maybe<
-    CustomerSegmentUpdateManyWithoutTable_idsInput
+  value_delivery_entry_ids?: Maybe<
+    ValueDeliveryUpdateManyWithoutTable_idsInput
   >;
-  key_resource_entry_ids?: Maybe<KeyResourceUpdateManyWithoutTable_idsInput>;
-  channel_entry_ids?: Maybe<ChannelUpdateManyWithoutTable_idsInput>;
+  revenue_entry_ids?: Maybe<RevenueUpdateManyWithoutTable_idsInput>;
+  expense_entry_ids?: Maybe<ExpenseUpdateManyWithoutTable_idsInput>;
+  network_effect_entry_ids?: Maybe<
+    NetworkEffectUpdateManyWithoutTable_idsInput
+  >;
+  technical_infrastructure_entry_ids?: Maybe<
+    TechnicalInfrastractureUpdateManyWithoutTable_idsInput
+  >;
 }
 
-export interface TableUpsertWithWhereUniqueWithoutReventue_stream_entry_idsInput {
+export interface TableUpsertWithWhereUniqueWithoutRegulatory_entry_idsInput {
   where: TableWhereUniqueInput;
-  update: TableUpdateWithoutReventue_stream_entry_idsDataInput;
-  create: TableCreateWithoutReventue_stream_entry_idsInput;
+  update: TableUpdateWithoutRegulatory_entry_idsDataInput;
+  create: TableCreateWithoutRegulatory_entry_idsInput;
 }
 
-export interface RevenueStreamUpdateManyMutationInput {
+export interface RegulatoryUpdateManyMutationInput {
   text?: Maybe<String>;
   note?: Maybe<String>;
 }
 
-export interface TableUpdateInput {
-  key_partner_entry_ids?: Maybe<KeyPartnerUpdateManyWithoutTable_idsInput>;
-  reventue_stream_entry_ids?: Maybe<
-    RevenueStreamUpdateManyWithoutTable_idsInput
+export interface RevenueCreateInput {
+  id?: Maybe<ID_Input>;
+  table_ids?: Maybe<TableCreateManyWithoutRevenue_entry_idsInput>;
+  text: String;
+  note?: Maybe<String>;
+  createdBy: UserCreateOneInput;
+  updatedBy: UserCreateOneInput;
+}
+
+export interface TableCreateManyWithoutRevenue_entry_idsInput {
+  create?: Maybe<
+    | TableCreateWithoutRevenue_entry_idsInput[]
+    | TableCreateWithoutRevenue_entry_idsInput
   >;
-  key_activity_entry_ids?: Maybe<KeyActitvityUpdateManyWithoutTable_idsInput>;
-  customer_relationship_entry_ids?: Maybe<
-    CustomerRelationshipUpdateManyWithoutTable_idsInput
+  connect?: Maybe<TableWhereUniqueInput[] | TableWhereUniqueInput>;
+}
+
+export interface TableCreateWithoutRevenue_entry_idsInput {
+  id?: Maybe<ID_Input>;
+  actor_entry_ids?: Maybe<ActorCreateManyWithoutTable_idsInput>;
+  value_proposition_entry_ids?: Maybe<
+    ValuePropositionCreateManyWithoutTable_idsInput
   >;
+  value_creation_entry_ids?: Maybe<
+    ValueCreationCreateManyWithoutTable_idsInput
+  >;
+  value_delivery_entry_ids?: Maybe<
+    ValueDeliveryCreateManyWithoutTable_idsInput
+  >;
+  expense_entry_ids?: Maybe<ExpenseCreateManyWithoutTable_idsInput>;
+  network_effect_entry_ids?: Maybe<
+    NetworkEffectCreateManyWithoutTable_idsInput
+  >;
+  technical_infrastructure_entry_ids?: Maybe<
+    TechnicalInfrastractureCreateManyWithoutTable_idsInput
+  >;
+  regulatory_entry_ids?: Maybe<RegulatoryCreateManyWithoutTable_idsInput>;
+}
+
+export interface RevenueUpdateInput {
+  table_ids?: Maybe<TableUpdateManyWithoutRevenue_entry_idsInput>;
+  text?: Maybe<String>;
+  note?: Maybe<String>;
+  createdBy?: Maybe<UserUpdateOneRequiredInput>;
+  updatedBy?: Maybe<UserUpdateOneRequiredInput>;
+}
+
+export interface TableUpdateManyWithoutRevenue_entry_idsInput {
+  create?: Maybe<
+    | TableCreateWithoutRevenue_entry_idsInput[]
+    | TableCreateWithoutRevenue_entry_idsInput
+  >;
+  delete?: Maybe<TableWhereUniqueInput[] | TableWhereUniqueInput>;
+  connect?: Maybe<TableWhereUniqueInput[] | TableWhereUniqueInput>;
+  set?: Maybe<TableWhereUniqueInput[] | TableWhereUniqueInput>;
+  disconnect?: Maybe<TableWhereUniqueInput[] | TableWhereUniqueInput>;
+  update?: Maybe<
+    | TableUpdateWithWhereUniqueWithoutRevenue_entry_idsInput[]
+    | TableUpdateWithWhereUniqueWithoutRevenue_entry_idsInput
+  >;
+  upsert?: Maybe<
+    | TableUpsertWithWhereUniqueWithoutRevenue_entry_idsInput[]
+    | TableUpsertWithWhereUniqueWithoutRevenue_entry_idsInput
+  >;
+  deleteMany?: Maybe<TableScalarWhereInput[] | TableScalarWhereInput>;
+}
+
+export interface TableUpdateWithWhereUniqueWithoutRevenue_entry_idsInput {
+  where: TableWhereUniqueInput;
+  data: TableUpdateWithoutRevenue_entry_idsDataInput;
+}
+
+export interface TableUpdateWithoutRevenue_entry_idsDataInput {
+  actor_entry_ids?: Maybe<ActorUpdateManyWithoutTable_idsInput>;
   value_proposition_entry_ids?: Maybe<
     ValuePropositionUpdateManyWithoutTable_idsInput
   >;
-  cost_structure_entry_ids?: Maybe<
-    CostStructureUpdateManyWithoutTable_idsInput
+  value_creation_entry_ids?: Maybe<
+    ValueCreationUpdateManyWithoutTable_idsInput
   >;
-  customer_segment_entry_ids?: Maybe<
-    CustomerSegmentUpdateManyWithoutTable_idsInput
+  value_delivery_entry_ids?: Maybe<
+    ValueDeliveryUpdateManyWithoutTable_idsInput
   >;
-  key_resource_entry_ids?: Maybe<KeyResourceUpdateManyWithoutTable_idsInput>;
-  channel_entry_ids?: Maybe<ChannelUpdateManyWithoutTable_idsInput>;
+  expense_entry_ids?: Maybe<ExpenseUpdateManyWithoutTable_idsInput>;
+  network_effect_entry_ids?: Maybe<
+    NetworkEffectUpdateManyWithoutTable_idsInput
+  >;
+  technical_infrastructure_entry_ids?: Maybe<
+    TechnicalInfrastractureUpdateManyWithoutTable_idsInput
+  >;
+  regulatory_entry_ids?: Maybe<RegulatoryUpdateManyWithoutTable_idsInput>;
+}
+
+export interface TableUpsertWithWhereUniqueWithoutRevenue_entry_idsInput {
+  where: TableWhereUniqueInput;
+  update: TableUpdateWithoutRevenue_entry_idsDataInput;
+  create: TableCreateWithoutRevenue_entry_idsInput;
+}
+
+export interface RevenueUpdateManyMutationInput {
+  text?: Maybe<String>;
+  note?: Maybe<String>;
+}
+
+export interface StrategyCreateInput {
+  id?: Maybe<ID_Input>;
+  canvas_ids?: Maybe<CanvasCreateManyWithoutStrategy_idInput>;
+  strategy_pattern_ids?: Maybe<
+    StrategyPatternCreateManyWithoutStrategy_idInput
+  >;
+  name: String;
+  description?: Maybe<String>;
+  createdBy: UserCreateOneInput;
+  updatedBy: UserCreateOneInput;
+}
+
+export interface StrategyUpdateInput {
+  canvas_ids?: Maybe<CanvasUpdateManyWithoutStrategy_idInput>;
+  strategy_pattern_ids?: Maybe<
+    StrategyPatternUpdateManyWithoutStrategy_idInput
+  >;
+  name?: Maybe<String>;
+  description?: Maybe<String>;
+  createdBy?: Maybe<UserUpdateOneRequiredInput>;
+  updatedBy?: Maybe<UserUpdateOneRequiredInput>;
+}
+
+export interface StrategyUpdateManyMutationInput {
+  name?: Maybe<String>;
+  description?: Maybe<String>;
+}
+
+export interface StrategyPatternCreateInput {
+  id?: Maybe<ID_Input>;
+  strategy_id: StrategyCreateOneWithoutStrategy_pattern_idsInput;
+  pattern_id: PatternCreateOneWithoutStrategy_pattern_idsInput;
+  weight: Int;
+}
+
+export interface StrategyPatternUpdateInput {
+  strategy_id?: Maybe<
+    StrategyUpdateOneRequiredWithoutStrategy_pattern_idsInput
+  >;
+  pattern_id?: Maybe<PatternUpdateOneRequiredWithoutStrategy_pattern_idsInput>;
+  weight?: Maybe<Int>;
+}
+
+export interface StrategyPatternUpdateManyMutationInput {
+  weight?: Maybe<Int>;
+}
+
+export interface TableUpdateInput {
+  actor_entry_ids?: Maybe<ActorUpdateManyWithoutTable_idsInput>;
+  value_proposition_entry_ids?: Maybe<
+    ValuePropositionUpdateManyWithoutTable_idsInput
+  >;
+  value_creation_entry_ids?: Maybe<
+    ValueCreationUpdateManyWithoutTable_idsInput
+  >;
+  value_delivery_entry_ids?: Maybe<
+    ValueDeliveryUpdateManyWithoutTable_idsInput
+  >;
+  revenue_entry_ids?: Maybe<RevenueUpdateManyWithoutTable_idsInput>;
+  expense_entry_ids?: Maybe<ExpenseUpdateManyWithoutTable_idsInput>;
+  network_effect_entry_ids?: Maybe<
+    NetworkEffectUpdateManyWithoutTable_idsInput
+  >;
+  technical_infrastructure_entry_ids?: Maybe<
+    TechnicalInfrastractureUpdateManyWithoutTable_idsInput
+  >;
+  regulatory_entry_ids?: Maybe<RegulatoryUpdateManyWithoutTable_idsInput>;
+}
+
+export interface TechnicalInfrastractureCreateInput {
+  id?: Maybe<ID_Input>;
+  table_ids?: Maybe<
+    TableCreateManyWithoutTechnical_infrastructure_entry_idsInput
+  >;
+  text: String;
+  note?: Maybe<String>;
+  createdBy: UserCreateOneInput;
+  updatedBy: UserCreateOneInput;
+}
+
+export interface TableCreateManyWithoutTechnical_infrastructure_entry_idsInput {
+  create?: Maybe<
+    | TableCreateWithoutTechnical_infrastructure_entry_idsInput[]
+    | TableCreateWithoutTechnical_infrastructure_entry_idsInput
+  >;
+  connect?: Maybe<TableWhereUniqueInput[] | TableWhereUniqueInput>;
+}
+
+export interface TableCreateWithoutTechnical_infrastructure_entry_idsInput {
+  id?: Maybe<ID_Input>;
+  actor_entry_ids?: Maybe<ActorCreateManyWithoutTable_idsInput>;
+  value_proposition_entry_ids?: Maybe<
+    ValuePropositionCreateManyWithoutTable_idsInput
+  >;
+  value_creation_entry_ids?: Maybe<
+    ValueCreationCreateManyWithoutTable_idsInput
+  >;
+  value_delivery_entry_ids?: Maybe<
+    ValueDeliveryCreateManyWithoutTable_idsInput
+  >;
+  revenue_entry_ids?: Maybe<RevenueCreateManyWithoutTable_idsInput>;
+  expense_entry_ids?: Maybe<ExpenseCreateManyWithoutTable_idsInput>;
+  network_effect_entry_ids?: Maybe<
+    NetworkEffectCreateManyWithoutTable_idsInput
+  >;
+  regulatory_entry_ids?: Maybe<RegulatoryCreateManyWithoutTable_idsInput>;
+}
+
+export interface TechnicalInfrastractureUpdateInput {
+  table_ids?: Maybe<
+    TableUpdateManyWithoutTechnical_infrastructure_entry_idsInput
+  >;
+  text?: Maybe<String>;
+  note?: Maybe<String>;
+  createdBy?: Maybe<UserUpdateOneRequiredInput>;
+  updatedBy?: Maybe<UserUpdateOneRequiredInput>;
+}
+
+export interface TableUpdateManyWithoutTechnical_infrastructure_entry_idsInput {
+  create?: Maybe<
+    | TableCreateWithoutTechnical_infrastructure_entry_idsInput[]
+    | TableCreateWithoutTechnical_infrastructure_entry_idsInput
+  >;
+  delete?: Maybe<TableWhereUniqueInput[] | TableWhereUniqueInput>;
+  connect?: Maybe<TableWhereUniqueInput[] | TableWhereUniqueInput>;
+  set?: Maybe<TableWhereUniqueInput[] | TableWhereUniqueInput>;
+  disconnect?: Maybe<TableWhereUniqueInput[] | TableWhereUniqueInput>;
+  update?: Maybe<
+    | TableUpdateWithWhereUniqueWithoutTechnical_infrastructure_entry_idsInput[]
+    | TableUpdateWithWhereUniqueWithoutTechnical_infrastructure_entry_idsInput
+  >;
+  upsert?: Maybe<
+    | TableUpsertWithWhereUniqueWithoutTechnical_infrastructure_entry_idsInput[]
+    | TableUpsertWithWhereUniqueWithoutTechnical_infrastructure_entry_idsInput
+  >;
+  deleteMany?: Maybe<TableScalarWhereInput[] | TableScalarWhereInput>;
+}
+
+export interface TableUpdateWithWhereUniqueWithoutTechnical_infrastructure_entry_idsInput {
+  where: TableWhereUniqueInput;
+  data: TableUpdateWithoutTechnical_infrastructure_entry_idsDataInput;
+}
+
+export interface TableUpdateWithoutTechnical_infrastructure_entry_idsDataInput {
+  actor_entry_ids?: Maybe<ActorUpdateManyWithoutTable_idsInput>;
+  value_proposition_entry_ids?: Maybe<
+    ValuePropositionUpdateManyWithoutTable_idsInput
+  >;
+  value_creation_entry_ids?: Maybe<
+    ValueCreationUpdateManyWithoutTable_idsInput
+  >;
+  value_delivery_entry_ids?: Maybe<
+    ValueDeliveryUpdateManyWithoutTable_idsInput
+  >;
+  revenue_entry_ids?: Maybe<RevenueUpdateManyWithoutTable_idsInput>;
+  expense_entry_ids?: Maybe<ExpenseUpdateManyWithoutTable_idsInput>;
+  network_effect_entry_ids?: Maybe<
+    NetworkEffectUpdateManyWithoutTable_idsInput
+  >;
+  regulatory_entry_ids?: Maybe<RegulatoryUpdateManyWithoutTable_idsInput>;
+}
+
+export interface TableUpsertWithWhereUniqueWithoutTechnical_infrastructure_entry_idsInput {
+  where: TableWhereUniqueInput;
+  update: TableUpdateWithoutTechnical_infrastructure_entry_idsDataInput;
+  create: TableCreateWithoutTechnical_infrastructure_entry_idsInput;
+}
+
+export interface TechnicalInfrastractureUpdateManyMutationInput {
+  text?: Maybe<String>;
+  note?: Maybe<String>;
 }
 
 export interface UserUpdateInput {
@@ -5078,6 +5767,206 @@ export interface UserUpdateManyMutationInput {
   phoneNumber?: Maybe<String>;
 }
 
+export interface ValueCreationCreateInput {
+  id?: Maybe<ID_Input>;
+  table_ids?: Maybe<TableCreateManyWithoutValue_creation_entry_idsInput>;
+  text: String;
+  note?: Maybe<String>;
+  createdBy: UserCreateOneInput;
+  updatedBy: UserCreateOneInput;
+}
+
+export interface TableCreateManyWithoutValue_creation_entry_idsInput {
+  create?: Maybe<
+    | TableCreateWithoutValue_creation_entry_idsInput[]
+    | TableCreateWithoutValue_creation_entry_idsInput
+  >;
+  connect?: Maybe<TableWhereUniqueInput[] | TableWhereUniqueInput>;
+}
+
+export interface TableCreateWithoutValue_creation_entry_idsInput {
+  id?: Maybe<ID_Input>;
+  actor_entry_ids?: Maybe<ActorCreateManyWithoutTable_idsInput>;
+  value_proposition_entry_ids?: Maybe<
+    ValuePropositionCreateManyWithoutTable_idsInput
+  >;
+  value_delivery_entry_ids?: Maybe<
+    ValueDeliveryCreateManyWithoutTable_idsInput
+  >;
+  revenue_entry_ids?: Maybe<RevenueCreateManyWithoutTable_idsInput>;
+  expense_entry_ids?: Maybe<ExpenseCreateManyWithoutTable_idsInput>;
+  network_effect_entry_ids?: Maybe<
+    NetworkEffectCreateManyWithoutTable_idsInput
+  >;
+  technical_infrastructure_entry_ids?: Maybe<
+    TechnicalInfrastractureCreateManyWithoutTable_idsInput
+  >;
+  regulatory_entry_ids?: Maybe<RegulatoryCreateManyWithoutTable_idsInput>;
+}
+
+export interface ValueCreationUpdateInput {
+  table_ids?: Maybe<TableUpdateManyWithoutValue_creation_entry_idsInput>;
+  text?: Maybe<String>;
+  note?: Maybe<String>;
+  createdBy?: Maybe<UserUpdateOneRequiredInput>;
+  updatedBy?: Maybe<UserUpdateOneRequiredInput>;
+}
+
+export interface TableUpdateManyWithoutValue_creation_entry_idsInput {
+  create?: Maybe<
+    | TableCreateWithoutValue_creation_entry_idsInput[]
+    | TableCreateWithoutValue_creation_entry_idsInput
+  >;
+  delete?: Maybe<TableWhereUniqueInput[] | TableWhereUniqueInput>;
+  connect?: Maybe<TableWhereUniqueInput[] | TableWhereUniqueInput>;
+  set?: Maybe<TableWhereUniqueInput[] | TableWhereUniqueInput>;
+  disconnect?: Maybe<TableWhereUniqueInput[] | TableWhereUniqueInput>;
+  update?: Maybe<
+    | TableUpdateWithWhereUniqueWithoutValue_creation_entry_idsInput[]
+    | TableUpdateWithWhereUniqueWithoutValue_creation_entry_idsInput
+  >;
+  upsert?: Maybe<
+    | TableUpsertWithWhereUniqueWithoutValue_creation_entry_idsInput[]
+    | TableUpsertWithWhereUniqueWithoutValue_creation_entry_idsInput
+  >;
+  deleteMany?: Maybe<TableScalarWhereInput[] | TableScalarWhereInput>;
+}
+
+export interface TableUpdateWithWhereUniqueWithoutValue_creation_entry_idsInput {
+  where: TableWhereUniqueInput;
+  data: TableUpdateWithoutValue_creation_entry_idsDataInput;
+}
+
+export interface TableUpdateWithoutValue_creation_entry_idsDataInput {
+  actor_entry_ids?: Maybe<ActorUpdateManyWithoutTable_idsInput>;
+  value_proposition_entry_ids?: Maybe<
+    ValuePropositionUpdateManyWithoutTable_idsInput
+  >;
+  value_delivery_entry_ids?: Maybe<
+    ValueDeliveryUpdateManyWithoutTable_idsInput
+  >;
+  revenue_entry_ids?: Maybe<RevenueUpdateManyWithoutTable_idsInput>;
+  expense_entry_ids?: Maybe<ExpenseUpdateManyWithoutTable_idsInput>;
+  network_effect_entry_ids?: Maybe<
+    NetworkEffectUpdateManyWithoutTable_idsInput
+  >;
+  technical_infrastructure_entry_ids?: Maybe<
+    TechnicalInfrastractureUpdateManyWithoutTable_idsInput
+  >;
+  regulatory_entry_ids?: Maybe<RegulatoryUpdateManyWithoutTable_idsInput>;
+}
+
+export interface TableUpsertWithWhereUniqueWithoutValue_creation_entry_idsInput {
+  where: TableWhereUniqueInput;
+  update: TableUpdateWithoutValue_creation_entry_idsDataInput;
+  create: TableCreateWithoutValue_creation_entry_idsInput;
+}
+
+export interface ValueCreationUpdateManyMutationInput {
+  text?: Maybe<String>;
+  note?: Maybe<String>;
+}
+
+export interface ValueDeliveryCreateInput {
+  id?: Maybe<ID_Input>;
+  table_ids?: Maybe<TableCreateManyWithoutValue_delivery_entry_idsInput>;
+  text: String;
+  note?: Maybe<String>;
+  createdBy: UserCreateOneInput;
+  updatedBy: UserCreateOneInput;
+}
+
+export interface TableCreateManyWithoutValue_delivery_entry_idsInput {
+  create?: Maybe<
+    | TableCreateWithoutValue_delivery_entry_idsInput[]
+    | TableCreateWithoutValue_delivery_entry_idsInput
+  >;
+  connect?: Maybe<TableWhereUniqueInput[] | TableWhereUniqueInput>;
+}
+
+export interface TableCreateWithoutValue_delivery_entry_idsInput {
+  id?: Maybe<ID_Input>;
+  actor_entry_ids?: Maybe<ActorCreateManyWithoutTable_idsInput>;
+  value_proposition_entry_ids?: Maybe<
+    ValuePropositionCreateManyWithoutTable_idsInput
+  >;
+  value_creation_entry_ids?: Maybe<
+    ValueCreationCreateManyWithoutTable_idsInput
+  >;
+  revenue_entry_ids?: Maybe<RevenueCreateManyWithoutTable_idsInput>;
+  expense_entry_ids?: Maybe<ExpenseCreateManyWithoutTable_idsInput>;
+  network_effect_entry_ids?: Maybe<
+    NetworkEffectCreateManyWithoutTable_idsInput
+  >;
+  technical_infrastructure_entry_ids?: Maybe<
+    TechnicalInfrastractureCreateManyWithoutTable_idsInput
+  >;
+  regulatory_entry_ids?: Maybe<RegulatoryCreateManyWithoutTable_idsInput>;
+}
+
+export interface ValueDeliveryUpdateInput {
+  table_ids?: Maybe<TableUpdateManyWithoutValue_delivery_entry_idsInput>;
+  text?: Maybe<String>;
+  note?: Maybe<String>;
+  createdBy?: Maybe<UserUpdateOneRequiredInput>;
+  updatedBy?: Maybe<UserUpdateOneRequiredInput>;
+}
+
+export interface TableUpdateManyWithoutValue_delivery_entry_idsInput {
+  create?: Maybe<
+    | TableCreateWithoutValue_delivery_entry_idsInput[]
+    | TableCreateWithoutValue_delivery_entry_idsInput
+  >;
+  delete?: Maybe<TableWhereUniqueInput[] | TableWhereUniqueInput>;
+  connect?: Maybe<TableWhereUniqueInput[] | TableWhereUniqueInput>;
+  set?: Maybe<TableWhereUniqueInput[] | TableWhereUniqueInput>;
+  disconnect?: Maybe<TableWhereUniqueInput[] | TableWhereUniqueInput>;
+  update?: Maybe<
+    | TableUpdateWithWhereUniqueWithoutValue_delivery_entry_idsInput[]
+    | TableUpdateWithWhereUniqueWithoutValue_delivery_entry_idsInput
+  >;
+  upsert?: Maybe<
+    | TableUpsertWithWhereUniqueWithoutValue_delivery_entry_idsInput[]
+    | TableUpsertWithWhereUniqueWithoutValue_delivery_entry_idsInput
+  >;
+  deleteMany?: Maybe<TableScalarWhereInput[] | TableScalarWhereInput>;
+}
+
+export interface TableUpdateWithWhereUniqueWithoutValue_delivery_entry_idsInput {
+  where: TableWhereUniqueInput;
+  data: TableUpdateWithoutValue_delivery_entry_idsDataInput;
+}
+
+export interface TableUpdateWithoutValue_delivery_entry_idsDataInput {
+  actor_entry_ids?: Maybe<ActorUpdateManyWithoutTable_idsInput>;
+  value_proposition_entry_ids?: Maybe<
+    ValuePropositionUpdateManyWithoutTable_idsInput
+  >;
+  value_creation_entry_ids?: Maybe<
+    ValueCreationUpdateManyWithoutTable_idsInput
+  >;
+  revenue_entry_ids?: Maybe<RevenueUpdateManyWithoutTable_idsInput>;
+  expense_entry_ids?: Maybe<ExpenseUpdateManyWithoutTable_idsInput>;
+  network_effect_entry_ids?: Maybe<
+    NetworkEffectUpdateManyWithoutTable_idsInput
+  >;
+  technical_infrastructure_entry_ids?: Maybe<
+    TechnicalInfrastractureUpdateManyWithoutTable_idsInput
+  >;
+  regulatory_entry_ids?: Maybe<RegulatoryUpdateManyWithoutTable_idsInput>;
+}
+
+export interface TableUpsertWithWhereUniqueWithoutValue_delivery_entry_idsInput {
+  where: TableWhereUniqueInput;
+  update: TableUpdateWithoutValue_delivery_entry_idsDataInput;
+  create: TableCreateWithoutValue_delivery_entry_idsInput;
+}
+
+export interface ValueDeliveryUpdateManyMutationInput {
+  text?: Maybe<String>;
+  note?: Maybe<String>;
+}
+
 export interface ValuePropositionCreateInput {
   id?: Maybe<ID_Input>;
   table_ids?: Maybe<TableCreateManyWithoutValue_proposition_entry_idsInput>;
@@ -5097,22 +5986,22 @@ export interface TableCreateManyWithoutValue_proposition_entry_idsInput {
 
 export interface TableCreateWithoutValue_proposition_entry_idsInput {
   id?: Maybe<ID_Input>;
-  key_partner_entry_ids?: Maybe<KeyPartnerCreateManyWithoutTable_idsInput>;
-  reventue_stream_entry_ids?: Maybe<
-    RevenueStreamCreateManyWithoutTable_idsInput
+  actor_entry_ids?: Maybe<ActorCreateManyWithoutTable_idsInput>;
+  value_creation_entry_ids?: Maybe<
+    ValueCreationCreateManyWithoutTable_idsInput
   >;
-  key_activity_entry_ids?: Maybe<KeyActitvityCreateManyWithoutTable_idsInput>;
-  customer_relationship_entry_ids?: Maybe<
-    CustomerRelationshipCreateManyWithoutTable_idsInput
+  value_delivery_entry_ids?: Maybe<
+    ValueDeliveryCreateManyWithoutTable_idsInput
   >;
-  cost_structure_entry_ids?: Maybe<
-    CostStructureCreateManyWithoutTable_idsInput
+  revenue_entry_ids?: Maybe<RevenueCreateManyWithoutTable_idsInput>;
+  expense_entry_ids?: Maybe<ExpenseCreateManyWithoutTable_idsInput>;
+  network_effect_entry_ids?: Maybe<
+    NetworkEffectCreateManyWithoutTable_idsInput
   >;
-  customer_segment_entry_ids?: Maybe<
-    CustomerSegmentCreateManyWithoutTable_idsInput
+  technical_infrastructure_entry_ids?: Maybe<
+    TechnicalInfrastractureCreateManyWithoutTable_idsInput
   >;
-  key_resource_entry_ids?: Maybe<KeyResourceCreateManyWithoutTable_idsInput>;
-  channel_entry_ids?: Maybe<ChannelCreateManyWithoutTable_idsInput>;
+  regulatory_entry_ids?: Maybe<RegulatoryCreateManyWithoutTable_idsInput>;
 }
 
 export interface ValuePropositionUpdateInput {
@@ -5149,22 +6038,22 @@ export interface TableUpdateWithWhereUniqueWithoutValue_proposition_entry_idsInp
 }
 
 export interface TableUpdateWithoutValue_proposition_entry_idsDataInput {
-  key_partner_entry_ids?: Maybe<KeyPartnerUpdateManyWithoutTable_idsInput>;
-  reventue_stream_entry_ids?: Maybe<
-    RevenueStreamUpdateManyWithoutTable_idsInput
+  actor_entry_ids?: Maybe<ActorUpdateManyWithoutTable_idsInput>;
+  value_creation_entry_ids?: Maybe<
+    ValueCreationUpdateManyWithoutTable_idsInput
   >;
-  key_activity_entry_ids?: Maybe<KeyActitvityUpdateManyWithoutTable_idsInput>;
-  customer_relationship_entry_ids?: Maybe<
-    CustomerRelationshipUpdateManyWithoutTable_idsInput
+  value_delivery_entry_ids?: Maybe<
+    ValueDeliveryUpdateManyWithoutTable_idsInput
   >;
-  cost_structure_entry_ids?: Maybe<
-    CostStructureUpdateManyWithoutTable_idsInput
+  revenue_entry_ids?: Maybe<RevenueUpdateManyWithoutTable_idsInput>;
+  expense_entry_ids?: Maybe<ExpenseUpdateManyWithoutTable_idsInput>;
+  network_effect_entry_ids?: Maybe<
+    NetworkEffectUpdateManyWithoutTable_idsInput
   >;
-  customer_segment_entry_ids?: Maybe<
-    CustomerSegmentUpdateManyWithoutTable_idsInput
+  technical_infrastructure_entry_ids?: Maybe<
+    TechnicalInfrastractureUpdateManyWithoutTable_idsInput
   >;
-  key_resource_entry_ids?: Maybe<KeyResourceUpdateManyWithoutTable_idsInput>;
-  channel_entry_ids?: Maybe<ChannelUpdateManyWithoutTable_idsInput>;
+  regulatory_entry_ids?: Maybe<RegulatoryUpdateManyWithoutTable_idsInput>;
 }
 
 export interface TableUpsertWithWhereUniqueWithoutValue_proposition_entry_idsInput {
@@ -5178,6 +6067,17 @@ export interface ValuePropositionUpdateManyMutationInput {
   note?: Maybe<String>;
 }
 
+export interface ActorSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<ActorWhereInput>;
+  AND?: Maybe<ActorSubscriptionWhereInput[] | ActorSubscriptionWhereInput>;
+  OR?: Maybe<ActorSubscriptionWhereInput[] | ActorSubscriptionWhereInput>;
+  NOT?: Maybe<ActorSubscriptionWhereInput[] | ActorSubscriptionWhereInput>;
+}
+
 export interface CanvasSubscriptionWhereInput {
   mutation_in?: Maybe<MutationType[] | MutationType>;
   updatedFields_contains?: Maybe<String>;
@@ -5187,17 +6087,6 @@ export interface CanvasSubscriptionWhereInput {
   AND?: Maybe<CanvasSubscriptionWhereInput[] | CanvasSubscriptionWhereInput>;
   OR?: Maybe<CanvasSubscriptionWhereInput[] | CanvasSubscriptionWhereInput>;
   NOT?: Maybe<CanvasSubscriptionWhereInput[] | CanvasSubscriptionWhereInput>;
-}
-
-export interface ChannelSubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<ChannelWhereInput>;
-  AND?: Maybe<ChannelSubscriptionWhereInput[] | ChannelSubscriptionWhereInput>;
-  OR?: Maybe<ChannelSubscriptionWhereInput[] | ChannelSubscriptionWhereInput>;
-  NOT?: Maybe<ChannelSubscriptionWhereInput[] | ChannelSubscriptionWhereInput>;
 }
 
 export interface CompanySubscriptionWhereInput {
@@ -5211,111 +6100,31 @@ export interface CompanySubscriptionWhereInput {
   NOT?: Maybe<CompanySubscriptionWhereInput[] | CompanySubscriptionWhereInput>;
 }
 
-export interface CostStructureSubscriptionWhereInput {
+export interface ExpenseSubscriptionWhereInput {
   mutation_in?: Maybe<MutationType[] | MutationType>;
   updatedFields_contains?: Maybe<String>;
   updatedFields_contains_every?: Maybe<String[] | String>;
   updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<CostStructureWhereInput>;
-  AND?: Maybe<
-    CostStructureSubscriptionWhereInput[] | CostStructureSubscriptionWhereInput
-  >;
-  OR?: Maybe<
-    CostStructureSubscriptionWhereInput[] | CostStructureSubscriptionWhereInput
-  >;
-  NOT?: Maybe<
-    CostStructureSubscriptionWhereInput[] | CostStructureSubscriptionWhereInput
-  >;
+  node?: Maybe<ExpenseWhereInput>;
+  AND?: Maybe<ExpenseSubscriptionWhereInput[] | ExpenseSubscriptionWhereInput>;
+  OR?: Maybe<ExpenseSubscriptionWhereInput[] | ExpenseSubscriptionWhereInput>;
+  NOT?: Maybe<ExpenseSubscriptionWhereInput[] | ExpenseSubscriptionWhereInput>;
 }
 
-export interface CustomerRelationshipSubscriptionWhereInput {
+export interface NetworkEffectSubscriptionWhereInput {
   mutation_in?: Maybe<MutationType[] | MutationType>;
   updatedFields_contains?: Maybe<String>;
   updatedFields_contains_every?: Maybe<String[] | String>;
   updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<CustomerRelationshipWhereInput>;
+  node?: Maybe<NetworkEffectWhereInput>;
   AND?: Maybe<
-    | CustomerRelationshipSubscriptionWhereInput[]
-    | CustomerRelationshipSubscriptionWhereInput
+    NetworkEffectSubscriptionWhereInput[] | NetworkEffectSubscriptionWhereInput
   >;
   OR?: Maybe<
-    | CustomerRelationshipSubscriptionWhereInput[]
-    | CustomerRelationshipSubscriptionWhereInput
+    NetworkEffectSubscriptionWhereInput[] | NetworkEffectSubscriptionWhereInput
   >;
   NOT?: Maybe<
-    | CustomerRelationshipSubscriptionWhereInput[]
-    | CustomerRelationshipSubscriptionWhereInput
-  >;
-}
-
-export interface CustomerSegmentSubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<CustomerSegmentWhereInput>;
-  AND?: Maybe<
-    | CustomerSegmentSubscriptionWhereInput[]
-    | CustomerSegmentSubscriptionWhereInput
-  >;
-  OR?: Maybe<
-    | CustomerSegmentSubscriptionWhereInput[]
-    | CustomerSegmentSubscriptionWhereInput
-  >;
-  NOT?: Maybe<
-    | CustomerSegmentSubscriptionWhereInput[]
-    | CustomerSegmentSubscriptionWhereInput
-  >;
-}
-
-export interface KeyActitvitySubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<KeyActitvityWhereInput>;
-  AND?: Maybe<
-    KeyActitvitySubscriptionWhereInput[] | KeyActitvitySubscriptionWhereInput
-  >;
-  OR?: Maybe<
-    KeyActitvitySubscriptionWhereInput[] | KeyActitvitySubscriptionWhereInput
-  >;
-  NOT?: Maybe<
-    KeyActitvitySubscriptionWhereInput[] | KeyActitvitySubscriptionWhereInput
-  >;
-}
-
-export interface KeyPartnerSubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<KeyPartnerWhereInput>;
-  AND?: Maybe<
-    KeyPartnerSubscriptionWhereInput[] | KeyPartnerSubscriptionWhereInput
-  >;
-  OR?: Maybe<
-    KeyPartnerSubscriptionWhereInput[] | KeyPartnerSubscriptionWhereInput
-  >;
-  NOT?: Maybe<
-    KeyPartnerSubscriptionWhereInput[] | KeyPartnerSubscriptionWhereInput
-  >;
-}
-
-export interface KeyResourceSubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<KeyResourceWhereInput>;
-  AND?: Maybe<
-    KeyResourceSubscriptionWhereInput[] | KeyResourceSubscriptionWhereInput
-  >;
-  OR?: Maybe<
-    KeyResourceSubscriptionWhereInput[] | KeyResourceSubscriptionWhereInput
-  >;
-  NOT?: Maybe<
-    KeyResourceSubscriptionWhereInput[] | KeyResourceSubscriptionWhereInput
+    NetworkEffectSubscriptionWhereInput[] | NetworkEffectSubscriptionWhereInput
   >;
 }
 
@@ -5341,20 +6150,66 @@ export interface ProjectSubscriptionWhereInput {
   NOT?: Maybe<ProjectSubscriptionWhereInput[] | ProjectSubscriptionWhereInput>;
 }
 
-export interface RevenueStreamSubscriptionWhereInput {
+export interface RegulatorySubscriptionWhereInput {
   mutation_in?: Maybe<MutationType[] | MutationType>;
   updatedFields_contains?: Maybe<String>;
   updatedFields_contains_every?: Maybe<String[] | String>;
   updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<RevenueStreamWhereInput>;
+  node?: Maybe<RegulatoryWhereInput>;
   AND?: Maybe<
-    RevenueStreamSubscriptionWhereInput[] | RevenueStreamSubscriptionWhereInput
+    RegulatorySubscriptionWhereInput[] | RegulatorySubscriptionWhereInput
   >;
   OR?: Maybe<
-    RevenueStreamSubscriptionWhereInput[] | RevenueStreamSubscriptionWhereInput
+    RegulatorySubscriptionWhereInput[] | RegulatorySubscriptionWhereInput
   >;
   NOT?: Maybe<
-    RevenueStreamSubscriptionWhereInput[] | RevenueStreamSubscriptionWhereInput
+    RegulatorySubscriptionWhereInput[] | RegulatorySubscriptionWhereInput
+  >;
+}
+
+export interface RevenueSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<RevenueWhereInput>;
+  AND?: Maybe<RevenueSubscriptionWhereInput[] | RevenueSubscriptionWhereInput>;
+  OR?: Maybe<RevenueSubscriptionWhereInput[] | RevenueSubscriptionWhereInput>;
+  NOT?: Maybe<RevenueSubscriptionWhereInput[] | RevenueSubscriptionWhereInput>;
+}
+
+export interface StrategySubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<StrategyWhereInput>;
+  AND?: Maybe<
+    StrategySubscriptionWhereInput[] | StrategySubscriptionWhereInput
+  >;
+  OR?: Maybe<StrategySubscriptionWhereInput[] | StrategySubscriptionWhereInput>;
+  NOT?: Maybe<
+    StrategySubscriptionWhereInput[] | StrategySubscriptionWhereInput
+  >;
+}
+
+export interface StrategyPatternSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<StrategyPatternWhereInput>;
+  AND?: Maybe<
+    | StrategyPatternSubscriptionWhereInput[]
+    | StrategyPatternSubscriptionWhereInput
+  >;
+  OR?: Maybe<
+    | StrategyPatternSubscriptionWhereInput[]
+    | StrategyPatternSubscriptionWhereInput
+  >;
+  NOT?: Maybe<
+    | StrategyPatternSubscriptionWhereInput[]
+    | StrategyPatternSubscriptionWhereInput
   >;
 }
 
@@ -5369,6 +6224,26 @@ export interface TableSubscriptionWhereInput {
   NOT?: Maybe<TableSubscriptionWhereInput[] | TableSubscriptionWhereInput>;
 }
 
+export interface TechnicalInfrastractureSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<TechnicalInfrastractureWhereInput>;
+  AND?: Maybe<
+    | TechnicalInfrastractureSubscriptionWhereInput[]
+    | TechnicalInfrastractureSubscriptionWhereInput
+  >;
+  OR?: Maybe<
+    | TechnicalInfrastractureSubscriptionWhereInput[]
+    | TechnicalInfrastractureSubscriptionWhereInput
+  >;
+  NOT?: Maybe<
+    | TechnicalInfrastractureSubscriptionWhereInput[]
+    | TechnicalInfrastractureSubscriptionWhereInput
+  >;
+}
+
 export interface UserSubscriptionWhereInput {
   mutation_in?: Maybe<MutationType[] | MutationType>;
   updatedFields_contains?: Maybe<String>;
@@ -5378,6 +6253,40 @@ export interface UserSubscriptionWhereInput {
   AND?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
   OR?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
   NOT?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
+}
+
+export interface ValueCreationSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<ValueCreationWhereInput>;
+  AND?: Maybe<
+    ValueCreationSubscriptionWhereInput[] | ValueCreationSubscriptionWhereInput
+  >;
+  OR?: Maybe<
+    ValueCreationSubscriptionWhereInput[] | ValueCreationSubscriptionWhereInput
+  >;
+  NOT?: Maybe<
+    ValueCreationSubscriptionWhereInput[] | ValueCreationSubscriptionWhereInput
+  >;
+}
+
+export interface ValueDeliverySubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<ValueDeliveryWhereInput>;
+  AND?: Maybe<
+    ValueDeliverySubscriptionWhereInput[] | ValueDeliverySubscriptionWhereInput
+  >;
+  OR?: Maybe<
+    ValueDeliverySubscriptionWhereInput[] | ValueDeliverySubscriptionWhereInput
+  >;
+  NOT?: Maybe<
+    ValueDeliverySubscriptionWhereInput[] | ValueDeliverySubscriptionWhereInput
+  >;
 }
 
 export interface ValuePropositionSubscriptionWhereInput {
@@ -5404,139 +6313,423 @@ export interface NodeNode {
   id: ID_Output;
 }
 
-export interface Canvas {
+export interface Actor {
   id: ID_Output;
-  name: String;
+  text: String;
+  note?: String;
   createdAt: DateTimeOutput;
   updatedAt: DateTimeOutput;
 }
 
-export interface CanvasPromise extends Promise<Canvas>, Fragmentable {
+export interface ActorPromise extends Promise<Actor>, Fragmentable {
   id: () => Promise<ID_Output>;
-  project_id: <T = ProjectPromise>() => T;
-  pattern_ids: <T = FragmentableArray<Pattern>>(args?: {
-    where?: PatternWhereInput;
-    orderBy?: PatternOrderByInput;
+  table_ids: <T = FragmentableArray<Table>>(args?: {
+    where?: TableWhereInput;
+    orderBy?: TableOrderByInput;
     skip?: Int;
     after?: String;
     before?: String;
     first?: Int;
     last?: Int;
   }) => T;
-  table_id: <T = TablePromise>() => T;
-  name: () => Promise<String>;
+  text: () => Promise<String>;
+  note: () => Promise<String>;
   createdBy: <T = UserPromise>() => T;
   updatedBy: <T = UserPromise>() => T;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
 }
 
-export interface CanvasSubscription
-  extends Promise<AsyncIterator<Canvas>>,
+export interface ActorSubscription
+  extends Promise<AsyncIterator<Actor>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
-  project_id: <T = ProjectSubscription>() => T;
-  pattern_ids: <T = Promise<AsyncIterator<PatternSubscription>>>(args?: {
-    where?: PatternWhereInput;
-    orderBy?: PatternOrderByInput;
+  table_ids: <T = Promise<AsyncIterator<TableSubscription>>>(args?: {
+    where?: TableWhereInput;
+    orderBy?: TableOrderByInput;
     skip?: Int;
     after?: String;
     before?: String;
     first?: Int;
     last?: Int;
   }) => T;
-  table_id: <T = TableSubscription>() => T;
-  name: () => Promise<AsyncIterator<String>>;
+  text: () => Promise<AsyncIterator<String>>;
+  note: () => Promise<AsyncIterator<String>>;
   createdBy: <T = UserSubscription>() => T;
   updatedBy: <T = UserSubscription>() => T;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
-export interface CanvasNullablePromise
-  extends Promise<Canvas | null>,
+export interface ActorNullablePromise
+  extends Promise<Actor | null>,
     Fragmentable {
   id: () => Promise<ID_Output>;
-  project_id: <T = ProjectPromise>() => T;
-  pattern_ids: <T = FragmentableArray<Pattern>>(args?: {
-    where?: PatternWhereInput;
-    orderBy?: PatternOrderByInput;
+  table_ids: <T = FragmentableArray<Table>>(args?: {
+    where?: TableWhereInput;
+    orderBy?: TableOrderByInput;
     skip?: Int;
     after?: String;
     before?: String;
     first?: Int;
     last?: Int;
   }) => T;
-  table_id: <T = TablePromise>() => T;
-  name: () => Promise<String>;
+  text: () => Promise<String>;
+  note: () => Promise<String>;
   createdBy: <T = UserPromise>() => T;
   updatedBy: <T = UserPromise>() => T;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
 }
 
-export interface Project {
+export interface Table {
   id: ID_Output;
-  name: String;
+}
+
+export interface TablePromise extends Promise<Table>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  actor_entry_ids: <T = FragmentableArray<Actor>>(args?: {
+    where?: ActorWhereInput;
+    orderBy?: ActorOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  value_proposition_entry_ids: <
+    T = FragmentableArray<ValueProposition>
+  >(args?: {
+    where?: ValuePropositionWhereInput;
+    orderBy?: ValuePropositionOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  value_creation_entry_ids: <T = FragmentableArray<ValueCreation>>(args?: {
+    where?: ValueCreationWhereInput;
+    orderBy?: ValueCreationOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  value_delivery_entry_ids: <T = FragmentableArray<ValueDelivery>>(args?: {
+    where?: ValueDeliveryWhereInput;
+    orderBy?: ValueDeliveryOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  revenue_entry_ids: <T = FragmentableArray<Revenue>>(args?: {
+    where?: RevenueWhereInput;
+    orderBy?: RevenueOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  expense_entry_ids: <T = FragmentableArray<Expense>>(args?: {
+    where?: ExpenseWhereInput;
+    orderBy?: ExpenseOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  network_effect_entry_ids: <T = FragmentableArray<NetworkEffect>>(args?: {
+    where?: NetworkEffectWhereInput;
+    orderBy?: NetworkEffectOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  technical_infrastructure_entry_ids: <
+    T = FragmentableArray<TechnicalInfrastracture>
+  >(args?: {
+    where?: TechnicalInfrastractureWhereInput;
+    orderBy?: TechnicalInfrastractureOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  regulatory_entry_ids: <T = FragmentableArray<Regulatory>>(args?: {
+    where?: RegulatoryWhereInput;
+    orderBy?: RegulatoryOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+}
+
+export interface TableSubscription
+  extends Promise<AsyncIterator<Table>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  actor_entry_ids: <T = Promise<AsyncIterator<ActorSubscription>>>(args?: {
+    where?: ActorWhereInput;
+    orderBy?: ActorOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  value_proposition_entry_ids: <
+    T = Promise<AsyncIterator<ValuePropositionSubscription>>
+  >(args?: {
+    where?: ValuePropositionWhereInput;
+    orderBy?: ValuePropositionOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  value_creation_entry_ids: <
+    T = Promise<AsyncIterator<ValueCreationSubscription>>
+  >(args?: {
+    where?: ValueCreationWhereInput;
+    orderBy?: ValueCreationOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  value_delivery_entry_ids: <
+    T = Promise<AsyncIterator<ValueDeliverySubscription>>
+  >(args?: {
+    where?: ValueDeliveryWhereInput;
+    orderBy?: ValueDeliveryOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  revenue_entry_ids: <T = Promise<AsyncIterator<RevenueSubscription>>>(args?: {
+    where?: RevenueWhereInput;
+    orderBy?: RevenueOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  expense_entry_ids: <T = Promise<AsyncIterator<ExpenseSubscription>>>(args?: {
+    where?: ExpenseWhereInput;
+    orderBy?: ExpenseOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  network_effect_entry_ids: <
+    T = Promise<AsyncIterator<NetworkEffectSubscription>>
+  >(args?: {
+    where?: NetworkEffectWhereInput;
+    orderBy?: NetworkEffectOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  technical_infrastructure_entry_ids: <
+    T = Promise<AsyncIterator<TechnicalInfrastractureSubscription>>
+  >(args?: {
+    where?: TechnicalInfrastractureWhereInput;
+    orderBy?: TechnicalInfrastractureOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  regulatory_entry_ids: <
+    T = Promise<AsyncIterator<RegulatorySubscription>>
+  >(args?: {
+    where?: RegulatoryWhereInput;
+    orderBy?: RegulatoryOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+}
+
+export interface TableNullablePromise
+  extends Promise<Table | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  actor_entry_ids: <T = FragmentableArray<Actor>>(args?: {
+    where?: ActorWhereInput;
+    orderBy?: ActorOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  value_proposition_entry_ids: <
+    T = FragmentableArray<ValueProposition>
+  >(args?: {
+    where?: ValuePropositionWhereInput;
+    orderBy?: ValuePropositionOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  value_creation_entry_ids: <T = FragmentableArray<ValueCreation>>(args?: {
+    where?: ValueCreationWhereInput;
+    orderBy?: ValueCreationOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  value_delivery_entry_ids: <T = FragmentableArray<ValueDelivery>>(args?: {
+    where?: ValueDeliveryWhereInput;
+    orderBy?: ValueDeliveryOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  revenue_entry_ids: <T = FragmentableArray<Revenue>>(args?: {
+    where?: RevenueWhereInput;
+    orderBy?: RevenueOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  expense_entry_ids: <T = FragmentableArray<Expense>>(args?: {
+    where?: ExpenseWhereInput;
+    orderBy?: ExpenseOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  network_effect_entry_ids: <T = FragmentableArray<NetworkEffect>>(args?: {
+    where?: NetworkEffectWhereInput;
+    orderBy?: NetworkEffectOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  technical_infrastructure_entry_ids: <
+    T = FragmentableArray<TechnicalInfrastracture>
+  >(args?: {
+    where?: TechnicalInfrastractureWhereInput;
+    orderBy?: TechnicalInfrastractureOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  regulatory_entry_ids: <T = FragmentableArray<Regulatory>>(args?: {
+    where?: RegulatoryWhereInput;
+    orderBy?: RegulatoryOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+}
+
+export interface ValueProposition {
+  id: ID_Output;
+  text: String;
+  note?: String;
   createdAt: DateTimeOutput;
   updatedAt: DateTimeOutput;
 }
 
-export interface ProjectPromise extends Promise<Project>, Fragmentable {
+export interface ValuePropositionPromise
+  extends Promise<ValueProposition>,
+    Fragmentable {
   id: () => Promise<ID_Output>;
-  user_id: <T = UserPromise>() => T;
-  canvas_ids: <T = FragmentableArray<Canvas>>(args?: {
-    where?: CanvasWhereInput;
-    orderBy?: CanvasOrderByInput;
+  table_ids: <T = FragmentableArray<Table>>(args?: {
+    where?: TableWhereInput;
+    orderBy?: TableOrderByInput;
     skip?: Int;
     after?: String;
     before?: String;
     first?: Int;
     last?: Int;
   }) => T;
-  name: () => Promise<String>;
+  text: () => Promise<String>;
+  note: () => Promise<String>;
   createdBy: <T = UserPromise>() => T;
   updatedBy: <T = UserPromise>() => T;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
 }
 
-export interface ProjectSubscription
-  extends Promise<AsyncIterator<Project>>,
+export interface ValuePropositionSubscription
+  extends Promise<AsyncIterator<ValueProposition>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
-  user_id: <T = UserSubscription>() => T;
-  canvas_ids: <T = Promise<AsyncIterator<CanvasSubscription>>>(args?: {
-    where?: CanvasWhereInput;
-    orderBy?: CanvasOrderByInput;
+  table_ids: <T = Promise<AsyncIterator<TableSubscription>>>(args?: {
+    where?: TableWhereInput;
+    orderBy?: TableOrderByInput;
     skip?: Int;
     after?: String;
     before?: String;
     first?: Int;
     last?: Int;
   }) => T;
-  name: () => Promise<AsyncIterator<String>>;
+  text: () => Promise<AsyncIterator<String>>;
+  note: () => Promise<AsyncIterator<String>>;
   createdBy: <T = UserSubscription>() => T;
   updatedBy: <T = UserSubscription>() => T;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
-export interface ProjectNullablePromise
-  extends Promise<Project | null>,
+export interface ValuePropositionNullablePromise
+  extends Promise<ValueProposition | null>,
     Fragmentable {
   id: () => Promise<ID_Output>;
-  user_id: <T = UserPromise>() => T;
-  canvas_ids: <T = FragmentableArray<Canvas>>(args?: {
-    where?: CanvasWhereInput;
-    orderBy?: CanvasOrderByInput;
+  table_ids: <T = FragmentableArray<Table>>(args?: {
+    where?: TableWhereInput;
+    orderBy?: TableOrderByInput;
     skip?: Int;
     after?: String;
     before?: String;
     first?: Int;
     last?: Int;
   }) => T;
-  name: () => Promise<String>;
+  text: () => Promise<String>;
+  note: () => Promise<String>;
   createdBy: <T = UserPromise>() => T;
   updatedBy: <T = UserPromise>() => T;
   createdAt: () => Promise<DateTimeOutput>;
@@ -5633,10 +6826,299 @@ export interface UserNullablePromise
   updatedAt: () => Promise<DateTimeOutput>;
 }
 
+export interface Project {
+  id: ID_Output;
+  name: String;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+}
+
+export interface ProjectPromise extends Promise<Project>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  user_id: <T = UserPromise>() => T;
+  canvas_ids: <T = FragmentableArray<Canvas>>(args?: {
+    where?: CanvasWhereInput;
+    orderBy?: CanvasOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  name: () => Promise<String>;
+  createdBy: <T = UserPromise>() => T;
+  updatedBy: <T = UserPromise>() => T;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface ProjectSubscription
+  extends Promise<AsyncIterator<Project>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  user_id: <T = UserSubscription>() => T;
+  canvas_ids: <T = Promise<AsyncIterator<CanvasSubscription>>>(args?: {
+    where?: CanvasWhereInput;
+    orderBy?: CanvasOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  name: () => Promise<AsyncIterator<String>>;
+  createdBy: <T = UserSubscription>() => T;
+  updatedBy: <T = UserSubscription>() => T;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
+export interface ProjectNullablePromise
+  extends Promise<Project | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  user_id: <T = UserPromise>() => T;
+  canvas_ids: <T = FragmentableArray<Canvas>>(args?: {
+    where?: CanvasWhereInput;
+    orderBy?: CanvasOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  name: () => Promise<String>;
+  createdBy: <T = UserPromise>() => T;
+  updatedBy: <T = UserPromise>() => T;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface Canvas {
+  id: ID_Output;
+  name: String;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+}
+
+export interface CanvasPromise extends Promise<Canvas>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  project_id: <T = ProjectPromise>() => T;
+  strategy_id: <T = StrategyPromise>() => T;
+  pattern_ids: <T = FragmentableArray<Pattern>>(args?: {
+    where?: PatternWhereInput;
+    orderBy?: PatternOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  table_id: <T = TablePromise>() => T;
+  name: () => Promise<String>;
+  createdBy: <T = UserPromise>() => T;
+  updatedBy: <T = UserPromise>() => T;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface CanvasSubscription
+  extends Promise<AsyncIterator<Canvas>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  project_id: <T = ProjectSubscription>() => T;
+  strategy_id: <T = StrategySubscription>() => T;
+  pattern_ids: <T = Promise<AsyncIterator<PatternSubscription>>>(args?: {
+    where?: PatternWhereInput;
+    orderBy?: PatternOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  table_id: <T = TableSubscription>() => T;
+  name: () => Promise<AsyncIterator<String>>;
+  createdBy: <T = UserSubscription>() => T;
+  updatedBy: <T = UserSubscription>() => T;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
+export interface CanvasNullablePromise
+  extends Promise<Canvas | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  project_id: <T = ProjectPromise>() => T;
+  strategy_id: <T = StrategyPromise>() => T;
+  pattern_ids: <T = FragmentableArray<Pattern>>(args?: {
+    where?: PatternWhereInput;
+    orderBy?: PatternOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  table_id: <T = TablePromise>() => T;
+  name: () => Promise<String>;
+  createdBy: <T = UserPromise>() => T;
+  updatedBy: <T = UserPromise>() => T;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface Strategy {
+  id: ID_Output;
+  name: String;
+  description?: String;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+}
+
+export interface StrategyPromise extends Promise<Strategy>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  canvas_ids: <T = FragmentableArray<Canvas>>(args?: {
+    where?: CanvasWhereInput;
+    orderBy?: CanvasOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  strategy_pattern_ids: <T = FragmentableArray<StrategyPattern>>(args?: {
+    where?: StrategyPatternWhereInput;
+    orderBy?: StrategyPatternOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  name: () => Promise<String>;
+  description: () => Promise<String>;
+  createdBy: <T = UserPromise>() => T;
+  updatedBy: <T = UserPromise>() => T;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface StrategySubscription
+  extends Promise<AsyncIterator<Strategy>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  canvas_ids: <T = Promise<AsyncIterator<CanvasSubscription>>>(args?: {
+    where?: CanvasWhereInput;
+    orderBy?: CanvasOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  strategy_pattern_ids: <
+    T = Promise<AsyncIterator<StrategyPatternSubscription>>
+  >(args?: {
+    where?: StrategyPatternWhereInput;
+    orderBy?: StrategyPatternOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  name: () => Promise<AsyncIterator<String>>;
+  description: () => Promise<AsyncIterator<String>>;
+  createdBy: <T = UserSubscription>() => T;
+  updatedBy: <T = UserSubscription>() => T;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
+export interface StrategyNullablePromise
+  extends Promise<Strategy | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  canvas_ids: <T = FragmentableArray<Canvas>>(args?: {
+    where?: CanvasWhereInput;
+    orderBy?: CanvasOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  strategy_pattern_ids: <T = FragmentableArray<StrategyPattern>>(args?: {
+    where?: StrategyPatternWhereInput;
+    orderBy?: StrategyPatternOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  name: () => Promise<String>;
+  description: () => Promise<String>;
+  createdBy: <T = UserPromise>() => T;
+  updatedBy: <T = UserPromise>() => T;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface StrategyPattern {
+  id: ID_Output;
+  weight: Int;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+}
+
+export interface StrategyPatternPromise
+  extends Promise<StrategyPattern>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  strategy_id: <T = StrategyPromise>() => T;
+  pattern_id: <T = PatternPromise>() => T;
+  weight: () => Promise<Int>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface StrategyPatternSubscription
+  extends Promise<AsyncIterator<StrategyPattern>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  strategy_id: <T = StrategySubscription>() => T;
+  pattern_id: <T = PatternSubscription>() => T;
+  weight: () => Promise<AsyncIterator<Int>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
+export interface StrategyPatternNullablePromise
+  extends Promise<StrategyPattern | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  strategy_id: <T = StrategyPromise>() => T;
+  pattern_id: <T = PatternPromise>() => T;
+  weight: () => Promise<Int>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
 export interface Pattern {
   id: ID_Output;
   name: String;
   description?: String;
+  actorWeight?: Int;
+  valuePropositionWeight?: Int;
+  valueCreationWeight?: Int;
+  valueDeliveryWeight?: Int;
+  revenueWeight?: Int;
+  expenseWeight?: Int;
+  networkEffectWeight?: Int;
+  regulatoryWeight?: Int;
+  technicalInfrastractureWeight?: Int;
   createdAt: DateTimeOutput;
   updatedAt: DateTimeOutput;
 }
@@ -5662,8 +7144,26 @@ export interface PatternPromise extends Promise<Pattern>, Fragmentable {
     first?: Int;
     last?: Int;
   }) => T;
+  strategy_pattern_ids: <T = FragmentableArray<StrategyPattern>>(args?: {
+    where?: StrategyPatternWhereInput;
+    orderBy?: StrategyPatternOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
   name: () => Promise<String>;
   description: () => Promise<String>;
+  actorWeight: () => Promise<Int>;
+  valuePropositionWeight: () => Promise<Int>;
+  valueCreationWeight: () => Promise<Int>;
+  valueDeliveryWeight: () => Promise<Int>;
+  revenueWeight: () => Promise<Int>;
+  expenseWeight: () => Promise<Int>;
+  networkEffectWeight: () => Promise<Int>;
+  regulatoryWeight: () => Promise<Int>;
+  technicalInfrastractureWeight: () => Promise<Int>;
   createdBy: <T = UserPromise>() => T;
   updatedBy: <T = UserPromise>() => T;
   createdAt: () => Promise<DateTimeOutput>;
@@ -5693,8 +7193,28 @@ export interface PatternSubscription
     first?: Int;
     last?: Int;
   }) => T;
+  strategy_pattern_ids: <
+    T = Promise<AsyncIterator<StrategyPatternSubscription>>
+  >(args?: {
+    where?: StrategyPatternWhereInput;
+    orderBy?: StrategyPatternOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
   name: () => Promise<AsyncIterator<String>>;
   description: () => Promise<AsyncIterator<String>>;
+  actorWeight: () => Promise<AsyncIterator<Int>>;
+  valuePropositionWeight: () => Promise<AsyncIterator<Int>>;
+  valueCreationWeight: () => Promise<AsyncIterator<Int>>;
+  valueDeliveryWeight: () => Promise<AsyncIterator<Int>>;
+  revenueWeight: () => Promise<AsyncIterator<Int>>;
+  expenseWeight: () => Promise<AsyncIterator<Int>>;
+  networkEffectWeight: () => Promise<AsyncIterator<Int>>;
+  regulatoryWeight: () => Promise<AsyncIterator<Int>>;
+  technicalInfrastractureWeight: () => Promise<AsyncIterator<Int>>;
   createdBy: <T = UserSubscription>() => T;
   updatedBy: <T = UserSubscription>() => T;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
@@ -5724,928 +7244,26 @@ export interface PatternNullablePromise
     first?: Int;
     last?: Int;
   }) => T;
+  strategy_pattern_ids: <T = FragmentableArray<StrategyPattern>>(args?: {
+    where?: StrategyPatternWhereInput;
+    orderBy?: StrategyPatternOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
   name: () => Promise<String>;
   description: () => Promise<String>;
-  createdBy: <T = UserPromise>() => T;
-  updatedBy: <T = UserPromise>() => T;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
-}
-
-export interface Table {
-  id: ID_Output;
-}
-
-export interface TablePromise extends Promise<Table>, Fragmentable {
-  id: () => Promise<ID_Output>;
-  key_partner_entry_ids: <T = FragmentableArray<KeyPartner>>(args?: {
-    where?: KeyPartnerWhereInput;
-    orderBy?: KeyPartnerOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  reventue_stream_entry_ids: <T = FragmentableArray<RevenueStream>>(args?: {
-    where?: RevenueStreamWhereInput;
-    orderBy?: RevenueStreamOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  key_activity_entry_ids: <T = FragmentableArray<KeyActitvity>>(args?: {
-    where?: KeyActitvityWhereInput;
-    orderBy?: KeyActitvityOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  customer_relationship_entry_ids: <
-    T = FragmentableArray<CustomerRelationship>
-  >(args?: {
-    where?: CustomerRelationshipWhereInput;
-    orderBy?: CustomerRelationshipOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  value_proposition_entry_ids: <
-    T = FragmentableArray<ValueProposition>
-  >(args?: {
-    where?: ValuePropositionWhereInput;
-    orderBy?: ValuePropositionOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  cost_structure_entry_ids: <T = FragmentableArray<CostStructure>>(args?: {
-    where?: CostStructureWhereInput;
-    orderBy?: CostStructureOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  customer_segment_entry_ids: <T = FragmentableArray<CustomerSegment>>(args?: {
-    where?: CustomerSegmentWhereInput;
-    orderBy?: CustomerSegmentOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  key_resource_entry_ids: <T = FragmentableArray<KeyResource>>(args?: {
-    where?: KeyResourceWhereInput;
-    orderBy?: KeyResourceOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  channel_entry_ids: <T = FragmentableArray<Channel>>(args?: {
-    where?: ChannelWhereInput;
-    orderBy?: ChannelOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-}
-
-export interface TableSubscription
-  extends Promise<AsyncIterator<Table>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  key_partner_entry_ids: <
-    T = Promise<AsyncIterator<KeyPartnerSubscription>>
-  >(args?: {
-    where?: KeyPartnerWhereInput;
-    orderBy?: KeyPartnerOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  reventue_stream_entry_ids: <
-    T = Promise<AsyncIterator<RevenueStreamSubscription>>
-  >(args?: {
-    where?: RevenueStreamWhereInput;
-    orderBy?: RevenueStreamOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  key_activity_entry_ids: <
-    T = Promise<AsyncIterator<KeyActitvitySubscription>>
-  >(args?: {
-    where?: KeyActitvityWhereInput;
-    orderBy?: KeyActitvityOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  customer_relationship_entry_ids: <
-    T = Promise<AsyncIterator<CustomerRelationshipSubscription>>
-  >(args?: {
-    where?: CustomerRelationshipWhereInput;
-    orderBy?: CustomerRelationshipOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  value_proposition_entry_ids: <
-    T = Promise<AsyncIterator<ValuePropositionSubscription>>
-  >(args?: {
-    where?: ValuePropositionWhereInput;
-    orderBy?: ValuePropositionOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  cost_structure_entry_ids: <
-    T = Promise<AsyncIterator<CostStructureSubscription>>
-  >(args?: {
-    where?: CostStructureWhereInput;
-    orderBy?: CostStructureOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  customer_segment_entry_ids: <
-    T = Promise<AsyncIterator<CustomerSegmentSubscription>>
-  >(args?: {
-    where?: CustomerSegmentWhereInput;
-    orderBy?: CustomerSegmentOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  key_resource_entry_ids: <
-    T = Promise<AsyncIterator<KeyResourceSubscription>>
-  >(args?: {
-    where?: KeyResourceWhereInput;
-    orderBy?: KeyResourceOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  channel_entry_ids: <T = Promise<AsyncIterator<ChannelSubscription>>>(args?: {
-    where?: ChannelWhereInput;
-    orderBy?: ChannelOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-}
-
-export interface TableNullablePromise
-  extends Promise<Table | null>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  key_partner_entry_ids: <T = FragmentableArray<KeyPartner>>(args?: {
-    where?: KeyPartnerWhereInput;
-    orderBy?: KeyPartnerOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  reventue_stream_entry_ids: <T = FragmentableArray<RevenueStream>>(args?: {
-    where?: RevenueStreamWhereInput;
-    orderBy?: RevenueStreamOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  key_activity_entry_ids: <T = FragmentableArray<KeyActitvity>>(args?: {
-    where?: KeyActitvityWhereInput;
-    orderBy?: KeyActitvityOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  customer_relationship_entry_ids: <
-    T = FragmentableArray<CustomerRelationship>
-  >(args?: {
-    where?: CustomerRelationshipWhereInput;
-    orderBy?: CustomerRelationshipOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  value_proposition_entry_ids: <
-    T = FragmentableArray<ValueProposition>
-  >(args?: {
-    where?: ValuePropositionWhereInput;
-    orderBy?: ValuePropositionOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  cost_structure_entry_ids: <T = FragmentableArray<CostStructure>>(args?: {
-    where?: CostStructureWhereInput;
-    orderBy?: CostStructureOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  customer_segment_entry_ids: <T = FragmentableArray<CustomerSegment>>(args?: {
-    where?: CustomerSegmentWhereInput;
-    orderBy?: CustomerSegmentOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  key_resource_entry_ids: <T = FragmentableArray<KeyResource>>(args?: {
-    where?: KeyResourceWhereInput;
-    orderBy?: KeyResourceOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  channel_entry_ids: <T = FragmentableArray<Channel>>(args?: {
-    where?: ChannelWhereInput;
-    orderBy?: ChannelOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-}
-
-export interface KeyPartner {
-  id: ID_Output;
-  text: String;
-  note?: String;
-  createdAt: DateTimeOutput;
-  updatedAt: DateTimeOutput;
-}
-
-export interface KeyPartnerPromise extends Promise<KeyPartner>, Fragmentable {
-  id: () => Promise<ID_Output>;
-  table_ids: <T = FragmentableArray<Table>>(args?: {
-    where?: TableWhereInput;
-    orderBy?: TableOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  text: () => Promise<String>;
-  note: () => Promise<String>;
-  createdBy: <T = UserPromise>() => T;
-  updatedBy: <T = UserPromise>() => T;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
-}
-
-export interface KeyPartnerSubscription
-  extends Promise<AsyncIterator<KeyPartner>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  table_ids: <T = Promise<AsyncIterator<TableSubscription>>>(args?: {
-    where?: TableWhereInput;
-    orderBy?: TableOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  text: () => Promise<AsyncIterator<String>>;
-  note: () => Promise<AsyncIterator<String>>;
-  createdBy: <T = UserSubscription>() => T;
-  updatedBy: <T = UserSubscription>() => T;
-  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-}
-
-export interface KeyPartnerNullablePromise
-  extends Promise<KeyPartner | null>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  table_ids: <T = FragmentableArray<Table>>(args?: {
-    where?: TableWhereInput;
-    orderBy?: TableOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  text: () => Promise<String>;
-  note: () => Promise<String>;
-  createdBy: <T = UserPromise>() => T;
-  updatedBy: <T = UserPromise>() => T;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
-}
-
-export interface RevenueStream {
-  id: ID_Output;
-  text: String;
-  note?: String;
-  createdAt: DateTimeOutput;
-  updatedAt: DateTimeOutput;
-}
-
-export interface RevenueStreamPromise
-  extends Promise<RevenueStream>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  table_ids: <T = FragmentableArray<Table>>(args?: {
-    where?: TableWhereInput;
-    orderBy?: TableOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  text: () => Promise<String>;
-  note: () => Promise<String>;
-  createdBy: <T = UserPromise>() => T;
-  updatedBy: <T = UserPromise>() => T;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
-}
-
-export interface RevenueStreamSubscription
-  extends Promise<AsyncIterator<RevenueStream>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  table_ids: <T = Promise<AsyncIterator<TableSubscription>>>(args?: {
-    where?: TableWhereInput;
-    orderBy?: TableOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  text: () => Promise<AsyncIterator<String>>;
-  note: () => Promise<AsyncIterator<String>>;
-  createdBy: <T = UserSubscription>() => T;
-  updatedBy: <T = UserSubscription>() => T;
-  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-}
-
-export interface RevenueStreamNullablePromise
-  extends Promise<RevenueStream | null>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  table_ids: <T = FragmentableArray<Table>>(args?: {
-    where?: TableWhereInput;
-    orderBy?: TableOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  text: () => Promise<String>;
-  note: () => Promise<String>;
-  createdBy: <T = UserPromise>() => T;
-  updatedBy: <T = UserPromise>() => T;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
-}
-
-export interface KeyActitvity {
-  id: ID_Output;
-  text: String;
-  note?: String;
-  createdAt: DateTimeOutput;
-  updatedAt: DateTimeOutput;
-}
-
-export interface KeyActitvityPromise
-  extends Promise<KeyActitvity>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  table_ids: <T = FragmentableArray<Table>>(args?: {
-    where?: TableWhereInput;
-    orderBy?: TableOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  text: () => Promise<String>;
-  note: () => Promise<String>;
-  createdBy: <T = UserPromise>() => T;
-  updatedBy: <T = UserPromise>() => T;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
-}
-
-export interface KeyActitvitySubscription
-  extends Promise<AsyncIterator<KeyActitvity>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  table_ids: <T = Promise<AsyncIterator<TableSubscription>>>(args?: {
-    where?: TableWhereInput;
-    orderBy?: TableOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  text: () => Promise<AsyncIterator<String>>;
-  note: () => Promise<AsyncIterator<String>>;
-  createdBy: <T = UserSubscription>() => T;
-  updatedBy: <T = UserSubscription>() => T;
-  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-}
-
-export interface KeyActitvityNullablePromise
-  extends Promise<KeyActitvity | null>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  table_ids: <T = FragmentableArray<Table>>(args?: {
-    where?: TableWhereInput;
-    orderBy?: TableOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  text: () => Promise<String>;
-  note: () => Promise<String>;
-  createdBy: <T = UserPromise>() => T;
-  updatedBy: <T = UserPromise>() => T;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
-}
-
-export interface CustomerRelationship {
-  id: ID_Output;
-  text: String;
-  note?: String;
-  createdAt: DateTimeOutput;
-  updatedAt: DateTimeOutput;
-}
-
-export interface CustomerRelationshipPromise
-  extends Promise<CustomerRelationship>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  table_ids: <T = FragmentableArray<Table>>(args?: {
-    where?: TableWhereInput;
-    orderBy?: TableOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  text: () => Promise<String>;
-  note: () => Promise<String>;
-  createdBy: <T = UserPromise>() => T;
-  updatedBy: <T = UserPromise>() => T;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
-}
-
-export interface CustomerRelationshipSubscription
-  extends Promise<AsyncIterator<CustomerRelationship>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  table_ids: <T = Promise<AsyncIterator<TableSubscription>>>(args?: {
-    where?: TableWhereInput;
-    orderBy?: TableOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  text: () => Promise<AsyncIterator<String>>;
-  note: () => Promise<AsyncIterator<String>>;
-  createdBy: <T = UserSubscription>() => T;
-  updatedBy: <T = UserSubscription>() => T;
-  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-}
-
-export interface CustomerRelationshipNullablePromise
-  extends Promise<CustomerRelationship | null>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  table_ids: <T = FragmentableArray<Table>>(args?: {
-    where?: TableWhereInput;
-    orderBy?: TableOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  text: () => Promise<String>;
-  note: () => Promise<String>;
-  createdBy: <T = UserPromise>() => T;
-  updatedBy: <T = UserPromise>() => T;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
-}
-
-export interface ValueProposition {
-  id: ID_Output;
-  text: String;
-  note?: String;
-  createdAt: DateTimeOutput;
-  updatedAt: DateTimeOutput;
-}
-
-export interface ValuePropositionPromise
-  extends Promise<ValueProposition>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  table_ids: <T = FragmentableArray<Table>>(args?: {
-    where?: TableWhereInput;
-    orderBy?: TableOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  text: () => Promise<String>;
-  note: () => Promise<String>;
-  createdBy: <T = UserPromise>() => T;
-  updatedBy: <T = UserPromise>() => T;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
-}
-
-export interface ValuePropositionSubscription
-  extends Promise<AsyncIterator<ValueProposition>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  table_ids: <T = Promise<AsyncIterator<TableSubscription>>>(args?: {
-    where?: TableWhereInput;
-    orderBy?: TableOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  text: () => Promise<AsyncIterator<String>>;
-  note: () => Promise<AsyncIterator<String>>;
-  createdBy: <T = UserSubscription>() => T;
-  updatedBy: <T = UserSubscription>() => T;
-  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-}
-
-export interface ValuePropositionNullablePromise
-  extends Promise<ValueProposition | null>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  table_ids: <T = FragmentableArray<Table>>(args?: {
-    where?: TableWhereInput;
-    orderBy?: TableOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  text: () => Promise<String>;
-  note: () => Promise<String>;
-  createdBy: <T = UserPromise>() => T;
-  updatedBy: <T = UserPromise>() => T;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
-}
-
-export interface CostStructure {
-  id: ID_Output;
-  text: String;
-  note?: String;
-  createdAt: DateTimeOutput;
-  updatedAt: DateTimeOutput;
-}
-
-export interface CostStructurePromise
-  extends Promise<CostStructure>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  table_ids: <T = FragmentableArray<Table>>(args?: {
-    where?: TableWhereInput;
-    orderBy?: TableOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  text: () => Promise<String>;
-  note: () => Promise<String>;
-  createdBy: <T = UserPromise>() => T;
-  updatedBy: <T = UserPromise>() => T;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
-}
-
-export interface CostStructureSubscription
-  extends Promise<AsyncIterator<CostStructure>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  table_ids: <T = Promise<AsyncIterator<TableSubscription>>>(args?: {
-    where?: TableWhereInput;
-    orderBy?: TableOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  text: () => Promise<AsyncIterator<String>>;
-  note: () => Promise<AsyncIterator<String>>;
-  createdBy: <T = UserSubscription>() => T;
-  updatedBy: <T = UserSubscription>() => T;
-  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-}
-
-export interface CostStructureNullablePromise
-  extends Promise<CostStructure | null>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  table_ids: <T = FragmentableArray<Table>>(args?: {
-    where?: TableWhereInput;
-    orderBy?: TableOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  text: () => Promise<String>;
-  note: () => Promise<String>;
-  createdBy: <T = UserPromise>() => T;
-  updatedBy: <T = UserPromise>() => T;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
-}
-
-export interface CustomerSegment {
-  id: ID_Output;
-  text: String;
-  note?: String;
-  createdAt: DateTimeOutput;
-  updatedAt: DateTimeOutput;
-}
-
-export interface CustomerSegmentPromise
-  extends Promise<CustomerSegment>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  table_ids: <T = FragmentableArray<Table>>(args?: {
-    where?: TableWhereInput;
-    orderBy?: TableOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  text: () => Promise<String>;
-  note: () => Promise<String>;
-  createdBy: <T = UserPromise>() => T;
-  updatedBy: <T = UserPromise>() => T;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
-}
-
-export interface CustomerSegmentSubscription
-  extends Promise<AsyncIterator<CustomerSegment>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  table_ids: <T = Promise<AsyncIterator<TableSubscription>>>(args?: {
-    where?: TableWhereInput;
-    orderBy?: TableOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  text: () => Promise<AsyncIterator<String>>;
-  note: () => Promise<AsyncIterator<String>>;
-  createdBy: <T = UserSubscription>() => T;
-  updatedBy: <T = UserSubscription>() => T;
-  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-}
-
-export interface CustomerSegmentNullablePromise
-  extends Promise<CustomerSegment | null>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  table_ids: <T = FragmentableArray<Table>>(args?: {
-    where?: TableWhereInput;
-    orderBy?: TableOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  text: () => Promise<String>;
-  note: () => Promise<String>;
-  createdBy: <T = UserPromise>() => T;
-  updatedBy: <T = UserPromise>() => T;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
-}
-
-export interface KeyResource {
-  id: ID_Output;
-  text: String;
-  note?: String;
-  createdAt: DateTimeOutput;
-  updatedAt: DateTimeOutput;
-}
-
-export interface KeyResourcePromise extends Promise<KeyResource>, Fragmentable {
-  id: () => Promise<ID_Output>;
-  table_ids: <T = FragmentableArray<Table>>(args?: {
-    where?: TableWhereInput;
-    orderBy?: TableOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  text: () => Promise<String>;
-  note: () => Promise<String>;
-  createdBy: <T = UserPromise>() => T;
-  updatedBy: <T = UserPromise>() => T;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
-}
-
-export interface KeyResourceSubscription
-  extends Promise<AsyncIterator<KeyResource>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  table_ids: <T = Promise<AsyncIterator<TableSubscription>>>(args?: {
-    where?: TableWhereInput;
-    orderBy?: TableOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  text: () => Promise<AsyncIterator<String>>;
-  note: () => Promise<AsyncIterator<String>>;
-  createdBy: <T = UserSubscription>() => T;
-  updatedBy: <T = UserSubscription>() => T;
-  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-}
-
-export interface KeyResourceNullablePromise
-  extends Promise<KeyResource | null>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  table_ids: <T = FragmentableArray<Table>>(args?: {
-    where?: TableWhereInput;
-    orderBy?: TableOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  text: () => Promise<String>;
-  note: () => Promise<String>;
-  createdBy: <T = UserPromise>() => T;
-  updatedBy: <T = UserPromise>() => T;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
-}
-
-export interface Channel {
-  id: ID_Output;
-  text: String;
-  note?: String;
-  createdAt: DateTimeOutput;
-  updatedAt: DateTimeOutput;
-}
-
-export interface ChannelPromise extends Promise<Channel>, Fragmentable {
-  id: () => Promise<ID_Output>;
-  table_ids: <T = FragmentableArray<Table>>(args?: {
-    where?: TableWhereInput;
-    orderBy?: TableOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  text: () => Promise<String>;
-  note: () => Promise<String>;
-  createdBy: <T = UserPromise>() => T;
-  updatedBy: <T = UserPromise>() => T;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
-}
-
-export interface ChannelSubscription
-  extends Promise<AsyncIterator<Channel>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  table_ids: <T = Promise<AsyncIterator<TableSubscription>>>(args?: {
-    where?: TableWhereInput;
-    orderBy?: TableOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  text: () => Promise<AsyncIterator<String>>;
-  note: () => Promise<AsyncIterator<String>>;
-  createdBy: <T = UserSubscription>() => T;
-  updatedBy: <T = UserSubscription>() => T;
-  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-}
-
-export interface ChannelNullablePromise
-  extends Promise<Channel | null>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  table_ids: <T = FragmentableArray<Table>>(args?: {
-    where?: TableWhereInput;
-    orderBy?: TableOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  text: () => Promise<String>;
-  note: () => Promise<String>;
+  actorWeight: () => Promise<Int>;
+  valuePropositionWeight: () => Promise<Int>;
+  valueCreationWeight: () => Promise<Int>;
+  valueDeliveryWeight: () => Promise<Int>;
+  revenueWeight: () => Promise<Int>;
+  expenseWeight: () => Promise<Int>;
+  networkEffectWeight: () => Promise<Int>;
+  regulatoryWeight: () => Promise<Int>;
+  technicalInfrastractureWeight: () => Promise<Int>;
   createdBy: <T = UserPromise>() => T;
   updatedBy: <T = UserPromise>() => T;
   createdAt: () => Promise<DateTimeOutput>;
@@ -6715,25 +7333,516 @@ export interface CompanyNullablePromise
   updatedAt: () => Promise<DateTimeOutput>;
 }
 
-export interface CanvasConnection {
-  pageInfo: PageInfo;
-  edges: CanvasEdge[];
+export interface ValueCreation {
+  id: ID_Output;
+  text: String;
+  note?: String;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
 }
 
-export interface CanvasConnectionPromise
-  extends Promise<CanvasConnection>,
+export interface ValueCreationPromise
+  extends Promise<ValueCreation>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  table_ids: <T = FragmentableArray<Table>>(args?: {
+    where?: TableWhereInput;
+    orderBy?: TableOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  text: () => Promise<String>;
+  note: () => Promise<String>;
+  createdBy: <T = UserPromise>() => T;
+  updatedBy: <T = UserPromise>() => T;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface ValueCreationSubscription
+  extends Promise<AsyncIterator<ValueCreation>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  table_ids: <T = Promise<AsyncIterator<TableSubscription>>>(args?: {
+    where?: TableWhereInput;
+    orderBy?: TableOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  text: () => Promise<AsyncIterator<String>>;
+  note: () => Promise<AsyncIterator<String>>;
+  createdBy: <T = UserSubscription>() => T;
+  updatedBy: <T = UserSubscription>() => T;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
+export interface ValueCreationNullablePromise
+  extends Promise<ValueCreation | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  table_ids: <T = FragmentableArray<Table>>(args?: {
+    where?: TableWhereInput;
+    orderBy?: TableOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  text: () => Promise<String>;
+  note: () => Promise<String>;
+  createdBy: <T = UserPromise>() => T;
+  updatedBy: <T = UserPromise>() => T;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface ValueDelivery {
+  id: ID_Output;
+  text: String;
+  note?: String;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+}
+
+export interface ValueDeliveryPromise
+  extends Promise<ValueDelivery>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  table_ids: <T = FragmentableArray<Table>>(args?: {
+    where?: TableWhereInput;
+    orderBy?: TableOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  text: () => Promise<String>;
+  note: () => Promise<String>;
+  createdBy: <T = UserPromise>() => T;
+  updatedBy: <T = UserPromise>() => T;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface ValueDeliverySubscription
+  extends Promise<AsyncIterator<ValueDelivery>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  table_ids: <T = Promise<AsyncIterator<TableSubscription>>>(args?: {
+    where?: TableWhereInput;
+    orderBy?: TableOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  text: () => Promise<AsyncIterator<String>>;
+  note: () => Promise<AsyncIterator<String>>;
+  createdBy: <T = UserSubscription>() => T;
+  updatedBy: <T = UserSubscription>() => T;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
+export interface ValueDeliveryNullablePromise
+  extends Promise<ValueDelivery | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  table_ids: <T = FragmentableArray<Table>>(args?: {
+    where?: TableWhereInput;
+    orderBy?: TableOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  text: () => Promise<String>;
+  note: () => Promise<String>;
+  createdBy: <T = UserPromise>() => T;
+  updatedBy: <T = UserPromise>() => T;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface Revenue {
+  id: ID_Output;
+  text: String;
+  note?: String;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+}
+
+export interface RevenuePromise extends Promise<Revenue>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  table_ids: <T = FragmentableArray<Table>>(args?: {
+    where?: TableWhereInput;
+    orderBy?: TableOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  text: () => Promise<String>;
+  note: () => Promise<String>;
+  createdBy: <T = UserPromise>() => T;
+  updatedBy: <T = UserPromise>() => T;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface RevenueSubscription
+  extends Promise<AsyncIterator<Revenue>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  table_ids: <T = Promise<AsyncIterator<TableSubscription>>>(args?: {
+    where?: TableWhereInput;
+    orderBy?: TableOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  text: () => Promise<AsyncIterator<String>>;
+  note: () => Promise<AsyncIterator<String>>;
+  createdBy: <T = UserSubscription>() => T;
+  updatedBy: <T = UserSubscription>() => T;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
+export interface RevenueNullablePromise
+  extends Promise<Revenue | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  table_ids: <T = FragmentableArray<Table>>(args?: {
+    where?: TableWhereInput;
+    orderBy?: TableOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  text: () => Promise<String>;
+  note: () => Promise<String>;
+  createdBy: <T = UserPromise>() => T;
+  updatedBy: <T = UserPromise>() => T;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface Expense {
+  id: ID_Output;
+  text: String;
+  note?: String;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+}
+
+export interface ExpensePromise extends Promise<Expense>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  table_ids: <T = FragmentableArray<Table>>(args?: {
+    where?: TableWhereInput;
+    orderBy?: TableOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  text: () => Promise<String>;
+  note: () => Promise<String>;
+  createdBy: <T = UserPromise>() => T;
+  updatedBy: <T = UserPromise>() => T;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface ExpenseSubscription
+  extends Promise<AsyncIterator<Expense>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  table_ids: <T = Promise<AsyncIterator<TableSubscription>>>(args?: {
+    where?: TableWhereInput;
+    orderBy?: TableOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  text: () => Promise<AsyncIterator<String>>;
+  note: () => Promise<AsyncIterator<String>>;
+  createdBy: <T = UserSubscription>() => T;
+  updatedBy: <T = UserSubscription>() => T;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
+export interface ExpenseNullablePromise
+  extends Promise<Expense | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  table_ids: <T = FragmentableArray<Table>>(args?: {
+    where?: TableWhereInput;
+    orderBy?: TableOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  text: () => Promise<String>;
+  note: () => Promise<String>;
+  createdBy: <T = UserPromise>() => T;
+  updatedBy: <T = UserPromise>() => T;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface NetworkEffect {
+  id: ID_Output;
+  text: String;
+  note?: String;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+}
+
+export interface NetworkEffectPromise
+  extends Promise<NetworkEffect>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  table_ids: <T = FragmentableArray<Table>>(args?: {
+    where?: TableWhereInput;
+    orderBy?: TableOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  text: () => Promise<String>;
+  note: () => Promise<String>;
+  createdBy: <T = UserPromise>() => T;
+  updatedBy: <T = UserPromise>() => T;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface NetworkEffectSubscription
+  extends Promise<AsyncIterator<NetworkEffect>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  table_ids: <T = Promise<AsyncIterator<TableSubscription>>>(args?: {
+    where?: TableWhereInput;
+    orderBy?: TableOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  text: () => Promise<AsyncIterator<String>>;
+  note: () => Promise<AsyncIterator<String>>;
+  createdBy: <T = UserSubscription>() => T;
+  updatedBy: <T = UserSubscription>() => T;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
+export interface NetworkEffectNullablePromise
+  extends Promise<NetworkEffect | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  table_ids: <T = FragmentableArray<Table>>(args?: {
+    where?: TableWhereInput;
+    orderBy?: TableOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  text: () => Promise<String>;
+  note: () => Promise<String>;
+  createdBy: <T = UserPromise>() => T;
+  updatedBy: <T = UserPromise>() => T;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface TechnicalInfrastracture {
+  id: ID_Output;
+  text: String;
+  note?: String;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+}
+
+export interface TechnicalInfrastracturePromise
+  extends Promise<TechnicalInfrastracture>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  table_ids: <T = FragmentableArray<Table>>(args?: {
+    where?: TableWhereInput;
+    orderBy?: TableOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  text: () => Promise<String>;
+  note: () => Promise<String>;
+  createdBy: <T = UserPromise>() => T;
+  updatedBy: <T = UserPromise>() => T;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface TechnicalInfrastractureSubscription
+  extends Promise<AsyncIterator<TechnicalInfrastracture>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  table_ids: <T = Promise<AsyncIterator<TableSubscription>>>(args?: {
+    where?: TableWhereInput;
+    orderBy?: TableOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  text: () => Promise<AsyncIterator<String>>;
+  note: () => Promise<AsyncIterator<String>>;
+  createdBy: <T = UserSubscription>() => T;
+  updatedBy: <T = UserSubscription>() => T;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
+export interface TechnicalInfrastractureNullablePromise
+  extends Promise<TechnicalInfrastracture | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  table_ids: <T = FragmentableArray<Table>>(args?: {
+    where?: TableWhereInput;
+    orderBy?: TableOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  text: () => Promise<String>;
+  note: () => Promise<String>;
+  createdBy: <T = UserPromise>() => T;
+  updatedBy: <T = UserPromise>() => T;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface Regulatory {
+  id: ID_Output;
+  text: String;
+  note?: String;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+}
+
+export interface RegulatoryPromise extends Promise<Regulatory>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  table_ids: <T = FragmentableArray<Table>>(args?: {
+    where?: TableWhereInput;
+    orderBy?: TableOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  text: () => Promise<String>;
+  note: () => Promise<String>;
+  createdBy: <T = UserPromise>() => T;
+  updatedBy: <T = UserPromise>() => T;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface RegulatorySubscription
+  extends Promise<AsyncIterator<Regulatory>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  table_ids: <T = Promise<AsyncIterator<TableSubscription>>>(args?: {
+    where?: TableWhereInput;
+    orderBy?: TableOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  text: () => Promise<AsyncIterator<String>>;
+  note: () => Promise<AsyncIterator<String>>;
+  createdBy: <T = UserSubscription>() => T;
+  updatedBy: <T = UserSubscription>() => T;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
+export interface RegulatoryNullablePromise
+  extends Promise<Regulatory | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  table_ids: <T = FragmentableArray<Table>>(args?: {
+    where?: TableWhereInput;
+    orderBy?: TableOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  text: () => Promise<String>;
+  note: () => Promise<String>;
+  createdBy: <T = UserPromise>() => T;
+  updatedBy: <T = UserPromise>() => T;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface ActorConnection {
+  pageInfo: PageInfo;
+  edges: ActorEdge[];
+}
+
+export interface ActorConnectionPromise
+  extends Promise<ActorConnection>,
     Fragmentable {
   pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<CanvasEdge>>() => T;
-  aggregate: <T = AggregateCanvasPromise>() => T;
+  edges: <T = FragmentableArray<ActorEdge>>() => T;
+  aggregate: <T = AggregateActorPromise>() => T;
 }
 
-export interface CanvasConnectionSubscription
-  extends Promise<AsyncIterator<CanvasConnection>>,
+export interface ActorConnectionSubscription
+  extends Promise<AsyncIterator<ActorConnection>>,
     Fragmentable {
   pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<CanvasEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateCanvasSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<ActorEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateActorSubscription>() => T;
 }
 
 export interface PageInfo {
@@ -6757,6 +7866,60 @@ export interface PageInfoSubscription
   hasPreviousPage: () => Promise<AsyncIterator<Boolean>>;
   startCursor: () => Promise<AsyncIterator<String>>;
   endCursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface ActorEdge {
+  node: Actor;
+  cursor: String;
+}
+
+export interface ActorEdgePromise extends Promise<ActorEdge>, Fragmentable {
+  node: <T = ActorPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface ActorEdgeSubscription
+  extends Promise<AsyncIterator<ActorEdge>>,
+    Fragmentable {
+  node: <T = ActorSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateActor {
+  count: Int;
+}
+
+export interface AggregateActorPromise
+  extends Promise<AggregateActor>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateActorSubscription
+  extends Promise<AsyncIterator<AggregateActor>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface CanvasConnection {
+  pageInfo: PageInfo;
+  edges: CanvasEdge[];
+}
+
+export interface CanvasConnectionPromise
+  extends Promise<CanvasConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<CanvasEdge>>() => T;
+  aggregate: <T = AggregateCanvasPromise>() => T;
+}
+
+export interface CanvasConnectionSubscription
+  extends Promise<AsyncIterator<CanvasConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<CanvasEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateCanvasSubscription>() => T;
 }
 
 export interface CanvasEdge {
@@ -6788,60 +7951,6 @@ export interface AggregateCanvasPromise
 
 export interface AggregateCanvasSubscription
   extends Promise<AsyncIterator<AggregateCanvas>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface ChannelConnection {
-  pageInfo: PageInfo;
-  edges: ChannelEdge[];
-}
-
-export interface ChannelConnectionPromise
-  extends Promise<ChannelConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<ChannelEdge>>() => T;
-  aggregate: <T = AggregateChannelPromise>() => T;
-}
-
-export interface ChannelConnectionSubscription
-  extends Promise<AsyncIterator<ChannelConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<ChannelEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateChannelSubscription>() => T;
-}
-
-export interface ChannelEdge {
-  node: Channel;
-  cursor: String;
-}
-
-export interface ChannelEdgePromise extends Promise<ChannelEdge>, Fragmentable {
-  node: <T = ChannelPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface ChannelEdgeSubscription
-  extends Promise<AsyncIterator<ChannelEdge>>,
-    Fragmentable {
-  node: <T = ChannelSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface AggregateChannel {
-  count: Int;
-}
-
-export interface AggregateChannelPromise
-  extends Promise<AggregateChannel>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateChannelSubscription
-  extends Promise<AsyncIterator<AggregateChannel>>,
     Fragmentable {
   count: () => Promise<AsyncIterator<Int>>;
 }
@@ -6900,340 +8009,112 @@ export interface AggregateCompanySubscription
   count: () => Promise<AsyncIterator<Int>>;
 }
 
-export interface CostStructureConnection {
+export interface ExpenseConnection {
   pageInfo: PageInfo;
-  edges: CostStructureEdge[];
+  edges: ExpenseEdge[];
 }
 
-export interface CostStructureConnectionPromise
-  extends Promise<CostStructureConnection>,
+export interface ExpenseConnectionPromise
+  extends Promise<ExpenseConnection>,
     Fragmentable {
   pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<CostStructureEdge>>() => T;
-  aggregate: <T = AggregateCostStructurePromise>() => T;
+  edges: <T = FragmentableArray<ExpenseEdge>>() => T;
+  aggregate: <T = AggregateExpensePromise>() => T;
 }
 
-export interface CostStructureConnectionSubscription
-  extends Promise<AsyncIterator<CostStructureConnection>>,
+export interface ExpenseConnectionSubscription
+  extends Promise<AsyncIterator<ExpenseConnection>>,
     Fragmentable {
   pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<CostStructureEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateCostStructureSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<ExpenseEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateExpenseSubscription>() => T;
 }
 
-export interface CostStructureEdge {
-  node: CostStructure;
+export interface ExpenseEdge {
+  node: Expense;
   cursor: String;
 }
 
-export interface CostStructureEdgePromise
-  extends Promise<CostStructureEdge>,
-    Fragmentable {
-  node: <T = CostStructurePromise>() => T;
+export interface ExpenseEdgePromise extends Promise<ExpenseEdge>, Fragmentable {
+  node: <T = ExpensePromise>() => T;
   cursor: () => Promise<String>;
 }
 
-export interface CostStructureEdgeSubscription
-  extends Promise<AsyncIterator<CostStructureEdge>>,
+export interface ExpenseEdgeSubscription
+  extends Promise<AsyncIterator<ExpenseEdge>>,
     Fragmentable {
-  node: <T = CostStructureSubscription>() => T;
+  node: <T = ExpenseSubscription>() => T;
   cursor: () => Promise<AsyncIterator<String>>;
 }
 
-export interface AggregateCostStructure {
+export interface AggregateExpense {
   count: Int;
 }
 
-export interface AggregateCostStructurePromise
-  extends Promise<AggregateCostStructure>,
+export interface AggregateExpensePromise
+  extends Promise<AggregateExpense>,
     Fragmentable {
   count: () => Promise<Int>;
 }
 
-export interface AggregateCostStructureSubscription
-  extends Promise<AsyncIterator<AggregateCostStructure>>,
+export interface AggregateExpenseSubscription
+  extends Promise<AsyncIterator<AggregateExpense>>,
     Fragmentable {
   count: () => Promise<AsyncIterator<Int>>;
 }
 
-export interface CustomerRelationshipConnection {
+export interface NetworkEffectConnection {
   pageInfo: PageInfo;
-  edges: CustomerRelationshipEdge[];
+  edges: NetworkEffectEdge[];
 }
 
-export interface CustomerRelationshipConnectionPromise
-  extends Promise<CustomerRelationshipConnection>,
+export interface NetworkEffectConnectionPromise
+  extends Promise<NetworkEffectConnection>,
     Fragmentable {
   pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<CustomerRelationshipEdge>>() => T;
-  aggregate: <T = AggregateCustomerRelationshipPromise>() => T;
+  edges: <T = FragmentableArray<NetworkEffectEdge>>() => T;
+  aggregate: <T = AggregateNetworkEffectPromise>() => T;
 }
 
-export interface CustomerRelationshipConnectionSubscription
-  extends Promise<AsyncIterator<CustomerRelationshipConnection>>,
+export interface NetworkEffectConnectionSubscription
+  extends Promise<AsyncIterator<NetworkEffectConnection>>,
     Fragmentable {
   pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <
-    T = Promise<AsyncIterator<CustomerRelationshipEdgeSubscription>>
-  >() => T;
-  aggregate: <T = AggregateCustomerRelationshipSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<NetworkEffectEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateNetworkEffectSubscription>() => T;
 }
 
-export interface CustomerRelationshipEdge {
-  node: CustomerRelationship;
+export interface NetworkEffectEdge {
+  node: NetworkEffect;
   cursor: String;
 }
 
-export interface CustomerRelationshipEdgePromise
-  extends Promise<CustomerRelationshipEdge>,
+export interface NetworkEffectEdgePromise
+  extends Promise<NetworkEffectEdge>,
     Fragmentable {
-  node: <T = CustomerRelationshipPromise>() => T;
+  node: <T = NetworkEffectPromise>() => T;
   cursor: () => Promise<String>;
 }
 
-export interface CustomerRelationshipEdgeSubscription
-  extends Promise<AsyncIterator<CustomerRelationshipEdge>>,
+export interface NetworkEffectEdgeSubscription
+  extends Promise<AsyncIterator<NetworkEffectEdge>>,
     Fragmentable {
-  node: <T = CustomerRelationshipSubscription>() => T;
+  node: <T = NetworkEffectSubscription>() => T;
   cursor: () => Promise<AsyncIterator<String>>;
 }
 
-export interface AggregateCustomerRelationship {
+export interface AggregateNetworkEffect {
   count: Int;
 }
 
-export interface AggregateCustomerRelationshipPromise
-  extends Promise<AggregateCustomerRelationship>,
+export interface AggregateNetworkEffectPromise
+  extends Promise<AggregateNetworkEffect>,
     Fragmentable {
   count: () => Promise<Int>;
 }
 
-export interface AggregateCustomerRelationshipSubscription
-  extends Promise<AsyncIterator<AggregateCustomerRelationship>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface CustomerSegmentConnection {
-  pageInfo: PageInfo;
-  edges: CustomerSegmentEdge[];
-}
-
-export interface CustomerSegmentConnectionPromise
-  extends Promise<CustomerSegmentConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<CustomerSegmentEdge>>() => T;
-  aggregate: <T = AggregateCustomerSegmentPromise>() => T;
-}
-
-export interface CustomerSegmentConnectionSubscription
-  extends Promise<AsyncIterator<CustomerSegmentConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<CustomerSegmentEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateCustomerSegmentSubscription>() => T;
-}
-
-export interface CustomerSegmentEdge {
-  node: CustomerSegment;
-  cursor: String;
-}
-
-export interface CustomerSegmentEdgePromise
-  extends Promise<CustomerSegmentEdge>,
-    Fragmentable {
-  node: <T = CustomerSegmentPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface CustomerSegmentEdgeSubscription
-  extends Promise<AsyncIterator<CustomerSegmentEdge>>,
-    Fragmentable {
-  node: <T = CustomerSegmentSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface AggregateCustomerSegment {
-  count: Int;
-}
-
-export interface AggregateCustomerSegmentPromise
-  extends Promise<AggregateCustomerSegment>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateCustomerSegmentSubscription
-  extends Promise<AsyncIterator<AggregateCustomerSegment>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface KeyActitvityConnection {
-  pageInfo: PageInfo;
-  edges: KeyActitvityEdge[];
-}
-
-export interface KeyActitvityConnectionPromise
-  extends Promise<KeyActitvityConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<KeyActitvityEdge>>() => T;
-  aggregate: <T = AggregateKeyActitvityPromise>() => T;
-}
-
-export interface KeyActitvityConnectionSubscription
-  extends Promise<AsyncIterator<KeyActitvityConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<KeyActitvityEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateKeyActitvitySubscription>() => T;
-}
-
-export interface KeyActitvityEdge {
-  node: KeyActitvity;
-  cursor: String;
-}
-
-export interface KeyActitvityEdgePromise
-  extends Promise<KeyActitvityEdge>,
-    Fragmentable {
-  node: <T = KeyActitvityPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface KeyActitvityEdgeSubscription
-  extends Promise<AsyncIterator<KeyActitvityEdge>>,
-    Fragmentable {
-  node: <T = KeyActitvitySubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface AggregateKeyActitvity {
-  count: Int;
-}
-
-export interface AggregateKeyActitvityPromise
-  extends Promise<AggregateKeyActitvity>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateKeyActitvitySubscription
-  extends Promise<AsyncIterator<AggregateKeyActitvity>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface KeyPartnerConnection {
-  pageInfo: PageInfo;
-  edges: KeyPartnerEdge[];
-}
-
-export interface KeyPartnerConnectionPromise
-  extends Promise<KeyPartnerConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<KeyPartnerEdge>>() => T;
-  aggregate: <T = AggregateKeyPartnerPromise>() => T;
-}
-
-export interface KeyPartnerConnectionSubscription
-  extends Promise<AsyncIterator<KeyPartnerConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<KeyPartnerEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateKeyPartnerSubscription>() => T;
-}
-
-export interface KeyPartnerEdge {
-  node: KeyPartner;
-  cursor: String;
-}
-
-export interface KeyPartnerEdgePromise
-  extends Promise<KeyPartnerEdge>,
-    Fragmentable {
-  node: <T = KeyPartnerPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface KeyPartnerEdgeSubscription
-  extends Promise<AsyncIterator<KeyPartnerEdge>>,
-    Fragmentable {
-  node: <T = KeyPartnerSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface AggregateKeyPartner {
-  count: Int;
-}
-
-export interface AggregateKeyPartnerPromise
-  extends Promise<AggregateKeyPartner>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateKeyPartnerSubscription
-  extends Promise<AsyncIterator<AggregateKeyPartner>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface KeyResourceConnection {
-  pageInfo: PageInfo;
-  edges: KeyResourceEdge[];
-}
-
-export interface KeyResourceConnectionPromise
-  extends Promise<KeyResourceConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<KeyResourceEdge>>() => T;
-  aggregate: <T = AggregateKeyResourcePromise>() => T;
-}
-
-export interface KeyResourceConnectionSubscription
-  extends Promise<AsyncIterator<KeyResourceConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<KeyResourceEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateKeyResourceSubscription>() => T;
-}
-
-export interface KeyResourceEdge {
-  node: KeyResource;
-  cursor: String;
-}
-
-export interface KeyResourceEdgePromise
-  extends Promise<KeyResourceEdge>,
-    Fragmentable {
-  node: <T = KeyResourcePromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface KeyResourceEdgeSubscription
-  extends Promise<AsyncIterator<KeyResourceEdge>>,
-    Fragmentable {
-  node: <T = KeyResourceSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface AggregateKeyResource {
-  count: Int;
-}
-
-export interface AggregateKeyResourcePromise
-  extends Promise<AggregateKeyResource>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateKeyResourceSubscription
-  extends Promise<AsyncIterator<AggregateKeyResource>>,
+export interface AggregateNetworkEffectSubscription
+  extends Promise<AsyncIterator<AggregateNetworkEffect>>,
     Fragmentable {
   count: () => Promise<AsyncIterator<Int>>;
 }
@@ -7346,58 +8227,224 @@ export interface AggregateProjectSubscription
   count: () => Promise<AsyncIterator<Int>>;
 }
 
-export interface RevenueStreamConnection {
+export interface RegulatoryConnection {
   pageInfo: PageInfo;
-  edges: RevenueStreamEdge[];
+  edges: RegulatoryEdge[];
 }
 
-export interface RevenueStreamConnectionPromise
-  extends Promise<RevenueStreamConnection>,
+export interface RegulatoryConnectionPromise
+  extends Promise<RegulatoryConnection>,
     Fragmentable {
   pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<RevenueStreamEdge>>() => T;
-  aggregate: <T = AggregateRevenueStreamPromise>() => T;
+  edges: <T = FragmentableArray<RegulatoryEdge>>() => T;
+  aggregate: <T = AggregateRegulatoryPromise>() => T;
 }
 
-export interface RevenueStreamConnectionSubscription
-  extends Promise<AsyncIterator<RevenueStreamConnection>>,
+export interface RegulatoryConnectionSubscription
+  extends Promise<AsyncIterator<RegulatoryConnection>>,
     Fragmentable {
   pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<RevenueStreamEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateRevenueStreamSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<RegulatoryEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateRegulatorySubscription>() => T;
 }
 
-export interface RevenueStreamEdge {
-  node: RevenueStream;
+export interface RegulatoryEdge {
+  node: Regulatory;
   cursor: String;
 }
 
-export interface RevenueStreamEdgePromise
-  extends Promise<RevenueStreamEdge>,
+export interface RegulatoryEdgePromise
+  extends Promise<RegulatoryEdge>,
     Fragmentable {
-  node: <T = RevenueStreamPromise>() => T;
+  node: <T = RegulatoryPromise>() => T;
   cursor: () => Promise<String>;
 }
 
-export interface RevenueStreamEdgeSubscription
-  extends Promise<AsyncIterator<RevenueStreamEdge>>,
+export interface RegulatoryEdgeSubscription
+  extends Promise<AsyncIterator<RegulatoryEdge>>,
     Fragmentable {
-  node: <T = RevenueStreamSubscription>() => T;
+  node: <T = RegulatorySubscription>() => T;
   cursor: () => Promise<AsyncIterator<String>>;
 }
 
-export interface AggregateRevenueStream {
+export interface AggregateRegulatory {
   count: Int;
 }
 
-export interface AggregateRevenueStreamPromise
-  extends Promise<AggregateRevenueStream>,
+export interface AggregateRegulatoryPromise
+  extends Promise<AggregateRegulatory>,
     Fragmentable {
   count: () => Promise<Int>;
 }
 
-export interface AggregateRevenueStreamSubscription
-  extends Promise<AsyncIterator<AggregateRevenueStream>>,
+export interface AggregateRegulatorySubscription
+  extends Promise<AsyncIterator<AggregateRegulatory>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface RevenueConnection {
+  pageInfo: PageInfo;
+  edges: RevenueEdge[];
+}
+
+export interface RevenueConnectionPromise
+  extends Promise<RevenueConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<RevenueEdge>>() => T;
+  aggregate: <T = AggregateRevenuePromise>() => T;
+}
+
+export interface RevenueConnectionSubscription
+  extends Promise<AsyncIterator<RevenueConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<RevenueEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateRevenueSubscription>() => T;
+}
+
+export interface RevenueEdge {
+  node: Revenue;
+  cursor: String;
+}
+
+export interface RevenueEdgePromise extends Promise<RevenueEdge>, Fragmentable {
+  node: <T = RevenuePromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface RevenueEdgeSubscription
+  extends Promise<AsyncIterator<RevenueEdge>>,
+    Fragmentable {
+  node: <T = RevenueSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateRevenue {
+  count: Int;
+}
+
+export interface AggregateRevenuePromise
+  extends Promise<AggregateRevenue>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateRevenueSubscription
+  extends Promise<AsyncIterator<AggregateRevenue>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface StrategyConnection {
+  pageInfo: PageInfo;
+  edges: StrategyEdge[];
+}
+
+export interface StrategyConnectionPromise
+  extends Promise<StrategyConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<StrategyEdge>>() => T;
+  aggregate: <T = AggregateStrategyPromise>() => T;
+}
+
+export interface StrategyConnectionSubscription
+  extends Promise<AsyncIterator<StrategyConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<StrategyEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateStrategySubscription>() => T;
+}
+
+export interface StrategyEdge {
+  node: Strategy;
+  cursor: String;
+}
+
+export interface StrategyEdgePromise
+  extends Promise<StrategyEdge>,
+    Fragmentable {
+  node: <T = StrategyPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface StrategyEdgeSubscription
+  extends Promise<AsyncIterator<StrategyEdge>>,
+    Fragmentable {
+  node: <T = StrategySubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateStrategy {
+  count: Int;
+}
+
+export interface AggregateStrategyPromise
+  extends Promise<AggregateStrategy>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateStrategySubscription
+  extends Promise<AsyncIterator<AggregateStrategy>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface StrategyPatternConnection {
+  pageInfo: PageInfo;
+  edges: StrategyPatternEdge[];
+}
+
+export interface StrategyPatternConnectionPromise
+  extends Promise<StrategyPatternConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<StrategyPatternEdge>>() => T;
+  aggregate: <T = AggregateStrategyPatternPromise>() => T;
+}
+
+export interface StrategyPatternConnectionSubscription
+  extends Promise<AsyncIterator<StrategyPatternConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<StrategyPatternEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateStrategyPatternSubscription>() => T;
+}
+
+export interface StrategyPatternEdge {
+  node: StrategyPattern;
+  cursor: String;
+}
+
+export interface StrategyPatternEdgePromise
+  extends Promise<StrategyPatternEdge>,
+    Fragmentable {
+  node: <T = StrategyPatternPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface StrategyPatternEdgeSubscription
+  extends Promise<AsyncIterator<StrategyPatternEdge>>,
+    Fragmentable {
+  node: <T = StrategyPatternSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateStrategyPattern {
+  count: Int;
+}
+
+export interface AggregateStrategyPatternPromise
+  extends Promise<AggregateStrategyPattern>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateStrategyPatternSubscription
+  extends Promise<AsyncIterator<AggregateStrategyPattern>>,
     Fragmentable {
   count: () => Promise<AsyncIterator<Int>>;
 }
@@ -7456,6 +8503,64 @@ export interface AggregateTableSubscription
   count: () => Promise<AsyncIterator<Int>>;
 }
 
+export interface TechnicalInfrastractureConnection {
+  pageInfo: PageInfo;
+  edges: TechnicalInfrastractureEdge[];
+}
+
+export interface TechnicalInfrastractureConnectionPromise
+  extends Promise<TechnicalInfrastractureConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<TechnicalInfrastractureEdge>>() => T;
+  aggregate: <T = AggregateTechnicalInfrastracturePromise>() => T;
+}
+
+export interface TechnicalInfrastractureConnectionSubscription
+  extends Promise<AsyncIterator<TechnicalInfrastractureConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <
+    T = Promise<AsyncIterator<TechnicalInfrastractureEdgeSubscription>>
+  >() => T;
+  aggregate: <T = AggregateTechnicalInfrastractureSubscription>() => T;
+}
+
+export interface TechnicalInfrastractureEdge {
+  node: TechnicalInfrastracture;
+  cursor: String;
+}
+
+export interface TechnicalInfrastractureEdgePromise
+  extends Promise<TechnicalInfrastractureEdge>,
+    Fragmentable {
+  node: <T = TechnicalInfrastracturePromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface TechnicalInfrastractureEdgeSubscription
+  extends Promise<AsyncIterator<TechnicalInfrastractureEdge>>,
+    Fragmentable {
+  node: <T = TechnicalInfrastractureSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateTechnicalInfrastracture {
+  count: Int;
+}
+
+export interface AggregateTechnicalInfrastracturePromise
+  extends Promise<AggregateTechnicalInfrastracture>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateTechnicalInfrastractureSubscription
+  extends Promise<AsyncIterator<AggregateTechnicalInfrastracture>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
 export interface UserConnection {
   pageInfo: PageInfo;
   edges: UserEdge[];
@@ -7506,6 +8611,118 @@ export interface AggregateUserPromise
 
 export interface AggregateUserSubscription
   extends Promise<AsyncIterator<AggregateUser>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface ValueCreationConnection {
+  pageInfo: PageInfo;
+  edges: ValueCreationEdge[];
+}
+
+export interface ValueCreationConnectionPromise
+  extends Promise<ValueCreationConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<ValueCreationEdge>>() => T;
+  aggregate: <T = AggregateValueCreationPromise>() => T;
+}
+
+export interface ValueCreationConnectionSubscription
+  extends Promise<AsyncIterator<ValueCreationConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<ValueCreationEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateValueCreationSubscription>() => T;
+}
+
+export interface ValueCreationEdge {
+  node: ValueCreation;
+  cursor: String;
+}
+
+export interface ValueCreationEdgePromise
+  extends Promise<ValueCreationEdge>,
+    Fragmentable {
+  node: <T = ValueCreationPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface ValueCreationEdgeSubscription
+  extends Promise<AsyncIterator<ValueCreationEdge>>,
+    Fragmentable {
+  node: <T = ValueCreationSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateValueCreation {
+  count: Int;
+}
+
+export interface AggregateValueCreationPromise
+  extends Promise<AggregateValueCreation>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateValueCreationSubscription
+  extends Promise<AsyncIterator<AggregateValueCreation>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface ValueDeliveryConnection {
+  pageInfo: PageInfo;
+  edges: ValueDeliveryEdge[];
+}
+
+export interface ValueDeliveryConnectionPromise
+  extends Promise<ValueDeliveryConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<ValueDeliveryEdge>>() => T;
+  aggregate: <T = AggregateValueDeliveryPromise>() => T;
+}
+
+export interface ValueDeliveryConnectionSubscription
+  extends Promise<AsyncIterator<ValueDeliveryConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<ValueDeliveryEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateValueDeliverySubscription>() => T;
+}
+
+export interface ValueDeliveryEdge {
+  node: ValueDelivery;
+  cursor: String;
+}
+
+export interface ValueDeliveryEdgePromise
+  extends Promise<ValueDeliveryEdge>,
+    Fragmentable {
+  node: <T = ValueDeliveryPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface ValueDeliveryEdgeSubscription
+  extends Promise<AsyncIterator<ValueDeliveryEdge>>,
+    Fragmentable {
+  node: <T = ValueDeliverySubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateValueDelivery {
+  count: Int;
+}
+
+export interface AggregateValueDeliveryPromise
+  extends Promise<AggregateValueDelivery>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateValueDeliverySubscription
+  extends Promise<AsyncIterator<AggregateValueDelivery>>,
     Fragmentable {
   count: () => Promise<AsyncIterator<Int>>;
 }
@@ -7582,6 +8799,59 @@ export interface BatchPayloadSubscription
   count: () => Promise<AsyncIterator<Long>>;
 }
 
+export interface ActorSubscriptionPayload {
+  mutation: MutationType;
+  node: Actor;
+  updatedFields: String[];
+  previousValues: ActorPreviousValues;
+}
+
+export interface ActorSubscriptionPayloadPromise
+  extends Promise<ActorSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = ActorPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = ActorPreviousValuesPromise>() => T;
+}
+
+export interface ActorSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<ActorSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = ActorSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = ActorPreviousValuesSubscription>() => T;
+}
+
+export interface ActorPreviousValues {
+  id: ID_Output;
+  text: String;
+  note?: String;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+}
+
+export interface ActorPreviousValuesPromise
+  extends Promise<ActorPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  text: () => Promise<String>;
+  note: () => Promise<String>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface ActorPreviousValuesSubscription
+  extends Promise<AsyncIterator<ActorPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  text: () => Promise<AsyncIterator<String>>;
+  note: () => Promise<AsyncIterator<String>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
 export interface CanvasSubscriptionPayload {
   mutation: MutationType;
   node: Canvas;
@@ -7628,59 +8898,6 @@ export interface CanvasPreviousValuesSubscription
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   name: () => Promise<AsyncIterator<String>>;
-  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-}
-
-export interface ChannelSubscriptionPayload {
-  mutation: MutationType;
-  node: Channel;
-  updatedFields: String[];
-  previousValues: ChannelPreviousValues;
-}
-
-export interface ChannelSubscriptionPayloadPromise
-  extends Promise<ChannelSubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = ChannelPromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = ChannelPreviousValuesPromise>() => T;
-}
-
-export interface ChannelSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<ChannelSubscriptionPayload>>,
-    Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = ChannelSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = ChannelPreviousValuesSubscription>() => T;
-}
-
-export interface ChannelPreviousValues {
-  id: ID_Output;
-  text: String;
-  note?: String;
-  createdAt: DateTimeOutput;
-  updatedAt: DateTimeOutput;
-}
-
-export interface ChannelPreviousValuesPromise
-  extends Promise<ChannelPreviousValues>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  text: () => Promise<String>;
-  note: () => Promise<String>;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
-}
-
-export interface ChannelPreviousValuesSubscription
-  extends Promise<AsyncIterator<ChannelPreviousValues>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  text: () => Promise<AsyncIterator<String>>;
-  note: () => Promise<AsyncIterator<String>>;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
@@ -7738,32 +8955,32 @@ export interface CompanyPreviousValuesSubscription
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
-export interface CostStructureSubscriptionPayload {
+export interface ExpenseSubscriptionPayload {
   mutation: MutationType;
-  node: CostStructure;
+  node: Expense;
   updatedFields: String[];
-  previousValues: CostStructurePreviousValues;
+  previousValues: ExpensePreviousValues;
 }
 
-export interface CostStructureSubscriptionPayloadPromise
-  extends Promise<CostStructureSubscriptionPayload>,
+export interface ExpenseSubscriptionPayloadPromise
+  extends Promise<ExpenseSubscriptionPayload>,
     Fragmentable {
   mutation: () => Promise<MutationType>;
-  node: <T = CostStructurePromise>() => T;
+  node: <T = ExpensePromise>() => T;
   updatedFields: () => Promise<String[]>;
-  previousValues: <T = CostStructurePreviousValuesPromise>() => T;
+  previousValues: <T = ExpensePreviousValuesPromise>() => T;
 }
 
-export interface CostStructureSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<CostStructureSubscriptionPayload>>,
+export interface ExpenseSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<ExpenseSubscriptionPayload>>,
     Fragmentable {
   mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = CostStructureSubscription>() => T;
+  node: <T = ExpenseSubscription>() => T;
   updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = CostStructurePreviousValuesSubscription>() => T;
+  previousValues: <T = ExpensePreviousValuesSubscription>() => T;
 }
 
-export interface CostStructurePreviousValues {
+export interface ExpensePreviousValues {
   id: ID_Output;
   text: String;
   note?: String;
@@ -7771,8 +8988,8 @@ export interface CostStructurePreviousValues {
   updatedAt: DateTimeOutput;
 }
 
-export interface CostStructurePreviousValuesPromise
-  extends Promise<CostStructurePreviousValues>,
+export interface ExpensePreviousValuesPromise
+  extends Promise<ExpensePreviousValues>,
     Fragmentable {
   id: () => Promise<ID_Output>;
   text: () => Promise<String>;
@@ -7781,8 +8998,8 @@ export interface CostStructurePreviousValuesPromise
   updatedAt: () => Promise<DateTimeOutput>;
 }
 
-export interface CostStructurePreviousValuesSubscription
-  extends Promise<AsyncIterator<CostStructurePreviousValues>>,
+export interface ExpensePreviousValuesSubscription
+  extends Promise<AsyncIterator<ExpensePreviousValues>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   text: () => Promise<AsyncIterator<String>>;
@@ -7791,32 +9008,32 @@ export interface CostStructurePreviousValuesSubscription
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
-export interface CustomerRelationshipSubscriptionPayload {
+export interface NetworkEffectSubscriptionPayload {
   mutation: MutationType;
-  node: CustomerRelationship;
+  node: NetworkEffect;
   updatedFields: String[];
-  previousValues: CustomerRelationshipPreviousValues;
+  previousValues: NetworkEffectPreviousValues;
 }
 
-export interface CustomerRelationshipSubscriptionPayloadPromise
-  extends Promise<CustomerRelationshipSubscriptionPayload>,
+export interface NetworkEffectSubscriptionPayloadPromise
+  extends Promise<NetworkEffectSubscriptionPayload>,
     Fragmentable {
   mutation: () => Promise<MutationType>;
-  node: <T = CustomerRelationshipPromise>() => T;
+  node: <T = NetworkEffectPromise>() => T;
   updatedFields: () => Promise<String[]>;
-  previousValues: <T = CustomerRelationshipPreviousValuesPromise>() => T;
+  previousValues: <T = NetworkEffectPreviousValuesPromise>() => T;
 }
 
-export interface CustomerRelationshipSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<CustomerRelationshipSubscriptionPayload>>,
+export interface NetworkEffectSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<NetworkEffectSubscriptionPayload>>,
     Fragmentable {
   mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = CustomerRelationshipSubscription>() => T;
+  node: <T = NetworkEffectSubscription>() => T;
   updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = CustomerRelationshipPreviousValuesSubscription>() => T;
+  previousValues: <T = NetworkEffectPreviousValuesSubscription>() => T;
 }
 
-export interface CustomerRelationshipPreviousValues {
+export interface NetworkEffectPreviousValues {
   id: ID_Output;
   text: String;
   note?: String;
@@ -7824,8 +9041,8 @@ export interface CustomerRelationshipPreviousValues {
   updatedAt: DateTimeOutput;
 }
 
-export interface CustomerRelationshipPreviousValuesPromise
-  extends Promise<CustomerRelationshipPreviousValues>,
+export interface NetworkEffectPreviousValuesPromise
+  extends Promise<NetworkEffectPreviousValues>,
     Fragmentable {
   id: () => Promise<ID_Output>;
   text: () => Promise<String>;
@@ -7834,220 +9051,8 @@ export interface CustomerRelationshipPreviousValuesPromise
   updatedAt: () => Promise<DateTimeOutput>;
 }
 
-export interface CustomerRelationshipPreviousValuesSubscription
-  extends Promise<AsyncIterator<CustomerRelationshipPreviousValues>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  text: () => Promise<AsyncIterator<String>>;
-  note: () => Promise<AsyncIterator<String>>;
-  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-}
-
-export interface CustomerSegmentSubscriptionPayload {
-  mutation: MutationType;
-  node: CustomerSegment;
-  updatedFields: String[];
-  previousValues: CustomerSegmentPreviousValues;
-}
-
-export interface CustomerSegmentSubscriptionPayloadPromise
-  extends Promise<CustomerSegmentSubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = CustomerSegmentPromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = CustomerSegmentPreviousValuesPromise>() => T;
-}
-
-export interface CustomerSegmentSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<CustomerSegmentSubscriptionPayload>>,
-    Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = CustomerSegmentSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = CustomerSegmentPreviousValuesSubscription>() => T;
-}
-
-export interface CustomerSegmentPreviousValues {
-  id: ID_Output;
-  text: String;
-  note?: String;
-  createdAt: DateTimeOutput;
-  updatedAt: DateTimeOutput;
-}
-
-export interface CustomerSegmentPreviousValuesPromise
-  extends Promise<CustomerSegmentPreviousValues>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  text: () => Promise<String>;
-  note: () => Promise<String>;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
-}
-
-export interface CustomerSegmentPreviousValuesSubscription
-  extends Promise<AsyncIterator<CustomerSegmentPreviousValues>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  text: () => Promise<AsyncIterator<String>>;
-  note: () => Promise<AsyncIterator<String>>;
-  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-}
-
-export interface KeyActitvitySubscriptionPayload {
-  mutation: MutationType;
-  node: KeyActitvity;
-  updatedFields: String[];
-  previousValues: KeyActitvityPreviousValues;
-}
-
-export interface KeyActitvitySubscriptionPayloadPromise
-  extends Promise<KeyActitvitySubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = KeyActitvityPromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = KeyActitvityPreviousValuesPromise>() => T;
-}
-
-export interface KeyActitvitySubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<KeyActitvitySubscriptionPayload>>,
-    Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = KeyActitvitySubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = KeyActitvityPreviousValuesSubscription>() => T;
-}
-
-export interface KeyActitvityPreviousValues {
-  id: ID_Output;
-  text: String;
-  note?: String;
-  createdAt: DateTimeOutput;
-  updatedAt: DateTimeOutput;
-}
-
-export interface KeyActitvityPreviousValuesPromise
-  extends Promise<KeyActitvityPreviousValues>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  text: () => Promise<String>;
-  note: () => Promise<String>;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
-}
-
-export interface KeyActitvityPreviousValuesSubscription
-  extends Promise<AsyncIterator<KeyActitvityPreviousValues>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  text: () => Promise<AsyncIterator<String>>;
-  note: () => Promise<AsyncIterator<String>>;
-  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-}
-
-export interface KeyPartnerSubscriptionPayload {
-  mutation: MutationType;
-  node: KeyPartner;
-  updatedFields: String[];
-  previousValues: KeyPartnerPreviousValues;
-}
-
-export interface KeyPartnerSubscriptionPayloadPromise
-  extends Promise<KeyPartnerSubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = KeyPartnerPromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = KeyPartnerPreviousValuesPromise>() => T;
-}
-
-export interface KeyPartnerSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<KeyPartnerSubscriptionPayload>>,
-    Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = KeyPartnerSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = KeyPartnerPreviousValuesSubscription>() => T;
-}
-
-export interface KeyPartnerPreviousValues {
-  id: ID_Output;
-  text: String;
-  note?: String;
-  createdAt: DateTimeOutput;
-  updatedAt: DateTimeOutput;
-}
-
-export interface KeyPartnerPreviousValuesPromise
-  extends Promise<KeyPartnerPreviousValues>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  text: () => Promise<String>;
-  note: () => Promise<String>;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
-}
-
-export interface KeyPartnerPreviousValuesSubscription
-  extends Promise<AsyncIterator<KeyPartnerPreviousValues>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  text: () => Promise<AsyncIterator<String>>;
-  note: () => Promise<AsyncIterator<String>>;
-  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-}
-
-export interface KeyResourceSubscriptionPayload {
-  mutation: MutationType;
-  node: KeyResource;
-  updatedFields: String[];
-  previousValues: KeyResourcePreviousValues;
-}
-
-export interface KeyResourceSubscriptionPayloadPromise
-  extends Promise<KeyResourceSubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = KeyResourcePromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = KeyResourcePreviousValuesPromise>() => T;
-}
-
-export interface KeyResourceSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<KeyResourceSubscriptionPayload>>,
-    Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = KeyResourceSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = KeyResourcePreviousValuesSubscription>() => T;
-}
-
-export interface KeyResourcePreviousValues {
-  id: ID_Output;
-  text: String;
-  note?: String;
-  createdAt: DateTimeOutput;
-  updatedAt: DateTimeOutput;
-}
-
-export interface KeyResourcePreviousValuesPromise
-  extends Promise<KeyResourcePreviousValues>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  text: () => Promise<String>;
-  note: () => Promise<String>;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
-}
-
-export interface KeyResourcePreviousValuesSubscription
-  extends Promise<AsyncIterator<KeyResourcePreviousValues>>,
+export interface NetworkEffectPreviousValuesSubscription
+  extends Promise<AsyncIterator<NetworkEffectPreviousValues>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   text: () => Promise<AsyncIterator<String>>;
@@ -8085,6 +9090,15 @@ export interface PatternPreviousValues {
   id: ID_Output;
   name: String;
   description?: String;
+  actorWeight?: Int;
+  valuePropositionWeight?: Int;
+  valueCreationWeight?: Int;
+  valueDeliveryWeight?: Int;
+  revenueWeight?: Int;
+  expenseWeight?: Int;
+  networkEffectWeight?: Int;
+  regulatoryWeight?: Int;
+  technicalInfrastractureWeight?: Int;
   createdAt: DateTimeOutput;
   updatedAt: DateTimeOutput;
 }
@@ -8095,6 +9109,15 @@ export interface PatternPreviousValuesPromise
   id: () => Promise<ID_Output>;
   name: () => Promise<String>;
   description: () => Promise<String>;
+  actorWeight: () => Promise<Int>;
+  valuePropositionWeight: () => Promise<Int>;
+  valueCreationWeight: () => Promise<Int>;
+  valueDeliveryWeight: () => Promise<Int>;
+  revenueWeight: () => Promise<Int>;
+  expenseWeight: () => Promise<Int>;
+  networkEffectWeight: () => Promise<Int>;
+  regulatoryWeight: () => Promise<Int>;
+  technicalInfrastractureWeight: () => Promise<Int>;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
 }
@@ -8105,6 +9128,15 @@ export interface PatternPreviousValuesSubscription
   id: () => Promise<AsyncIterator<ID_Output>>;
   name: () => Promise<AsyncIterator<String>>;
   description: () => Promise<AsyncIterator<String>>;
+  actorWeight: () => Promise<AsyncIterator<Int>>;
+  valuePropositionWeight: () => Promise<AsyncIterator<Int>>;
+  valueCreationWeight: () => Promise<AsyncIterator<Int>>;
+  valueDeliveryWeight: () => Promise<AsyncIterator<Int>>;
+  revenueWeight: () => Promise<AsyncIterator<Int>>;
+  expenseWeight: () => Promise<AsyncIterator<Int>>;
+  networkEffectWeight: () => Promise<AsyncIterator<Int>>;
+  regulatoryWeight: () => Promise<AsyncIterator<Int>>;
+  technicalInfrastractureWeight: () => Promise<AsyncIterator<Int>>;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
@@ -8159,32 +9191,32 @@ export interface ProjectPreviousValuesSubscription
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
-export interface RevenueStreamSubscriptionPayload {
+export interface RegulatorySubscriptionPayload {
   mutation: MutationType;
-  node: RevenueStream;
+  node: Regulatory;
   updatedFields: String[];
-  previousValues: RevenueStreamPreviousValues;
+  previousValues: RegulatoryPreviousValues;
 }
 
-export interface RevenueStreamSubscriptionPayloadPromise
-  extends Promise<RevenueStreamSubscriptionPayload>,
+export interface RegulatorySubscriptionPayloadPromise
+  extends Promise<RegulatorySubscriptionPayload>,
     Fragmentable {
   mutation: () => Promise<MutationType>;
-  node: <T = RevenueStreamPromise>() => T;
+  node: <T = RegulatoryPromise>() => T;
   updatedFields: () => Promise<String[]>;
-  previousValues: <T = RevenueStreamPreviousValuesPromise>() => T;
+  previousValues: <T = RegulatoryPreviousValuesPromise>() => T;
 }
 
-export interface RevenueStreamSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<RevenueStreamSubscriptionPayload>>,
+export interface RegulatorySubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<RegulatorySubscriptionPayload>>,
     Fragmentable {
   mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = RevenueStreamSubscription>() => T;
+  node: <T = RegulatorySubscription>() => T;
   updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = RevenueStreamPreviousValuesSubscription>() => T;
+  previousValues: <T = RegulatoryPreviousValuesSubscription>() => T;
 }
 
-export interface RevenueStreamPreviousValues {
+export interface RegulatoryPreviousValues {
   id: ID_Output;
   text: String;
   note?: String;
@@ -8192,8 +9224,8 @@ export interface RevenueStreamPreviousValues {
   updatedAt: DateTimeOutput;
 }
 
-export interface RevenueStreamPreviousValuesPromise
-  extends Promise<RevenueStreamPreviousValues>,
+export interface RegulatoryPreviousValuesPromise
+  extends Promise<RegulatoryPreviousValues>,
     Fragmentable {
   id: () => Promise<ID_Output>;
   text: () => Promise<String>;
@@ -8202,12 +9234,168 @@ export interface RevenueStreamPreviousValuesPromise
   updatedAt: () => Promise<DateTimeOutput>;
 }
 
-export interface RevenueStreamPreviousValuesSubscription
-  extends Promise<AsyncIterator<RevenueStreamPreviousValues>>,
+export interface RegulatoryPreviousValuesSubscription
+  extends Promise<AsyncIterator<RegulatoryPreviousValues>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   text: () => Promise<AsyncIterator<String>>;
   note: () => Promise<AsyncIterator<String>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
+export interface RevenueSubscriptionPayload {
+  mutation: MutationType;
+  node: Revenue;
+  updatedFields: String[];
+  previousValues: RevenuePreviousValues;
+}
+
+export interface RevenueSubscriptionPayloadPromise
+  extends Promise<RevenueSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = RevenuePromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = RevenuePreviousValuesPromise>() => T;
+}
+
+export interface RevenueSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<RevenueSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = RevenueSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = RevenuePreviousValuesSubscription>() => T;
+}
+
+export interface RevenuePreviousValues {
+  id: ID_Output;
+  text: String;
+  note?: String;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+}
+
+export interface RevenuePreviousValuesPromise
+  extends Promise<RevenuePreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  text: () => Promise<String>;
+  note: () => Promise<String>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface RevenuePreviousValuesSubscription
+  extends Promise<AsyncIterator<RevenuePreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  text: () => Promise<AsyncIterator<String>>;
+  note: () => Promise<AsyncIterator<String>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
+export interface StrategySubscriptionPayload {
+  mutation: MutationType;
+  node: Strategy;
+  updatedFields: String[];
+  previousValues: StrategyPreviousValues;
+}
+
+export interface StrategySubscriptionPayloadPromise
+  extends Promise<StrategySubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = StrategyPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = StrategyPreviousValuesPromise>() => T;
+}
+
+export interface StrategySubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<StrategySubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = StrategySubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = StrategyPreviousValuesSubscription>() => T;
+}
+
+export interface StrategyPreviousValues {
+  id: ID_Output;
+  name: String;
+  description?: String;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+}
+
+export interface StrategyPreviousValuesPromise
+  extends Promise<StrategyPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
+  description: () => Promise<String>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface StrategyPreviousValuesSubscription
+  extends Promise<AsyncIterator<StrategyPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  name: () => Promise<AsyncIterator<String>>;
+  description: () => Promise<AsyncIterator<String>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
+export interface StrategyPatternSubscriptionPayload {
+  mutation: MutationType;
+  node: StrategyPattern;
+  updatedFields: String[];
+  previousValues: StrategyPatternPreviousValues;
+}
+
+export interface StrategyPatternSubscriptionPayloadPromise
+  extends Promise<StrategyPatternSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = StrategyPatternPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = StrategyPatternPreviousValuesPromise>() => T;
+}
+
+export interface StrategyPatternSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<StrategyPatternSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = StrategyPatternSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = StrategyPatternPreviousValuesSubscription>() => T;
+}
+
+export interface StrategyPatternPreviousValues {
+  id: ID_Output;
+  weight: Int;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+}
+
+export interface StrategyPatternPreviousValuesPromise
+  extends Promise<StrategyPatternPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  weight: () => Promise<Int>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface StrategyPatternPreviousValuesSubscription
+  extends Promise<AsyncIterator<StrategyPatternPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  weight: () => Promise<AsyncIterator<Int>>;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
@@ -8251,6 +9439,61 @@ export interface TablePreviousValuesSubscription
   extends Promise<AsyncIterator<TablePreviousValues>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
+}
+
+export interface TechnicalInfrastractureSubscriptionPayload {
+  mutation: MutationType;
+  node: TechnicalInfrastracture;
+  updatedFields: String[];
+  previousValues: TechnicalInfrastracturePreviousValues;
+}
+
+export interface TechnicalInfrastractureSubscriptionPayloadPromise
+  extends Promise<TechnicalInfrastractureSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = TechnicalInfrastracturePromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = TechnicalInfrastracturePreviousValuesPromise>() => T;
+}
+
+export interface TechnicalInfrastractureSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<TechnicalInfrastractureSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = TechnicalInfrastractureSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <
+    T = TechnicalInfrastracturePreviousValuesSubscription
+  >() => T;
+}
+
+export interface TechnicalInfrastracturePreviousValues {
+  id: ID_Output;
+  text: String;
+  note?: String;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+}
+
+export interface TechnicalInfrastracturePreviousValuesPromise
+  extends Promise<TechnicalInfrastracturePreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  text: () => Promise<String>;
+  note: () => Promise<String>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface TechnicalInfrastracturePreviousValuesSubscription
+  extends Promise<AsyncIterator<TechnicalInfrastracturePreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  text: () => Promise<AsyncIterator<String>>;
+  note: () => Promise<AsyncIterator<String>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
 export interface UserSubscriptionPayload {
@@ -8324,6 +9567,112 @@ export interface UserPreviousValuesSubscription
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
+export interface ValueCreationSubscriptionPayload {
+  mutation: MutationType;
+  node: ValueCreation;
+  updatedFields: String[];
+  previousValues: ValueCreationPreviousValues;
+}
+
+export interface ValueCreationSubscriptionPayloadPromise
+  extends Promise<ValueCreationSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = ValueCreationPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = ValueCreationPreviousValuesPromise>() => T;
+}
+
+export interface ValueCreationSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<ValueCreationSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = ValueCreationSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = ValueCreationPreviousValuesSubscription>() => T;
+}
+
+export interface ValueCreationPreviousValues {
+  id: ID_Output;
+  text: String;
+  note?: String;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+}
+
+export interface ValueCreationPreviousValuesPromise
+  extends Promise<ValueCreationPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  text: () => Promise<String>;
+  note: () => Promise<String>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface ValueCreationPreviousValuesSubscription
+  extends Promise<AsyncIterator<ValueCreationPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  text: () => Promise<AsyncIterator<String>>;
+  note: () => Promise<AsyncIterator<String>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
+export interface ValueDeliverySubscriptionPayload {
+  mutation: MutationType;
+  node: ValueDelivery;
+  updatedFields: String[];
+  previousValues: ValueDeliveryPreviousValues;
+}
+
+export interface ValueDeliverySubscriptionPayloadPromise
+  extends Promise<ValueDeliverySubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = ValueDeliveryPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = ValueDeliveryPreviousValuesPromise>() => T;
+}
+
+export interface ValueDeliverySubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<ValueDeliverySubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = ValueDeliverySubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = ValueDeliveryPreviousValuesSubscription>() => T;
+}
+
+export interface ValueDeliveryPreviousValues {
+  id: ID_Output;
+  text: String;
+  note?: String;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+}
+
+export interface ValueDeliveryPreviousValuesPromise
+  extends Promise<ValueDeliveryPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  text: () => Promise<String>;
+  note: () => Promise<String>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface ValueDeliveryPreviousValuesSubscription
+  extends Promise<AsyncIterator<ValueDeliveryPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  text: () => Promise<AsyncIterator<String>>;
+  note: () => Promise<AsyncIterator<String>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
 export interface ValuePropositionSubscriptionPayload {
   mutation: MutationType;
   node: ValueProposition;
@@ -8389,11 +9738,6 @@ The `String` scalar type represents textual data, represented as UTF-8 character
 export type String = string;
 
 /*
-The `Boolean` scalar type represents `true` or `false`.
-*/
-export type Boolean = boolean;
-
-/*
 DateTime scalar input type, allowing Date
 */
 export type DateTimeInput = Date | string;
@@ -8407,6 +9751,11 @@ export type DateTimeOutput = string;
 The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.
 */
 export type Int = number;
+
+/*
+The `Boolean` scalar type represents `true` or `false`.
+*/
+export type Boolean = boolean;
 
 export type Long = string;
 
@@ -8436,6 +9785,14 @@ export const models: Model[] = [
     embedded: false
   },
   {
+    name: "Strategy",
+    embedded: false
+  },
+  {
+    name: "StrategyPattern",
+    embedded: false
+  },
+  {
     name: "Table",
     embedded: false
   },
@@ -8444,19 +9801,7 @@ export const models: Model[] = [
     embedded: false
   },
   {
-    name: "KeyPartner",
-    embedded: false
-  },
-  {
-    name: "RevenueStream",
-    embedded: false
-  },
-  {
-    name: "KeyActitvity",
-    embedded: false
-  },
-  {
-    name: "CustomerRelationship",
+    name: "Actor",
     embedded: false
   },
   {
@@ -8464,19 +9809,31 @@ export const models: Model[] = [
     embedded: false
   },
   {
-    name: "CostStructure",
+    name: "ValueCreation",
     embedded: false
   },
   {
-    name: "CustomerSegment",
+    name: "ValueDelivery",
     embedded: false
   },
   {
-    name: "KeyResource",
+    name: "Revenue",
     embedded: false
   },
   {
-    name: "Channel",
+    name: "Expense",
+    embedded: false
+  },
+  {
+    name: "NetworkEffect",
+    embedded: false
+  },
+  {
+    name: "TechnicalInfrastracture",
+    embedded: false
+  },
+  {
+    name: "Regulatory",
     embedded: false
   }
 ];

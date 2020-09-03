@@ -1,19 +1,19 @@
-export const KeyPartnerQuery = {
-    getKeyPartner: {
+export const ActorQuery = {
+    getActor: {
         resolve: (root, args, ctx, info) => {
-            return ctx.db.keyPartner({ id: args.id });;
+            return ctx.db.actor({ id: args.id });;
         }
     },
 
-    getAllKeyPartners: {
+    getAllActors: {
         resolve: (root, args, ctx, info) => {
-            return ctx.db.keyPartners();
+            return ctx.db.actors();
         }
     }
 };
 
 
-export const KeyPartnerMutation = {
+export const ActorMutation = {
 
     /* 
         mutation{
@@ -39,28 +39,28 @@ export const KeyPartnerMutation = {
         }
     */
 
-    createKeyPartner: {
+    createActor: {
         resolve: async (root, args, ctx, info) => {
             const userId = ctx.userId;
-            return await ctx.db.createKeyPartner(args.data);
+            return await ctx.db.createActor(args.data);
         }
     },
 
-    updateKeyPartner: {
+    updateActor: {
         resolve: async (root, args, ctx, info) => {
             const userId = ctx.userId;
-            return await ctx.db.updateKeyPartner({
-                where: {id: args.keyPartnerId},
+            return await ctx.db.updateActor({
+                where: {id: args.actorId},
                 data: args.data
             });
         }
     },
 
     
-    deleteKeyPartner: {
+    deleteActor: {
         resolve: async (root, args,ctx, info) => {
-            return await ctx.db.deleteKeyPartner({
-                id: args.keyPartnerId
+            return await ctx.db.deleteActor({
+                id: args.actorId
             });
 
         }

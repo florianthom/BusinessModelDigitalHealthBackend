@@ -7,43 +7,42 @@ type Query {
   """Check if email address is free"""
   checkEmailAddress(email: String!): Boolean!
 
-  getUser(id: ID!) : User!
 
+  getUser(id: ID!) : User!
   getAllUsers: [User!]!
 
-  getProject(id: ID!) : Project!
 
+  getProject(id: ID!) : Project!
   getAllProjects: [Project!]!
 
-  getCanvas(id: ID!) : Canvas!
 
+  getCanvas(id: ID!) : Canvas!
   getAllCanvases: [Canvas!]!
 
-  getPattern(id: ID!) : Pattern!
 
+  getPattern(id: ID!) : Pattern!
   getAllPattern: [Pattern!]!
 
-  getTable(id: ID!) : Table!
 
+  getTable(id: ID!) : Table!
   getAllTables: [Table!]!
 
-  getCompany(id: ID!): Company!
 
+  getCompany(id: ID!): Company!
   getAllCompanies: [Company!]!
 
-  getKeyPartner(id: ID!): KeyPartner!
 
-  getAllKeyPartners: [KeyPartner!]!
 
-  getRevenueStream(id: ID!): RevenueStream!
+  getActor(id: ID!): Actor!
+  getAllActors: [Actor!]!
 
-  getAllRevenueStreams: [RevenueStream!]!
 
-  createCompany(data: CompanyCreateInput!): Company!
+  getValueProposition(id: ID!): ValueProposition!
+  getAllValuePropositions: [ValueProposition!]!
 
-  updateCompany(companyId: ID!, data: CompanyUpdateInput!): Company!
+  getStrategy(id: ID!): Strategy!
+  getAllStrategys: [Strategy!]!
 
-  deleteCompany(companyId: ID!): Company!
 }
 
 type Mutation {
@@ -65,17 +64,17 @@ type Mutation {
 
   deleteCanvas(canvasId: ID!): Canvas!
 
-  createKeyPartner(data: KeyPartnerCreateInput!): KeyPartner!
+  createActor(data: ActorCreateInput!): Actor!
 
-  updateKeyPartner(keyPartnerId: ID!, data: KeyPartnerUpdateInput!): KeyPartner!
+  updateActor(actorId: ID!, data: ActorUpdateInput!): Actor!
 
-  deleteKeyPartner(keyPartnerId: ID!): KeyPartner!
+  deleteActor(actorId: ID!): Actor!
 
-  createRevenueStream(data: RevenueStreamCreateInput!): RevenueStream!
+  createValueProposition(data: ValuePropositionCreateInput!): ValueProposition!
   
-  updateRevenueStream(revenueStreamId: ID!, data: RevenueStreamUpdateInput!): RevenueStream!
+  updateValueProposition(valuePropositionId: ID!, data: ValuePropositionUpdateInput!): ValueProposition!
 
-  deleteRevenueStream(revenueStreamId: ID!):RevenueStream!
+  deleteValueProposition(valuePropositionId: ID!):ValueProposition!
 
   createPattern(data: PatternCreateInput!): Pattern!
 

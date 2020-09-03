@@ -1,8 +1,281 @@
-type AggregateCanvas {
+type Actor {
+  id: ID!
+  table_ids(where: TableWhereInput, orderBy: TableOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Table!]
+  text: String!
+  note: String
+  createdBy: User!
+  updatedBy: User!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type ActorConnection {
+  pageInfo: PageInfo!
+  edges: [ActorEdge]!
+  aggregate: AggregateActor!
+}
+
+input ActorCreateInput {
+  id: ID
+  table_ids: TableCreateManyWithoutActor_entry_idsInput
+  text: String!
+  note: String
+  createdBy: UserCreateOneInput!
+  updatedBy: UserCreateOneInput!
+}
+
+input ActorCreateManyWithoutTable_idsInput {
+  create: [ActorCreateWithoutTable_idsInput!]
+  connect: [ActorWhereUniqueInput!]
+}
+
+input ActorCreateWithoutTable_idsInput {
+  id: ID
+  text: String!
+  note: String
+  createdBy: UserCreateOneInput!
+  updatedBy: UserCreateOneInput!
+}
+
+type ActorEdge {
+  node: Actor!
+  cursor: String!
+}
+
+enum ActorOrderByInput {
+  id_ASC
+  id_DESC
+  text_ASC
+  text_DESC
+  note_ASC
+  note_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type ActorPreviousValues {
+  id: ID!
+  text: String!
+  note: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+input ActorScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  text: String
+  text_not: String
+  text_in: [String!]
+  text_not_in: [String!]
+  text_lt: String
+  text_lte: String
+  text_gt: String
+  text_gte: String
+  text_contains: String
+  text_not_contains: String
+  text_starts_with: String
+  text_not_starts_with: String
+  text_ends_with: String
+  text_not_ends_with: String
+  note: String
+  note_not: String
+  note_in: [String!]
+  note_not_in: [String!]
+  note_lt: String
+  note_lte: String
+  note_gt: String
+  note_gte: String
+  note_contains: String
+  note_not_contains: String
+  note_starts_with: String
+  note_not_starts_with: String
+  note_ends_with: String
+  note_not_ends_with: String
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  AND: [ActorScalarWhereInput!]
+  OR: [ActorScalarWhereInput!]
+  NOT: [ActorScalarWhereInput!]
+}
+
+type ActorSubscriptionPayload {
+  mutation: MutationType!
+  node: Actor
+  updatedFields: [String!]
+  previousValues: ActorPreviousValues
+}
+
+input ActorSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: ActorWhereInput
+  AND: [ActorSubscriptionWhereInput!]
+  OR: [ActorSubscriptionWhereInput!]
+  NOT: [ActorSubscriptionWhereInput!]
+}
+
+input ActorUpdateInput {
+  table_ids: TableUpdateManyWithoutActor_entry_idsInput
+  text: String
+  note: String
+  createdBy: UserUpdateOneRequiredInput
+  updatedBy: UserUpdateOneRequiredInput
+}
+
+input ActorUpdateManyDataInput {
+  text: String
+  note: String
+}
+
+input ActorUpdateManyMutationInput {
+  text: String
+  note: String
+}
+
+input ActorUpdateManyWithoutTable_idsInput {
+  create: [ActorCreateWithoutTable_idsInput!]
+  delete: [ActorWhereUniqueInput!]
+  connect: [ActorWhereUniqueInput!]
+  set: [ActorWhereUniqueInput!]
+  disconnect: [ActorWhereUniqueInput!]
+  update: [ActorUpdateWithWhereUniqueWithoutTable_idsInput!]
+  upsert: [ActorUpsertWithWhereUniqueWithoutTable_idsInput!]
+  deleteMany: [ActorScalarWhereInput!]
+  updateMany: [ActorUpdateManyWithWhereNestedInput!]
+}
+
+input ActorUpdateManyWithWhereNestedInput {
+  where: ActorScalarWhereInput!
+  data: ActorUpdateManyDataInput!
+}
+
+input ActorUpdateWithoutTable_idsDataInput {
+  text: String
+  note: String
+  createdBy: UserUpdateOneRequiredInput
+  updatedBy: UserUpdateOneRequiredInput
+}
+
+input ActorUpdateWithWhereUniqueWithoutTable_idsInput {
+  where: ActorWhereUniqueInput!
+  data: ActorUpdateWithoutTable_idsDataInput!
+}
+
+input ActorUpsertWithWhereUniqueWithoutTable_idsInput {
+  where: ActorWhereUniqueInput!
+  update: ActorUpdateWithoutTable_idsDataInput!
+  create: ActorCreateWithoutTable_idsInput!
+}
+
+input ActorWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  table_ids_every: TableWhereInput
+  table_ids_some: TableWhereInput
+  table_ids_none: TableWhereInput
+  text: String
+  text_not: String
+  text_in: [String!]
+  text_not_in: [String!]
+  text_lt: String
+  text_lte: String
+  text_gt: String
+  text_gte: String
+  text_contains: String
+  text_not_contains: String
+  text_starts_with: String
+  text_not_starts_with: String
+  text_ends_with: String
+  text_not_ends_with: String
+  note: String
+  note_not: String
+  note_in: [String!]
+  note_not_in: [String!]
+  note_lt: String
+  note_lte: String
+  note_gt: String
+  note_gte: String
+  note_contains: String
+  note_not_contains: String
+  note_starts_with: String
+  note_not_starts_with: String
+  note_ends_with: String
+  note_not_ends_with: String
+  createdBy: UserWhereInput
+  updatedBy: UserWhereInput
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  AND: [ActorWhereInput!]
+  OR: [ActorWhereInput!]
+  NOT: [ActorWhereInput!]
+}
+
+input ActorWhereUniqueInput {
+  id: ID
+}
+
+type AggregateActor {
   count: Int!
 }
 
-type AggregateChannel {
+type AggregateCanvas {
   count: Int!
 }
 
@@ -10,27 +283,11 @@ type AggregateCompany {
   count: Int!
 }
 
-type AggregateCostStructure {
+type AggregateExpense {
   count: Int!
 }
 
-type AggregateCustomerRelationship {
-  count: Int!
-}
-
-type AggregateCustomerSegment {
-  count: Int!
-}
-
-type AggregateKeyActitvity {
-  count: Int!
-}
-
-type AggregateKeyPartner {
-  count: Int!
-}
-
-type AggregateKeyResource {
+type AggregateNetworkEffect {
   count: Int!
 }
 
@@ -42,7 +299,19 @@ type AggregateProject {
   count: Int!
 }
 
-type AggregateRevenueStream {
+type AggregateRegulatory {
+  count: Int!
+}
+
+type AggregateRevenue {
+  count: Int!
+}
+
+type AggregateStrategy {
+  count: Int!
+}
+
+type AggregateStrategyPattern {
   count: Int!
 }
 
@@ -50,7 +319,19 @@ type AggregateTable {
   count: Int!
 }
 
+type AggregateTechnicalInfrastracture {
+  count: Int!
+}
+
 type AggregateUser {
+  count: Int!
+}
+
+type AggregateValueCreation {
+  count: Int!
+}
+
+type AggregateValueDelivery {
   count: Int!
 }
 
@@ -65,6 +346,7 @@ type BatchPayload {
 type Canvas {
   id: ID!
   project_id: Project!
+  strategy_id: Strategy
   pattern_ids(where: PatternWhereInput, orderBy: PatternOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Pattern!]
   table_id: Table!
   name: String!
@@ -83,6 +365,7 @@ type CanvasConnection {
 input CanvasCreateInput {
   id: ID
   project_id: ProjectCreateOneWithoutCanvas_idsInput!
+  strategy_id: StrategyCreateOneWithoutCanvas_idsInput
   pattern_ids: PatternCreateManyWithoutCanvas_idsInput
   table_id: TableCreateOneInput!
   name: String!
@@ -100,9 +383,15 @@ input CanvasCreateManyWithoutProject_idInput {
   connect: [CanvasWhereUniqueInput!]
 }
 
+input CanvasCreateManyWithoutStrategy_idInput {
+  create: [CanvasCreateWithoutStrategy_idInput!]
+  connect: [CanvasWhereUniqueInput!]
+}
+
 input CanvasCreateWithoutPattern_idsInput {
   id: ID
   project_id: ProjectCreateOneWithoutCanvas_idsInput!
+  strategy_id: StrategyCreateOneWithoutCanvas_idsInput
   table_id: TableCreateOneInput!
   name: String!
   createdBy: UserCreateOneInput!
@@ -111,6 +400,17 @@ input CanvasCreateWithoutPattern_idsInput {
 
 input CanvasCreateWithoutProject_idInput {
   id: ID
+  strategy_id: StrategyCreateOneWithoutCanvas_idsInput
+  pattern_ids: PatternCreateManyWithoutCanvas_idsInput
+  table_id: TableCreateOneInput!
+  name: String!
+  createdBy: UserCreateOneInput!
+  updatedBy: UserCreateOneInput!
+}
+
+input CanvasCreateWithoutStrategy_idInput {
+  id: ID
+  project_id: ProjectCreateOneWithoutCanvas_idsInput!
   pattern_ids: PatternCreateManyWithoutCanvas_idsInput
   table_id: TableCreateOneInput!
   name: String!
@@ -211,6 +511,7 @@ input CanvasSubscriptionWhereInput {
 
 input CanvasUpdateInput {
   project_id: ProjectUpdateOneRequiredWithoutCanvas_idsInput
+  strategy_id: StrategyUpdateOneWithoutCanvas_idsInput
   pattern_ids: PatternUpdateManyWithoutCanvas_idsInput
   table_id: TableUpdateOneRequiredInput
   name: String
@@ -250,6 +551,18 @@ input CanvasUpdateManyWithoutProject_idInput {
   updateMany: [CanvasUpdateManyWithWhereNestedInput!]
 }
 
+input CanvasUpdateManyWithoutStrategy_idInput {
+  create: [CanvasCreateWithoutStrategy_idInput!]
+  delete: [CanvasWhereUniqueInput!]
+  connect: [CanvasWhereUniqueInput!]
+  set: [CanvasWhereUniqueInput!]
+  disconnect: [CanvasWhereUniqueInput!]
+  update: [CanvasUpdateWithWhereUniqueWithoutStrategy_idInput!]
+  upsert: [CanvasUpsertWithWhereUniqueWithoutStrategy_idInput!]
+  deleteMany: [CanvasScalarWhereInput!]
+  updateMany: [CanvasUpdateManyWithWhereNestedInput!]
+}
+
 input CanvasUpdateManyWithWhereNestedInput {
   where: CanvasScalarWhereInput!
   data: CanvasUpdateManyDataInput!
@@ -257,6 +570,7 @@ input CanvasUpdateManyWithWhereNestedInput {
 
 input CanvasUpdateWithoutPattern_idsDataInput {
   project_id: ProjectUpdateOneRequiredWithoutCanvas_idsInput
+  strategy_id: StrategyUpdateOneWithoutCanvas_idsInput
   table_id: TableUpdateOneRequiredInput
   name: String
   createdBy: UserUpdateOneRequiredInput
@@ -264,6 +578,16 @@ input CanvasUpdateWithoutPattern_idsDataInput {
 }
 
 input CanvasUpdateWithoutProject_idDataInput {
+  strategy_id: StrategyUpdateOneWithoutCanvas_idsInput
+  pattern_ids: PatternUpdateManyWithoutCanvas_idsInput
+  table_id: TableUpdateOneRequiredInput
+  name: String
+  createdBy: UserUpdateOneRequiredInput
+  updatedBy: UserUpdateOneRequiredInput
+}
+
+input CanvasUpdateWithoutStrategy_idDataInput {
+  project_id: ProjectUpdateOneRequiredWithoutCanvas_idsInput
   pattern_ids: PatternUpdateManyWithoutCanvas_idsInput
   table_id: TableUpdateOneRequiredInput
   name: String
@@ -281,6 +605,11 @@ input CanvasUpdateWithWhereUniqueWithoutProject_idInput {
   data: CanvasUpdateWithoutProject_idDataInput!
 }
 
+input CanvasUpdateWithWhereUniqueWithoutStrategy_idInput {
+  where: CanvasWhereUniqueInput!
+  data: CanvasUpdateWithoutStrategy_idDataInput!
+}
+
 input CanvasUpsertWithWhereUniqueWithoutPattern_idsInput {
   where: CanvasWhereUniqueInput!
   update: CanvasUpdateWithoutPattern_idsDataInput!
@@ -291,6 +620,12 @@ input CanvasUpsertWithWhereUniqueWithoutProject_idInput {
   where: CanvasWhereUniqueInput!
   update: CanvasUpdateWithoutProject_idDataInput!
   create: CanvasCreateWithoutProject_idInput!
+}
+
+input CanvasUpsertWithWhereUniqueWithoutStrategy_idInput {
+  where: CanvasWhereUniqueInput!
+  update: CanvasUpdateWithoutStrategy_idDataInput!
+  create: CanvasCreateWithoutStrategy_idInput!
 }
 
 input CanvasWhereInput {
@@ -309,6 +644,7 @@ input CanvasWhereInput {
   id_ends_with: ID
   id_not_ends_with: ID
   project_id: ProjectWhereInput
+  strategy_id: StrategyWhereInput
   pattern_ids_every: PatternWhereInput
   pattern_ids_some: PatternWhereInput
   pattern_ids_none: PatternWhereInput
@@ -351,279 +687,6 @@ input CanvasWhereInput {
 }
 
 input CanvasWhereUniqueInput {
-  id: ID
-}
-
-type Channel {
-  id: ID!
-  table_ids(where: TableWhereInput, orderBy: TableOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Table!]
-  text: String!
-  note: String
-  createdBy: User!
-  updatedBy: User!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-}
-
-type ChannelConnection {
-  pageInfo: PageInfo!
-  edges: [ChannelEdge]!
-  aggregate: AggregateChannel!
-}
-
-input ChannelCreateInput {
-  id: ID
-  table_ids: TableCreateManyWithoutChannel_entry_idsInput
-  text: String!
-  note: String
-  createdBy: UserCreateOneInput!
-  updatedBy: UserCreateOneInput!
-}
-
-input ChannelCreateManyWithoutTable_idsInput {
-  create: [ChannelCreateWithoutTable_idsInput!]
-  connect: [ChannelWhereUniqueInput!]
-}
-
-input ChannelCreateWithoutTable_idsInput {
-  id: ID
-  text: String!
-  note: String
-  createdBy: UserCreateOneInput!
-  updatedBy: UserCreateOneInput!
-}
-
-type ChannelEdge {
-  node: Channel!
-  cursor: String!
-}
-
-enum ChannelOrderByInput {
-  id_ASC
-  id_DESC
-  text_ASC
-  text_DESC
-  note_ASC
-  note_DESC
-  createdAt_ASC
-  createdAt_DESC
-  updatedAt_ASC
-  updatedAt_DESC
-}
-
-type ChannelPreviousValues {
-  id: ID!
-  text: String!
-  note: String
-  createdAt: DateTime!
-  updatedAt: DateTime!
-}
-
-input ChannelScalarWhereInput {
-  id: ID
-  id_not: ID
-  id_in: [ID!]
-  id_not_in: [ID!]
-  id_lt: ID
-  id_lte: ID
-  id_gt: ID
-  id_gte: ID
-  id_contains: ID
-  id_not_contains: ID
-  id_starts_with: ID
-  id_not_starts_with: ID
-  id_ends_with: ID
-  id_not_ends_with: ID
-  text: String
-  text_not: String
-  text_in: [String!]
-  text_not_in: [String!]
-  text_lt: String
-  text_lte: String
-  text_gt: String
-  text_gte: String
-  text_contains: String
-  text_not_contains: String
-  text_starts_with: String
-  text_not_starts_with: String
-  text_ends_with: String
-  text_not_ends_with: String
-  note: String
-  note_not: String
-  note_in: [String!]
-  note_not_in: [String!]
-  note_lt: String
-  note_lte: String
-  note_gt: String
-  note_gte: String
-  note_contains: String
-  note_not_contains: String
-  note_starts_with: String
-  note_not_starts_with: String
-  note_ends_with: String
-  note_not_ends_with: String
-  createdAt: DateTime
-  createdAt_not: DateTime
-  createdAt_in: [DateTime!]
-  createdAt_not_in: [DateTime!]
-  createdAt_lt: DateTime
-  createdAt_lte: DateTime
-  createdAt_gt: DateTime
-  createdAt_gte: DateTime
-  updatedAt: DateTime
-  updatedAt_not: DateTime
-  updatedAt_in: [DateTime!]
-  updatedAt_not_in: [DateTime!]
-  updatedAt_lt: DateTime
-  updatedAt_lte: DateTime
-  updatedAt_gt: DateTime
-  updatedAt_gte: DateTime
-  AND: [ChannelScalarWhereInput!]
-  OR: [ChannelScalarWhereInput!]
-  NOT: [ChannelScalarWhereInput!]
-}
-
-type ChannelSubscriptionPayload {
-  mutation: MutationType!
-  node: Channel
-  updatedFields: [String!]
-  previousValues: ChannelPreviousValues
-}
-
-input ChannelSubscriptionWhereInput {
-  mutation_in: [MutationType!]
-  updatedFields_contains: String
-  updatedFields_contains_every: [String!]
-  updatedFields_contains_some: [String!]
-  node: ChannelWhereInput
-  AND: [ChannelSubscriptionWhereInput!]
-  OR: [ChannelSubscriptionWhereInput!]
-  NOT: [ChannelSubscriptionWhereInput!]
-}
-
-input ChannelUpdateInput {
-  table_ids: TableUpdateManyWithoutChannel_entry_idsInput
-  text: String
-  note: String
-  createdBy: UserUpdateOneRequiredInput
-  updatedBy: UserUpdateOneRequiredInput
-}
-
-input ChannelUpdateManyDataInput {
-  text: String
-  note: String
-}
-
-input ChannelUpdateManyMutationInput {
-  text: String
-  note: String
-}
-
-input ChannelUpdateManyWithoutTable_idsInput {
-  create: [ChannelCreateWithoutTable_idsInput!]
-  delete: [ChannelWhereUniqueInput!]
-  connect: [ChannelWhereUniqueInput!]
-  set: [ChannelWhereUniqueInput!]
-  disconnect: [ChannelWhereUniqueInput!]
-  update: [ChannelUpdateWithWhereUniqueWithoutTable_idsInput!]
-  upsert: [ChannelUpsertWithWhereUniqueWithoutTable_idsInput!]
-  deleteMany: [ChannelScalarWhereInput!]
-  updateMany: [ChannelUpdateManyWithWhereNestedInput!]
-}
-
-input ChannelUpdateManyWithWhereNestedInput {
-  where: ChannelScalarWhereInput!
-  data: ChannelUpdateManyDataInput!
-}
-
-input ChannelUpdateWithoutTable_idsDataInput {
-  text: String
-  note: String
-  createdBy: UserUpdateOneRequiredInput
-  updatedBy: UserUpdateOneRequiredInput
-}
-
-input ChannelUpdateWithWhereUniqueWithoutTable_idsInput {
-  where: ChannelWhereUniqueInput!
-  data: ChannelUpdateWithoutTable_idsDataInput!
-}
-
-input ChannelUpsertWithWhereUniqueWithoutTable_idsInput {
-  where: ChannelWhereUniqueInput!
-  update: ChannelUpdateWithoutTable_idsDataInput!
-  create: ChannelCreateWithoutTable_idsInput!
-}
-
-input ChannelWhereInput {
-  id: ID
-  id_not: ID
-  id_in: [ID!]
-  id_not_in: [ID!]
-  id_lt: ID
-  id_lte: ID
-  id_gt: ID
-  id_gte: ID
-  id_contains: ID
-  id_not_contains: ID
-  id_starts_with: ID
-  id_not_starts_with: ID
-  id_ends_with: ID
-  id_not_ends_with: ID
-  table_ids_every: TableWhereInput
-  table_ids_some: TableWhereInput
-  table_ids_none: TableWhereInput
-  text: String
-  text_not: String
-  text_in: [String!]
-  text_not_in: [String!]
-  text_lt: String
-  text_lte: String
-  text_gt: String
-  text_gte: String
-  text_contains: String
-  text_not_contains: String
-  text_starts_with: String
-  text_not_starts_with: String
-  text_ends_with: String
-  text_not_ends_with: String
-  note: String
-  note_not: String
-  note_in: [String!]
-  note_not_in: [String!]
-  note_lt: String
-  note_lte: String
-  note_gt: String
-  note_gte: String
-  note_contains: String
-  note_not_contains: String
-  note_starts_with: String
-  note_not_starts_with: String
-  note_ends_with: String
-  note_not_ends_with: String
-  createdBy: UserWhereInput
-  updatedBy: UserWhereInput
-  createdAt: DateTime
-  createdAt_not: DateTime
-  createdAt_in: [DateTime!]
-  createdAt_not_in: [DateTime!]
-  createdAt_lt: DateTime
-  createdAt_lte: DateTime
-  createdAt_gt: DateTime
-  createdAt_gte: DateTime
-  updatedAt: DateTime
-  updatedAt_not: DateTime
-  updatedAt_in: [DateTime!]
-  updatedAt_not_in: [DateTime!]
-  updatedAt_lt: DateTime
-  updatedAt_lte: DateTime
-  updatedAt_gt: DateTime
-  updatedAt_gte: DateTime
-  AND: [ChannelWhereInput!]
-  OR: [ChannelWhereInput!]
-  NOT: [ChannelWhereInput!]
-}
-
-input ChannelWhereUniqueInput {
   id: ID
 }
 
@@ -888,828 +951,9 @@ input CompanyWhereUniqueInput {
   id: ID
 }
 
-type CostStructure {
-  id: ID!
-  table_ids(where: TableWhereInput, orderBy: TableOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Table!]
-  text: String!
-  note: String
-  createdBy: User!
-  updatedBy: User!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-}
-
-type CostStructureConnection {
-  pageInfo: PageInfo!
-  edges: [CostStructureEdge]!
-  aggregate: AggregateCostStructure!
-}
-
-input CostStructureCreateInput {
-  id: ID
-  table_ids: TableCreateManyWithoutCost_structure_entry_idsInput
-  text: String!
-  note: String
-  createdBy: UserCreateOneInput!
-  updatedBy: UserCreateOneInput!
-}
-
-input CostStructureCreateManyWithoutTable_idsInput {
-  create: [CostStructureCreateWithoutTable_idsInput!]
-  connect: [CostStructureWhereUniqueInput!]
-}
-
-input CostStructureCreateWithoutTable_idsInput {
-  id: ID
-  text: String!
-  note: String
-  createdBy: UserCreateOneInput!
-  updatedBy: UserCreateOneInput!
-}
-
-type CostStructureEdge {
-  node: CostStructure!
-  cursor: String!
-}
-
-enum CostStructureOrderByInput {
-  id_ASC
-  id_DESC
-  text_ASC
-  text_DESC
-  note_ASC
-  note_DESC
-  createdAt_ASC
-  createdAt_DESC
-  updatedAt_ASC
-  updatedAt_DESC
-}
-
-type CostStructurePreviousValues {
-  id: ID!
-  text: String!
-  note: String
-  createdAt: DateTime!
-  updatedAt: DateTime!
-}
-
-input CostStructureScalarWhereInput {
-  id: ID
-  id_not: ID
-  id_in: [ID!]
-  id_not_in: [ID!]
-  id_lt: ID
-  id_lte: ID
-  id_gt: ID
-  id_gte: ID
-  id_contains: ID
-  id_not_contains: ID
-  id_starts_with: ID
-  id_not_starts_with: ID
-  id_ends_with: ID
-  id_not_ends_with: ID
-  text: String
-  text_not: String
-  text_in: [String!]
-  text_not_in: [String!]
-  text_lt: String
-  text_lte: String
-  text_gt: String
-  text_gte: String
-  text_contains: String
-  text_not_contains: String
-  text_starts_with: String
-  text_not_starts_with: String
-  text_ends_with: String
-  text_not_ends_with: String
-  note: String
-  note_not: String
-  note_in: [String!]
-  note_not_in: [String!]
-  note_lt: String
-  note_lte: String
-  note_gt: String
-  note_gte: String
-  note_contains: String
-  note_not_contains: String
-  note_starts_with: String
-  note_not_starts_with: String
-  note_ends_with: String
-  note_not_ends_with: String
-  createdAt: DateTime
-  createdAt_not: DateTime
-  createdAt_in: [DateTime!]
-  createdAt_not_in: [DateTime!]
-  createdAt_lt: DateTime
-  createdAt_lte: DateTime
-  createdAt_gt: DateTime
-  createdAt_gte: DateTime
-  updatedAt: DateTime
-  updatedAt_not: DateTime
-  updatedAt_in: [DateTime!]
-  updatedAt_not_in: [DateTime!]
-  updatedAt_lt: DateTime
-  updatedAt_lte: DateTime
-  updatedAt_gt: DateTime
-  updatedAt_gte: DateTime
-  AND: [CostStructureScalarWhereInput!]
-  OR: [CostStructureScalarWhereInput!]
-  NOT: [CostStructureScalarWhereInput!]
-}
-
-type CostStructureSubscriptionPayload {
-  mutation: MutationType!
-  node: CostStructure
-  updatedFields: [String!]
-  previousValues: CostStructurePreviousValues
-}
-
-input CostStructureSubscriptionWhereInput {
-  mutation_in: [MutationType!]
-  updatedFields_contains: String
-  updatedFields_contains_every: [String!]
-  updatedFields_contains_some: [String!]
-  node: CostStructureWhereInput
-  AND: [CostStructureSubscriptionWhereInput!]
-  OR: [CostStructureSubscriptionWhereInput!]
-  NOT: [CostStructureSubscriptionWhereInput!]
-}
-
-input CostStructureUpdateInput {
-  table_ids: TableUpdateManyWithoutCost_structure_entry_idsInput
-  text: String
-  note: String
-  createdBy: UserUpdateOneRequiredInput
-  updatedBy: UserUpdateOneRequiredInput
-}
-
-input CostStructureUpdateManyDataInput {
-  text: String
-  note: String
-}
-
-input CostStructureUpdateManyMutationInput {
-  text: String
-  note: String
-}
-
-input CostStructureUpdateManyWithoutTable_idsInput {
-  create: [CostStructureCreateWithoutTable_idsInput!]
-  delete: [CostStructureWhereUniqueInput!]
-  connect: [CostStructureWhereUniqueInput!]
-  set: [CostStructureWhereUniqueInput!]
-  disconnect: [CostStructureWhereUniqueInput!]
-  update: [CostStructureUpdateWithWhereUniqueWithoutTable_idsInput!]
-  upsert: [CostStructureUpsertWithWhereUniqueWithoutTable_idsInput!]
-  deleteMany: [CostStructureScalarWhereInput!]
-  updateMany: [CostStructureUpdateManyWithWhereNestedInput!]
-}
-
-input CostStructureUpdateManyWithWhereNestedInput {
-  where: CostStructureScalarWhereInput!
-  data: CostStructureUpdateManyDataInput!
-}
-
-input CostStructureUpdateWithoutTable_idsDataInput {
-  text: String
-  note: String
-  createdBy: UserUpdateOneRequiredInput
-  updatedBy: UserUpdateOneRequiredInput
-}
-
-input CostStructureUpdateWithWhereUniqueWithoutTable_idsInput {
-  where: CostStructureWhereUniqueInput!
-  data: CostStructureUpdateWithoutTable_idsDataInput!
-}
-
-input CostStructureUpsertWithWhereUniqueWithoutTable_idsInput {
-  where: CostStructureWhereUniqueInput!
-  update: CostStructureUpdateWithoutTable_idsDataInput!
-  create: CostStructureCreateWithoutTable_idsInput!
-}
-
-input CostStructureWhereInput {
-  id: ID
-  id_not: ID
-  id_in: [ID!]
-  id_not_in: [ID!]
-  id_lt: ID
-  id_lte: ID
-  id_gt: ID
-  id_gte: ID
-  id_contains: ID
-  id_not_contains: ID
-  id_starts_with: ID
-  id_not_starts_with: ID
-  id_ends_with: ID
-  id_not_ends_with: ID
-  table_ids_every: TableWhereInput
-  table_ids_some: TableWhereInput
-  table_ids_none: TableWhereInput
-  text: String
-  text_not: String
-  text_in: [String!]
-  text_not_in: [String!]
-  text_lt: String
-  text_lte: String
-  text_gt: String
-  text_gte: String
-  text_contains: String
-  text_not_contains: String
-  text_starts_with: String
-  text_not_starts_with: String
-  text_ends_with: String
-  text_not_ends_with: String
-  note: String
-  note_not: String
-  note_in: [String!]
-  note_not_in: [String!]
-  note_lt: String
-  note_lte: String
-  note_gt: String
-  note_gte: String
-  note_contains: String
-  note_not_contains: String
-  note_starts_with: String
-  note_not_starts_with: String
-  note_ends_with: String
-  note_not_ends_with: String
-  createdBy: UserWhereInput
-  updatedBy: UserWhereInput
-  createdAt: DateTime
-  createdAt_not: DateTime
-  createdAt_in: [DateTime!]
-  createdAt_not_in: [DateTime!]
-  createdAt_lt: DateTime
-  createdAt_lte: DateTime
-  createdAt_gt: DateTime
-  createdAt_gte: DateTime
-  updatedAt: DateTime
-  updatedAt_not: DateTime
-  updatedAt_in: [DateTime!]
-  updatedAt_not_in: [DateTime!]
-  updatedAt_lt: DateTime
-  updatedAt_lte: DateTime
-  updatedAt_gt: DateTime
-  updatedAt_gte: DateTime
-  AND: [CostStructureWhereInput!]
-  OR: [CostStructureWhereInput!]
-  NOT: [CostStructureWhereInput!]
-}
-
-input CostStructureWhereUniqueInput {
-  id: ID
-}
-
-type CustomerRelationship {
-  id: ID!
-  table_ids(where: TableWhereInput, orderBy: TableOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Table!]
-  text: String!
-  note: String
-  createdBy: User!
-  updatedBy: User!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-}
-
-type CustomerRelationshipConnection {
-  pageInfo: PageInfo!
-  edges: [CustomerRelationshipEdge]!
-  aggregate: AggregateCustomerRelationship!
-}
-
-input CustomerRelationshipCreateInput {
-  id: ID
-  table_ids: TableCreateManyWithoutCustomer_relationship_entry_idsInput
-  text: String!
-  note: String
-  createdBy: UserCreateOneInput!
-  updatedBy: UserCreateOneInput!
-}
-
-input CustomerRelationshipCreateManyWithoutTable_idsInput {
-  create: [CustomerRelationshipCreateWithoutTable_idsInput!]
-  connect: [CustomerRelationshipWhereUniqueInput!]
-}
-
-input CustomerRelationshipCreateWithoutTable_idsInput {
-  id: ID
-  text: String!
-  note: String
-  createdBy: UserCreateOneInput!
-  updatedBy: UserCreateOneInput!
-}
-
-type CustomerRelationshipEdge {
-  node: CustomerRelationship!
-  cursor: String!
-}
-
-enum CustomerRelationshipOrderByInput {
-  id_ASC
-  id_DESC
-  text_ASC
-  text_DESC
-  note_ASC
-  note_DESC
-  createdAt_ASC
-  createdAt_DESC
-  updatedAt_ASC
-  updatedAt_DESC
-}
-
-type CustomerRelationshipPreviousValues {
-  id: ID!
-  text: String!
-  note: String
-  createdAt: DateTime!
-  updatedAt: DateTime!
-}
-
-input CustomerRelationshipScalarWhereInput {
-  id: ID
-  id_not: ID
-  id_in: [ID!]
-  id_not_in: [ID!]
-  id_lt: ID
-  id_lte: ID
-  id_gt: ID
-  id_gte: ID
-  id_contains: ID
-  id_not_contains: ID
-  id_starts_with: ID
-  id_not_starts_with: ID
-  id_ends_with: ID
-  id_not_ends_with: ID
-  text: String
-  text_not: String
-  text_in: [String!]
-  text_not_in: [String!]
-  text_lt: String
-  text_lte: String
-  text_gt: String
-  text_gte: String
-  text_contains: String
-  text_not_contains: String
-  text_starts_with: String
-  text_not_starts_with: String
-  text_ends_with: String
-  text_not_ends_with: String
-  note: String
-  note_not: String
-  note_in: [String!]
-  note_not_in: [String!]
-  note_lt: String
-  note_lte: String
-  note_gt: String
-  note_gte: String
-  note_contains: String
-  note_not_contains: String
-  note_starts_with: String
-  note_not_starts_with: String
-  note_ends_with: String
-  note_not_ends_with: String
-  createdAt: DateTime
-  createdAt_not: DateTime
-  createdAt_in: [DateTime!]
-  createdAt_not_in: [DateTime!]
-  createdAt_lt: DateTime
-  createdAt_lte: DateTime
-  createdAt_gt: DateTime
-  createdAt_gte: DateTime
-  updatedAt: DateTime
-  updatedAt_not: DateTime
-  updatedAt_in: [DateTime!]
-  updatedAt_not_in: [DateTime!]
-  updatedAt_lt: DateTime
-  updatedAt_lte: DateTime
-  updatedAt_gt: DateTime
-  updatedAt_gte: DateTime
-  AND: [CustomerRelationshipScalarWhereInput!]
-  OR: [CustomerRelationshipScalarWhereInput!]
-  NOT: [CustomerRelationshipScalarWhereInput!]
-}
-
-type CustomerRelationshipSubscriptionPayload {
-  mutation: MutationType!
-  node: CustomerRelationship
-  updatedFields: [String!]
-  previousValues: CustomerRelationshipPreviousValues
-}
-
-input CustomerRelationshipSubscriptionWhereInput {
-  mutation_in: [MutationType!]
-  updatedFields_contains: String
-  updatedFields_contains_every: [String!]
-  updatedFields_contains_some: [String!]
-  node: CustomerRelationshipWhereInput
-  AND: [CustomerRelationshipSubscriptionWhereInput!]
-  OR: [CustomerRelationshipSubscriptionWhereInput!]
-  NOT: [CustomerRelationshipSubscriptionWhereInput!]
-}
-
-input CustomerRelationshipUpdateInput {
-  table_ids: TableUpdateManyWithoutCustomer_relationship_entry_idsInput
-  text: String
-  note: String
-  createdBy: UserUpdateOneRequiredInput
-  updatedBy: UserUpdateOneRequiredInput
-}
-
-input CustomerRelationshipUpdateManyDataInput {
-  text: String
-  note: String
-}
-
-input CustomerRelationshipUpdateManyMutationInput {
-  text: String
-  note: String
-}
-
-input CustomerRelationshipUpdateManyWithoutTable_idsInput {
-  create: [CustomerRelationshipCreateWithoutTable_idsInput!]
-  delete: [CustomerRelationshipWhereUniqueInput!]
-  connect: [CustomerRelationshipWhereUniqueInput!]
-  set: [CustomerRelationshipWhereUniqueInput!]
-  disconnect: [CustomerRelationshipWhereUniqueInput!]
-  update: [CustomerRelationshipUpdateWithWhereUniqueWithoutTable_idsInput!]
-  upsert: [CustomerRelationshipUpsertWithWhereUniqueWithoutTable_idsInput!]
-  deleteMany: [CustomerRelationshipScalarWhereInput!]
-  updateMany: [CustomerRelationshipUpdateManyWithWhereNestedInput!]
-}
-
-input CustomerRelationshipUpdateManyWithWhereNestedInput {
-  where: CustomerRelationshipScalarWhereInput!
-  data: CustomerRelationshipUpdateManyDataInput!
-}
-
-input CustomerRelationshipUpdateWithoutTable_idsDataInput {
-  text: String
-  note: String
-  createdBy: UserUpdateOneRequiredInput
-  updatedBy: UserUpdateOneRequiredInput
-}
-
-input CustomerRelationshipUpdateWithWhereUniqueWithoutTable_idsInput {
-  where: CustomerRelationshipWhereUniqueInput!
-  data: CustomerRelationshipUpdateWithoutTable_idsDataInput!
-}
-
-input CustomerRelationshipUpsertWithWhereUniqueWithoutTable_idsInput {
-  where: CustomerRelationshipWhereUniqueInput!
-  update: CustomerRelationshipUpdateWithoutTable_idsDataInput!
-  create: CustomerRelationshipCreateWithoutTable_idsInput!
-}
-
-input CustomerRelationshipWhereInput {
-  id: ID
-  id_not: ID
-  id_in: [ID!]
-  id_not_in: [ID!]
-  id_lt: ID
-  id_lte: ID
-  id_gt: ID
-  id_gte: ID
-  id_contains: ID
-  id_not_contains: ID
-  id_starts_with: ID
-  id_not_starts_with: ID
-  id_ends_with: ID
-  id_not_ends_with: ID
-  table_ids_every: TableWhereInput
-  table_ids_some: TableWhereInput
-  table_ids_none: TableWhereInput
-  text: String
-  text_not: String
-  text_in: [String!]
-  text_not_in: [String!]
-  text_lt: String
-  text_lte: String
-  text_gt: String
-  text_gte: String
-  text_contains: String
-  text_not_contains: String
-  text_starts_with: String
-  text_not_starts_with: String
-  text_ends_with: String
-  text_not_ends_with: String
-  note: String
-  note_not: String
-  note_in: [String!]
-  note_not_in: [String!]
-  note_lt: String
-  note_lte: String
-  note_gt: String
-  note_gte: String
-  note_contains: String
-  note_not_contains: String
-  note_starts_with: String
-  note_not_starts_with: String
-  note_ends_with: String
-  note_not_ends_with: String
-  createdBy: UserWhereInput
-  updatedBy: UserWhereInput
-  createdAt: DateTime
-  createdAt_not: DateTime
-  createdAt_in: [DateTime!]
-  createdAt_not_in: [DateTime!]
-  createdAt_lt: DateTime
-  createdAt_lte: DateTime
-  createdAt_gt: DateTime
-  createdAt_gte: DateTime
-  updatedAt: DateTime
-  updatedAt_not: DateTime
-  updatedAt_in: [DateTime!]
-  updatedAt_not_in: [DateTime!]
-  updatedAt_lt: DateTime
-  updatedAt_lte: DateTime
-  updatedAt_gt: DateTime
-  updatedAt_gte: DateTime
-  AND: [CustomerRelationshipWhereInput!]
-  OR: [CustomerRelationshipWhereInput!]
-  NOT: [CustomerRelationshipWhereInput!]
-}
-
-input CustomerRelationshipWhereUniqueInput {
-  id: ID
-}
-
-type CustomerSegment {
-  id: ID!
-  table_ids(where: TableWhereInput, orderBy: TableOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Table!]
-  text: String!
-  note: String
-  createdBy: User!
-  updatedBy: User!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-}
-
-type CustomerSegmentConnection {
-  pageInfo: PageInfo!
-  edges: [CustomerSegmentEdge]!
-  aggregate: AggregateCustomerSegment!
-}
-
-input CustomerSegmentCreateInput {
-  id: ID
-  table_ids: TableCreateManyWithoutCustomer_segment_entry_idsInput
-  text: String!
-  note: String
-  createdBy: UserCreateOneInput!
-  updatedBy: UserCreateOneInput!
-}
-
-input CustomerSegmentCreateManyWithoutTable_idsInput {
-  create: [CustomerSegmentCreateWithoutTable_idsInput!]
-  connect: [CustomerSegmentWhereUniqueInput!]
-}
-
-input CustomerSegmentCreateWithoutTable_idsInput {
-  id: ID
-  text: String!
-  note: String
-  createdBy: UserCreateOneInput!
-  updatedBy: UserCreateOneInput!
-}
-
-type CustomerSegmentEdge {
-  node: CustomerSegment!
-  cursor: String!
-}
-
-enum CustomerSegmentOrderByInput {
-  id_ASC
-  id_DESC
-  text_ASC
-  text_DESC
-  note_ASC
-  note_DESC
-  createdAt_ASC
-  createdAt_DESC
-  updatedAt_ASC
-  updatedAt_DESC
-}
-
-type CustomerSegmentPreviousValues {
-  id: ID!
-  text: String!
-  note: String
-  createdAt: DateTime!
-  updatedAt: DateTime!
-}
-
-input CustomerSegmentScalarWhereInput {
-  id: ID
-  id_not: ID
-  id_in: [ID!]
-  id_not_in: [ID!]
-  id_lt: ID
-  id_lte: ID
-  id_gt: ID
-  id_gte: ID
-  id_contains: ID
-  id_not_contains: ID
-  id_starts_with: ID
-  id_not_starts_with: ID
-  id_ends_with: ID
-  id_not_ends_with: ID
-  text: String
-  text_not: String
-  text_in: [String!]
-  text_not_in: [String!]
-  text_lt: String
-  text_lte: String
-  text_gt: String
-  text_gte: String
-  text_contains: String
-  text_not_contains: String
-  text_starts_with: String
-  text_not_starts_with: String
-  text_ends_with: String
-  text_not_ends_with: String
-  note: String
-  note_not: String
-  note_in: [String!]
-  note_not_in: [String!]
-  note_lt: String
-  note_lte: String
-  note_gt: String
-  note_gte: String
-  note_contains: String
-  note_not_contains: String
-  note_starts_with: String
-  note_not_starts_with: String
-  note_ends_with: String
-  note_not_ends_with: String
-  createdAt: DateTime
-  createdAt_not: DateTime
-  createdAt_in: [DateTime!]
-  createdAt_not_in: [DateTime!]
-  createdAt_lt: DateTime
-  createdAt_lte: DateTime
-  createdAt_gt: DateTime
-  createdAt_gte: DateTime
-  updatedAt: DateTime
-  updatedAt_not: DateTime
-  updatedAt_in: [DateTime!]
-  updatedAt_not_in: [DateTime!]
-  updatedAt_lt: DateTime
-  updatedAt_lte: DateTime
-  updatedAt_gt: DateTime
-  updatedAt_gte: DateTime
-  AND: [CustomerSegmentScalarWhereInput!]
-  OR: [CustomerSegmentScalarWhereInput!]
-  NOT: [CustomerSegmentScalarWhereInput!]
-}
-
-type CustomerSegmentSubscriptionPayload {
-  mutation: MutationType!
-  node: CustomerSegment
-  updatedFields: [String!]
-  previousValues: CustomerSegmentPreviousValues
-}
-
-input CustomerSegmentSubscriptionWhereInput {
-  mutation_in: [MutationType!]
-  updatedFields_contains: String
-  updatedFields_contains_every: [String!]
-  updatedFields_contains_some: [String!]
-  node: CustomerSegmentWhereInput
-  AND: [CustomerSegmentSubscriptionWhereInput!]
-  OR: [CustomerSegmentSubscriptionWhereInput!]
-  NOT: [CustomerSegmentSubscriptionWhereInput!]
-}
-
-input CustomerSegmentUpdateInput {
-  table_ids: TableUpdateManyWithoutCustomer_segment_entry_idsInput
-  text: String
-  note: String
-  createdBy: UserUpdateOneRequiredInput
-  updatedBy: UserUpdateOneRequiredInput
-}
-
-input CustomerSegmentUpdateManyDataInput {
-  text: String
-  note: String
-}
-
-input CustomerSegmentUpdateManyMutationInput {
-  text: String
-  note: String
-}
-
-input CustomerSegmentUpdateManyWithoutTable_idsInput {
-  create: [CustomerSegmentCreateWithoutTable_idsInput!]
-  delete: [CustomerSegmentWhereUniqueInput!]
-  connect: [CustomerSegmentWhereUniqueInput!]
-  set: [CustomerSegmentWhereUniqueInput!]
-  disconnect: [CustomerSegmentWhereUniqueInput!]
-  update: [CustomerSegmentUpdateWithWhereUniqueWithoutTable_idsInput!]
-  upsert: [CustomerSegmentUpsertWithWhereUniqueWithoutTable_idsInput!]
-  deleteMany: [CustomerSegmentScalarWhereInput!]
-  updateMany: [CustomerSegmentUpdateManyWithWhereNestedInput!]
-}
-
-input CustomerSegmentUpdateManyWithWhereNestedInput {
-  where: CustomerSegmentScalarWhereInput!
-  data: CustomerSegmentUpdateManyDataInput!
-}
-
-input CustomerSegmentUpdateWithoutTable_idsDataInput {
-  text: String
-  note: String
-  createdBy: UserUpdateOneRequiredInput
-  updatedBy: UserUpdateOneRequiredInput
-}
-
-input CustomerSegmentUpdateWithWhereUniqueWithoutTable_idsInput {
-  where: CustomerSegmentWhereUniqueInput!
-  data: CustomerSegmentUpdateWithoutTable_idsDataInput!
-}
-
-input CustomerSegmentUpsertWithWhereUniqueWithoutTable_idsInput {
-  where: CustomerSegmentWhereUniqueInput!
-  update: CustomerSegmentUpdateWithoutTable_idsDataInput!
-  create: CustomerSegmentCreateWithoutTable_idsInput!
-}
-
-input CustomerSegmentWhereInput {
-  id: ID
-  id_not: ID
-  id_in: [ID!]
-  id_not_in: [ID!]
-  id_lt: ID
-  id_lte: ID
-  id_gt: ID
-  id_gte: ID
-  id_contains: ID
-  id_not_contains: ID
-  id_starts_with: ID
-  id_not_starts_with: ID
-  id_ends_with: ID
-  id_not_ends_with: ID
-  table_ids_every: TableWhereInput
-  table_ids_some: TableWhereInput
-  table_ids_none: TableWhereInput
-  text: String
-  text_not: String
-  text_in: [String!]
-  text_not_in: [String!]
-  text_lt: String
-  text_lte: String
-  text_gt: String
-  text_gte: String
-  text_contains: String
-  text_not_contains: String
-  text_starts_with: String
-  text_not_starts_with: String
-  text_ends_with: String
-  text_not_ends_with: String
-  note: String
-  note_not: String
-  note_in: [String!]
-  note_not_in: [String!]
-  note_lt: String
-  note_lte: String
-  note_gt: String
-  note_gte: String
-  note_contains: String
-  note_not_contains: String
-  note_starts_with: String
-  note_not_starts_with: String
-  note_ends_with: String
-  note_not_ends_with: String
-  createdBy: UserWhereInput
-  updatedBy: UserWhereInput
-  createdAt: DateTime
-  createdAt_not: DateTime
-  createdAt_in: [DateTime!]
-  createdAt_not_in: [DateTime!]
-  createdAt_lt: DateTime
-  createdAt_lte: DateTime
-  createdAt_gt: DateTime
-  createdAt_gte: DateTime
-  updatedAt: DateTime
-  updatedAt_not: DateTime
-  updatedAt_in: [DateTime!]
-  updatedAt_not_in: [DateTime!]
-  updatedAt_lt: DateTime
-  updatedAt_lte: DateTime
-  updatedAt_gt: DateTime
-  updatedAt_gte: DateTime
-  AND: [CustomerSegmentWhereInput!]
-  OR: [CustomerSegmentWhereInput!]
-  NOT: [CustomerSegmentWhereInput!]
-}
-
-input CustomerSegmentWhereUniqueInput {
-  id: ID
-}
-
 scalar DateTime
 
-type KeyActitvity {
+type Expense {
   id: ID!
   table_ids(where: TableWhereInput, orderBy: TableOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Table!]
   text: String!
@@ -1720,27 +964,27 @@ type KeyActitvity {
   updatedAt: DateTime!
 }
 
-type KeyActitvityConnection {
+type ExpenseConnection {
   pageInfo: PageInfo!
-  edges: [KeyActitvityEdge]!
-  aggregate: AggregateKeyActitvity!
+  edges: [ExpenseEdge]!
+  aggregate: AggregateExpense!
 }
 
-input KeyActitvityCreateInput {
+input ExpenseCreateInput {
   id: ID
-  table_ids: TableCreateManyWithoutKey_activity_entry_idsInput
+  table_ids: TableCreateManyWithoutExpense_entry_idsInput
   text: String!
   note: String
   createdBy: UserCreateOneInput!
   updatedBy: UserCreateOneInput!
 }
 
-input KeyActitvityCreateManyWithoutTable_idsInput {
-  create: [KeyActitvityCreateWithoutTable_idsInput!]
-  connect: [KeyActitvityWhereUniqueInput!]
+input ExpenseCreateManyWithoutTable_idsInput {
+  create: [ExpenseCreateWithoutTable_idsInput!]
+  connect: [ExpenseWhereUniqueInput!]
 }
 
-input KeyActitvityCreateWithoutTable_idsInput {
+input ExpenseCreateWithoutTable_idsInput {
   id: ID
   text: String!
   note: String
@@ -1748,12 +992,12 @@ input KeyActitvityCreateWithoutTable_idsInput {
   updatedBy: UserCreateOneInput!
 }
 
-type KeyActitvityEdge {
-  node: KeyActitvity!
+type ExpenseEdge {
+  node: Expense!
   cursor: String!
 }
 
-enum KeyActitvityOrderByInput {
+enum ExpenseOrderByInput {
   id_ASC
   id_DESC
   text_ASC
@@ -1766,7 +1010,7 @@ enum KeyActitvityOrderByInput {
   updatedAt_DESC
 }
 
-type KeyActitvityPreviousValues {
+type ExpensePreviousValues {
   id: ID!
   text: String!
   note: String
@@ -1774,7 +1018,7 @@ type KeyActitvityPreviousValues {
   updatedAt: DateTime!
 }
 
-input KeyActitvityScalarWhereInput {
+input ExpenseScalarWhereInput {
   id: ID
   id_not: ID
   id_in: [ID!]
@@ -1833,83 +1077,83 @@ input KeyActitvityScalarWhereInput {
   updatedAt_lte: DateTime
   updatedAt_gt: DateTime
   updatedAt_gte: DateTime
-  AND: [KeyActitvityScalarWhereInput!]
-  OR: [KeyActitvityScalarWhereInput!]
-  NOT: [KeyActitvityScalarWhereInput!]
+  AND: [ExpenseScalarWhereInput!]
+  OR: [ExpenseScalarWhereInput!]
+  NOT: [ExpenseScalarWhereInput!]
 }
 
-type KeyActitvitySubscriptionPayload {
+type ExpenseSubscriptionPayload {
   mutation: MutationType!
-  node: KeyActitvity
+  node: Expense
   updatedFields: [String!]
-  previousValues: KeyActitvityPreviousValues
+  previousValues: ExpensePreviousValues
 }
 
-input KeyActitvitySubscriptionWhereInput {
+input ExpenseSubscriptionWhereInput {
   mutation_in: [MutationType!]
   updatedFields_contains: String
   updatedFields_contains_every: [String!]
   updatedFields_contains_some: [String!]
-  node: KeyActitvityWhereInput
-  AND: [KeyActitvitySubscriptionWhereInput!]
-  OR: [KeyActitvitySubscriptionWhereInput!]
-  NOT: [KeyActitvitySubscriptionWhereInput!]
+  node: ExpenseWhereInput
+  AND: [ExpenseSubscriptionWhereInput!]
+  OR: [ExpenseSubscriptionWhereInput!]
+  NOT: [ExpenseSubscriptionWhereInput!]
 }
 
-input KeyActitvityUpdateInput {
-  table_ids: TableUpdateManyWithoutKey_activity_entry_idsInput
+input ExpenseUpdateInput {
+  table_ids: TableUpdateManyWithoutExpense_entry_idsInput
   text: String
   note: String
   createdBy: UserUpdateOneRequiredInput
   updatedBy: UserUpdateOneRequiredInput
 }
 
-input KeyActitvityUpdateManyDataInput {
+input ExpenseUpdateManyDataInput {
   text: String
   note: String
 }
 
-input KeyActitvityUpdateManyMutationInput {
+input ExpenseUpdateManyMutationInput {
   text: String
   note: String
 }
 
-input KeyActitvityUpdateManyWithoutTable_idsInput {
-  create: [KeyActitvityCreateWithoutTable_idsInput!]
-  delete: [KeyActitvityWhereUniqueInput!]
-  connect: [KeyActitvityWhereUniqueInput!]
-  set: [KeyActitvityWhereUniqueInput!]
-  disconnect: [KeyActitvityWhereUniqueInput!]
-  update: [KeyActitvityUpdateWithWhereUniqueWithoutTable_idsInput!]
-  upsert: [KeyActitvityUpsertWithWhereUniqueWithoutTable_idsInput!]
-  deleteMany: [KeyActitvityScalarWhereInput!]
-  updateMany: [KeyActitvityUpdateManyWithWhereNestedInput!]
+input ExpenseUpdateManyWithoutTable_idsInput {
+  create: [ExpenseCreateWithoutTable_idsInput!]
+  delete: [ExpenseWhereUniqueInput!]
+  connect: [ExpenseWhereUniqueInput!]
+  set: [ExpenseWhereUniqueInput!]
+  disconnect: [ExpenseWhereUniqueInput!]
+  update: [ExpenseUpdateWithWhereUniqueWithoutTable_idsInput!]
+  upsert: [ExpenseUpsertWithWhereUniqueWithoutTable_idsInput!]
+  deleteMany: [ExpenseScalarWhereInput!]
+  updateMany: [ExpenseUpdateManyWithWhereNestedInput!]
 }
 
-input KeyActitvityUpdateManyWithWhereNestedInput {
-  where: KeyActitvityScalarWhereInput!
-  data: KeyActitvityUpdateManyDataInput!
+input ExpenseUpdateManyWithWhereNestedInput {
+  where: ExpenseScalarWhereInput!
+  data: ExpenseUpdateManyDataInput!
 }
 
-input KeyActitvityUpdateWithoutTable_idsDataInput {
+input ExpenseUpdateWithoutTable_idsDataInput {
   text: String
   note: String
   createdBy: UserUpdateOneRequiredInput
   updatedBy: UserUpdateOneRequiredInput
 }
 
-input KeyActitvityUpdateWithWhereUniqueWithoutTable_idsInput {
-  where: KeyActitvityWhereUniqueInput!
-  data: KeyActitvityUpdateWithoutTable_idsDataInput!
+input ExpenseUpdateWithWhereUniqueWithoutTable_idsInput {
+  where: ExpenseWhereUniqueInput!
+  data: ExpenseUpdateWithoutTable_idsDataInput!
 }
 
-input KeyActitvityUpsertWithWhereUniqueWithoutTable_idsInput {
-  where: KeyActitvityWhereUniqueInput!
-  update: KeyActitvityUpdateWithoutTable_idsDataInput!
-  create: KeyActitvityCreateWithoutTable_idsInput!
+input ExpenseUpsertWithWhereUniqueWithoutTable_idsInput {
+  where: ExpenseWhereUniqueInput!
+  update: ExpenseUpdateWithoutTable_idsDataInput!
+  create: ExpenseCreateWithoutTable_idsInput!
 }
 
-input KeyActitvityWhereInput {
+input ExpenseWhereInput {
   id: ID
   id_not: ID
   id_in: [ID!]
@@ -1973,618 +1217,48 @@ input KeyActitvityWhereInput {
   updatedAt_lte: DateTime
   updatedAt_gt: DateTime
   updatedAt_gte: DateTime
-  AND: [KeyActitvityWhereInput!]
-  OR: [KeyActitvityWhereInput!]
-  NOT: [KeyActitvityWhereInput!]
+  AND: [ExpenseWhereInput!]
+  OR: [ExpenseWhereInput!]
+  NOT: [ExpenseWhereInput!]
 }
 
-input KeyActitvityWhereUniqueInput {
-  id: ID
-}
-
-type KeyPartner {
-  id: ID!
-  table_ids(where: TableWhereInput, orderBy: TableOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Table!]
-  text: String!
-  note: String
-  createdBy: User!
-  updatedBy: User!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-}
-
-type KeyPartnerConnection {
-  pageInfo: PageInfo!
-  edges: [KeyPartnerEdge]!
-  aggregate: AggregateKeyPartner!
-}
-
-input KeyPartnerCreateInput {
-  id: ID
-  table_ids: TableCreateManyWithoutKey_partner_entry_idsInput
-  text: String!
-  note: String
-  createdBy: UserCreateOneInput!
-  updatedBy: UserCreateOneInput!
-}
-
-input KeyPartnerCreateManyWithoutTable_idsInput {
-  create: [KeyPartnerCreateWithoutTable_idsInput!]
-  connect: [KeyPartnerWhereUniqueInput!]
-}
-
-input KeyPartnerCreateWithoutTable_idsInput {
-  id: ID
-  text: String!
-  note: String
-  createdBy: UserCreateOneInput!
-  updatedBy: UserCreateOneInput!
-}
-
-type KeyPartnerEdge {
-  node: KeyPartner!
-  cursor: String!
-}
-
-enum KeyPartnerOrderByInput {
-  id_ASC
-  id_DESC
-  text_ASC
-  text_DESC
-  note_ASC
-  note_DESC
-  createdAt_ASC
-  createdAt_DESC
-  updatedAt_ASC
-  updatedAt_DESC
-}
-
-type KeyPartnerPreviousValues {
-  id: ID!
-  text: String!
-  note: String
-  createdAt: DateTime!
-  updatedAt: DateTime!
-}
-
-input KeyPartnerScalarWhereInput {
-  id: ID
-  id_not: ID
-  id_in: [ID!]
-  id_not_in: [ID!]
-  id_lt: ID
-  id_lte: ID
-  id_gt: ID
-  id_gte: ID
-  id_contains: ID
-  id_not_contains: ID
-  id_starts_with: ID
-  id_not_starts_with: ID
-  id_ends_with: ID
-  id_not_ends_with: ID
-  text: String
-  text_not: String
-  text_in: [String!]
-  text_not_in: [String!]
-  text_lt: String
-  text_lte: String
-  text_gt: String
-  text_gte: String
-  text_contains: String
-  text_not_contains: String
-  text_starts_with: String
-  text_not_starts_with: String
-  text_ends_with: String
-  text_not_ends_with: String
-  note: String
-  note_not: String
-  note_in: [String!]
-  note_not_in: [String!]
-  note_lt: String
-  note_lte: String
-  note_gt: String
-  note_gte: String
-  note_contains: String
-  note_not_contains: String
-  note_starts_with: String
-  note_not_starts_with: String
-  note_ends_with: String
-  note_not_ends_with: String
-  createdAt: DateTime
-  createdAt_not: DateTime
-  createdAt_in: [DateTime!]
-  createdAt_not_in: [DateTime!]
-  createdAt_lt: DateTime
-  createdAt_lte: DateTime
-  createdAt_gt: DateTime
-  createdAt_gte: DateTime
-  updatedAt: DateTime
-  updatedAt_not: DateTime
-  updatedAt_in: [DateTime!]
-  updatedAt_not_in: [DateTime!]
-  updatedAt_lt: DateTime
-  updatedAt_lte: DateTime
-  updatedAt_gt: DateTime
-  updatedAt_gte: DateTime
-  AND: [KeyPartnerScalarWhereInput!]
-  OR: [KeyPartnerScalarWhereInput!]
-  NOT: [KeyPartnerScalarWhereInput!]
-}
-
-type KeyPartnerSubscriptionPayload {
-  mutation: MutationType!
-  node: KeyPartner
-  updatedFields: [String!]
-  previousValues: KeyPartnerPreviousValues
-}
-
-input KeyPartnerSubscriptionWhereInput {
-  mutation_in: [MutationType!]
-  updatedFields_contains: String
-  updatedFields_contains_every: [String!]
-  updatedFields_contains_some: [String!]
-  node: KeyPartnerWhereInput
-  AND: [KeyPartnerSubscriptionWhereInput!]
-  OR: [KeyPartnerSubscriptionWhereInput!]
-  NOT: [KeyPartnerSubscriptionWhereInput!]
-}
-
-input KeyPartnerUpdateInput {
-  table_ids: TableUpdateManyWithoutKey_partner_entry_idsInput
-  text: String
-  note: String
-  createdBy: UserUpdateOneRequiredInput
-  updatedBy: UserUpdateOneRequiredInput
-}
-
-input KeyPartnerUpdateManyDataInput {
-  text: String
-  note: String
-}
-
-input KeyPartnerUpdateManyMutationInput {
-  text: String
-  note: String
-}
-
-input KeyPartnerUpdateManyWithoutTable_idsInput {
-  create: [KeyPartnerCreateWithoutTable_idsInput!]
-  delete: [KeyPartnerWhereUniqueInput!]
-  connect: [KeyPartnerWhereUniqueInput!]
-  set: [KeyPartnerWhereUniqueInput!]
-  disconnect: [KeyPartnerWhereUniqueInput!]
-  update: [KeyPartnerUpdateWithWhereUniqueWithoutTable_idsInput!]
-  upsert: [KeyPartnerUpsertWithWhereUniqueWithoutTable_idsInput!]
-  deleteMany: [KeyPartnerScalarWhereInput!]
-  updateMany: [KeyPartnerUpdateManyWithWhereNestedInput!]
-}
-
-input KeyPartnerUpdateManyWithWhereNestedInput {
-  where: KeyPartnerScalarWhereInput!
-  data: KeyPartnerUpdateManyDataInput!
-}
-
-input KeyPartnerUpdateWithoutTable_idsDataInput {
-  text: String
-  note: String
-  createdBy: UserUpdateOneRequiredInput
-  updatedBy: UserUpdateOneRequiredInput
-}
-
-input KeyPartnerUpdateWithWhereUniqueWithoutTable_idsInput {
-  where: KeyPartnerWhereUniqueInput!
-  data: KeyPartnerUpdateWithoutTable_idsDataInput!
-}
-
-input KeyPartnerUpsertWithWhereUniqueWithoutTable_idsInput {
-  where: KeyPartnerWhereUniqueInput!
-  update: KeyPartnerUpdateWithoutTable_idsDataInput!
-  create: KeyPartnerCreateWithoutTable_idsInput!
-}
-
-input KeyPartnerWhereInput {
-  id: ID
-  id_not: ID
-  id_in: [ID!]
-  id_not_in: [ID!]
-  id_lt: ID
-  id_lte: ID
-  id_gt: ID
-  id_gte: ID
-  id_contains: ID
-  id_not_contains: ID
-  id_starts_with: ID
-  id_not_starts_with: ID
-  id_ends_with: ID
-  id_not_ends_with: ID
-  table_ids_every: TableWhereInput
-  table_ids_some: TableWhereInput
-  table_ids_none: TableWhereInput
-  text: String
-  text_not: String
-  text_in: [String!]
-  text_not_in: [String!]
-  text_lt: String
-  text_lte: String
-  text_gt: String
-  text_gte: String
-  text_contains: String
-  text_not_contains: String
-  text_starts_with: String
-  text_not_starts_with: String
-  text_ends_with: String
-  text_not_ends_with: String
-  note: String
-  note_not: String
-  note_in: [String!]
-  note_not_in: [String!]
-  note_lt: String
-  note_lte: String
-  note_gt: String
-  note_gte: String
-  note_contains: String
-  note_not_contains: String
-  note_starts_with: String
-  note_not_starts_with: String
-  note_ends_with: String
-  note_not_ends_with: String
-  createdBy: UserWhereInput
-  updatedBy: UserWhereInput
-  createdAt: DateTime
-  createdAt_not: DateTime
-  createdAt_in: [DateTime!]
-  createdAt_not_in: [DateTime!]
-  createdAt_lt: DateTime
-  createdAt_lte: DateTime
-  createdAt_gt: DateTime
-  createdAt_gte: DateTime
-  updatedAt: DateTime
-  updatedAt_not: DateTime
-  updatedAt_in: [DateTime!]
-  updatedAt_not_in: [DateTime!]
-  updatedAt_lt: DateTime
-  updatedAt_lte: DateTime
-  updatedAt_gt: DateTime
-  updatedAt_gte: DateTime
-  AND: [KeyPartnerWhereInput!]
-  OR: [KeyPartnerWhereInput!]
-  NOT: [KeyPartnerWhereInput!]
-}
-
-input KeyPartnerWhereUniqueInput {
-  id: ID
-}
-
-type KeyResource {
-  id: ID!
-  table_ids(where: TableWhereInput, orderBy: TableOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Table!]
-  text: String!
-  note: String
-  createdBy: User!
-  updatedBy: User!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-}
-
-type KeyResourceConnection {
-  pageInfo: PageInfo!
-  edges: [KeyResourceEdge]!
-  aggregate: AggregateKeyResource!
-}
-
-input KeyResourceCreateInput {
-  id: ID
-  table_ids: TableCreateManyWithoutKey_resource_entry_idsInput
-  text: String!
-  note: String
-  createdBy: UserCreateOneInput!
-  updatedBy: UserCreateOneInput!
-}
-
-input KeyResourceCreateManyWithoutTable_idsInput {
-  create: [KeyResourceCreateWithoutTable_idsInput!]
-  connect: [KeyResourceWhereUniqueInput!]
-}
-
-input KeyResourceCreateWithoutTable_idsInput {
-  id: ID
-  text: String!
-  note: String
-  createdBy: UserCreateOneInput!
-  updatedBy: UserCreateOneInput!
-}
-
-type KeyResourceEdge {
-  node: KeyResource!
-  cursor: String!
-}
-
-enum KeyResourceOrderByInput {
-  id_ASC
-  id_DESC
-  text_ASC
-  text_DESC
-  note_ASC
-  note_DESC
-  createdAt_ASC
-  createdAt_DESC
-  updatedAt_ASC
-  updatedAt_DESC
-}
-
-type KeyResourcePreviousValues {
-  id: ID!
-  text: String!
-  note: String
-  createdAt: DateTime!
-  updatedAt: DateTime!
-}
-
-input KeyResourceScalarWhereInput {
-  id: ID
-  id_not: ID
-  id_in: [ID!]
-  id_not_in: [ID!]
-  id_lt: ID
-  id_lte: ID
-  id_gt: ID
-  id_gte: ID
-  id_contains: ID
-  id_not_contains: ID
-  id_starts_with: ID
-  id_not_starts_with: ID
-  id_ends_with: ID
-  id_not_ends_with: ID
-  text: String
-  text_not: String
-  text_in: [String!]
-  text_not_in: [String!]
-  text_lt: String
-  text_lte: String
-  text_gt: String
-  text_gte: String
-  text_contains: String
-  text_not_contains: String
-  text_starts_with: String
-  text_not_starts_with: String
-  text_ends_with: String
-  text_not_ends_with: String
-  note: String
-  note_not: String
-  note_in: [String!]
-  note_not_in: [String!]
-  note_lt: String
-  note_lte: String
-  note_gt: String
-  note_gte: String
-  note_contains: String
-  note_not_contains: String
-  note_starts_with: String
-  note_not_starts_with: String
-  note_ends_with: String
-  note_not_ends_with: String
-  createdAt: DateTime
-  createdAt_not: DateTime
-  createdAt_in: [DateTime!]
-  createdAt_not_in: [DateTime!]
-  createdAt_lt: DateTime
-  createdAt_lte: DateTime
-  createdAt_gt: DateTime
-  createdAt_gte: DateTime
-  updatedAt: DateTime
-  updatedAt_not: DateTime
-  updatedAt_in: [DateTime!]
-  updatedAt_not_in: [DateTime!]
-  updatedAt_lt: DateTime
-  updatedAt_lte: DateTime
-  updatedAt_gt: DateTime
-  updatedAt_gte: DateTime
-  AND: [KeyResourceScalarWhereInput!]
-  OR: [KeyResourceScalarWhereInput!]
-  NOT: [KeyResourceScalarWhereInput!]
-}
-
-type KeyResourceSubscriptionPayload {
-  mutation: MutationType!
-  node: KeyResource
-  updatedFields: [String!]
-  previousValues: KeyResourcePreviousValues
-}
-
-input KeyResourceSubscriptionWhereInput {
-  mutation_in: [MutationType!]
-  updatedFields_contains: String
-  updatedFields_contains_every: [String!]
-  updatedFields_contains_some: [String!]
-  node: KeyResourceWhereInput
-  AND: [KeyResourceSubscriptionWhereInput!]
-  OR: [KeyResourceSubscriptionWhereInput!]
-  NOT: [KeyResourceSubscriptionWhereInput!]
-}
-
-input KeyResourceUpdateInput {
-  table_ids: TableUpdateManyWithoutKey_resource_entry_idsInput
-  text: String
-  note: String
-  createdBy: UserUpdateOneRequiredInput
-  updatedBy: UserUpdateOneRequiredInput
-}
-
-input KeyResourceUpdateManyDataInput {
-  text: String
-  note: String
-}
-
-input KeyResourceUpdateManyMutationInput {
-  text: String
-  note: String
-}
-
-input KeyResourceUpdateManyWithoutTable_idsInput {
-  create: [KeyResourceCreateWithoutTable_idsInput!]
-  delete: [KeyResourceWhereUniqueInput!]
-  connect: [KeyResourceWhereUniqueInput!]
-  set: [KeyResourceWhereUniqueInput!]
-  disconnect: [KeyResourceWhereUniqueInput!]
-  update: [KeyResourceUpdateWithWhereUniqueWithoutTable_idsInput!]
-  upsert: [KeyResourceUpsertWithWhereUniqueWithoutTable_idsInput!]
-  deleteMany: [KeyResourceScalarWhereInput!]
-  updateMany: [KeyResourceUpdateManyWithWhereNestedInput!]
-}
-
-input KeyResourceUpdateManyWithWhereNestedInput {
-  where: KeyResourceScalarWhereInput!
-  data: KeyResourceUpdateManyDataInput!
-}
-
-input KeyResourceUpdateWithoutTable_idsDataInput {
-  text: String
-  note: String
-  createdBy: UserUpdateOneRequiredInput
-  updatedBy: UserUpdateOneRequiredInput
-}
-
-input KeyResourceUpdateWithWhereUniqueWithoutTable_idsInput {
-  where: KeyResourceWhereUniqueInput!
-  data: KeyResourceUpdateWithoutTable_idsDataInput!
-}
-
-input KeyResourceUpsertWithWhereUniqueWithoutTable_idsInput {
-  where: KeyResourceWhereUniqueInput!
-  update: KeyResourceUpdateWithoutTable_idsDataInput!
-  create: KeyResourceCreateWithoutTable_idsInput!
-}
-
-input KeyResourceWhereInput {
-  id: ID
-  id_not: ID
-  id_in: [ID!]
-  id_not_in: [ID!]
-  id_lt: ID
-  id_lte: ID
-  id_gt: ID
-  id_gte: ID
-  id_contains: ID
-  id_not_contains: ID
-  id_starts_with: ID
-  id_not_starts_with: ID
-  id_ends_with: ID
-  id_not_ends_with: ID
-  table_ids_every: TableWhereInput
-  table_ids_some: TableWhereInput
-  table_ids_none: TableWhereInput
-  text: String
-  text_not: String
-  text_in: [String!]
-  text_not_in: [String!]
-  text_lt: String
-  text_lte: String
-  text_gt: String
-  text_gte: String
-  text_contains: String
-  text_not_contains: String
-  text_starts_with: String
-  text_not_starts_with: String
-  text_ends_with: String
-  text_not_ends_with: String
-  note: String
-  note_not: String
-  note_in: [String!]
-  note_not_in: [String!]
-  note_lt: String
-  note_lte: String
-  note_gt: String
-  note_gte: String
-  note_contains: String
-  note_not_contains: String
-  note_starts_with: String
-  note_not_starts_with: String
-  note_ends_with: String
-  note_not_ends_with: String
-  createdBy: UserWhereInput
-  updatedBy: UserWhereInput
-  createdAt: DateTime
-  createdAt_not: DateTime
-  createdAt_in: [DateTime!]
-  createdAt_not_in: [DateTime!]
-  createdAt_lt: DateTime
-  createdAt_lte: DateTime
-  createdAt_gt: DateTime
-  createdAt_gte: DateTime
-  updatedAt: DateTime
-  updatedAt_not: DateTime
-  updatedAt_in: [DateTime!]
-  updatedAt_not_in: [DateTime!]
-  updatedAt_lt: DateTime
-  updatedAt_lte: DateTime
-  updatedAt_gt: DateTime
-  updatedAt_gte: DateTime
-  AND: [KeyResourceWhereInput!]
-  OR: [KeyResourceWhereInput!]
-  NOT: [KeyResourceWhereInput!]
-}
-
-input KeyResourceWhereUniqueInput {
+input ExpenseWhereUniqueInput {
   id: ID
 }
 
 scalar Long
 
 type Mutation {
+  createActor(data: ActorCreateInput!): Actor!
+  updateActor(data: ActorUpdateInput!, where: ActorWhereUniqueInput!): Actor
+  updateManyActors(data: ActorUpdateManyMutationInput!, where: ActorWhereInput): BatchPayload!
+  upsertActor(where: ActorWhereUniqueInput!, create: ActorCreateInput!, update: ActorUpdateInput!): Actor!
+  deleteActor(where: ActorWhereUniqueInput!): Actor
+  deleteManyActors(where: ActorWhereInput): BatchPayload!
   createCanvas(data: CanvasCreateInput!): Canvas!
   updateCanvas(data: CanvasUpdateInput!, where: CanvasWhereUniqueInput!): Canvas
   updateManyCanvases(data: CanvasUpdateManyMutationInput!, where: CanvasWhereInput): BatchPayload!
   upsertCanvas(where: CanvasWhereUniqueInput!, create: CanvasCreateInput!, update: CanvasUpdateInput!): Canvas!
   deleteCanvas(where: CanvasWhereUniqueInput!): Canvas
   deleteManyCanvases(where: CanvasWhereInput): BatchPayload!
-  createChannel(data: ChannelCreateInput!): Channel!
-  updateChannel(data: ChannelUpdateInput!, where: ChannelWhereUniqueInput!): Channel
-  updateManyChannels(data: ChannelUpdateManyMutationInput!, where: ChannelWhereInput): BatchPayload!
-  upsertChannel(where: ChannelWhereUniqueInput!, create: ChannelCreateInput!, update: ChannelUpdateInput!): Channel!
-  deleteChannel(where: ChannelWhereUniqueInput!): Channel
-  deleteManyChannels(where: ChannelWhereInput): BatchPayload!
   createCompany(data: CompanyCreateInput!): Company!
   updateCompany(data: CompanyUpdateInput!, where: CompanyWhereUniqueInput!): Company
   updateManyCompanies(data: CompanyUpdateManyMutationInput!, where: CompanyWhereInput): BatchPayload!
   upsertCompany(where: CompanyWhereUniqueInput!, create: CompanyCreateInput!, update: CompanyUpdateInput!): Company!
   deleteCompany(where: CompanyWhereUniqueInput!): Company
   deleteManyCompanies(where: CompanyWhereInput): BatchPayload!
-  createCostStructure(data: CostStructureCreateInput!): CostStructure!
-  updateCostStructure(data: CostStructureUpdateInput!, where: CostStructureWhereUniqueInput!): CostStructure
-  updateManyCostStructures(data: CostStructureUpdateManyMutationInput!, where: CostStructureWhereInput): BatchPayload!
-  upsertCostStructure(where: CostStructureWhereUniqueInput!, create: CostStructureCreateInput!, update: CostStructureUpdateInput!): CostStructure!
-  deleteCostStructure(where: CostStructureWhereUniqueInput!): CostStructure
-  deleteManyCostStructures(where: CostStructureWhereInput): BatchPayload!
-  createCustomerRelationship(data: CustomerRelationshipCreateInput!): CustomerRelationship!
-  updateCustomerRelationship(data: CustomerRelationshipUpdateInput!, where: CustomerRelationshipWhereUniqueInput!): CustomerRelationship
-  updateManyCustomerRelationships(data: CustomerRelationshipUpdateManyMutationInput!, where: CustomerRelationshipWhereInput): BatchPayload!
-  upsertCustomerRelationship(where: CustomerRelationshipWhereUniqueInput!, create: CustomerRelationshipCreateInput!, update: CustomerRelationshipUpdateInput!): CustomerRelationship!
-  deleteCustomerRelationship(where: CustomerRelationshipWhereUniqueInput!): CustomerRelationship
-  deleteManyCustomerRelationships(where: CustomerRelationshipWhereInput): BatchPayload!
-  createCustomerSegment(data: CustomerSegmentCreateInput!): CustomerSegment!
-  updateCustomerSegment(data: CustomerSegmentUpdateInput!, where: CustomerSegmentWhereUniqueInput!): CustomerSegment
-  updateManyCustomerSegments(data: CustomerSegmentUpdateManyMutationInput!, where: CustomerSegmentWhereInput): BatchPayload!
-  upsertCustomerSegment(where: CustomerSegmentWhereUniqueInput!, create: CustomerSegmentCreateInput!, update: CustomerSegmentUpdateInput!): CustomerSegment!
-  deleteCustomerSegment(where: CustomerSegmentWhereUniqueInput!): CustomerSegment
-  deleteManyCustomerSegments(where: CustomerSegmentWhereInput): BatchPayload!
-  createKeyActitvity(data: KeyActitvityCreateInput!): KeyActitvity!
-  updateKeyActitvity(data: KeyActitvityUpdateInput!, where: KeyActitvityWhereUniqueInput!): KeyActitvity
-  updateManyKeyActitvities(data: KeyActitvityUpdateManyMutationInput!, where: KeyActitvityWhereInput): BatchPayload!
-  upsertKeyActitvity(where: KeyActitvityWhereUniqueInput!, create: KeyActitvityCreateInput!, update: KeyActitvityUpdateInput!): KeyActitvity!
-  deleteKeyActitvity(where: KeyActitvityWhereUniqueInput!): KeyActitvity
-  deleteManyKeyActitvities(where: KeyActitvityWhereInput): BatchPayload!
-  createKeyPartner(data: KeyPartnerCreateInput!): KeyPartner!
-  updateKeyPartner(data: KeyPartnerUpdateInput!, where: KeyPartnerWhereUniqueInput!): KeyPartner
-  updateManyKeyPartners(data: KeyPartnerUpdateManyMutationInput!, where: KeyPartnerWhereInput): BatchPayload!
-  upsertKeyPartner(where: KeyPartnerWhereUniqueInput!, create: KeyPartnerCreateInput!, update: KeyPartnerUpdateInput!): KeyPartner!
-  deleteKeyPartner(where: KeyPartnerWhereUniqueInput!): KeyPartner
-  deleteManyKeyPartners(where: KeyPartnerWhereInput): BatchPayload!
-  createKeyResource(data: KeyResourceCreateInput!): KeyResource!
-  updateKeyResource(data: KeyResourceUpdateInput!, where: KeyResourceWhereUniqueInput!): KeyResource
-  updateManyKeyResources(data: KeyResourceUpdateManyMutationInput!, where: KeyResourceWhereInput): BatchPayload!
-  upsertKeyResource(where: KeyResourceWhereUniqueInput!, create: KeyResourceCreateInput!, update: KeyResourceUpdateInput!): KeyResource!
-  deleteKeyResource(where: KeyResourceWhereUniqueInput!): KeyResource
-  deleteManyKeyResources(where: KeyResourceWhereInput): BatchPayload!
+  createExpense(data: ExpenseCreateInput!): Expense!
+  updateExpense(data: ExpenseUpdateInput!, where: ExpenseWhereUniqueInput!): Expense
+  updateManyExpenses(data: ExpenseUpdateManyMutationInput!, where: ExpenseWhereInput): BatchPayload!
+  upsertExpense(where: ExpenseWhereUniqueInput!, create: ExpenseCreateInput!, update: ExpenseUpdateInput!): Expense!
+  deleteExpense(where: ExpenseWhereUniqueInput!): Expense
+  deleteManyExpenses(where: ExpenseWhereInput): BatchPayload!
+  createNetworkEffect(data: NetworkEffectCreateInput!): NetworkEffect!
+  updateNetworkEffect(data: NetworkEffectUpdateInput!, where: NetworkEffectWhereUniqueInput!): NetworkEffect
+  updateManyNetworkEffects(data: NetworkEffectUpdateManyMutationInput!, where: NetworkEffectWhereInput): BatchPayload!
+  upsertNetworkEffect(where: NetworkEffectWhereUniqueInput!, create: NetworkEffectCreateInput!, update: NetworkEffectUpdateInput!): NetworkEffect!
+  deleteNetworkEffect(where: NetworkEffectWhereUniqueInput!): NetworkEffect
+  deleteManyNetworkEffects(where: NetworkEffectWhereInput): BatchPayload!
   createPattern(data: PatternCreateInput!): Pattern!
   updatePattern(data: PatternUpdateInput!, where: PatternWhereUniqueInput!): Pattern
   updateManyPatterns(data: PatternUpdateManyMutationInput!, where: PatternWhereInput): BatchPayload!
@@ -2597,23 +1271,59 @@ type Mutation {
   upsertProject(where: ProjectWhereUniqueInput!, create: ProjectCreateInput!, update: ProjectUpdateInput!): Project!
   deleteProject(where: ProjectWhereUniqueInput!): Project
   deleteManyProjects(where: ProjectWhereInput): BatchPayload!
-  createRevenueStream(data: RevenueStreamCreateInput!): RevenueStream!
-  updateRevenueStream(data: RevenueStreamUpdateInput!, where: RevenueStreamWhereUniqueInput!): RevenueStream
-  updateManyRevenueStreams(data: RevenueStreamUpdateManyMutationInput!, where: RevenueStreamWhereInput): BatchPayload!
-  upsertRevenueStream(where: RevenueStreamWhereUniqueInput!, create: RevenueStreamCreateInput!, update: RevenueStreamUpdateInput!): RevenueStream!
-  deleteRevenueStream(where: RevenueStreamWhereUniqueInput!): RevenueStream
-  deleteManyRevenueStreams(where: RevenueStreamWhereInput): BatchPayload!
+  createRegulatory(data: RegulatoryCreateInput!): Regulatory!
+  updateRegulatory(data: RegulatoryUpdateInput!, where: RegulatoryWhereUniqueInput!): Regulatory
+  updateManyRegulatories(data: RegulatoryUpdateManyMutationInput!, where: RegulatoryWhereInput): BatchPayload!
+  upsertRegulatory(where: RegulatoryWhereUniqueInput!, create: RegulatoryCreateInput!, update: RegulatoryUpdateInput!): Regulatory!
+  deleteRegulatory(where: RegulatoryWhereUniqueInput!): Regulatory
+  deleteManyRegulatories(where: RegulatoryWhereInput): BatchPayload!
+  createRevenue(data: RevenueCreateInput!): Revenue!
+  updateRevenue(data: RevenueUpdateInput!, where: RevenueWhereUniqueInput!): Revenue
+  updateManyRevenues(data: RevenueUpdateManyMutationInput!, where: RevenueWhereInput): BatchPayload!
+  upsertRevenue(where: RevenueWhereUniqueInput!, create: RevenueCreateInput!, update: RevenueUpdateInput!): Revenue!
+  deleteRevenue(where: RevenueWhereUniqueInput!): Revenue
+  deleteManyRevenues(where: RevenueWhereInput): BatchPayload!
+  createStrategy(data: StrategyCreateInput!): Strategy!
+  updateStrategy(data: StrategyUpdateInput!, where: StrategyWhereUniqueInput!): Strategy
+  updateManyStrategies(data: StrategyUpdateManyMutationInput!, where: StrategyWhereInput): BatchPayload!
+  upsertStrategy(where: StrategyWhereUniqueInput!, create: StrategyCreateInput!, update: StrategyUpdateInput!): Strategy!
+  deleteStrategy(where: StrategyWhereUniqueInput!): Strategy
+  deleteManyStrategies(where: StrategyWhereInput): BatchPayload!
+  createStrategyPattern(data: StrategyPatternCreateInput!): StrategyPattern!
+  updateStrategyPattern(data: StrategyPatternUpdateInput!, where: StrategyPatternWhereUniqueInput!): StrategyPattern
+  updateManyStrategyPatterns(data: StrategyPatternUpdateManyMutationInput!, where: StrategyPatternWhereInput): BatchPayload!
+  upsertStrategyPattern(where: StrategyPatternWhereUniqueInput!, create: StrategyPatternCreateInput!, update: StrategyPatternUpdateInput!): StrategyPattern!
+  deleteStrategyPattern(where: StrategyPatternWhereUniqueInput!): StrategyPattern
+  deleteManyStrategyPatterns(where: StrategyPatternWhereInput): BatchPayload!
   createTable(data: TableCreateInput!): Table!
   updateTable(data: TableUpdateInput!, where: TableWhereUniqueInput!): Table
   upsertTable(where: TableWhereUniqueInput!, create: TableCreateInput!, update: TableUpdateInput!): Table!
   deleteTable(where: TableWhereUniqueInput!): Table
   deleteManyTables(where: TableWhereInput): BatchPayload!
+  createTechnicalInfrastracture(data: TechnicalInfrastractureCreateInput!): TechnicalInfrastracture!
+  updateTechnicalInfrastracture(data: TechnicalInfrastractureUpdateInput!, where: TechnicalInfrastractureWhereUniqueInput!): TechnicalInfrastracture
+  updateManyTechnicalInfrastractures(data: TechnicalInfrastractureUpdateManyMutationInput!, where: TechnicalInfrastractureWhereInput): BatchPayload!
+  upsertTechnicalInfrastracture(where: TechnicalInfrastractureWhereUniqueInput!, create: TechnicalInfrastractureCreateInput!, update: TechnicalInfrastractureUpdateInput!): TechnicalInfrastracture!
+  deleteTechnicalInfrastracture(where: TechnicalInfrastractureWhereUniqueInput!): TechnicalInfrastracture
+  deleteManyTechnicalInfrastractures(where: TechnicalInfrastractureWhereInput): BatchPayload!
   createUser(data: UserCreateInput!): User!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   deleteUser(where: UserWhereUniqueInput!): User
   deleteManyUsers(where: UserWhereInput): BatchPayload!
+  createValueCreation(data: ValueCreationCreateInput!): ValueCreation!
+  updateValueCreation(data: ValueCreationUpdateInput!, where: ValueCreationWhereUniqueInput!): ValueCreation
+  updateManyValueCreations(data: ValueCreationUpdateManyMutationInput!, where: ValueCreationWhereInput): BatchPayload!
+  upsertValueCreation(where: ValueCreationWhereUniqueInput!, create: ValueCreationCreateInput!, update: ValueCreationUpdateInput!): ValueCreation!
+  deleteValueCreation(where: ValueCreationWhereUniqueInput!): ValueCreation
+  deleteManyValueCreations(where: ValueCreationWhereInput): BatchPayload!
+  createValueDelivery(data: ValueDeliveryCreateInput!): ValueDelivery!
+  updateValueDelivery(data: ValueDeliveryUpdateInput!, where: ValueDeliveryWhereUniqueInput!): ValueDelivery
+  updateManyValueDeliveries(data: ValueDeliveryUpdateManyMutationInput!, where: ValueDeliveryWhereInput): BatchPayload!
+  upsertValueDelivery(where: ValueDeliveryWhereUniqueInput!, create: ValueDeliveryCreateInput!, update: ValueDeliveryUpdateInput!): ValueDelivery!
+  deleteValueDelivery(where: ValueDeliveryWhereUniqueInput!): ValueDelivery
+  deleteManyValueDeliveries(where: ValueDeliveryWhereInput): BatchPayload!
   createValueProposition(data: ValuePropositionCreateInput!): ValueProposition!
   updateValueProposition(data: ValuePropositionUpdateInput!, where: ValuePropositionWhereUniqueInput!): ValueProposition
   updateManyValuePropositions(data: ValuePropositionUpdateManyMutationInput!, where: ValuePropositionWhereInput): BatchPayload!
@@ -2626,6 +1336,279 @@ enum MutationType {
   CREATED
   UPDATED
   DELETED
+}
+
+type NetworkEffect {
+  id: ID!
+  table_ids(where: TableWhereInput, orderBy: TableOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Table!]
+  text: String!
+  note: String
+  createdBy: User!
+  updatedBy: User!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type NetworkEffectConnection {
+  pageInfo: PageInfo!
+  edges: [NetworkEffectEdge]!
+  aggregate: AggregateNetworkEffect!
+}
+
+input NetworkEffectCreateInput {
+  id: ID
+  table_ids: TableCreateManyWithoutNetwork_effect_entry_idsInput
+  text: String!
+  note: String
+  createdBy: UserCreateOneInput!
+  updatedBy: UserCreateOneInput!
+}
+
+input NetworkEffectCreateManyWithoutTable_idsInput {
+  create: [NetworkEffectCreateWithoutTable_idsInput!]
+  connect: [NetworkEffectWhereUniqueInput!]
+}
+
+input NetworkEffectCreateWithoutTable_idsInput {
+  id: ID
+  text: String!
+  note: String
+  createdBy: UserCreateOneInput!
+  updatedBy: UserCreateOneInput!
+}
+
+type NetworkEffectEdge {
+  node: NetworkEffect!
+  cursor: String!
+}
+
+enum NetworkEffectOrderByInput {
+  id_ASC
+  id_DESC
+  text_ASC
+  text_DESC
+  note_ASC
+  note_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type NetworkEffectPreviousValues {
+  id: ID!
+  text: String!
+  note: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+input NetworkEffectScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  text: String
+  text_not: String
+  text_in: [String!]
+  text_not_in: [String!]
+  text_lt: String
+  text_lte: String
+  text_gt: String
+  text_gte: String
+  text_contains: String
+  text_not_contains: String
+  text_starts_with: String
+  text_not_starts_with: String
+  text_ends_with: String
+  text_not_ends_with: String
+  note: String
+  note_not: String
+  note_in: [String!]
+  note_not_in: [String!]
+  note_lt: String
+  note_lte: String
+  note_gt: String
+  note_gte: String
+  note_contains: String
+  note_not_contains: String
+  note_starts_with: String
+  note_not_starts_with: String
+  note_ends_with: String
+  note_not_ends_with: String
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  AND: [NetworkEffectScalarWhereInput!]
+  OR: [NetworkEffectScalarWhereInput!]
+  NOT: [NetworkEffectScalarWhereInput!]
+}
+
+type NetworkEffectSubscriptionPayload {
+  mutation: MutationType!
+  node: NetworkEffect
+  updatedFields: [String!]
+  previousValues: NetworkEffectPreviousValues
+}
+
+input NetworkEffectSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: NetworkEffectWhereInput
+  AND: [NetworkEffectSubscriptionWhereInput!]
+  OR: [NetworkEffectSubscriptionWhereInput!]
+  NOT: [NetworkEffectSubscriptionWhereInput!]
+}
+
+input NetworkEffectUpdateInput {
+  table_ids: TableUpdateManyWithoutNetwork_effect_entry_idsInput
+  text: String
+  note: String
+  createdBy: UserUpdateOneRequiredInput
+  updatedBy: UserUpdateOneRequiredInput
+}
+
+input NetworkEffectUpdateManyDataInput {
+  text: String
+  note: String
+}
+
+input NetworkEffectUpdateManyMutationInput {
+  text: String
+  note: String
+}
+
+input NetworkEffectUpdateManyWithoutTable_idsInput {
+  create: [NetworkEffectCreateWithoutTable_idsInput!]
+  delete: [NetworkEffectWhereUniqueInput!]
+  connect: [NetworkEffectWhereUniqueInput!]
+  set: [NetworkEffectWhereUniqueInput!]
+  disconnect: [NetworkEffectWhereUniqueInput!]
+  update: [NetworkEffectUpdateWithWhereUniqueWithoutTable_idsInput!]
+  upsert: [NetworkEffectUpsertWithWhereUniqueWithoutTable_idsInput!]
+  deleteMany: [NetworkEffectScalarWhereInput!]
+  updateMany: [NetworkEffectUpdateManyWithWhereNestedInput!]
+}
+
+input NetworkEffectUpdateManyWithWhereNestedInput {
+  where: NetworkEffectScalarWhereInput!
+  data: NetworkEffectUpdateManyDataInput!
+}
+
+input NetworkEffectUpdateWithoutTable_idsDataInput {
+  text: String
+  note: String
+  createdBy: UserUpdateOneRequiredInput
+  updatedBy: UserUpdateOneRequiredInput
+}
+
+input NetworkEffectUpdateWithWhereUniqueWithoutTable_idsInput {
+  where: NetworkEffectWhereUniqueInput!
+  data: NetworkEffectUpdateWithoutTable_idsDataInput!
+}
+
+input NetworkEffectUpsertWithWhereUniqueWithoutTable_idsInput {
+  where: NetworkEffectWhereUniqueInput!
+  update: NetworkEffectUpdateWithoutTable_idsDataInput!
+  create: NetworkEffectCreateWithoutTable_idsInput!
+}
+
+input NetworkEffectWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  table_ids_every: TableWhereInput
+  table_ids_some: TableWhereInput
+  table_ids_none: TableWhereInput
+  text: String
+  text_not: String
+  text_in: [String!]
+  text_not_in: [String!]
+  text_lt: String
+  text_lte: String
+  text_gt: String
+  text_gte: String
+  text_contains: String
+  text_not_contains: String
+  text_starts_with: String
+  text_not_starts_with: String
+  text_ends_with: String
+  text_not_ends_with: String
+  note: String
+  note_not: String
+  note_in: [String!]
+  note_not_in: [String!]
+  note_lt: String
+  note_lte: String
+  note_gt: String
+  note_gte: String
+  note_contains: String
+  note_not_contains: String
+  note_starts_with: String
+  note_not_starts_with: String
+  note_ends_with: String
+  note_not_ends_with: String
+  createdBy: UserWhereInput
+  updatedBy: UserWhereInput
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  AND: [NetworkEffectWhereInput!]
+  OR: [NetworkEffectWhereInput!]
+  NOT: [NetworkEffectWhereInput!]
+}
+
+input NetworkEffectWhereUniqueInput {
+  id: ID
 }
 
 interface Node {
@@ -2644,8 +1627,18 @@ type Pattern {
   canvas_ids(where: CanvasWhereInput, orderBy: CanvasOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Canvas!]
   table_id: Table!
   company_ids(where: CompanyWhereInput, orderBy: CompanyOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Company!]
+  strategy_pattern_ids(where: StrategyPatternWhereInput, orderBy: StrategyPatternOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [StrategyPattern!]
   name: String!
   description: String
+  actorWeight: Int
+  valuePropositionWeight: Int
+  valueCreationWeight: Int
+  valueDeliveryWeight: Int
+  revenueWeight: Int
+  expenseWeight: Int
+  networkEffectWeight: Int
+  regulatoryWeight: Int
+  technicalInfrastractureWeight: Int
   createdBy: User!
   updatedBy: User!
   createdAt: DateTime!
@@ -2663,8 +1656,18 @@ input PatternCreateInput {
   canvas_ids: CanvasCreateManyWithoutPattern_idsInput
   table_id: TableCreateOneInput!
   company_ids: CompanyCreateManyWithoutPattern_idsInput
+  strategy_pattern_ids: StrategyPatternCreateManyWithoutPattern_idInput
   name: String!
   description: String
+  actorWeight: Int
+  valuePropositionWeight: Int
+  valueCreationWeight: Int
+  valueDeliveryWeight: Int
+  revenueWeight: Int
+  expenseWeight: Int
+  networkEffectWeight: Int
+  regulatoryWeight: Int
+  technicalInfrastractureWeight: Int
   createdBy: UserCreateOneInput!
   updatedBy: UserCreateOneInput!
 }
@@ -2679,12 +1682,27 @@ input PatternCreateManyWithoutCompany_idsInput {
   connect: [PatternWhereUniqueInput!]
 }
 
+input PatternCreateOneWithoutStrategy_pattern_idsInput {
+  create: PatternCreateWithoutStrategy_pattern_idsInput
+  connect: PatternWhereUniqueInput
+}
+
 input PatternCreateWithoutCanvas_idsInput {
   id: ID
   table_id: TableCreateOneInput!
   company_ids: CompanyCreateManyWithoutPattern_idsInput
+  strategy_pattern_ids: StrategyPatternCreateManyWithoutPattern_idInput
   name: String!
   description: String
+  actorWeight: Int
+  valuePropositionWeight: Int
+  valueCreationWeight: Int
+  valueDeliveryWeight: Int
+  revenueWeight: Int
+  expenseWeight: Int
+  networkEffectWeight: Int
+  regulatoryWeight: Int
+  technicalInfrastractureWeight: Int
   createdBy: UserCreateOneInput!
   updatedBy: UserCreateOneInput!
 }
@@ -2693,8 +1711,38 @@ input PatternCreateWithoutCompany_idsInput {
   id: ID
   canvas_ids: CanvasCreateManyWithoutPattern_idsInput
   table_id: TableCreateOneInput!
+  strategy_pattern_ids: StrategyPatternCreateManyWithoutPattern_idInput
   name: String!
   description: String
+  actorWeight: Int
+  valuePropositionWeight: Int
+  valueCreationWeight: Int
+  valueDeliveryWeight: Int
+  revenueWeight: Int
+  expenseWeight: Int
+  networkEffectWeight: Int
+  regulatoryWeight: Int
+  technicalInfrastractureWeight: Int
+  createdBy: UserCreateOneInput!
+  updatedBy: UserCreateOneInput!
+}
+
+input PatternCreateWithoutStrategy_pattern_idsInput {
+  id: ID
+  canvas_ids: CanvasCreateManyWithoutPattern_idsInput
+  table_id: TableCreateOneInput!
+  company_ids: CompanyCreateManyWithoutPattern_idsInput
+  name: String!
+  description: String
+  actorWeight: Int
+  valuePropositionWeight: Int
+  valueCreationWeight: Int
+  valueDeliveryWeight: Int
+  revenueWeight: Int
+  expenseWeight: Int
+  networkEffectWeight: Int
+  regulatoryWeight: Int
+  technicalInfrastractureWeight: Int
   createdBy: UserCreateOneInput!
   updatedBy: UserCreateOneInput!
 }
@@ -2711,6 +1759,24 @@ enum PatternOrderByInput {
   name_DESC
   description_ASC
   description_DESC
+  actorWeight_ASC
+  actorWeight_DESC
+  valuePropositionWeight_ASC
+  valuePropositionWeight_DESC
+  valueCreationWeight_ASC
+  valueCreationWeight_DESC
+  valueDeliveryWeight_ASC
+  valueDeliveryWeight_DESC
+  revenueWeight_ASC
+  revenueWeight_DESC
+  expenseWeight_ASC
+  expenseWeight_DESC
+  networkEffectWeight_ASC
+  networkEffectWeight_DESC
+  regulatoryWeight_ASC
+  regulatoryWeight_DESC
+  technicalInfrastractureWeight_ASC
+  technicalInfrastractureWeight_DESC
   createdAt_ASC
   createdAt_DESC
   updatedAt_ASC
@@ -2721,6 +1787,15 @@ type PatternPreviousValues {
   id: ID!
   name: String!
   description: String
+  actorWeight: Int
+  valuePropositionWeight: Int
+  valueCreationWeight: Int
+  valueDeliveryWeight: Int
+  revenueWeight: Int
+  expenseWeight: Int
+  networkEffectWeight: Int
+  regulatoryWeight: Int
+  technicalInfrastractureWeight: Int
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -2768,6 +1843,78 @@ input PatternScalarWhereInput {
   description_not_starts_with: String
   description_ends_with: String
   description_not_ends_with: String
+  actorWeight: Int
+  actorWeight_not: Int
+  actorWeight_in: [Int!]
+  actorWeight_not_in: [Int!]
+  actorWeight_lt: Int
+  actorWeight_lte: Int
+  actorWeight_gt: Int
+  actorWeight_gte: Int
+  valuePropositionWeight: Int
+  valuePropositionWeight_not: Int
+  valuePropositionWeight_in: [Int!]
+  valuePropositionWeight_not_in: [Int!]
+  valuePropositionWeight_lt: Int
+  valuePropositionWeight_lte: Int
+  valuePropositionWeight_gt: Int
+  valuePropositionWeight_gte: Int
+  valueCreationWeight: Int
+  valueCreationWeight_not: Int
+  valueCreationWeight_in: [Int!]
+  valueCreationWeight_not_in: [Int!]
+  valueCreationWeight_lt: Int
+  valueCreationWeight_lte: Int
+  valueCreationWeight_gt: Int
+  valueCreationWeight_gte: Int
+  valueDeliveryWeight: Int
+  valueDeliveryWeight_not: Int
+  valueDeliveryWeight_in: [Int!]
+  valueDeliveryWeight_not_in: [Int!]
+  valueDeliveryWeight_lt: Int
+  valueDeliveryWeight_lte: Int
+  valueDeliveryWeight_gt: Int
+  valueDeliveryWeight_gte: Int
+  revenueWeight: Int
+  revenueWeight_not: Int
+  revenueWeight_in: [Int!]
+  revenueWeight_not_in: [Int!]
+  revenueWeight_lt: Int
+  revenueWeight_lte: Int
+  revenueWeight_gt: Int
+  revenueWeight_gte: Int
+  expenseWeight: Int
+  expenseWeight_not: Int
+  expenseWeight_in: [Int!]
+  expenseWeight_not_in: [Int!]
+  expenseWeight_lt: Int
+  expenseWeight_lte: Int
+  expenseWeight_gt: Int
+  expenseWeight_gte: Int
+  networkEffectWeight: Int
+  networkEffectWeight_not: Int
+  networkEffectWeight_in: [Int!]
+  networkEffectWeight_not_in: [Int!]
+  networkEffectWeight_lt: Int
+  networkEffectWeight_lte: Int
+  networkEffectWeight_gt: Int
+  networkEffectWeight_gte: Int
+  regulatoryWeight: Int
+  regulatoryWeight_not: Int
+  regulatoryWeight_in: [Int!]
+  regulatoryWeight_not_in: [Int!]
+  regulatoryWeight_lt: Int
+  regulatoryWeight_lte: Int
+  regulatoryWeight_gt: Int
+  regulatoryWeight_gte: Int
+  technicalInfrastractureWeight: Int
+  technicalInfrastractureWeight_not: Int
+  technicalInfrastractureWeight_in: [Int!]
+  technicalInfrastractureWeight_not_in: [Int!]
+  technicalInfrastractureWeight_lt: Int
+  technicalInfrastractureWeight_lte: Int
+  technicalInfrastractureWeight_gt: Int
+  technicalInfrastractureWeight_gte: Int
   createdAt: DateTime
   createdAt_not: DateTime
   createdAt_in: [DateTime!]
@@ -2811,8 +1958,18 @@ input PatternUpdateInput {
   canvas_ids: CanvasUpdateManyWithoutPattern_idsInput
   table_id: TableUpdateOneRequiredInput
   company_ids: CompanyUpdateManyWithoutPattern_idsInput
+  strategy_pattern_ids: StrategyPatternUpdateManyWithoutPattern_idInput
   name: String
   description: String
+  actorWeight: Int
+  valuePropositionWeight: Int
+  valueCreationWeight: Int
+  valueDeliveryWeight: Int
+  revenueWeight: Int
+  expenseWeight: Int
+  networkEffectWeight: Int
+  regulatoryWeight: Int
+  technicalInfrastractureWeight: Int
   createdBy: UserUpdateOneRequiredInput
   updatedBy: UserUpdateOneRequiredInput
 }
@@ -2820,11 +1977,29 @@ input PatternUpdateInput {
 input PatternUpdateManyDataInput {
   name: String
   description: String
+  actorWeight: Int
+  valuePropositionWeight: Int
+  valueCreationWeight: Int
+  valueDeliveryWeight: Int
+  revenueWeight: Int
+  expenseWeight: Int
+  networkEffectWeight: Int
+  regulatoryWeight: Int
+  technicalInfrastractureWeight: Int
 }
 
 input PatternUpdateManyMutationInput {
   name: String
   description: String
+  actorWeight: Int
+  valuePropositionWeight: Int
+  valueCreationWeight: Int
+  valueDeliveryWeight: Int
+  revenueWeight: Int
+  expenseWeight: Int
+  networkEffectWeight: Int
+  regulatoryWeight: Int
+  technicalInfrastractureWeight: Int
 }
 
 input PatternUpdateManyWithoutCanvas_idsInput {
@@ -2856,11 +2031,28 @@ input PatternUpdateManyWithWhereNestedInput {
   data: PatternUpdateManyDataInput!
 }
 
+input PatternUpdateOneRequiredWithoutStrategy_pattern_idsInput {
+  create: PatternCreateWithoutStrategy_pattern_idsInput
+  update: PatternUpdateWithoutStrategy_pattern_idsDataInput
+  upsert: PatternUpsertWithoutStrategy_pattern_idsInput
+  connect: PatternWhereUniqueInput
+}
+
 input PatternUpdateWithoutCanvas_idsDataInput {
   table_id: TableUpdateOneRequiredInput
   company_ids: CompanyUpdateManyWithoutPattern_idsInput
+  strategy_pattern_ids: StrategyPatternUpdateManyWithoutPattern_idInput
   name: String
   description: String
+  actorWeight: Int
+  valuePropositionWeight: Int
+  valueCreationWeight: Int
+  valueDeliveryWeight: Int
+  revenueWeight: Int
+  expenseWeight: Int
+  networkEffectWeight: Int
+  regulatoryWeight: Int
+  technicalInfrastractureWeight: Int
   createdBy: UserUpdateOneRequiredInput
   updatedBy: UserUpdateOneRequiredInput
 }
@@ -2868,8 +2060,37 @@ input PatternUpdateWithoutCanvas_idsDataInput {
 input PatternUpdateWithoutCompany_idsDataInput {
   canvas_ids: CanvasUpdateManyWithoutPattern_idsInput
   table_id: TableUpdateOneRequiredInput
+  strategy_pattern_ids: StrategyPatternUpdateManyWithoutPattern_idInput
   name: String
   description: String
+  actorWeight: Int
+  valuePropositionWeight: Int
+  valueCreationWeight: Int
+  valueDeliveryWeight: Int
+  revenueWeight: Int
+  expenseWeight: Int
+  networkEffectWeight: Int
+  regulatoryWeight: Int
+  technicalInfrastractureWeight: Int
+  createdBy: UserUpdateOneRequiredInput
+  updatedBy: UserUpdateOneRequiredInput
+}
+
+input PatternUpdateWithoutStrategy_pattern_idsDataInput {
+  canvas_ids: CanvasUpdateManyWithoutPattern_idsInput
+  table_id: TableUpdateOneRequiredInput
+  company_ids: CompanyUpdateManyWithoutPattern_idsInput
+  name: String
+  description: String
+  actorWeight: Int
+  valuePropositionWeight: Int
+  valueCreationWeight: Int
+  valueDeliveryWeight: Int
+  revenueWeight: Int
+  expenseWeight: Int
+  networkEffectWeight: Int
+  regulatoryWeight: Int
+  technicalInfrastractureWeight: Int
   createdBy: UserUpdateOneRequiredInput
   updatedBy: UserUpdateOneRequiredInput
 }
@@ -2882,6 +2103,11 @@ input PatternUpdateWithWhereUniqueWithoutCanvas_idsInput {
 input PatternUpdateWithWhereUniqueWithoutCompany_idsInput {
   where: PatternWhereUniqueInput!
   data: PatternUpdateWithoutCompany_idsDataInput!
+}
+
+input PatternUpsertWithoutStrategy_pattern_idsInput {
+  update: PatternUpdateWithoutStrategy_pattern_idsDataInput!
+  create: PatternCreateWithoutStrategy_pattern_idsInput!
 }
 
 input PatternUpsertWithWhereUniqueWithoutCanvas_idsInput {
@@ -2918,6 +2144,9 @@ input PatternWhereInput {
   company_ids_every: CompanyWhereInput
   company_ids_some: CompanyWhereInput
   company_ids_none: CompanyWhereInput
+  strategy_pattern_ids_every: StrategyPatternWhereInput
+  strategy_pattern_ids_some: StrategyPatternWhereInput
+  strategy_pattern_ids_none: StrategyPatternWhereInput
   name: String
   name_not: String
   name_in: [String!]
@@ -2946,6 +2175,78 @@ input PatternWhereInput {
   description_not_starts_with: String
   description_ends_with: String
   description_not_ends_with: String
+  actorWeight: Int
+  actorWeight_not: Int
+  actorWeight_in: [Int!]
+  actorWeight_not_in: [Int!]
+  actorWeight_lt: Int
+  actorWeight_lte: Int
+  actorWeight_gt: Int
+  actorWeight_gte: Int
+  valuePropositionWeight: Int
+  valuePropositionWeight_not: Int
+  valuePropositionWeight_in: [Int!]
+  valuePropositionWeight_not_in: [Int!]
+  valuePropositionWeight_lt: Int
+  valuePropositionWeight_lte: Int
+  valuePropositionWeight_gt: Int
+  valuePropositionWeight_gte: Int
+  valueCreationWeight: Int
+  valueCreationWeight_not: Int
+  valueCreationWeight_in: [Int!]
+  valueCreationWeight_not_in: [Int!]
+  valueCreationWeight_lt: Int
+  valueCreationWeight_lte: Int
+  valueCreationWeight_gt: Int
+  valueCreationWeight_gte: Int
+  valueDeliveryWeight: Int
+  valueDeliveryWeight_not: Int
+  valueDeliveryWeight_in: [Int!]
+  valueDeliveryWeight_not_in: [Int!]
+  valueDeliveryWeight_lt: Int
+  valueDeliveryWeight_lte: Int
+  valueDeliveryWeight_gt: Int
+  valueDeliveryWeight_gte: Int
+  revenueWeight: Int
+  revenueWeight_not: Int
+  revenueWeight_in: [Int!]
+  revenueWeight_not_in: [Int!]
+  revenueWeight_lt: Int
+  revenueWeight_lte: Int
+  revenueWeight_gt: Int
+  revenueWeight_gte: Int
+  expenseWeight: Int
+  expenseWeight_not: Int
+  expenseWeight_in: [Int!]
+  expenseWeight_not_in: [Int!]
+  expenseWeight_lt: Int
+  expenseWeight_lte: Int
+  expenseWeight_gt: Int
+  expenseWeight_gte: Int
+  networkEffectWeight: Int
+  networkEffectWeight_not: Int
+  networkEffectWeight_in: [Int!]
+  networkEffectWeight_not_in: [Int!]
+  networkEffectWeight_lt: Int
+  networkEffectWeight_lte: Int
+  networkEffectWeight_gt: Int
+  networkEffectWeight_gte: Int
+  regulatoryWeight: Int
+  regulatoryWeight_not: Int
+  regulatoryWeight_in: [Int!]
+  regulatoryWeight_not_in: [Int!]
+  regulatoryWeight_lt: Int
+  regulatoryWeight_lte: Int
+  regulatoryWeight_gt: Int
+  regulatoryWeight_gte: Int
+  technicalInfrastractureWeight: Int
+  technicalInfrastractureWeight_not: Int
+  technicalInfrastractureWeight_in: [Int!]
+  technicalInfrastractureWeight_not_in: [Int!]
+  technicalInfrastractureWeight_lt: Int
+  technicalInfrastractureWeight_lte: Int
+  technicalInfrastractureWeight_gt: Int
+  technicalInfrastractureWeight_gte: Int
   createdBy: UserWhereInput
   updatedBy: UserWhereInput
   createdAt: DateTime
@@ -3247,55 +2548,61 @@ input ProjectWhereUniqueInput {
 }
 
 type Query {
+  actor(where: ActorWhereUniqueInput!): Actor
+  actors(where: ActorWhereInput, orderBy: ActorOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Actor]!
+  actorsConnection(where: ActorWhereInput, orderBy: ActorOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ActorConnection!
   canvas(where: CanvasWhereUniqueInput!): Canvas
   canvases(where: CanvasWhereInput, orderBy: CanvasOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Canvas]!
   canvasesConnection(where: CanvasWhereInput, orderBy: CanvasOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CanvasConnection!
-  channel(where: ChannelWhereUniqueInput!): Channel
-  channels(where: ChannelWhereInput, orderBy: ChannelOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Channel]!
-  channelsConnection(where: ChannelWhereInput, orderBy: ChannelOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ChannelConnection!
   company(where: CompanyWhereUniqueInput!): Company
   companies(where: CompanyWhereInput, orderBy: CompanyOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Company]!
   companiesConnection(where: CompanyWhereInput, orderBy: CompanyOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CompanyConnection!
-  costStructure(where: CostStructureWhereUniqueInput!): CostStructure
-  costStructures(where: CostStructureWhereInput, orderBy: CostStructureOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [CostStructure]!
-  costStructuresConnection(where: CostStructureWhereInput, orderBy: CostStructureOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CostStructureConnection!
-  customerRelationship(where: CustomerRelationshipWhereUniqueInput!): CustomerRelationship
-  customerRelationships(where: CustomerRelationshipWhereInput, orderBy: CustomerRelationshipOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [CustomerRelationship]!
-  customerRelationshipsConnection(where: CustomerRelationshipWhereInput, orderBy: CustomerRelationshipOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CustomerRelationshipConnection!
-  customerSegment(where: CustomerSegmentWhereUniqueInput!): CustomerSegment
-  customerSegments(where: CustomerSegmentWhereInput, orderBy: CustomerSegmentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [CustomerSegment]!
-  customerSegmentsConnection(where: CustomerSegmentWhereInput, orderBy: CustomerSegmentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CustomerSegmentConnection!
-  keyActitvity(where: KeyActitvityWhereUniqueInput!): KeyActitvity
-  keyActitvities(where: KeyActitvityWhereInput, orderBy: KeyActitvityOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [KeyActitvity]!
-  keyActitvitiesConnection(where: KeyActitvityWhereInput, orderBy: KeyActitvityOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): KeyActitvityConnection!
-  keyPartner(where: KeyPartnerWhereUniqueInput!): KeyPartner
-  keyPartners(where: KeyPartnerWhereInput, orderBy: KeyPartnerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [KeyPartner]!
-  keyPartnersConnection(where: KeyPartnerWhereInput, orderBy: KeyPartnerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): KeyPartnerConnection!
-  keyResource(where: KeyResourceWhereUniqueInput!): KeyResource
-  keyResources(where: KeyResourceWhereInput, orderBy: KeyResourceOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [KeyResource]!
-  keyResourcesConnection(where: KeyResourceWhereInput, orderBy: KeyResourceOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): KeyResourceConnection!
+  expense(where: ExpenseWhereUniqueInput!): Expense
+  expenses(where: ExpenseWhereInput, orderBy: ExpenseOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Expense]!
+  expensesConnection(where: ExpenseWhereInput, orderBy: ExpenseOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ExpenseConnection!
+  networkEffect(where: NetworkEffectWhereUniqueInput!): NetworkEffect
+  networkEffects(where: NetworkEffectWhereInput, orderBy: NetworkEffectOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [NetworkEffect]!
+  networkEffectsConnection(where: NetworkEffectWhereInput, orderBy: NetworkEffectOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): NetworkEffectConnection!
   pattern(where: PatternWhereUniqueInput!): Pattern
   patterns(where: PatternWhereInput, orderBy: PatternOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Pattern]!
   patternsConnection(where: PatternWhereInput, orderBy: PatternOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PatternConnection!
   project(where: ProjectWhereUniqueInput!): Project
   projects(where: ProjectWhereInput, orderBy: ProjectOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Project]!
   projectsConnection(where: ProjectWhereInput, orderBy: ProjectOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ProjectConnection!
-  revenueStream(where: RevenueStreamWhereUniqueInput!): RevenueStream
-  revenueStreams(where: RevenueStreamWhereInput, orderBy: RevenueStreamOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [RevenueStream]!
-  revenueStreamsConnection(where: RevenueStreamWhereInput, orderBy: RevenueStreamOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): RevenueStreamConnection!
+  regulatory(where: RegulatoryWhereUniqueInput!): Regulatory
+  regulatories(where: RegulatoryWhereInput, orderBy: RegulatoryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Regulatory]!
+  regulatoriesConnection(where: RegulatoryWhereInput, orderBy: RegulatoryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): RegulatoryConnection!
+  revenue(where: RevenueWhereUniqueInput!): Revenue
+  revenues(where: RevenueWhereInput, orderBy: RevenueOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Revenue]!
+  revenuesConnection(where: RevenueWhereInput, orderBy: RevenueOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): RevenueConnection!
+  strategy(where: StrategyWhereUniqueInput!): Strategy
+  strategies(where: StrategyWhereInput, orderBy: StrategyOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Strategy]!
+  strategiesConnection(where: StrategyWhereInput, orderBy: StrategyOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): StrategyConnection!
+  strategyPattern(where: StrategyPatternWhereUniqueInput!): StrategyPattern
+  strategyPatterns(where: StrategyPatternWhereInput, orderBy: StrategyPatternOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [StrategyPattern]!
+  strategyPatternsConnection(where: StrategyPatternWhereInput, orderBy: StrategyPatternOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): StrategyPatternConnection!
   table(where: TableWhereUniqueInput!): Table
   tables(where: TableWhereInput, orderBy: TableOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Table]!
   tablesConnection(where: TableWhereInput, orderBy: TableOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): TableConnection!
+  technicalInfrastracture(where: TechnicalInfrastractureWhereUniqueInput!): TechnicalInfrastracture
+  technicalInfrastractures(where: TechnicalInfrastractureWhereInput, orderBy: TechnicalInfrastractureOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [TechnicalInfrastracture]!
+  technicalInfrastracturesConnection(where: TechnicalInfrastractureWhereInput, orderBy: TechnicalInfrastractureOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): TechnicalInfrastractureConnection!
   user(where: UserWhereUniqueInput!): User
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
+  valueCreation(where: ValueCreationWhereUniqueInput!): ValueCreation
+  valueCreations(where: ValueCreationWhereInput, orderBy: ValueCreationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ValueCreation]!
+  valueCreationsConnection(where: ValueCreationWhereInput, orderBy: ValueCreationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ValueCreationConnection!
+  valueDelivery(where: ValueDeliveryWhereUniqueInput!): ValueDelivery
+  valueDeliveries(where: ValueDeliveryWhereInput, orderBy: ValueDeliveryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ValueDelivery]!
+  valueDeliveriesConnection(where: ValueDeliveryWhereInput, orderBy: ValueDeliveryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ValueDeliveryConnection!
   valueProposition(where: ValuePropositionWhereUniqueInput!): ValueProposition
   valuePropositions(where: ValuePropositionWhereInput, orderBy: ValuePropositionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ValueProposition]!
   valuePropositionsConnection(where: ValuePropositionWhereInput, orderBy: ValuePropositionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ValuePropositionConnection!
   node(id: ID!): Node
 }
 
-type RevenueStream {
+type Regulatory {
   id: ID!
   table_ids(where: TableWhereInput, orderBy: TableOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Table!]
   text: String!
@@ -3306,27 +2613,27 @@ type RevenueStream {
   updatedAt: DateTime!
 }
 
-type RevenueStreamConnection {
+type RegulatoryConnection {
   pageInfo: PageInfo!
-  edges: [RevenueStreamEdge]!
-  aggregate: AggregateRevenueStream!
+  edges: [RegulatoryEdge]!
+  aggregate: AggregateRegulatory!
 }
 
-input RevenueStreamCreateInput {
+input RegulatoryCreateInput {
   id: ID
-  table_ids: TableCreateManyWithoutReventue_stream_entry_idsInput
+  table_ids: TableCreateManyWithoutRegulatory_entry_idsInput
   text: String!
   note: String
   createdBy: UserCreateOneInput!
   updatedBy: UserCreateOneInput!
 }
 
-input RevenueStreamCreateManyWithoutTable_idsInput {
-  create: [RevenueStreamCreateWithoutTable_idsInput!]
-  connect: [RevenueStreamWhereUniqueInput!]
+input RegulatoryCreateManyWithoutTable_idsInput {
+  create: [RegulatoryCreateWithoutTable_idsInput!]
+  connect: [RegulatoryWhereUniqueInput!]
 }
 
-input RevenueStreamCreateWithoutTable_idsInput {
+input RegulatoryCreateWithoutTable_idsInput {
   id: ID
   text: String!
   note: String
@@ -3334,12 +2641,12 @@ input RevenueStreamCreateWithoutTable_idsInput {
   updatedBy: UserCreateOneInput!
 }
 
-type RevenueStreamEdge {
-  node: RevenueStream!
+type RegulatoryEdge {
+  node: Regulatory!
   cursor: String!
 }
 
-enum RevenueStreamOrderByInput {
+enum RegulatoryOrderByInput {
   id_ASC
   id_DESC
   text_ASC
@@ -3352,7 +2659,7 @@ enum RevenueStreamOrderByInput {
   updatedAt_DESC
 }
 
-type RevenueStreamPreviousValues {
+type RegulatoryPreviousValues {
   id: ID!
   text: String!
   note: String
@@ -3360,7 +2667,7 @@ type RevenueStreamPreviousValues {
   updatedAt: DateTime!
 }
 
-input RevenueStreamScalarWhereInput {
+input RegulatoryScalarWhereInput {
   id: ID
   id_not: ID
   id_in: [ID!]
@@ -3419,83 +2726,83 @@ input RevenueStreamScalarWhereInput {
   updatedAt_lte: DateTime
   updatedAt_gt: DateTime
   updatedAt_gte: DateTime
-  AND: [RevenueStreamScalarWhereInput!]
-  OR: [RevenueStreamScalarWhereInput!]
-  NOT: [RevenueStreamScalarWhereInput!]
+  AND: [RegulatoryScalarWhereInput!]
+  OR: [RegulatoryScalarWhereInput!]
+  NOT: [RegulatoryScalarWhereInput!]
 }
 
-type RevenueStreamSubscriptionPayload {
+type RegulatorySubscriptionPayload {
   mutation: MutationType!
-  node: RevenueStream
+  node: Regulatory
   updatedFields: [String!]
-  previousValues: RevenueStreamPreviousValues
+  previousValues: RegulatoryPreviousValues
 }
 
-input RevenueStreamSubscriptionWhereInput {
+input RegulatorySubscriptionWhereInput {
   mutation_in: [MutationType!]
   updatedFields_contains: String
   updatedFields_contains_every: [String!]
   updatedFields_contains_some: [String!]
-  node: RevenueStreamWhereInput
-  AND: [RevenueStreamSubscriptionWhereInput!]
-  OR: [RevenueStreamSubscriptionWhereInput!]
-  NOT: [RevenueStreamSubscriptionWhereInput!]
+  node: RegulatoryWhereInput
+  AND: [RegulatorySubscriptionWhereInput!]
+  OR: [RegulatorySubscriptionWhereInput!]
+  NOT: [RegulatorySubscriptionWhereInput!]
 }
 
-input RevenueStreamUpdateInput {
-  table_ids: TableUpdateManyWithoutReventue_stream_entry_idsInput
+input RegulatoryUpdateInput {
+  table_ids: TableUpdateManyWithoutRegulatory_entry_idsInput
   text: String
   note: String
   createdBy: UserUpdateOneRequiredInput
   updatedBy: UserUpdateOneRequiredInput
 }
 
-input RevenueStreamUpdateManyDataInput {
+input RegulatoryUpdateManyDataInput {
   text: String
   note: String
 }
 
-input RevenueStreamUpdateManyMutationInput {
+input RegulatoryUpdateManyMutationInput {
   text: String
   note: String
 }
 
-input RevenueStreamUpdateManyWithoutTable_idsInput {
-  create: [RevenueStreamCreateWithoutTable_idsInput!]
-  delete: [RevenueStreamWhereUniqueInput!]
-  connect: [RevenueStreamWhereUniqueInput!]
-  set: [RevenueStreamWhereUniqueInput!]
-  disconnect: [RevenueStreamWhereUniqueInput!]
-  update: [RevenueStreamUpdateWithWhereUniqueWithoutTable_idsInput!]
-  upsert: [RevenueStreamUpsertWithWhereUniqueWithoutTable_idsInput!]
-  deleteMany: [RevenueStreamScalarWhereInput!]
-  updateMany: [RevenueStreamUpdateManyWithWhereNestedInput!]
+input RegulatoryUpdateManyWithoutTable_idsInput {
+  create: [RegulatoryCreateWithoutTable_idsInput!]
+  delete: [RegulatoryWhereUniqueInput!]
+  connect: [RegulatoryWhereUniqueInput!]
+  set: [RegulatoryWhereUniqueInput!]
+  disconnect: [RegulatoryWhereUniqueInput!]
+  update: [RegulatoryUpdateWithWhereUniqueWithoutTable_idsInput!]
+  upsert: [RegulatoryUpsertWithWhereUniqueWithoutTable_idsInput!]
+  deleteMany: [RegulatoryScalarWhereInput!]
+  updateMany: [RegulatoryUpdateManyWithWhereNestedInput!]
 }
 
-input RevenueStreamUpdateManyWithWhereNestedInput {
-  where: RevenueStreamScalarWhereInput!
-  data: RevenueStreamUpdateManyDataInput!
+input RegulatoryUpdateManyWithWhereNestedInput {
+  where: RegulatoryScalarWhereInput!
+  data: RegulatoryUpdateManyDataInput!
 }
 
-input RevenueStreamUpdateWithoutTable_idsDataInput {
+input RegulatoryUpdateWithoutTable_idsDataInput {
   text: String
   note: String
   createdBy: UserUpdateOneRequiredInput
   updatedBy: UserUpdateOneRequiredInput
 }
 
-input RevenueStreamUpdateWithWhereUniqueWithoutTable_idsInput {
-  where: RevenueStreamWhereUniqueInput!
-  data: RevenueStreamUpdateWithoutTable_idsDataInput!
+input RegulatoryUpdateWithWhereUniqueWithoutTable_idsInput {
+  where: RegulatoryWhereUniqueInput!
+  data: RegulatoryUpdateWithoutTable_idsDataInput!
 }
 
-input RevenueStreamUpsertWithWhereUniqueWithoutTable_idsInput {
-  where: RevenueStreamWhereUniqueInput!
-  update: RevenueStreamUpdateWithoutTable_idsDataInput!
-  create: RevenueStreamCreateWithoutTable_idsInput!
+input RegulatoryUpsertWithWhereUniqueWithoutTable_idsInput {
+  where: RegulatoryWhereUniqueInput!
+  update: RegulatoryUpdateWithoutTable_idsDataInput!
+  create: RegulatoryCreateWithoutTable_idsInput!
 }
 
-input RevenueStreamWhereInput {
+input RegulatoryWhereInput {
   id: ID
   id_not: ID
   id_in: [ID!]
@@ -3559,12 +2866,285 @@ input RevenueStreamWhereInput {
   updatedAt_lte: DateTime
   updatedAt_gt: DateTime
   updatedAt_gte: DateTime
-  AND: [RevenueStreamWhereInput!]
-  OR: [RevenueStreamWhereInput!]
-  NOT: [RevenueStreamWhereInput!]
+  AND: [RegulatoryWhereInput!]
+  OR: [RegulatoryWhereInput!]
+  NOT: [RegulatoryWhereInput!]
 }
 
-input RevenueStreamWhereUniqueInput {
+input RegulatoryWhereUniqueInput {
+  id: ID
+}
+
+type Revenue {
+  id: ID!
+  table_ids(where: TableWhereInput, orderBy: TableOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Table!]
+  text: String!
+  note: String
+  createdBy: User!
+  updatedBy: User!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type RevenueConnection {
+  pageInfo: PageInfo!
+  edges: [RevenueEdge]!
+  aggregate: AggregateRevenue!
+}
+
+input RevenueCreateInput {
+  id: ID
+  table_ids: TableCreateManyWithoutRevenue_entry_idsInput
+  text: String!
+  note: String
+  createdBy: UserCreateOneInput!
+  updatedBy: UserCreateOneInput!
+}
+
+input RevenueCreateManyWithoutTable_idsInput {
+  create: [RevenueCreateWithoutTable_idsInput!]
+  connect: [RevenueWhereUniqueInput!]
+}
+
+input RevenueCreateWithoutTable_idsInput {
+  id: ID
+  text: String!
+  note: String
+  createdBy: UserCreateOneInput!
+  updatedBy: UserCreateOneInput!
+}
+
+type RevenueEdge {
+  node: Revenue!
+  cursor: String!
+}
+
+enum RevenueOrderByInput {
+  id_ASC
+  id_DESC
+  text_ASC
+  text_DESC
+  note_ASC
+  note_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type RevenuePreviousValues {
+  id: ID!
+  text: String!
+  note: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+input RevenueScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  text: String
+  text_not: String
+  text_in: [String!]
+  text_not_in: [String!]
+  text_lt: String
+  text_lte: String
+  text_gt: String
+  text_gte: String
+  text_contains: String
+  text_not_contains: String
+  text_starts_with: String
+  text_not_starts_with: String
+  text_ends_with: String
+  text_not_ends_with: String
+  note: String
+  note_not: String
+  note_in: [String!]
+  note_not_in: [String!]
+  note_lt: String
+  note_lte: String
+  note_gt: String
+  note_gte: String
+  note_contains: String
+  note_not_contains: String
+  note_starts_with: String
+  note_not_starts_with: String
+  note_ends_with: String
+  note_not_ends_with: String
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  AND: [RevenueScalarWhereInput!]
+  OR: [RevenueScalarWhereInput!]
+  NOT: [RevenueScalarWhereInput!]
+}
+
+type RevenueSubscriptionPayload {
+  mutation: MutationType!
+  node: Revenue
+  updatedFields: [String!]
+  previousValues: RevenuePreviousValues
+}
+
+input RevenueSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: RevenueWhereInput
+  AND: [RevenueSubscriptionWhereInput!]
+  OR: [RevenueSubscriptionWhereInput!]
+  NOT: [RevenueSubscriptionWhereInput!]
+}
+
+input RevenueUpdateInput {
+  table_ids: TableUpdateManyWithoutRevenue_entry_idsInput
+  text: String
+  note: String
+  createdBy: UserUpdateOneRequiredInput
+  updatedBy: UserUpdateOneRequiredInput
+}
+
+input RevenueUpdateManyDataInput {
+  text: String
+  note: String
+}
+
+input RevenueUpdateManyMutationInput {
+  text: String
+  note: String
+}
+
+input RevenueUpdateManyWithoutTable_idsInput {
+  create: [RevenueCreateWithoutTable_idsInput!]
+  delete: [RevenueWhereUniqueInput!]
+  connect: [RevenueWhereUniqueInput!]
+  set: [RevenueWhereUniqueInput!]
+  disconnect: [RevenueWhereUniqueInput!]
+  update: [RevenueUpdateWithWhereUniqueWithoutTable_idsInput!]
+  upsert: [RevenueUpsertWithWhereUniqueWithoutTable_idsInput!]
+  deleteMany: [RevenueScalarWhereInput!]
+  updateMany: [RevenueUpdateManyWithWhereNestedInput!]
+}
+
+input RevenueUpdateManyWithWhereNestedInput {
+  where: RevenueScalarWhereInput!
+  data: RevenueUpdateManyDataInput!
+}
+
+input RevenueUpdateWithoutTable_idsDataInput {
+  text: String
+  note: String
+  createdBy: UserUpdateOneRequiredInput
+  updatedBy: UserUpdateOneRequiredInput
+}
+
+input RevenueUpdateWithWhereUniqueWithoutTable_idsInput {
+  where: RevenueWhereUniqueInput!
+  data: RevenueUpdateWithoutTable_idsDataInput!
+}
+
+input RevenueUpsertWithWhereUniqueWithoutTable_idsInput {
+  where: RevenueWhereUniqueInput!
+  update: RevenueUpdateWithoutTable_idsDataInput!
+  create: RevenueCreateWithoutTable_idsInput!
+}
+
+input RevenueWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  table_ids_every: TableWhereInput
+  table_ids_some: TableWhereInput
+  table_ids_none: TableWhereInput
+  text: String
+  text_not: String
+  text_in: [String!]
+  text_not_in: [String!]
+  text_lt: String
+  text_lte: String
+  text_gt: String
+  text_gte: String
+  text_contains: String
+  text_not_contains: String
+  text_starts_with: String
+  text_not_starts_with: String
+  text_ends_with: String
+  text_not_ends_with: String
+  note: String
+  note_not: String
+  note_in: [String!]
+  note_not_in: [String!]
+  note_lt: String
+  note_lte: String
+  note_gt: String
+  note_gte: String
+  note_contains: String
+  note_not_contains: String
+  note_starts_with: String
+  note_not_starts_with: String
+  note_ends_with: String
+  note_not_ends_with: String
+  createdBy: UserWhereInput
+  updatedBy: UserWhereInput
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  AND: [RevenueWhereInput!]
+  OR: [RevenueWhereInput!]
+  NOT: [RevenueWhereInput!]
+}
+
+input RevenueWhereUniqueInput {
   id: ID
 }
 
@@ -3573,35 +3153,523 @@ enum Role {
   ADMIN
 }
 
+type Strategy {
+  id: ID!
+  canvas_ids(where: CanvasWhereInput, orderBy: CanvasOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Canvas!]
+  strategy_pattern_ids(where: StrategyPatternWhereInput, orderBy: StrategyPatternOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [StrategyPattern!]
+  name: String!
+  description: String
+  createdBy: User!
+  updatedBy: User!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type StrategyConnection {
+  pageInfo: PageInfo!
+  edges: [StrategyEdge]!
+  aggregate: AggregateStrategy!
+}
+
+input StrategyCreateInput {
+  id: ID
+  canvas_ids: CanvasCreateManyWithoutStrategy_idInput
+  strategy_pattern_ids: StrategyPatternCreateManyWithoutStrategy_idInput
+  name: String!
+  description: String
+  createdBy: UserCreateOneInput!
+  updatedBy: UserCreateOneInput!
+}
+
+input StrategyCreateOneWithoutCanvas_idsInput {
+  create: StrategyCreateWithoutCanvas_idsInput
+  connect: StrategyWhereUniqueInput
+}
+
+input StrategyCreateOneWithoutStrategy_pattern_idsInput {
+  create: StrategyCreateWithoutStrategy_pattern_idsInput
+  connect: StrategyWhereUniqueInput
+}
+
+input StrategyCreateWithoutCanvas_idsInput {
+  id: ID
+  strategy_pattern_ids: StrategyPatternCreateManyWithoutStrategy_idInput
+  name: String!
+  description: String
+  createdBy: UserCreateOneInput!
+  updatedBy: UserCreateOneInput!
+}
+
+input StrategyCreateWithoutStrategy_pattern_idsInput {
+  id: ID
+  canvas_ids: CanvasCreateManyWithoutStrategy_idInput
+  name: String!
+  description: String
+  createdBy: UserCreateOneInput!
+  updatedBy: UserCreateOneInput!
+}
+
+type StrategyEdge {
+  node: Strategy!
+  cursor: String!
+}
+
+enum StrategyOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  description_ASC
+  description_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type StrategyPattern {
+  id: ID!
+  strategy_id: Strategy!
+  pattern_id: Pattern!
+  weight: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type StrategyPatternConnection {
+  pageInfo: PageInfo!
+  edges: [StrategyPatternEdge]!
+  aggregate: AggregateStrategyPattern!
+}
+
+input StrategyPatternCreateInput {
+  id: ID
+  strategy_id: StrategyCreateOneWithoutStrategy_pattern_idsInput!
+  pattern_id: PatternCreateOneWithoutStrategy_pattern_idsInput!
+  weight: Int!
+}
+
+input StrategyPatternCreateManyWithoutPattern_idInput {
+  create: [StrategyPatternCreateWithoutPattern_idInput!]
+  connect: [StrategyPatternWhereUniqueInput!]
+}
+
+input StrategyPatternCreateManyWithoutStrategy_idInput {
+  create: [StrategyPatternCreateWithoutStrategy_idInput!]
+  connect: [StrategyPatternWhereUniqueInput!]
+}
+
+input StrategyPatternCreateWithoutPattern_idInput {
+  id: ID
+  strategy_id: StrategyCreateOneWithoutStrategy_pattern_idsInput!
+  weight: Int!
+}
+
+input StrategyPatternCreateWithoutStrategy_idInput {
+  id: ID
+  pattern_id: PatternCreateOneWithoutStrategy_pattern_idsInput!
+  weight: Int!
+}
+
+type StrategyPatternEdge {
+  node: StrategyPattern!
+  cursor: String!
+}
+
+enum StrategyPatternOrderByInput {
+  id_ASC
+  id_DESC
+  weight_ASC
+  weight_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type StrategyPatternPreviousValues {
+  id: ID!
+  weight: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+input StrategyPatternScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  weight: Int
+  weight_not: Int
+  weight_in: [Int!]
+  weight_not_in: [Int!]
+  weight_lt: Int
+  weight_lte: Int
+  weight_gt: Int
+  weight_gte: Int
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  AND: [StrategyPatternScalarWhereInput!]
+  OR: [StrategyPatternScalarWhereInput!]
+  NOT: [StrategyPatternScalarWhereInput!]
+}
+
+type StrategyPatternSubscriptionPayload {
+  mutation: MutationType!
+  node: StrategyPattern
+  updatedFields: [String!]
+  previousValues: StrategyPatternPreviousValues
+}
+
+input StrategyPatternSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: StrategyPatternWhereInput
+  AND: [StrategyPatternSubscriptionWhereInput!]
+  OR: [StrategyPatternSubscriptionWhereInput!]
+  NOT: [StrategyPatternSubscriptionWhereInput!]
+}
+
+input StrategyPatternUpdateInput {
+  strategy_id: StrategyUpdateOneRequiredWithoutStrategy_pattern_idsInput
+  pattern_id: PatternUpdateOneRequiredWithoutStrategy_pattern_idsInput
+  weight: Int
+}
+
+input StrategyPatternUpdateManyDataInput {
+  weight: Int
+}
+
+input StrategyPatternUpdateManyMutationInput {
+  weight: Int
+}
+
+input StrategyPatternUpdateManyWithoutPattern_idInput {
+  create: [StrategyPatternCreateWithoutPattern_idInput!]
+  delete: [StrategyPatternWhereUniqueInput!]
+  connect: [StrategyPatternWhereUniqueInput!]
+  set: [StrategyPatternWhereUniqueInput!]
+  disconnect: [StrategyPatternWhereUniqueInput!]
+  update: [StrategyPatternUpdateWithWhereUniqueWithoutPattern_idInput!]
+  upsert: [StrategyPatternUpsertWithWhereUniqueWithoutPattern_idInput!]
+  deleteMany: [StrategyPatternScalarWhereInput!]
+  updateMany: [StrategyPatternUpdateManyWithWhereNestedInput!]
+}
+
+input StrategyPatternUpdateManyWithoutStrategy_idInput {
+  create: [StrategyPatternCreateWithoutStrategy_idInput!]
+  delete: [StrategyPatternWhereUniqueInput!]
+  connect: [StrategyPatternWhereUniqueInput!]
+  set: [StrategyPatternWhereUniqueInput!]
+  disconnect: [StrategyPatternWhereUniqueInput!]
+  update: [StrategyPatternUpdateWithWhereUniqueWithoutStrategy_idInput!]
+  upsert: [StrategyPatternUpsertWithWhereUniqueWithoutStrategy_idInput!]
+  deleteMany: [StrategyPatternScalarWhereInput!]
+  updateMany: [StrategyPatternUpdateManyWithWhereNestedInput!]
+}
+
+input StrategyPatternUpdateManyWithWhereNestedInput {
+  where: StrategyPatternScalarWhereInput!
+  data: StrategyPatternUpdateManyDataInput!
+}
+
+input StrategyPatternUpdateWithoutPattern_idDataInput {
+  strategy_id: StrategyUpdateOneRequiredWithoutStrategy_pattern_idsInput
+  weight: Int
+}
+
+input StrategyPatternUpdateWithoutStrategy_idDataInput {
+  pattern_id: PatternUpdateOneRequiredWithoutStrategy_pattern_idsInput
+  weight: Int
+}
+
+input StrategyPatternUpdateWithWhereUniqueWithoutPattern_idInput {
+  where: StrategyPatternWhereUniqueInput!
+  data: StrategyPatternUpdateWithoutPattern_idDataInput!
+}
+
+input StrategyPatternUpdateWithWhereUniqueWithoutStrategy_idInput {
+  where: StrategyPatternWhereUniqueInput!
+  data: StrategyPatternUpdateWithoutStrategy_idDataInput!
+}
+
+input StrategyPatternUpsertWithWhereUniqueWithoutPattern_idInput {
+  where: StrategyPatternWhereUniqueInput!
+  update: StrategyPatternUpdateWithoutPattern_idDataInput!
+  create: StrategyPatternCreateWithoutPattern_idInput!
+}
+
+input StrategyPatternUpsertWithWhereUniqueWithoutStrategy_idInput {
+  where: StrategyPatternWhereUniqueInput!
+  update: StrategyPatternUpdateWithoutStrategy_idDataInput!
+  create: StrategyPatternCreateWithoutStrategy_idInput!
+}
+
+input StrategyPatternWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  strategy_id: StrategyWhereInput
+  pattern_id: PatternWhereInput
+  weight: Int
+  weight_not: Int
+  weight_in: [Int!]
+  weight_not_in: [Int!]
+  weight_lt: Int
+  weight_lte: Int
+  weight_gt: Int
+  weight_gte: Int
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  AND: [StrategyPatternWhereInput!]
+  OR: [StrategyPatternWhereInput!]
+  NOT: [StrategyPatternWhereInput!]
+}
+
+input StrategyPatternWhereUniqueInput {
+  id: ID
+}
+
+type StrategyPreviousValues {
+  id: ID!
+  name: String!
+  description: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type StrategySubscriptionPayload {
+  mutation: MutationType!
+  node: Strategy
+  updatedFields: [String!]
+  previousValues: StrategyPreviousValues
+}
+
+input StrategySubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: StrategyWhereInput
+  AND: [StrategySubscriptionWhereInput!]
+  OR: [StrategySubscriptionWhereInput!]
+  NOT: [StrategySubscriptionWhereInput!]
+}
+
+input StrategyUpdateInput {
+  canvas_ids: CanvasUpdateManyWithoutStrategy_idInput
+  strategy_pattern_ids: StrategyPatternUpdateManyWithoutStrategy_idInput
+  name: String
+  description: String
+  createdBy: UserUpdateOneRequiredInput
+  updatedBy: UserUpdateOneRequiredInput
+}
+
+input StrategyUpdateManyMutationInput {
+  name: String
+  description: String
+}
+
+input StrategyUpdateOneRequiredWithoutStrategy_pattern_idsInput {
+  create: StrategyCreateWithoutStrategy_pattern_idsInput
+  update: StrategyUpdateWithoutStrategy_pattern_idsDataInput
+  upsert: StrategyUpsertWithoutStrategy_pattern_idsInput
+  connect: StrategyWhereUniqueInput
+}
+
+input StrategyUpdateOneWithoutCanvas_idsInput {
+  create: StrategyCreateWithoutCanvas_idsInput
+  update: StrategyUpdateWithoutCanvas_idsDataInput
+  upsert: StrategyUpsertWithoutCanvas_idsInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: StrategyWhereUniqueInput
+}
+
+input StrategyUpdateWithoutCanvas_idsDataInput {
+  strategy_pattern_ids: StrategyPatternUpdateManyWithoutStrategy_idInput
+  name: String
+  description: String
+  createdBy: UserUpdateOneRequiredInput
+  updatedBy: UserUpdateOneRequiredInput
+}
+
+input StrategyUpdateWithoutStrategy_pattern_idsDataInput {
+  canvas_ids: CanvasUpdateManyWithoutStrategy_idInput
+  name: String
+  description: String
+  createdBy: UserUpdateOneRequiredInput
+  updatedBy: UserUpdateOneRequiredInput
+}
+
+input StrategyUpsertWithoutCanvas_idsInput {
+  update: StrategyUpdateWithoutCanvas_idsDataInput!
+  create: StrategyCreateWithoutCanvas_idsInput!
+}
+
+input StrategyUpsertWithoutStrategy_pattern_idsInput {
+  update: StrategyUpdateWithoutStrategy_pattern_idsDataInput!
+  create: StrategyCreateWithoutStrategy_pattern_idsInput!
+}
+
+input StrategyWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  canvas_ids_every: CanvasWhereInput
+  canvas_ids_some: CanvasWhereInput
+  canvas_ids_none: CanvasWhereInput
+  strategy_pattern_ids_every: StrategyPatternWhereInput
+  strategy_pattern_ids_some: StrategyPatternWhereInput
+  strategy_pattern_ids_none: StrategyPatternWhereInput
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  description: String
+  description_not: String
+  description_in: [String!]
+  description_not_in: [String!]
+  description_lt: String
+  description_lte: String
+  description_gt: String
+  description_gte: String
+  description_contains: String
+  description_not_contains: String
+  description_starts_with: String
+  description_not_starts_with: String
+  description_ends_with: String
+  description_not_ends_with: String
+  createdBy: UserWhereInput
+  updatedBy: UserWhereInput
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  AND: [StrategyWhereInput!]
+  OR: [StrategyWhereInput!]
+  NOT: [StrategyWhereInput!]
+}
+
+input StrategyWhereUniqueInput {
+  id: ID
+}
+
 type Subscription {
+  actor(where: ActorSubscriptionWhereInput): ActorSubscriptionPayload
   canvas(where: CanvasSubscriptionWhereInput): CanvasSubscriptionPayload
-  channel(where: ChannelSubscriptionWhereInput): ChannelSubscriptionPayload
   company(where: CompanySubscriptionWhereInput): CompanySubscriptionPayload
-  costStructure(where: CostStructureSubscriptionWhereInput): CostStructureSubscriptionPayload
-  customerRelationship(where: CustomerRelationshipSubscriptionWhereInput): CustomerRelationshipSubscriptionPayload
-  customerSegment(where: CustomerSegmentSubscriptionWhereInput): CustomerSegmentSubscriptionPayload
-  keyActitvity(where: KeyActitvitySubscriptionWhereInput): KeyActitvitySubscriptionPayload
-  keyPartner(where: KeyPartnerSubscriptionWhereInput): KeyPartnerSubscriptionPayload
-  keyResource(where: KeyResourceSubscriptionWhereInput): KeyResourceSubscriptionPayload
+  expense(where: ExpenseSubscriptionWhereInput): ExpenseSubscriptionPayload
+  networkEffect(where: NetworkEffectSubscriptionWhereInput): NetworkEffectSubscriptionPayload
   pattern(where: PatternSubscriptionWhereInput): PatternSubscriptionPayload
   project(where: ProjectSubscriptionWhereInput): ProjectSubscriptionPayload
-  revenueStream(where: RevenueStreamSubscriptionWhereInput): RevenueStreamSubscriptionPayload
+  regulatory(where: RegulatorySubscriptionWhereInput): RegulatorySubscriptionPayload
+  revenue(where: RevenueSubscriptionWhereInput): RevenueSubscriptionPayload
+  strategy(where: StrategySubscriptionWhereInput): StrategySubscriptionPayload
+  strategyPattern(where: StrategyPatternSubscriptionWhereInput): StrategyPatternSubscriptionPayload
   table(where: TableSubscriptionWhereInput): TableSubscriptionPayload
+  technicalInfrastracture(where: TechnicalInfrastractureSubscriptionWhereInput): TechnicalInfrastractureSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
+  valueCreation(where: ValueCreationSubscriptionWhereInput): ValueCreationSubscriptionPayload
+  valueDelivery(where: ValueDeliverySubscriptionWhereInput): ValueDeliverySubscriptionPayload
   valueProposition(where: ValuePropositionSubscriptionWhereInput): ValuePropositionSubscriptionPayload
 }
 
 type Table {
   id: ID!
-  key_partner_entry_ids(where: KeyPartnerWhereInput, orderBy: KeyPartnerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [KeyPartner!]
-  reventue_stream_entry_ids(where: RevenueStreamWhereInput, orderBy: RevenueStreamOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [RevenueStream!]
-  key_activity_entry_ids(where: KeyActitvityWhereInput, orderBy: KeyActitvityOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [KeyActitvity!]
-  customer_relationship_entry_ids(where: CustomerRelationshipWhereInput, orderBy: CustomerRelationshipOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [CustomerRelationship!]
+  actor_entry_ids(where: ActorWhereInput, orderBy: ActorOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Actor!]
   value_proposition_entry_ids(where: ValuePropositionWhereInput, orderBy: ValuePropositionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ValueProposition!]
-  cost_structure_entry_ids(where: CostStructureWhereInput, orderBy: CostStructureOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [CostStructure!]
-  customer_segment_entry_ids(where: CustomerSegmentWhereInput, orderBy: CustomerSegmentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [CustomerSegment!]
-  key_resource_entry_ids(where: KeyResourceWhereInput, orderBy: KeyResourceOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [KeyResource!]
-  channel_entry_ids(where: ChannelWhereInput, orderBy: ChannelOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Channel!]
+  value_creation_entry_ids(where: ValueCreationWhereInput, orderBy: ValueCreationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ValueCreation!]
+  value_delivery_entry_ids(where: ValueDeliveryWhereInput, orderBy: ValueDeliveryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ValueDelivery!]
+  revenue_entry_ids(where: RevenueWhereInput, orderBy: RevenueOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Revenue!]
+  expense_entry_ids(where: ExpenseWhereInput, orderBy: ExpenseOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Expense!]
+  network_effect_entry_ids(where: NetworkEffectWhereInput, orderBy: NetworkEffectOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [NetworkEffect!]
+  technical_infrastructure_entry_ids(where: TechnicalInfrastractureWhereInput, orderBy: TechnicalInfrastractureOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [TechnicalInfrastracture!]
+  regulatory_entry_ids(where: RegulatoryWhereInput, orderBy: RegulatoryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Regulatory!]
 }
 
 type TableConnection {
@@ -3612,54 +3680,54 @@ type TableConnection {
 
 input TableCreateInput {
   id: ID
-  key_partner_entry_ids: KeyPartnerCreateManyWithoutTable_idsInput
-  reventue_stream_entry_ids: RevenueStreamCreateManyWithoutTable_idsInput
-  key_activity_entry_ids: KeyActitvityCreateManyWithoutTable_idsInput
-  customer_relationship_entry_ids: CustomerRelationshipCreateManyWithoutTable_idsInput
+  actor_entry_ids: ActorCreateManyWithoutTable_idsInput
   value_proposition_entry_ids: ValuePropositionCreateManyWithoutTable_idsInput
-  cost_structure_entry_ids: CostStructureCreateManyWithoutTable_idsInput
-  customer_segment_entry_ids: CustomerSegmentCreateManyWithoutTable_idsInput
-  key_resource_entry_ids: KeyResourceCreateManyWithoutTable_idsInput
-  channel_entry_ids: ChannelCreateManyWithoutTable_idsInput
+  value_creation_entry_ids: ValueCreationCreateManyWithoutTable_idsInput
+  value_delivery_entry_ids: ValueDeliveryCreateManyWithoutTable_idsInput
+  revenue_entry_ids: RevenueCreateManyWithoutTable_idsInput
+  expense_entry_ids: ExpenseCreateManyWithoutTable_idsInput
+  network_effect_entry_ids: NetworkEffectCreateManyWithoutTable_idsInput
+  technical_infrastructure_entry_ids: TechnicalInfrastractureCreateManyWithoutTable_idsInput
+  regulatory_entry_ids: RegulatoryCreateManyWithoutTable_idsInput
 }
 
-input TableCreateManyWithoutChannel_entry_idsInput {
-  create: [TableCreateWithoutChannel_entry_idsInput!]
+input TableCreateManyWithoutActor_entry_idsInput {
+  create: [TableCreateWithoutActor_entry_idsInput!]
   connect: [TableWhereUniqueInput!]
 }
 
-input TableCreateManyWithoutCost_structure_entry_idsInput {
-  create: [TableCreateWithoutCost_structure_entry_idsInput!]
+input TableCreateManyWithoutExpense_entry_idsInput {
+  create: [TableCreateWithoutExpense_entry_idsInput!]
   connect: [TableWhereUniqueInput!]
 }
 
-input TableCreateManyWithoutCustomer_relationship_entry_idsInput {
-  create: [TableCreateWithoutCustomer_relationship_entry_idsInput!]
+input TableCreateManyWithoutNetwork_effect_entry_idsInput {
+  create: [TableCreateWithoutNetwork_effect_entry_idsInput!]
   connect: [TableWhereUniqueInput!]
 }
 
-input TableCreateManyWithoutCustomer_segment_entry_idsInput {
-  create: [TableCreateWithoutCustomer_segment_entry_idsInput!]
+input TableCreateManyWithoutRegulatory_entry_idsInput {
+  create: [TableCreateWithoutRegulatory_entry_idsInput!]
   connect: [TableWhereUniqueInput!]
 }
 
-input TableCreateManyWithoutKey_activity_entry_idsInput {
-  create: [TableCreateWithoutKey_activity_entry_idsInput!]
+input TableCreateManyWithoutRevenue_entry_idsInput {
+  create: [TableCreateWithoutRevenue_entry_idsInput!]
   connect: [TableWhereUniqueInput!]
 }
 
-input TableCreateManyWithoutKey_partner_entry_idsInput {
-  create: [TableCreateWithoutKey_partner_entry_idsInput!]
+input TableCreateManyWithoutTechnical_infrastructure_entry_idsInput {
+  create: [TableCreateWithoutTechnical_infrastructure_entry_idsInput!]
   connect: [TableWhereUniqueInput!]
 }
 
-input TableCreateManyWithoutKey_resource_entry_idsInput {
-  create: [TableCreateWithoutKey_resource_entry_idsInput!]
+input TableCreateManyWithoutValue_creation_entry_idsInput {
+  create: [TableCreateWithoutValue_creation_entry_idsInput!]
   connect: [TableWhereUniqueInput!]
 }
 
-input TableCreateManyWithoutReventue_stream_entry_idsInput {
-  create: [TableCreateWithoutReventue_stream_entry_idsInput!]
+input TableCreateManyWithoutValue_delivery_entry_idsInput {
+  create: [TableCreateWithoutValue_delivery_entry_idsInput!]
   connect: [TableWhereUniqueInput!]
 }
 
@@ -3673,112 +3741,112 @@ input TableCreateOneInput {
   connect: TableWhereUniqueInput
 }
 
-input TableCreateWithoutChannel_entry_idsInput {
+input TableCreateWithoutActor_entry_idsInput {
   id: ID
-  key_partner_entry_ids: KeyPartnerCreateManyWithoutTable_idsInput
-  reventue_stream_entry_ids: RevenueStreamCreateManyWithoutTable_idsInput
-  key_activity_entry_ids: KeyActitvityCreateManyWithoutTable_idsInput
-  customer_relationship_entry_ids: CustomerRelationshipCreateManyWithoutTable_idsInput
   value_proposition_entry_ids: ValuePropositionCreateManyWithoutTable_idsInput
-  cost_structure_entry_ids: CostStructureCreateManyWithoutTable_idsInput
-  customer_segment_entry_ids: CustomerSegmentCreateManyWithoutTable_idsInput
-  key_resource_entry_ids: KeyResourceCreateManyWithoutTable_idsInput
+  value_creation_entry_ids: ValueCreationCreateManyWithoutTable_idsInput
+  value_delivery_entry_ids: ValueDeliveryCreateManyWithoutTable_idsInput
+  revenue_entry_ids: RevenueCreateManyWithoutTable_idsInput
+  expense_entry_ids: ExpenseCreateManyWithoutTable_idsInput
+  network_effect_entry_ids: NetworkEffectCreateManyWithoutTable_idsInput
+  technical_infrastructure_entry_ids: TechnicalInfrastractureCreateManyWithoutTable_idsInput
+  regulatory_entry_ids: RegulatoryCreateManyWithoutTable_idsInput
 }
 
-input TableCreateWithoutCost_structure_entry_idsInput {
+input TableCreateWithoutExpense_entry_idsInput {
   id: ID
-  key_partner_entry_ids: KeyPartnerCreateManyWithoutTable_idsInput
-  reventue_stream_entry_ids: RevenueStreamCreateManyWithoutTable_idsInput
-  key_activity_entry_ids: KeyActitvityCreateManyWithoutTable_idsInput
-  customer_relationship_entry_ids: CustomerRelationshipCreateManyWithoutTable_idsInput
+  actor_entry_ids: ActorCreateManyWithoutTable_idsInput
   value_proposition_entry_ids: ValuePropositionCreateManyWithoutTable_idsInput
-  customer_segment_entry_ids: CustomerSegmentCreateManyWithoutTable_idsInput
-  key_resource_entry_ids: KeyResourceCreateManyWithoutTable_idsInput
-  channel_entry_ids: ChannelCreateManyWithoutTable_idsInput
+  value_creation_entry_ids: ValueCreationCreateManyWithoutTable_idsInput
+  value_delivery_entry_ids: ValueDeliveryCreateManyWithoutTable_idsInput
+  revenue_entry_ids: RevenueCreateManyWithoutTable_idsInput
+  network_effect_entry_ids: NetworkEffectCreateManyWithoutTable_idsInput
+  technical_infrastructure_entry_ids: TechnicalInfrastractureCreateManyWithoutTable_idsInput
+  regulatory_entry_ids: RegulatoryCreateManyWithoutTable_idsInput
 }
 
-input TableCreateWithoutCustomer_relationship_entry_idsInput {
+input TableCreateWithoutNetwork_effect_entry_idsInput {
   id: ID
-  key_partner_entry_ids: KeyPartnerCreateManyWithoutTable_idsInput
-  reventue_stream_entry_ids: RevenueStreamCreateManyWithoutTable_idsInput
-  key_activity_entry_ids: KeyActitvityCreateManyWithoutTable_idsInput
+  actor_entry_ids: ActorCreateManyWithoutTable_idsInput
   value_proposition_entry_ids: ValuePropositionCreateManyWithoutTable_idsInput
-  cost_structure_entry_ids: CostStructureCreateManyWithoutTable_idsInput
-  customer_segment_entry_ids: CustomerSegmentCreateManyWithoutTable_idsInput
-  key_resource_entry_ids: KeyResourceCreateManyWithoutTable_idsInput
-  channel_entry_ids: ChannelCreateManyWithoutTable_idsInput
+  value_creation_entry_ids: ValueCreationCreateManyWithoutTable_idsInput
+  value_delivery_entry_ids: ValueDeliveryCreateManyWithoutTable_idsInput
+  revenue_entry_ids: RevenueCreateManyWithoutTable_idsInput
+  expense_entry_ids: ExpenseCreateManyWithoutTable_idsInput
+  technical_infrastructure_entry_ids: TechnicalInfrastractureCreateManyWithoutTable_idsInput
+  regulatory_entry_ids: RegulatoryCreateManyWithoutTable_idsInput
 }
 
-input TableCreateWithoutCustomer_segment_entry_idsInput {
+input TableCreateWithoutRegulatory_entry_idsInput {
   id: ID
-  key_partner_entry_ids: KeyPartnerCreateManyWithoutTable_idsInput
-  reventue_stream_entry_ids: RevenueStreamCreateManyWithoutTable_idsInput
-  key_activity_entry_ids: KeyActitvityCreateManyWithoutTable_idsInput
-  customer_relationship_entry_ids: CustomerRelationshipCreateManyWithoutTable_idsInput
+  actor_entry_ids: ActorCreateManyWithoutTable_idsInput
   value_proposition_entry_ids: ValuePropositionCreateManyWithoutTable_idsInput
-  cost_structure_entry_ids: CostStructureCreateManyWithoutTable_idsInput
-  key_resource_entry_ids: KeyResourceCreateManyWithoutTable_idsInput
-  channel_entry_ids: ChannelCreateManyWithoutTable_idsInput
+  value_creation_entry_ids: ValueCreationCreateManyWithoutTable_idsInput
+  value_delivery_entry_ids: ValueDeliveryCreateManyWithoutTable_idsInput
+  revenue_entry_ids: RevenueCreateManyWithoutTable_idsInput
+  expense_entry_ids: ExpenseCreateManyWithoutTable_idsInput
+  network_effect_entry_ids: NetworkEffectCreateManyWithoutTable_idsInput
+  technical_infrastructure_entry_ids: TechnicalInfrastractureCreateManyWithoutTable_idsInput
 }
 
-input TableCreateWithoutKey_activity_entry_idsInput {
+input TableCreateWithoutRevenue_entry_idsInput {
   id: ID
-  key_partner_entry_ids: KeyPartnerCreateManyWithoutTable_idsInput
-  reventue_stream_entry_ids: RevenueStreamCreateManyWithoutTable_idsInput
-  customer_relationship_entry_ids: CustomerRelationshipCreateManyWithoutTable_idsInput
+  actor_entry_ids: ActorCreateManyWithoutTable_idsInput
   value_proposition_entry_ids: ValuePropositionCreateManyWithoutTable_idsInput
-  cost_structure_entry_ids: CostStructureCreateManyWithoutTable_idsInput
-  customer_segment_entry_ids: CustomerSegmentCreateManyWithoutTable_idsInput
-  key_resource_entry_ids: KeyResourceCreateManyWithoutTable_idsInput
-  channel_entry_ids: ChannelCreateManyWithoutTable_idsInput
+  value_creation_entry_ids: ValueCreationCreateManyWithoutTable_idsInput
+  value_delivery_entry_ids: ValueDeliveryCreateManyWithoutTable_idsInput
+  expense_entry_ids: ExpenseCreateManyWithoutTable_idsInput
+  network_effect_entry_ids: NetworkEffectCreateManyWithoutTable_idsInput
+  technical_infrastructure_entry_ids: TechnicalInfrastractureCreateManyWithoutTable_idsInput
+  regulatory_entry_ids: RegulatoryCreateManyWithoutTable_idsInput
 }
 
-input TableCreateWithoutKey_partner_entry_idsInput {
+input TableCreateWithoutTechnical_infrastructure_entry_idsInput {
   id: ID
-  reventue_stream_entry_ids: RevenueStreamCreateManyWithoutTable_idsInput
-  key_activity_entry_ids: KeyActitvityCreateManyWithoutTable_idsInput
-  customer_relationship_entry_ids: CustomerRelationshipCreateManyWithoutTable_idsInput
+  actor_entry_ids: ActorCreateManyWithoutTable_idsInput
   value_proposition_entry_ids: ValuePropositionCreateManyWithoutTable_idsInput
-  cost_structure_entry_ids: CostStructureCreateManyWithoutTable_idsInput
-  customer_segment_entry_ids: CustomerSegmentCreateManyWithoutTable_idsInput
-  key_resource_entry_ids: KeyResourceCreateManyWithoutTable_idsInput
-  channel_entry_ids: ChannelCreateManyWithoutTable_idsInput
+  value_creation_entry_ids: ValueCreationCreateManyWithoutTable_idsInput
+  value_delivery_entry_ids: ValueDeliveryCreateManyWithoutTable_idsInput
+  revenue_entry_ids: RevenueCreateManyWithoutTable_idsInput
+  expense_entry_ids: ExpenseCreateManyWithoutTable_idsInput
+  network_effect_entry_ids: NetworkEffectCreateManyWithoutTable_idsInput
+  regulatory_entry_ids: RegulatoryCreateManyWithoutTable_idsInput
 }
 
-input TableCreateWithoutKey_resource_entry_idsInput {
+input TableCreateWithoutValue_creation_entry_idsInput {
   id: ID
-  key_partner_entry_ids: KeyPartnerCreateManyWithoutTable_idsInput
-  reventue_stream_entry_ids: RevenueStreamCreateManyWithoutTable_idsInput
-  key_activity_entry_ids: KeyActitvityCreateManyWithoutTable_idsInput
-  customer_relationship_entry_ids: CustomerRelationshipCreateManyWithoutTable_idsInput
+  actor_entry_ids: ActorCreateManyWithoutTable_idsInput
   value_proposition_entry_ids: ValuePropositionCreateManyWithoutTable_idsInput
-  cost_structure_entry_ids: CostStructureCreateManyWithoutTable_idsInput
-  customer_segment_entry_ids: CustomerSegmentCreateManyWithoutTable_idsInput
-  channel_entry_ids: ChannelCreateManyWithoutTable_idsInput
+  value_delivery_entry_ids: ValueDeliveryCreateManyWithoutTable_idsInput
+  revenue_entry_ids: RevenueCreateManyWithoutTable_idsInput
+  expense_entry_ids: ExpenseCreateManyWithoutTable_idsInput
+  network_effect_entry_ids: NetworkEffectCreateManyWithoutTable_idsInput
+  technical_infrastructure_entry_ids: TechnicalInfrastractureCreateManyWithoutTable_idsInput
+  regulatory_entry_ids: RegulatoryCreateManyWithoutTable_idsInput
 }
 
-input TableCreateWithoutReventue_stream_entry_idsInput {
+input TableCreateWithoutValue_delivery_entry_idsInput {
   id: ID
-  key_partner_entry_ids: KeyPartnerCreateManyWithoutTable_idsInput
-  key_activity_entry_ids: KeyActitvityCreateManyWithoutTable_idsInput
-  customer_relationship_entry_ids: CustomerRelationshipCreateManyWithoutTable_idsInput
+  actor_entry_ids: ActorCreateManyWithoutTable_idsInput
   value_proposition_entry_ids: ValuePropositionCreateManyWithoutTable_idsInput
-  cost_structure_entry_ids: CostStructureCreateManyWithoutTable_idsInput
-  customer_segment_entry_ids: CustomerSegmentCreateManyWithoutTable_idsInput
-  key_resource_entry_ids: KeyResourceCreateManyWithoutTable_idsInput
-  channel_entry_ids: ChannelCreateManyWithoutTable_idsInput
+  value_creation_entry_ids: ValueCreationCreateManyWithoutTable_idsInput
+  revenue_entry_ids: RevenueCreateManyWithoutTable_idsInput
+  expense_entry_ids: ExpenseCreateManyWithoutTable_idsInput
+  network_effect_entry_ids: NetworkEffectCreateManyWithoutTable_idsInput
+  technical_infrastructure_entry_ids: TechnicalInfrastractureCreateManyWithoutTable_idsInput
+  regulatory_entry_ids: RegulatoryCreateManyWithoutTable_idsInput
 }
 
 input TableCreateWithoutValue_proposition_entry_idsInput {
   id: ID
-  key_partner_entry_ids: KeyPartnerCreateManyWithoutTable_idsInput
-  reventue_stream_entry_ids: RevenueStreamCreateManyWithoutTable_idsInput
-  key_activity_entry_ids: KeyActitvityCreateManyWithoutTable_idsInput
-  customer_relationship_entry_ids: CustomerRelationshipCreateManyWithoutTable_idsInput
-  cost_structure_entry_ids: CostStructureCreateManyWithoutTable_idsInput
-  customer_segment_entry_ids: CustomerSegmentCreateManyWithoutTable_idsInput
-  key_resource_entry_ids: KeyResourceCreateManyWithoutTable_idsInput
-  channel_entry_ids: ChannelCreateManyWithoutTable_idsInput
+  actor_entry_ids: ActorCreateManyWithoutTable_idsInput
+  value_creation_entry_ids: ValueCreationCreateManyWithoutTable_idsInput
+  value_delivery_entry_ids: ValueDeliveryCreateManyWithoutTable_idsInput
+  revenue_entry_ids: RevenueCreateManyWithoutTable_idsInput
+  expense_entry_ids: ExpenseCreateManyWithoutTable_idsInput
+  network_effect_entry_ids: NetworkEffectCreateManyWithoutTable_idsInput
+  technical_infrastructure_entry_ids: TechnicalInfrastractureCreateManyWithoutTable_idsInput
+  regulatory_entry_ids: RegulatoryCreateManyWithoutTable_idsInput
 }
 
 type TableEdge {
@@ -3834,114 +3902,114 @@ input TableSubscriptionWhereInput {
 }
 
 input TableUpdateDataInput {
-  key_partner_entry_ids: KeyPartnerUpdateManyWithoutTable_idsInput
-  reventue_stream_entry_ids: RevenueStreamUpdateManyWithoutTable_idsInput
-  key_activity_entry_ids: KeyActitvityUpdateManyWithoutTable_idsInput
-  customer_relationship_entry_ids: CustomerRelationshipUpdateManyWithoutTable_idsInput
+  actor_entry_ids: ActorUpdateManyWithoutTable_idsInput
   value_proposition_entry_ids: ValuePropositionUpdateManyWithoutTable_idsInput
-  cost_structure_entry_ids: CostStructureUpdateManyWithoutTable_idsInput
-  customer_segment_entry_ids: CustomerSegmentUpdateManyWithoutTable_idsInput
-  key_resource_entry_ids: KeyResourceUpdateManyWithoutTable_idsInput
-  channel_entry_ids: ChannelUpdateManyWithoutTable_idsInput
+  value_creation_entry_ids: ValueCreationUpdateManyWithoutTable_idsInput
+  value_delivery_entry_ids: ValueDeliveryUpdateManyWithoutTable_idsInput
+  revenue_entry_ids: RevenueUpdateManyWithoutTable_idsInput
+  expense_entry_ids: ExpenseUpdateManyWithoutTable_idsInput
+  network_effect_entry_ids: NetworkEffectUpdateManyWithoutTable_idsInput
+  technical_infrastructure_entry_ids: TechnicalInfrastractureUpdateManyWithoutTable_idsInput
+  regulatory_entry_ids: RegulatoryUpdateManyWithoutTable_idsInput
 }
 
 input TableUpdateInput {
-  key_partner_entry_ids: KeyPartnerUpdateManyWithoutTable_idsInput
-  reventue_stream_entry_ids: RevenueStreamUpdateManyWithoutTable_idsInput
-  key_activity_entry_ids: KeyActitvityUpdateManyWithoutTable_idsInput
-  customer_relationship_entry_ids: CustomerRelationshipUpdateManyWithoutTable_idsInput
+  actor_entry_ids: ActorUpdateManyWithoutTable_idsInput
   value_proposition_entry_ids: ValuePropositionUpdateManyWithoutTable_idsInput
-  cost_structure_entry_ids: CostStructureUpdateManyWithoutTable_idsInput
-  customer_segment_entry_ids: CustomerSegmentUpdateManyWithoutTable_idsInput
-  key_resource_entry_ids: KeyResourceUpdateManyWithoutTable_idsInput
-  channel_entry_ids: ChannelUpdateManyWithoutTable_idsInput
+  value_creation_entry_ids: ValueCreationUpdateManyWithoutTable_idsInput
+  value_delivery_entry_ids: ValueDeliveryUpdateManyWithoutTable_idsInput
+  revenue_entry_ids: RevenueUpdateManyWithoutTable_idsInput
+  expense_entry_ids: ExpenseUpdateManyWithoutTable_idsInput
+  network_effect_entry_ids: NetworkEffectUpdateManyWithoutTable_idsInput
+  technical_infrastructure_entry_ids: TechnicalInfrastractureUpdateManyWithoutTable_idsInput
+  regulatory_entry_ids: RegulatoryUpdateManyWithoutTable_idsInput
 }
 
-input TableUpdateManyWithoutChannel_entry_idsInput {
-  create: [TableCreateWithoutChannel_entry_idsInput!]
+input TableUpdateManyWithoutActor_entry_idsInput {
+  create: [TableCreateWithoutActor_entry_idsInput!]
   delete: [TableWhereUniqueInput!]
   connect: [TableWhereUniqueInput!]
   set: [TableWhereUniqueInput!]
   disconnect: [TableWhereUniqueInput!]
-  update: [TableUpdateWithWhereUniqueWithoutChannel_entry_idsInput!]
-  upsert: [TableUpsertWithWhereUniqueWithoutChannel_entry_idsInput!]
+  update: [TableUpdateWithWhereUniqueWithoutActor_entry_idsInput!]
+  upsert: [TableUpsertWithWhereUniqueWithoutActor_entry_idsInput!]
   deleteMany: [TableScalarWhereInput!]
 }
 
-input TableUpdateManyWithoutCost_structure_entry_idsInput {
-  create: [TableCreateWithoutCost_structure_entry_idsInput!]
+input TableUpdateManyWithoutExpense_entry_idsInput {
+  create: [TableCreateWithoutExpense_entry_idsInput!]
   delete: [TableWhereUniqueInput!]
   connect: [TableWhereUniqueInput!]
   set: [TableWhereUniqueInput!]
   disconnect: [TableWhereUniqueInput!]
-  update: [TableUpdateWithWhereUniqueWithoutCost_structure_entry_idsInput!]
-  upsert: [TableUpsertWithWhereUniqueWithoutCost_structure_entry_idsInput!]
+  update: [TableUpdateWithWhereUniqueWithoutExpense_entry_idsInput!]
+  upsert: [TableUpsertWithWhereUniqueWithoutExpense_entry_idsInput!]
   deleteMany: [TableScalarWhereInput!]
 }
 
-input TableUpdateManyWithoutCustomer_relationship_entry_idsInput {
-  create: [TableCreateWithoutCustomer_relationship_entry_idsInput!]
+input TableUpdateManyWithoutNetwork_effect_entry_idsInput {
+  create: [TableCreateWithoutNetwork_effect_entry_idsInput!]
   delete: [TableWhereUniqueInput!]
   connect: [TableWhereUniqueInput!]
   set: [TableWhereUniqueInput!]
   disconnect: [TableWhereUniqueInput!]
-  update: [TableUpdateWithWhereUniqueWithoutCustomer_relationship_entry_idsInput!]
-  upsert: [TableUpsertWithWhereUniqueWithoutCustomer_relationship_entry_idsInput!]
+  update: [TableUpdateWithWhereUniqueWithoutNetwork_effect_entry_idsInput!]
+  upsert: [TableUpsertWithWhereUniqueWithoutNetwork_effect_entry_idsInput!]
   deleteMany: [TableScalarWhereInput!]
 }
 
-input TableUpdateManyWithoutCustomer_segment_entry_idsInput {
-  create: [TableCreateWithoutCustomer_segment_entry_idsInput!]
+input TableUpdateManyWithoutRegulatory_entry_idsInput {
+  create: [TableCreateWithoutRegulatory_entry_idsInput!]
   delete: [TableWhereUniqueInput!]
   connect: [TableWhereUniqueInput!]
   set: [TableWhereUniqueInput!]
   disconnect: [TableWhereUniqueInput!]
-  update: [TableUpdateWithWhereUniqueWithoutCustomer_segment_entry_idsInput!]
-  upsert: [TableUpsertWithWhereUniqueWithoutCustomer_segment_entry_idsInput!]
+  update: [TableUpdateWithWhereUniqueWithoutRegulatory_entry_idsInput!]
+  upsert: [TableUpsertWithWhereUniqueWithoutRegulatory_entry_idsInput!]
   deleteMany: [TableScalarWhereInput!]
 }
 
-input TableUpdateManyWithoutKey_activity_entry_idsInput {
-  create: [TableCreateWithoutKey_activity_entry_idsInput!]
+input TableUpdateManyWithoutRevenue_entry_idsInput {
+  create: [TableCreateWithoutRevenue_entry_idsInput!]
   delete: [TableWhereUniqueInput!]
   connect: [TableWhereUniqueInput!]
   set: [TableWhereUniqueInput!]
   disconnect: [TableWhereUniqueInput!]
-  update: [TableUpdateWithWhereUniqueWithoutKey_activity_entry_idsInput!]
-  upsert: [TableUpsertWithWhereUniqueWithoutKey_activity_entry_idsInput!]
+  update: [TableUpdateWithWhereUniqueWithoutRevenue_entry_idsInput!]
+  upsert: [TableUpsertWithWhereUniqueWithoutRevenue_entry_idsInput!]
   deleteMany: [TableScalarWhereInput!]
 }
 
-input TableUpdateManyWithoutKey_partner_entry_idsInput {
-  create: [TableCreateWithoutKey_partner_entry_idsInput!]
+input TableUpdateManyWithoutTechnical_infrastructure_entry_idsInput {
+  create: [TableCreateWithoutTechnical_infrastructure_entry_idsInput!]
   delete: [TableWhereUniqueInput!]
   connect: [TableWhereUniqueInput!]
   set: [TableWhereUniqueInput!]
   disconnect: [TableWhereUniqueInput!]
-  update: [TableUpdateWithWhereUniqueWithoutKey_partner_entry_idsInput!]
-  upsert: [TableUpsertWithWhereUniqueWithoutKey_partner_entry_idsInput!]
+  update: [TableUpdateWithWhereUniqueWithoutTechnical_infrastructure_entry_idsInput!]
+  upsert: [TableUpsertWithWhereUniqueWithoutTechnical_infrastructure_entry_idsInput!]
   deleteMany: [TableScalarWhereInput!]
 }
 
-input TableUpdateManyWithoutKey_resource_entry_idsInput {
-  create: [TableCreateWithoutKey_resource_entry_idsInput!]
+input TableUpdateManyWithoutValue_creation_entry_idsInput {
+  create: [TableCreateWithoutValue_creation_entry_idsInput!]
   delete: [TableWhereUniqueInput!]
   connect: [TableWhereUniqueInput!]
   set: [TableWhereUniqueInput!]
   disconnect: [TableWhereUniqueInput!]
-  update: [TableUpdateWithWhereUniqueWithoutKey_resource_entry_idsInput!]
-  upsert: [TableUpsertWithWhereUniqueWithoutKey_resource_entry_idsInput!]
+  update: [TableUpdateWithWhereUniqueWithoutValue_creation_entry_idsInput!]
+  upsert: [TableUpsertWithWhereUniqueWithoutValue_creation_entry_idsInput!]
   deleteMany: [TableScalarWhereInput!]
 }
 
-input TableUpdateManyWithoutReventue_stream_entry_idsInput {
-  create: [TableCreateWithoutReventue_stream_entry_idsInput!]
+input TableUpdateManyWithoutValue_delivery_entry_idsInput {
+  create: [TableCreateWithoutValue_delivery_entry_idsInput!]
   delete: [TableWhereUniqueInput!]
   connect: [TableWhereUniqueInput!]
   set: [TableWhereUniqueInput!]
   disconnect: [TableWhereUniqueInput!]
-  update: [TableUpdateWithWhereUniqueWithoutReventue_stream_entry_idsInput!]
-  upsert: [TableUpsertWithWhereUniqueWithoutReventue_stream_entry_idsInput!]
+  update: [TableUpdateWithWhereUniqueWithoutValue_delivery_entry_idsInput!]
+  upsert: [TableUpsertWithWhereUniqueWithoutValue_delivery_entry_idsInput!]
   deleteMany: [TableScalarWhereInput!]
 }
 
@@ -3963,143 +4031,143 @@ input TableUpdateOneRequiredInput {
   connect: TableWhereUniqueInput
 }
 
-input TableUpdateWithoutChannel_entry_idsDataInput {
-  key_partner_entry_ids: KeyPartnerUpdateManyWithoutTable_idsInput
-  reventue_stream_entry_ids: RevenueStreamUpdateManyWithoutTable_idsInput
-  key_activity_entry_ids: KeyActitvityUpdateManyWithoutTable_idsInput
-  customer_relationship_entry_ids: CustomerRelationshipUpdateManyWithoutTable_idsInput
+input TableUpdateWithoutActor_entry_idsDataInput {
   value_proposition_entry_ids: ValuePropositionUpdateManyWithoutTable_idsInput
-  cost_structure_entry_ids: CostStructureUpdateManyWithoutTable_idsInput
-  customer_segment_entry_ids: CustomerSegmentUpdateManyWithoutTable_idsInput
-  key_resource_entry_ids: KeyResourceUpdateManyWithoutTable_idsInput
+  value_creation_entry_ids: ValueCreationUpdateManyWithoutTable_idsInput
+  value_delivery_entry_ids: ValueDeliveryUpdateManyWithoutTable_idsInput
+  revenue_entry_ids: RevenueUpdateManyWithoutTable_idsInput
+  expense_entry_ids: ExpenseUpdateManyWithoutTable_idsInput
+  network_effect_entry_ids: NetworkEffectUpdateManyWithoutTable_idsInput
+  technical_infrastructure_entry_ids: TechnicalInfrastractureUpdateManyWithoutTable_idsInput
+  regulatory_entry_ids: RegulatoryUpdateManyWithoutTable_idsInput
 }
 
-input TableUpdateWithoutCost_structure_entry_idsDataInput {
-  key_partner_entry_ids: KeyPartnerUpdateManyWithoutTable_idsInput
-  reventue_stream_entry_ids: RevenueStreamUpdateManyWithoutTable_idsInput
-  key_activity_entry_ids: KeyActitvityUpdateManyWithoutTable_idsInput
-  customer_relationship_entry_ids: CustomerRelationshipUpdateManyWithoutTable_idsInput
+input TableUpdateWithoutExpense_entry_idsDataInput {
+  actor_entry_ids: ActorUpdateManyWithoutTable_idsInput
   value_proposition_entry_ids: ValuePropositionUpdateManyWithoutTable_idsInput
-  customer_segment_entry_ids: CustomerSegmentUpdateManyWithoutTable_idsInput
-  key_resource_entry_ids: KeyResourceUpdateManyWithoutTable_idsInput
-  channel_entry_ids: ChannelUpdateManyWithoutTable_idsInput
+  value_creation_entry_ids: ValueCreationUpdateManyWithoutTable_idsInput
+  value_delivery_entry_ids: ValueDeliveryUpdateManyWithoutTable_idsInput
+  revenue_entry_ids: RevenueUpdateManyWithoutTable_idsInput
+  network_effect_entry_ids: NetworkEffectUpdateManyWithoutTable_idsInput
+  technical_infrastructure_entry_ids: TechnicalInfrastractureUpdateManyWithoutTable_idsInput
+  regulatory_entry_ids: RegulatoryUpdateManyWithoutTable_idsInput
 }
 
-input TableUpdateWithoutCustomer_relationship_entry_idsDataInput {
-  key_partner_entry_ids: KeyPartnerUpdateManyWithoutTable_idsInput
-  reventue_stream_entry_ids: RevenueStreamUpdateManyWithoutTable_idsInput
-  key_activity_entry_ids: KeyActitvityUpdateManyWithoutTable_idsInput
+input TableUpdateWithoutNetwork_effect_entry_idsDataInput {
+  actor_entry_ids: ActorUpdateManyWithoutTable_idsInput
   value_proposition_entry_ids: ValuePropositionUpdateManyWithoutTable_idsInput
-  cost_structure_entry_ids: CostStructureUpdateManyWithoutTable_idsInput
-  customer_segment_entry_ids: CustomerSegmentUpdateManyWithoutTable_idsInput
-  key_resource_entry_ids: KeyResourceUpdateManyWithoutTable_idsInput
-  channel_entry_ids: ChannelUpdateManyWithoutTable_idsInput
+  value_creation_entry_ids: ValueCreationUpdateManyWithoutTable_idsInput
+  value_delivery_entry_ids: ValueDeliveryUpdateManyWithoutTable_idsInput
+  revenue_entry_ids: RevenueUpdateManyWithoutTable_idsInput
+  expense_entry_ids: ExpenseUpdateManyWithoutTable_idsInput
+  technical_infrastructure_entry_ids: TechnicalInfrastractureUpdateManyWithoutTable_idsInput
+  regulatory_entry_ids: RegulatoryUpdateManyWithoutTable_idsInput
 }
 
-input TableUpdateWithoutCustomer_segment_entry_idsDataInput {
-  key_partner_entry_ids: KeyPartnerUpdateManyWithoutTable_idsInput
-  reventue_stream_entry_ids: RevenueStreamUpdateManyWithoutTable_idsInput
-  key_activity_entry_ids: KeyActitvityUpdateManyWithoutTable_idsInput
-  customer_relationship_entry_ids: CustomerRelationshipUpdateManyWithoutTable_idsInput
+input TableUpdateWithoutRegulatory_entry_idsDataInput {
+  actor_entry_ids: ActorUpdateManyWithoutTable_idsInput
   value_proposition_entry_ids: ValuePropositionUpdateManyWithoutTable_idsInput
-  cost_structure_entry_ids: CostStructureUpdateManyWithoutTable_idsInput
-  key_resource_entry_ids: KeyResourceUpdateManyWithoutTable_idsInput
-  channel_entry_ids: ChannelUpdateManyWithoutTable_idsInput
+  value_creation_entry_ids: ValueCreationUpdateManyWithoutTable_idsInput
+  value_delivery_entry_ids: ValueDeliveryUpdateManyWithoutTable_idsInput
+  revenue_entry_ids: RevenueUpdateManyWithoutTable_idsInput
+  expense_entry_ids: ExpenseUpdateManyWithoutTable_idsInput
+  network_effect_entry_ids: NetworkEffectUpdateManyWithoutTable_idsInput
+  technical_infrastructure_entry_ids: TechnicalInfrastractureUpdateManyWithoutTable_idsInput
 }
 
-input TableUpdateWithoutKey_activity_entry_idsDataInput {
-  key_partner_entry_ids: KeyPartnerUpdateManyWithoutTable_idsInput
-  reventue_stream_entry_ids: RevenueStreamUpdateManyWithoutTable_idsInput
-  customer_relationship_entry_ids: CustomerRelationshipUpdateManyWithoutTable_idsInput
+input TableUpdateWithoutRevenue_entry_idsDataInput {
+  actor_entry_ids: ActorUpdateManyWithoutTable_idsInput
   value_proposition_entry_ids: ValuePropositionUpdateManyWithoutTable_idsInput
-  cost_structure_entry_ids: CostStructureUpdateManyWithoutTable_idsInput
-  customer_segment_entry_ids: CustomerSegmentUpdateManyWithoutTable_idsInput
-  key_resource_entry_ids: KeyResourceUpdateManyWithoutTable_idsInput
-  channel_entry_ids: ChannelUpdateManyWithoutTable_idsInput
+  value_creation_entry_ids: ValueCreationUpdateManyWithoutTable_idsInput
+  value_delivery_entry_ids: ValueDeliveryUpdateManyWithoutTable_idsInput
+  expense_entry_ids: ExpenseUpdateManyWithoutTable_idsInput
+  network_effect_entry_ids: NetworkEffectUpdateManyWithoutTable_idsInput
+  technical_infrastructure_entry_ids: TechnicalInfrastractureUpdateManyWithoutTable_idsInput
+  regulatory_entry_ids: RegulatoryUpdateManyWithoutTable_idsInput
 }
 
-input TableUpdateWithoutKey_partner_entry_idsDataInput {
-  reventue_stream_entry_ids: RevenueStreamUpdateManyWithoutTable_idsInput
-  key_activity_entry_ids: KeyActitvityUpdateManyWithoutTable_idsInput
-  customer_relationship_entry_ids: CustomerRelationshipUpdateManyWithoutTable_idsInput
+input TableUpdateWithoutTechnical_infrastructure_entry_idsDataInput {
+  actor_entry_ids: ActorUpdateManyWithoutTable_idsInput
   value_proposition_entry_ids: ValuePropositionUpdateManyWithoutTable_idsInput
-  cost_structure_entry_ids: CostStructureUpdateManyWithoutTable_idsInput
-  customer_segment_entry_ids: CustomerSegmentUpdateManyWithoutTable_idsInput
-  key_resource_entry_ids: KeyResourceUpdateManyWithoutTable_idsInput
-  channel_entry_ids: ChannelUpdateManyWithoutTable_idsInput
+  value_creation_entry_ids: ValueCreationUpdateManyWithoutTable_idsInput
+  value_delivery_entry_ids: ValueDeliveryUpdateManyWithoutTable_idsInput
+  revenue_entry_ids: RevenueUpdateManyWithoutTable_idsInput
+  expense_entry_ids: ExpenseUpdateManyWithoutTable_idsInput
+  network_effect_entry_ids: NetworkEffectUpdateManyWithoutTable_idsInput
+  regulatory_entry_ids: RegulatoryUpdateManyWithoutTable_idsInput
 }
 
-input TableUpdateWithoutKey_resource_entry_idsDataInput {
-  key_partner_entry_ids: KeyPartnerUpdateManyWithoutTable_idsInput
-  reventue_stream_entry_ids: RevenueStreamUpdateManyWithoutTable_idsInput
-  key_activity_entry_ids: KeyActitvityUpdateManyWithoutTable_idsInput
-  customer_relationship_entry_ids: CustomerRelationshipUpdateManyWithoutTable_idsInput
+input TableUpdateWithoutValue_creation_entry_idsDataInput {
+  actor_entry_ids: ActorUpdateManyWithoutTable_idsInput
   value_proposition_entry_ids: ValuePropositionUpdateManyWithoutTable_idsInput
-  cost_structure_entry_ids: CostStructureUpdateManyWithoutTable_idsInput
-  customer_segment_entry_ids: CustomerSegmentUpdateManyWithoutTable_idsInput
-  channel_entry_ids: ChannelUpdateManyWithoutTable_idsInput
+  value_delivery_entry_ids: ValueDeliveryUpdateManyWithoutTable_idsInput
+  revenue_entry_ids: RevenueUpdateManyWithoutTable_idsInput
+  expense_entry_ids: ExpenseUpdateManyWithoutTable_idsInput
+  network_effect_entry_ids: NetworkEffectUpdateManyWithoutTable_idsInput
+  technical_infrastructure_entry_ids: TechnicalInfrastractureUpdateManyWithoutTable_idsInput
+  regulatory_entry_ids: RegulatoryUpdateManyWithoutTable_idsInput
 }
 
-input TableUpdateWithoutReventue_stream_entry_idsDataInput {
-  key_partner_entry_ids: KeyPartnerUpdateManyWithoutTable_idsInput
-  key_activity_entry_ids: KeyActitvityUpdateManyWithoutTable_idsInput
-  customer_relationship_entry_ids: CustomerRelationshipUpdateManyWithoutTable_idsInput
+input TableUpdateWithoutValue_delivery_entry_idsDataInput {
+  actor_entry_ids: ActorUpdateManyWithoutTable_idsInput
   value_proposition_entry_ids: ValuePropositionUpdateManyWithoutTable_idsInput
-  cost_structure_entry_ids: CostStructureUpdateManyWithoutTable_idsInput
-  customer_segment_entry_ids: CustomerSegmentUpdateManyWithoutTable_idsInput
-  key_resource_entry_ids: KeyResourceUpdateManyWithoutTable_idsInput
-  channel_entry_ids: ChannelUpdateManyWithoutTable_idsInput
+  value_creation_entry_ids: ValueCreationUpdateManyWithoutTable_idsInput
+  revenue_entry_ids: RevenueUpdateManyWithoutTable_idsInput
+  expense_entry_ids: ExpenseUpdateManyWithoutTable_idsInput
+  network_effect_entry_ids: NetworkEffectUpdateManyWithoutTable_idsInput
+  technical_infrastructure_entry_ids: TechnicalInfrastractureUpdateManyWithoutTable_idsInput
+  regulatory_entry_ids: RegulatoryUpdateManyWithoutTable_idsInput
 }
 
 input TableUpdateWithoutValue_proposition_entry_idsDataInput {
-  key_partner_entry_ids: KeyPartnerUpdateManyWithoutTable_idsInput
-  reventue_stream_entry_ids: RevenueStreamUpdateManyWithoutTable_idsInput
-  key_activity_entry_ids: KeyActitvityUpdateManyWithoutTable_idsInput
-  customer_relationship_entry_ids: CustomerRelationshipUpdateManyWithoutTable_idsInput
-  cost_structure_entry_ids: CostStructureUpdateManyWithoutTable_idsInput
-  customer_segment_entry_ids: CustomerSegmentUpdateManyWithoutTable_idsInput
-  key_resource_entry_ids: KeyResourceUpdateManyWithoutTable_idsInput
-  channel_entry_ids: ChannelUpdateManyWithoutTable_idsInput
+  actor_entry_ids: ActorUpdateManyWithoutTable_idsInput
+  value_creation_entry_ids: ValueCreationUpdateManyWithoutTable_idsInput
+  value_delivery_entry_ids: ValueDeliveryUpdateManyWithoutTable_idsInput
+  revenue_entry_ids: RevenueUpdateManyWithoutTable_idsInput
+  expense_entry_ids: ExpenseUpdateManyWithoutTable_idsInput
+  network_effect_entry_ids: NetworkEffectUpdateManyWithoutTable_idsInput
+  technical_infrastructure_entry_ids: TechnicalInfrastractureUpdateManyWithoutTable_idsInput
+  regulatory_entry_ids: RegulatoryUpdateManyWithoutTable_idsInput
 }
 
-input TableUpdateWithWhereUniqueWithoutChannel_entry_idsInput {
+input TableUpdateWithWhereUniqueWithoutActor_entry_idsInput {
   where: TableWhereUniqueInput!
-  data: TableUpdateWithoutChannel_entry_idsDataInput!
+  data: TableUpdateWithoutActor_entry_idsDataInput!
 }
 
-input TableUpdateWithWhereUniqueWithoutCost_structure_entry_idsInput {
+input TableUpdateWithWhereUniqueWithoutExpense_entry_idsInput {
   where: TableWhereUniqueInput!
-  data: TableUpdateWithoutCost_structure_entry_idsDataInput!
+  data: TableUpdateWithoutExpense_entry_idsDataInput!
 }
 
-input TableUpdateWithWhereUniqueWithoutCustomer_relationship_entry_idsInput {
+input TableUpdateWithWhereUniqueWithoutNetwork_effect_entry_idsInput {
   where: TableWhereUniqueInput!
-  data: TableUpdateWithoutCustomer_relationship_entry_idsDataInput!
+  data: TableUpdateWithoutNetwork_effect_entry_idsDataInput!
 }
 
-input TableUpdateWithWhereUniqueWithoutCustomer_segment_entry_idsInput {
+input TableUpdateWithWhereUniqueWithoutRegulatory_entry_idsInput {
   where: TableWhereUniqueInput!
-  data: TableUpdateWithoutCustomer_segment_entry_idsDataInput!
+  data: TableUpdateWithoutRegulatory_entry_idsDataInput!
 }
 
-input TableUpdateWithWhereUniqueWithoutKey_activity_entry_idsInput {
+input TableUpdateWithWhereUniqueWithoutRevenue_entry_idsInput {
   where: TableWhereUniqueInput!
-  data: TableUpdateWithoutKey_activity_entry_idsDataInput!
+  data: TableUpdateWithoutRevenue_entry_idsDataInput!
 }
 
-input TableUpdateWithWhereUniqueWithoutKey_partner_entry_idsInput {
+input TableUpdateWithWhereUniqueWithoutTechnical_infrastructure_entry_idsInput {
   where: TableWhereUniqueInput!
-  data: TableUpdateWithoutKey_partner_entry_idsDataInput!
+  data: TableUpdateWithoutTechnical_infrastructure_entry_idsDataInput!
 }
 
-input TableUpdateWithWhereUniqueWithoutKey_resource_entry_idsInput {
+input TableUpdateWithWhereUniqueWithoutValue_creation_entry_idsInput {
   where: TableWhereUniqueInput!
-  data: TableUpdateWithoutKey_resource_entry_idsDataInput!
+  data: TableUpdateWithoutValue_creation_entry_idsDataInput!
 }
 
-input TableUpdateWithWhereUniqueWithoutReventue_stream_entry_idsInput {
+input TableUpdateWithWhereUniqueWithoutValue_delivery_entry_idsInput {
   where: TableWhereUniqueInput!
-  data: TableUpdateWithoutReventue_stream_entry_idsDataInput!
+  data: TableUpdateWithoutValue_delivery_entry_idsDataInput!
 }
 
 input TableUpdateWithWhereUniqueWithoutValue_proposition_entry_idsInput {
@@ -4112,52 +4180,52 @@ input TableUpsertNestedInput {
   create: TableCreateInput!
 }
 
-input TableUpsertWithWhereUniqueWithoutChannel_entry_idsInput {
+input TableUpsertWithWhereUniqueWithoutActor_entry_idsInput {
   where: TableWhereUniqueInput!
-  update: TableUpdateWithoutChannel_entry_idsDataInput!
-  create: TableCreateWithoutChannel_entry_idsInput!
+  update: TableUpdateWithoutActor_entry_idsDataInput!
+  create: TableCreateWithoutActor_entry_idsInput!
 }
 
-input TableUpsertWithWhereUniqueWithoutCost_structure_entry_idsInput {
+input TableUpsertWithWhereUniqueWithoutExpense_entry_idsInput {
   where: TableWhereUniqueInput!
-  update: TableUpdateWithoutCost_structure_entry_idsDataInput!
-  create: TableCreateWithoutCost_structure_entry_idsInput!
+  update: TableUpdateWithoutExpense_entry_idsDataInput!
+  create: TableCreateWithoutExpense_entry_idsInput!
 }
 
-input TableUpsertWithWhereUniqueWithoutCustomer_relationship_entry_idsInput {
+input TableUpsertWithWhereUniqueWithoutNetwork_effect_entry_idsInput {
   where: TableWhereUniqueInput!
-  update: TableUpdateWithoutCustomer_relationship_entry_idsDataInput!
-  create: TableCreateWithoutCustomer_relationship_entry_idsInput!
+  update: TableUpdateWithoutNetwork_effect_entry_idsDataInput!
+  create: TableCreateWithoutNetwork_effect_entry_idsInput!
 }
 
-input TableUpsertWithWhereUniqueWithoutCustomer_segment_entry_idsInput {
+input TableUpsertWithWhereUniqueWithoutRegulatory_entry_idsInput {
   where: TableWhereUniqueInput!
-  update: TableUpdateWithoutCustomer_segment_entry_idsDataInput!
-  create: TableCreateWithoutCustomer_segment_entry_idsInput!
+  update: TableUpdateWithoutRegulatory_entry_idsDataInput!
+  create: TableCreateWithoutRegulatory_entry_idsInput!
 }
 
-input TableUpsertWithWhereUniqueWithoutKey_activity_entry_idsInput {
+input TableUpsertWithWhereUniqueWithoutRevenue_entry_idsInput {
   where: TableWhereUniqueInput!
-  update: TableUpdateWithoutKey_activity_entry_idsDataInput!
-  create: TableCreateWithoutKey_activity_entry_idsInput!
+  update: TableUpdateWithoutRevenue_entry_idsDataInput!
+  create: TableCreateWithoutRevenue_entry_idsInput!
 }
 
-input TableUpsertWithWhereUniqueWithoutKey_partner_entry_idsInput {
+input TableUpsertWithWhereUniqueWithoutTechnical_infrastructure_entry_idsInput {
   where: TableWhereUniqueInput!
-  update: TableUpdateWithoutKey_partner_entry_idsDataInput!
-  create: TableCreateWithoutKey_partner_entry_idsInput!
+  update: TableUpdateWithoutTechnical_infrastructure_entry_idsDataInput!
+  create: TableCreateWithoutTechnical_infrastructure_entry_idsInput!
 }
 
-input TableUpsertWithWhereUniqueWithoutKey_resource_entry_idsInput {
+input TableUpsertWithWhereUniqueWithoutValue_creation_entry_idsInput {
   where: TableWhereUniqueInput!
-  update: TableUpdateWithoutKey_resource_entry_idsDataInput!
-  create: TableCreateWithoutKey_resource_entry_idsInput!
+  update: TableUpdateWithoutValue_creation_entry_idsDataInput!
+  create: TableCreateWithoutValue_creation_entry_idsInput!
 }
 
-input TableUpsertWithWhereUniqueWithoutReventue_stream_entry_idsInput {
+input TableUpsertWithWhereUniqueWithoutValue_delivery_entry_idsInput {
   where: TableWhereUniqueInput!
-  update: TableUpdateWithoutReventue_stream_entry_idsDataInput!
-  create: TableCreateWithoutReventue_stream_entry_idsInput!
+  update: TableUpdateWithoutValue_delivery_entry_idsDataInput!
+  create: TableCreateWithoutValue_delivery_entry_idsInput!
 }
 
 input TableUpsertWithWhereUniqueWithoutValue_proposition_entry_idsInput {
@@ -4181,39 +4249,312 @@ input TableWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
-  key_partner_entry_ids_every: KeyPartnerWhereInput
-  key_partner_entry_ids_some: KeyPartnerWhereInput
-  key_partner_entry_ids_none: KeyPartnerWhereInput
-  reventue_stream_entry_ids_every: RevenueStreamWhereInput
-  reventue_stream_entry_ids_some: RevenueStreamWhereInput
-  reventue_stream_entry_ids_none: RevenueStreamWhereInput
-  key_activity_entry_ids_every: KeyActitvityWhereInput
-  key_activity_entry_ids_some: KeyActitvityWhereInput
-  key_activity_entry_ids_none: KeyActitvityWhereInput
-  customer_relationship_entry_ids_every: CustomerRelationshipWhereInput
-  customer_relationship_entry_ids_some: CustomerRelationshipWhereInput
-  customer_relationship_entry_ids_none: CustomerRelationshipWhereInput
+  actor_entry_ids_every: ActorWhereInput
+  actor_entry_ids_some: ActorWhereInput
+  actor_entry_ids_none: ActorWhereInput
   value_proposition_entry_ids_every: ValuePropositionWhereInput
   value_proposition_entry_ids_some: ValuePropositionWhereInput
   value_proposition_entry_ids_none: ValuePropositionWhereInput
-  cost_structure_entry_ids_every: CostStructureWhereInput
-  cost_structure_entry_ids_some: CostStructureWhereInput
-  cost_structure_entry_ids_none: CostStructureWhereInput
-  customer_segment_entry_ids_every: CustomerSegmentWhereInput
-  customer_segment_entry_ids_some: CustomerSegmentWhereInput
-  customer_segment_entry_ids_none: CustomerSegmentWhereInput
-  key_resource_entry_ids_every: KeyResourceWhereInput
-  key_resource_entry_ids_some: KeyResourceWhereInput
-  key_resource_entry_ids_none: KeyResourceWhereInput
-  channel_entry_ids_every: ChannelWhereInput
-  channel_entry_ids_some: ChannelWhereInput
-  channel_entry_ids_none: ChannelWhereInput
+  value_creation_entry_ids_every: ValueCreationWhereInput
+  value_creation_entry_ids_some: ValueCreationWhereInput
+  value_creation_entry_ids_none: ValueCreationWhereInput
+  value_delivery_entry_ids_every: ValueDeliveryWhereInput
+  value_delivery_entry_ids_some: ValueDeliveryWhereInput
+  value_delivery_entry_ids_none: ValueDeliveryWhereInput
+  revenue_entry_ids_every: RevenueWhereInput
+  revenue_entry_ids_some: RevenueWhereInput
+  revenue_entry_ids_none: RevenueWhereInput
+  expense_entry_ids_every: ExpenseWhereInput
+  expense_entry_ids_some: ExpenseWhereInput
+  expense_entry_ids_none: ExpenseWhereInput
+  network_effect_entry_ids_every: NetworkEffectWhereInput
+  network_effect_entry_ids_some: NetworkEffectWhereInput
+  network_effect_entry_ids_none: NetworkEffectWhereInput
+  technical_infrastructure_entry_ids_every: TechnicalInfrastractureWhereInput
+  technical_infrastructure_entry_ids_some: TechnicalInfrastractureWhereInput
+  technical_infrastructure_entry_ids_none: TechnicalInfrastractureWhereInput
+  regulatory_entry_ids_every: RegulatoryWhereInput
+  regulatory_entry_ids_some: RegulatoryWhereInput
+  regulatory_entry_ids_none: RegulatoryWhereInput
   AND: [TableWhereInput!]
   OR: [TableWhereInput!]
   NOT: [TableWhereInput!]
 }
 
 input TableWhereUniqueInput {
+  id: ID
+}
+
+type TechnicalInfrastracture {
+  id: ID!
+  table_ids(where: TableWhereInput, orderBy: TableOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Table!]
+  text: String!
+  note: String
+  createdBy: User!
+  updatedBy: User!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type TechnicalInfrastractureConnection {
+  pageInfo: PageInfo!
+  edges: [TechnicalInfrastractureEdge]!
+  aggregate: AggregateTechnicalInfrastracture!
+}
+
+input TechnicalInfrastractureCreateInput {
+  id: ID
+  table_ids: TableCreateManyWithoutTechnical_infrastructure_entry_idsInput
+  text: String!
+  note: String
+  createdBy: UserCreateOneInput!
+  updatedBy: UserCreateOneInput!
+}
+
+input TechnicalInfrastractureCreateManyWithoutTable_idsInput {
+  create: [TechnicalInfrastractureCreateWithoutTable_idsInput!]
+  connect: [TechnicalInfrastractureWhereUniqueInput!]
+}
+
+input TechnicalInfrastractureCreateWithoutTable_idsInput {
+  id: ID
+  text: String!
+  note: String
+  createdBy: UserCreateOneInput!
+  updatedBy: UserCreateOneInput!
+}
+
+type TechnicalInfrastractureEdge {
+  node: TechnicalInfrastracture!
+  cursor: String!
+}
+
+enum TechnicalInfrastractureOrderByInput {
+  id_ASC
+  id_DESC
+  text_ASC
+  text_DESC
+  note_ASC
+  note_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type TechnicalInfrastracturePreviousValues {
+  id: ID!
+  text: String!
+  note: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+input TechnicalInfrastractureScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  text: String
+  text_not: String
+  text_in: [String!]
+  text_not_in: [String!]
+  text_lt: String
+  text_lte: String
+  text_gt: String
+  text_gte: String
+  text_contains: String
+  text_not_contains: String
+  text_starts_with: String
+  text_not_starts_with: String
+  text_ends_with: String
+  text_not_ends_with: String
+  note: String
+  note_not: String
+  note_in: [String!]
+  note_not_in: [String!]
+  note_lt: String
+  note_lte: String
+  note_gt: String
+  note_gte: String
+  note_contains: String
+  note_not_contains: String
+  note_starts_with: String
+  note_not_starts_with: String
+  note_ends_with: String
+  note_not_ends_with: String
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  AND: [TechnicalInfrastractureScalarWhereInput!]
+  OR: [TechnicalInfrastractureScalarWhereInput!]
+  NOT: [TechnicalInfrastractureScalarWhereInput!]
+}
+
+type TechnicalInfrastractureSubscriptionPayload {
+  mutation: MutationType!
+  node: TechnicalInfrastracture
+  updatedFields: [String!]
+  previousValues: TechnicalInfrastracturePreviousValues
+}
+
+input TechnicalInfrastractureSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: TechnicalInfrastractureWhereInput
+  AND: [TechnicalInfrastractureSubscriptionWhereInput!]
+  OR: [TechnicalInfrastractureSubscriptionWhereInput!]
+  NOT: [TechnicalInfrastractureSubscriptionWhereInput!]
+}
+
+input TechnicalInfrastractureUpdateInput {
+  table_ids: TableUpdateManyWithoutTechnical_infrastructure_entry_idsInput
+  text: String
+  note: String
+  createdBy: UserUpdateOneRequiredInput
+  updatedBy: UserUpdateOneRequiredInput
+}
+
+input TechnicalInfrastractureUpdateManyDataInput {
+  text: String
+  note: String
+}
+
+input TechnicalInfrastractureUpdateManyMutationInput {
+  text: String
+  note: String
+}
+
+input TechnicalInfrastractureUpdateManyWithoutTable_idsInput {
+  create: [TechnicalInfrastractureCreateWithoutTable_idsInput!]
+  delete: [TechnicalInfrastractureWhereUniqueInput!]
+  connect: [TechnicalInfrastractureWhereUniqueInput!]
+  set: [TechnicalInfrastractureWhereUniqueInput!]
+  disconnect: [TechnicalInfrastractureWhereUniqueInput!]
+  update: [TechnicalInfrastractureUpdateWithWhereUniqueWithoutTable_idsInput!]
+  upsert: [TechnicalInfrastractureUpsertWithWhereUniqueWithoutTable_idsInput!]
+  deleteMany: [TechnicalInfrastractureScalarWhereInput!]
+  updateMany: [TechnicalInfrastractureUpdateManyWithWhereNestedInput!]
+}
+
+input TechnicalInfrastractureUpdateManyWithWhereNestedInput {
+  where: TechnicalInfrastractureScalarWhereInput!
+  data: TechnicalInfrastractureUpdateManyDataInput!
+}
+
+input TechnicalInfrastractureUpdateWithoutTable_idsDataInput {
+  text: String
+  note: String
+  createdBy: UserUpdateOneRequiredInput
+  updatedBy: UserUpdateOneRequiredInput
+}
+
+input TechnicalInfrastractureUpdateWithWhereUniqueWithoutTable_idsInput {
+  where: TechnicalInfrastractureWhereUniqueInput!
+  data: TechnicalInfrastractureUpdateWithoutTable_idsDataInput!
+}
+
+input TechnicalInfrastractureUpsertWithWhereUniqueWithoutTable_idsInput {
+  where: TechnicalInfrastractureWhereUniqueInput!
+  update: TechnicalInfrastractureUpdateWithoutTable_idsDataInput!
+  create: TechnicalInfrastractureCreateWithoutTable_idsInput!
+}
+
+input TechnicalInfrastractureWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  table_ids_every: TableWhereInput
+  table_ids_some: TableWhereInput
+  table_ids_none: TableWhereInput
+  text: String
+  text_not: String
+  text_in: [String!]
+  text_not_in: [String!]
+  text_lt: String
+  text_lte: String
+  text_gt: String
+  text_gte: String
+  text_contains: String
+  text_not_contains: String
+  text_starts_with: String
+  text_not_starts_with: String
+  text_ends_with: String
+  text_not_ends_with: String
+  note: String
+  note_not: String
+  note_in: [String!]
+  note_not_in: [String!]
+  note_lt: String
+  note_lte: String
+  note_gt: String
+  note_gte: String
+  note_contains: String
+  note_not_contains: String
+  note_starts_with: String
+  note_not_starts_with: String
+  note_ends_with: String
+  note_not_ends_with: String
+  createdBy: UserWhereInput
+  updatedBy: UserWhereInput
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  AND: [TechnicalInfrastractureWhereInput!]
+  OR: [TechnicalInfrastractureWhereInput!]
+  NOT: [TechnicalInfrastractureWhereInput!]
+}
+
+input TechnicalInfrastractureWhereUniqueInput {
   id: ID
 }
 
@@ -4588,6 +4929,552 @@ input UserWhereInput {
 input UserWhereUniqueInput {
   id: ID
   email: String
+}
+
+type ValueCreation {
+  id: ID!
+  table_ids(where: TableWhereInput, orderBy: TableOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Table!]
+  text: String!
+  note: String
+  createdBy: User!
+  updatedBy: User!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type ValueCreationConnection {
+  pageInfo: PageInfo!
+  edges: [ValueCreationEdge]!
+  aggregate: AggregateValueCreation!
+}
+
+input ValueCreationCreateInput {
+  id: ID
+  table_ids: TableCreateManyWithoutValue_creation_entry_idsInput
+  text: String!
+  note: String
+  createdBy: UserCreateOneInput!
+  updatedBy: UserCreateOneInput!
+}
+
+input ValueCreationCreateManyWithoutTable_idsInput {
+  create: [ValueCreationCreateWithoutTable_idsInput!]
+  connect: [ValueCreationWhereUniqueInput!]
+}
+
+input ValueCreationCreateWithoutTable_idsInput {
+  id: ID
+  text: String!
+  note: String
+  createdBy: UserCreateOneInput!
+  updatedBy: UserCreateOneInput!
+}
+
+type ValueCreationEdge {
+  node: ValueCreation!
+  cursor: String!
+}
+
+enum ValueCreationOrderByInput {
+  id_ASC
+  id_DESC
+  text_ASC
+  text_DESC
+  note_ASC
+  note_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type ValueCreationPreviousValues {
+  id: ID!
+  text: String!
+  note: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+input ValueCreationScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  text: String
+  text_not: String
+  text_in: [String!]
+  text_not_in: [String!]
+  text_lt: String
+  text_lte: String
+  text_gt: String
+  text_gte: String
+  text_contains: String
+  text_not_contains: String
+  text_starts_with: String
+  text_not_starts_with: String
+  text_ends_with: String
+  text_not_ends_with: String
+  note: String
+  note_not: String
+  note_in: [String!]
+  note_not_in: [String!]
+  note_lt: String
+  note_lte: String
+  note_gt: String
+  note_gte: String
+  note_contains: String
+  note_not_contains: String
+  note_starts_with: String
+  note_not_starts_with: String
+  note_ends_with: String
+  note_not_ends_with: String
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  AND: [ValueCreationScalarWhereInput!]
+  OR: [ValueCreationScalarWhereInput!]
+  NOT: [ValueCreationScalarWhereInput!]
+}
+
+type ValueCreationSubscriptionPayload {
+  mutation: MutationType!
+  node: ValueCreation
+  updatedFields: [String!]
+  previousValues: ValueCreationPreviousValues
+}
+
+input ValueCreationSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: ValueCreationWhereInput
+  AND: [ValueCreationSubscriptionWhereInput!]
+  OR: [ValueCreationSubscriptionWhereInput!]
+  NOT: [ValueCreationSubscriptionWhereInput!]
+}
+
+input ValueCreationUpdateInput {
+  table_ids: TableUpdateManyWithoutValue_creation_entry_idsInput
+  text: String
+  note: String
+  createdBy: UserUpdateOneRequiredInput
+  updatedBy: UserUpdateOneRequiredInput
+}
+
+input ValueCreationUpdateManyDataInput {
+  text: String
+  note: String
+}
+
+input ValueCreationUpdateManyMutationInput {
+  text: String
+  note: String
+}
+
+input ValueCreationUpdateManyWithoutTable_idsInput {
+  create: [ValueCreationCreateWithoutTable_idsInput!]
+  delete: [ValueCreationWhereUniqueInput!]
+  connect: [ValueCreationWhereUniqueInput!]
+  set: [ValueCreationWhereUniqueInput!]
+  disconnect: [ValueCreationWhereUniqueInput!]
+  update: [ValueCreationUpdateWithWhereUniqueWithoutTable_idsInput!]
+  upsert: [ValueCreationUpsertWithWhereUniqueWithoutTable_idsInput!]
+  deleteMany: [ValueCreationScalarWhereInput!]
+  updateMany: [ValueCreationUpdateManyWithWhereNestedInput!]
+}
+
+input ValueCreationUpdateManyWithWhereNestedInput {
+  where: ValueCreationScalarWhereInput!
+  data: ValueCreationUpdateManyDataInput!
+}
+
+input ValueCreationUpdateWithoutTable_idsDataInput {
+  text: String
+  note: String
+  createdBy: UserUpdateOneRequiredInput
+  updatedBy: UserUpdateOneRequiredInput
+}
+
+input ValueCreationUpdateWithWhereUniqueWithoutTable_idsInput {
+  where: ValueCreationWhereUniqueInput!
+  data: ValueCreationUpdateWithoutTable_idsDataInput!
+}
+
+input ValueCreationUpsertWithWhereUniqueWithoutTable_idsInput {
+  where: ValueCreationWhereUniqueInput!
+  update: ValueCreationUpdateWithoutTable_idsDataInput!
+  create: ValueCreationCreateWithoutTable_idsInput!
+}
+
+input ValueCreationWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  table_ids_every: TableWhereInput
+  table_ids_some: TableWhereInput
+  table_ids_none: TableWhereInput
+  text: String
+  text_not: String
+  text_in: [String!]
+  text_not_in: [String!]
+  text_lt: String
+  text_lte: String
+  text_gt: String
+  text_gte: String
+  text_contains: String
+  text_not_contains: String
+  text_starts_with: String
+  text_not_starts_with: String
+  text_ends_with: String
+  text_not_ends_with: String
+  note: String
+  note_not: String
+  note_in: [String!]
+  note_not_in: [String!]
+  note_lt: String
+  note_lte: String
+  note_gt: String
+  note_gte: String
+  note_contains: String
+  note_not_contains: String
+  note_starts_with: String
+  note_not_starts_with: String
+  note_ends_with: String
+  note_not_ends_with: String
+  createdBy: UserWhereInput
+  updatedBy: UserWhereInput
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  AND: [ValueCreationWhereInput!]
+  OR: [ValueCreationWhereInput!]
+  NOT: [ValueCreationWhereInput!]
+}
+
+input ValueCreationWhereUniqueInput {
+  id: ID
+}
+
+type ValueDelivery {
+  id: ID!
+  table_ids(where: TableWhereInput, orderBy: TableOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Table!]
+  text: String!
+  note: String
+  createdBy: User!
+  updatedBy: User!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type ValueDeliveryConnection {
+  pageInfo: PageInfo!
+  edges: [ValueDeliveryEdge]!
+  aggregate: AggregateValueDelivery!
+}
+
+input ValueDeliveryCreateInput {
+  id: ID
+  table_ids: TableCreateManyWithoutValue_delivery_entry_idsInput
+  text: String!
+  note: String
+  createdBy: UserCreateOneInput!
+  updatedBy: UserCreateOneInput!
+}
+
+input ValueDeliveryCreateManyWithoutTable_idsInput {
+  create: [ValueDeliveryCreateWithoutTable_idsInput!]
+  connect: [ValueDeliveryWhereUniqueInput!]
+}
+
+input ValueDeliveryCreateWithoutTable_idsInput {
+  id: ID
+  text: String!
+  note: String
+  createdBy: UserCreateOneInput!
+  updatedBy: UserCreateOneInput!
+}
+
+type ValueDeliveryEdge {
+  node: ValueDelivery!
+  cursor: String!
+}
+
+enum ValueDeliveryOrderByInput {
+  id_ASC
+  id_DESC
+  text_ASC
+  text_DESC
+  note_ASC
+  note_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type ValueDeliveryPreviousValues {
+  id: ID!
+  text: String!
+  note: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+input ValueDeliveryScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  text: String
+  text_not: String
+  text_in: [String!]
+  text_not_in: [String!]
+  text_lt: String
+  text_lte: String
+  text_gt: String
+  text_gte: String
+  text_contains: String
+  text_not_contains: String
+  text_starts_with: String
+  text_not_starts_with: String
+  text_ends_with: String
+  text_not_ends_with: String
+  note: String
+  note_not: String
+  note_in: [String!]
+  note_not_in: [String!]
+  note_lt: String
+  note_lte: String
+  note_gt: String
+  note_gte: String
+  note_contains: String
+  note_not_contains: String
+  note_starts_with: String
+  note_not_starts_with: String
+  note_ends_with: String
+  note_not_ends_with: String
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  AND: [ValueDeliveryScalarWhereInput!]
+  OR: [ValueDeliveryScalarWhereInput!]
+  NOT: [ValueDeliveryScalarWhereInput!]
+}
+
+type ValueDeliverySubscriptionPayload {
+  mutation: MutationType!
+  node: ValueDelivery
+  updatedFields: [String!]
+  previousValues: ValueDeliveryPreviousValues
+}
+
+input ValueDeliverySubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: ValueDeliveryWhereInput
+  AND: [ValueDeliverySubscriptionWhereInput!]
+  OR: [ValueDeliverySubscriptionWhereInput!]
+  NOT: [ValueDeliverySubscriptionWhereInput!]
+}
+
+input ValueDeliveryUpdateInput {
+  table_ids: TableUpdateManyWithoutValue_delivery_entry_idsInput
+  text: String
+  note: String
+  createdBy: UserUpdateOneRequiredInput
+  updatedBy: UserUpdateOneRequiredInput
+}
+
+input ValueDeliveryUpdateManyDataInput {
+  text: String
+  note: String
+}
+
+input ValueDeliveryUpdateManyMutationInput {
+  text: String
+  note: String
+}
+
+input ValueDeliveryUpdateManyWithoutTable_idsInput {
+  create: [ValueDeliveryCreateWithoutTable_idsInput!]
+  delete: [ValueDeliveryWhereUniqueInput!]
+  connect: [ValueDeliveryWhereUniqueInput!]
+  set: [ValueDeliveryWhereUniqueInput!]
+  disconnect: [ValueDeliveryWhereUniqueInput!]
+  update: [ValueDeliveryUpdateWithWhereUniqueWithoutTable_idsInput!]
+  upsert: [ValueDeliveryUpsertWithWhereUniqueWithoutTable_idsInput!]
+  deleteMany: [ValueDeliveryScalarWhereInput!]
+  updateMany: [ValueDeliveryUpdateManyWithWhereNestedInput!]
+}
+
+input ValueDeliveryUpdateManyWithWhereNestedInput {
+  where: ValueDeliveryScalarWhereInput!
+  data: ValueDeliveryUpdateManyDataInput!
+}
+
+input ValueDeliveryUpdateWithoutTable_idsDataInput {
+  text: String
+  note: String
+  createdBy: UserUpdateOneRequiredInput
+  updatedBy: UserUpdateOneRequiredInput
+}
+
+input ValueDeliveryUpdateWithWhereUniqueWithoutTable_idsInput {
+  where: ValueDeliveryWhereUniqueInput!
+  data: ValueDeliveryUpdateWithoutTable_idsDataInput!
+}
+
+input ValueDeliveryUpsertWithWhereUniqueWithoutTable_idsInput {
+  where: ValueDeliveryWhereUniqueInput!
+  update: ValueDeliveryUpdateWithoutTable_idsDataInput!
+  create: ValueDeliveryCreateWithoutTable_idsInput!
+}
+
+input ValueDeliveryWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  table_ids_every: TableWhereInput
+  table_ids_some: TableWhereInput
+  table_ids_none: TableWhereInput
+  text: String
+  text_not: String
+  text_in: [String!]
+  text_not_in: [String!]
+  text_lt: String
+  text_lte: String
+  text_gt: String
+  text_gte: String
+  text_contains: String
+  text_not_contains: String
+  text_starts_with: String
+  text_not_starts_with: String
+  text_ends_with: String
+  text_not_ends_with: String
+  note: String
+  note_not: String
+  note_in: [String!]
+  note_not_in: [String!]
+  note_lt: String
+  note_lte: String
+  note_gt: String
+  note_gte: String
+  note_contains: String
+  note_not_contains: String
+  note_starts_with: String
+  note_not_starts_with: String
+  note_ends_with: String
+  note_not_ends_with: String
+  createdBy: UserWhereInput
+  updatedBy: UserWhereInput
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  AND: [ValueDeliveryWhereInput!]
+  OR: [ValueDeliveryWhereInput!]
+  NOT: [ValueDeliveryWhereInput!]
+}
+
+input ValueDeliveryWhereUniqueInput {
+  id: ID
 }
 
 type ValueProposition {

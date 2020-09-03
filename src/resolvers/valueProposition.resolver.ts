@@ -1,19 +1,19 @@
-export const RevenueStreamQuery = {
-    getRevenueStream: {
+export const ValuePropositionQuery = {
+    getValueProposition: {
         resolve: (root, args, ctx, info) => {
-            return ctx.db.revenueStream({ id: args.id });;
+            return ctx.db.valueProposition({ id: args.id });;
         }
     },
 
-    getAllRevenueStreams: {
+    getAllValuePropositions: {
         resolve: (root, args, ctx, info) => {
-            return ctx.db.revenueStreams();
+            return ctx.db.valuePropositions();
         }
     }
 };
 
 
-export const RevenueStreamMutation = {
+export const ValuePropositionMutation = {
 
     /* 
         mutation{
@@ -39,28 +39,28 @@ export const RevenueStreamMutation = {
         }
     */
 
-    createRevenueStream: {
+    createValueProposition: {
         resolve: async (root, args, ctx, info) => {
             const userId = ctx.userId;
-            return await ctx.db.createRevenueStream(args.data);
+            return await ctx.db.createValueProposition(args.data);
         }
     },
 
-    updateRevenueStream: {
+    updateValueProposition: {
         resolve: async (root, args, ctx, info) => {
             const userId = ctx.userId;
-            return await ctx.db.updateRevenueStream({
-                where: {id: args.revenueStreamId},
+            return await ctx.db.updateValueProposition({
+                where: {id: args.valuePropositionId},
                 data: args.data
             });
         }
     },
 
     
-    deleteRevenueStream: {
+    deleteValueProposition: {
         resolve: async (root, args,ctx, info) => {
-            return await ctx.db.deleteRevenueStream({
-                id: args.revenueStreamId
+            return await ctx.db.deleteValueProposition({
+                id: args.valuePropositionId
             });
 
         }

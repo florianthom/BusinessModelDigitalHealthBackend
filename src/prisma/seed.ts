@@ -1,8 +1,9 @@
 // prisma seed -r
 
-import { prisma } from '../generated/prisma-client';
+import { prisma, Strategy, StrategyPattern, Pattern } from '../generated/prisma-client';
 import { generateSHA512Hash } from '../auth/Cryptography';
-
+let bmodelData = require("./seedData/bmodel-converted.json");
+let strategyData = require("./seedData/strategie-converted.json");
 
 // create example user with example relation
 // create example company with example pattern and example relations
@@ -35,7 +36,7 @@ let testProjectUser2 = await prisma.createProject({
 })
 
 let testTableProject1 = await prisma.createTable({
-  key_partner_entry_ids: {
+  actor_entry_ids: {
     create: [
       {
         text: "example text for canvas in key_partner_entry_ids 1",
@@ -51,7 +52,7 @@ let testTableProject1 = await prisma.createTable({
       },
     ]
   },
-  reventue_stream_entry_ids: {
+  value_proposition_entry_ids: {
     create: [
       {
         text: "example text for canvas in reventue_stream_entry_ids 1",
@@ -69,10 +70,27 @@ let testTableProject1 = await prisma.createTable({
   }
 })
 
+// create Strategies
+let tmpStrategies : Strategy[] = [];
+let strategyNames = Object.keys(strategyData[0]);
+// a=1 since the first propertie = constant "Business-Model-Name"
+for (let a = 1; a < strategyNames.length; a++)
+{
+  let tmpStrat = await prisma.createStrategy({
+      name: strategyNames[a],
+      description: "test description",
+      createdBy: {connect: {id: testUser1.id}},
+      updatedBy: {connect: {id: testUser1.id}}
+  });
+  tmpStrategies.push(tmpStrat);
+}
+
+// create Canvas and assign one random strategy to it
 let testCanvas1Project1 = await prisma.createCanvas({
   name: "TestCanvas1",
   project_id: {connect: {id: testProjectUser1.id}},
   table_id: {connect: {id: testTableProject1.id}},
+  strategy_id: {connect: {id: tmpStrategies[0].id}},
   createdBy: {connect: {id: testUser1.id}},
   updatedBy: {connect: {id: testUser1.id}}
 })
@@ -81,7 +99,7 @@ let testCanvas1Project1 = await prisma.createCanvas({
 // start pattern definition
 
 let testTablePattern1 = await prisma.createTable({
-  key_partner_entry_ids: {
+  actor_entry_ids: {
     create: [
       {
         text: "example text for pattern in key_partner_entry_ids 1",
@@ -97,7 +115,7 @@ let testTablePattern1 = await prisma.createTable({
       },
     ]
   },
-  reventue_stream_entry_ids: {
+  value_proposition_entry_ids: {
     create: [
       {
         text: "example text pattern reventue_stream_entry_ids 1",
@@ -118,8 +136,20 @@ let testTablePattern1 = await prisma.createTable({
 
 let testPatternUser1 = await prisma.createPattern({
   name: "Test Pattern1",
-  table_id: {connect: {id: testTablePattern1.id}},
   description: "Test Description 1",
+
+  table_id: {connect: {id: testTablePattern1.id}},
+
+  actorWeight: 0,
+  valuePropositionWeight: 0,
+  valueCreationWeight: 0,
+  valueDeliveryWeight: 0,
+  revenueWeight: 0,
+  expenseWeight: 0,
+  networkEffectWeight: 0,
+  regulatoryWeight: 0,
+  technicalInfrastractureWeight: 0,
+
   createdBy: {connect: {id: testUser1.id}},
   updatedBy: {connect: {id: testUser1.id}}
 })
@@ -131,6 +161,64 @@ let testCompany1Pattern1 = await prisma.createCompany({
     {id: testPatternUser1.id}
   ]}
 })
+
+
+// create pattern
+interface PatternWithStrategyData{
+  strategyData: Object,
+  patternObject: Pattern
+}
+let tmpPattern: PatternWithStrategyData[] = [];
+for (let i = 0; i < bmodelData.length; i++)
+{
+
+    let tmpTable = await prisma.createTable({});
+
+    tmpPattern.push(
+      {
+        // since filter will return list with 1 element, we take this element out of the list
+        strategyData: strategyData.filter(a => a["Business-Model-Name"] === bmodelData[i]["Business-Model-Name"])[0],
+        patternObject: await prisma.createPattern({
+            name: bmodelData[i]["Business-Model-Name"],
+            description: "tmp test description",
+
+            table_id: {connect: {id: tmpTable.id}},
+
+            actorWeight: Number(bmodelData[i]["Akteure"]),
+            valuePropositionWeight: Number(bmodelData[i]["Wertversprechen"]),
+            valueCreationWeight: Number(bmodelData[i]["Wertschoepfung"]),
+            valueDeliveryWeight: Number(bmodelData[i]["Wertbereitstellung"]),
+            revenueWeight: Number(bmodelData[i]["Erloese"]),
+            expenseWeight: Number(bmodelData[i]["Ausgaben"]),
+            networkEffectWeight: Number(bmodelData[i]["Netzwerkeffekte"]),
+            regulatoryWeight: Number(bmodelData[i]["Regulatorisches"]),
+            technicalInfrastractureWeight: Number(bmodelData[i]["Technische Infrastruktur"]),
+            createdBy: {connect: {id: testUser1.id}},
+            updatedBy: {connect: {id: testUser1.id}}
+        })
+      }
+    );
+}
+
+// create StrategyPattern
+for (let a = 0; a < tmpPattern.length; a++)
+{
+  let currentPattern = tmpPattern[a];
+  for (let b = 0; b < tmpStrategies.length; b++)
+  {
+    let currentStrategy = tmpStrategies[b];
+    let strategyPatternRef = await prisma.createStrategyPattern({
+      weight: Number(currentPattern.strategyData[currentStrategy.name]),
+      pattern_id: {connect: {id: currentPattern.patternObject.id}},
+      strategy_id: {connect: {id: currentStrategy.id}},
+    });
+  }
+}
+
+// strategy dem nutzer zuweisen
+
+
+
 // --------------------------------------------------------------------
 }
 main().catch(e => console.error(e))
