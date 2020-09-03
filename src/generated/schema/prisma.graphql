@@ -319,7 +319,7 @@ type AggregateTable {
   count: Int!
 }
 
-type AggregateTechnicalInfrastracture {
+type AggregateTechnicalInfrastructure {
   count: Int!
 }
 
@@ -1300,12 +1300,12 @@ type Mutation {
   upsertTable(where: TableWhereUniqueInput!, create: TableCreateInput!, update: TableUpdateInput!): Table!
   deleteTable(where: TableWhereUniqueInput!): Table
   deleteManyTables(where: TableWhereInput): BatchPayload!
-  createTechnicalInfrastracture(data: TechnicalInfrastractureCreateInput!): TechnicalInfrastracture!
-  updateTechnicalInfrastracture(data: TechnicalInfrastractureUpdateInput!, where: TechnicalInfrastractureWhereUniqueInput!): TechnicalInfrastracture
-  updateManyTechnicalInfrastractures(data: TechnicalInfrastractureUpdateManyMutationInput!, where: TechnicalInfrastractureWhereInput): BatchPayload!
-  upsertTechnicalInfrastracture(where: TechnicalInfrastractureWhereUniqueInput!, create: TechnicalInfrastractureCreateInput!, update: TechnicalInfrastractureUpdateInput!): TechnicalInfrastracture!
-  deleteTechnicalInfrastracture(where: TechnicalInfrastractureWhereUniqueInput!): TechnicalInfrastracture
-  deleteManyTechnicalInfrastractures(where: TechnicalInfrastractureWhereInput): BatchPayload!
+  createTechnicalInfrastructure(data: TechnicalInfrastructureCreateInput!): TechnicalInfrastructure!
+  updateTechnicalInfrastructure(data: TechnicalInfrastructureUpdateInput!, where: TechnicalInfrastructureWhereUniqueInput!): TechnicalInfrastructure
+  updateManyTechnicalInfrastructures(data: TechnicalInfrastructureUpdateManyMutationInput!, where: TechnicalInfrastructureWhereInput): BatchPayload!
+  upsertTechnicalInfrastructure(where: TechnicalInfrastructureWhereUniqueInput!, create: TechnicalInfrastructureCreateInput!, update: TechnicalInfrastructureUpdateInput!): TechnicalInfrastructure!
+  deleteTechnicalInfrastructure(where: TechnicalInfrastructureWhereUniqueInput!): TechnicalInfrastructure
+  deleteManyTechnicalInfrastructures(where: TechnicalInfrastructureWhereInput): BatchPayload!
   createUser(data: UserCreateInput!): User!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
@@ -1638,7 +1638,7 @@ type Pattern {
   expenseWeight: Int
   networkEffectWeight: Int
   regulatoryWeight: Int
-  technicalInfrastractureWeight: Int
+  technicalInfrastructureWeight: Int
   createdBy: User!
   updatedBy: User!
   createdAt: DateTime!
@@ -1667,7 +1667,7 @@ input PatternCreateInput {
   expenseWeight: Int
   networkEffectWeight: Int
   regulatoryWeight: Int
-  technicalInfrastractureWeight: Int
+  technicalInfrastructureWeight: Int
   createdBy: UserCreateOneInput!
   updatedBy: UserCreateOneInput!
 }
@@ -1702,7 +1702,7 @@ input PatternCreateWithoutCanvas_idsInput {
   expenseWeight: Int
   networkEffectWeight: Int
   regulatoryWeight: Int
-  technicalInfrastractureWeight: Int
+  technicalInfrastructureWeight: Int
   createdBy: UserCreateOneInput!
   updatedBy: UserCreateOneInput!
 }
@@ -1722,7 +1722,7 @@ input PatternCreateWithoutCompany_idsInput {
   expenseWeight: Int
   networkEffectWeight: Int
   regulatoryWeight: Int
-  technicalInfrastractureWeight: Int
+  technicalInfrastructureWeight: Int
   createdBy: UserCreateOneInput!
   updatedBy: UserCreateOneInput!
 }
@@ -1742,7 +1742,7 @@ input PatternCreateWithoutStrategy_pattern_idsInput {
   expenseWeight: Int
   networkEffectWeight: Int
   regulatoryWeight: Int
-  technicalInfrastractureWeight: Int
+  technicalInfrastructureWeight: Int
   createdBy: UserCreateOneInput!
   updatedBy: UserCreateOneInput!
 }
@@ -1775,8 +1775,8 @@ enum PatternOrderByInput {
   networkEffectWeight_DESC
   regulatoryWeight_ASC
   regulatoryWeight_DESC
-  technicalInfrastractureWeight_ASC
-  technicalInfrastractureWeight_DESC
+  technicalInfrastructureWeight_ASC
+  technicalInfrastructureWeight_DESC
   createdAt_ASC
   createdAt_DESC
   updatedAt_ASC
@@ -1795,7 +1795,7 @@ type PatternPreviousValues {
   expenseWeight: Int
   networkEffectWeight: Int
   regulatoryWeight: Int
-  technicalInfrastractureWeight: Int
+  technicalInfrastructureWeight: Int
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -1907,14 +1907,14 @@ input PatternScalarWhereInput {
   regulatoryWeight_lte: Int
   regulatoryWeight_gt: Int
   regulatoryWeight_gte: Int
-  technicalInfrastractureWeight: Int
-  technicalInfrastractureWeight_not: Int
-  technicalInfrastractureWeight_in: [Int!]
-  technicalInfrastractureWeight_not_in: [Int!]
-  technicalInfrastractureWeight_lt: Int
-  technicalInfrastractureWeight_lte: Int
-  technicalInfrastractureWeight_gt: Int
-  technicalInfrastractureWeight_gte: Int
+  technicalInfrastructureWeight: Int
+  technicalInfrastructureWeight_not: Int
+  technicalInfrastructureWeight_in: [Int!]
+  technicalInfrastructureWeight_not_in: [Int!]
+  technicalInfrastructureWeight_lt: Int
+  technicalInfrastructureWeight_lte: Int
+  technicalInfrastructureWeight_gt: Int
+  technicalInfrastructureWeight_gte: Int
   createdAt: DateTime
   createdAt_not: DateTime
   createdAt_in: [DateTime!]
@@ -1969,7 +1969,7 @@ input PatternUpdateInput {
   expenseWeight: Int
   networkEffectWeight: Int
   regulatoryWeight: Int
-  technicalInfrastractureWeight: Int
+  technicalInfrastructureWeight: Int
   createdBy: UserUpdateOneRequiredInput
   updatedBy: UserUpdateOneRequiredInput
 }
@@ -1985,7 +1985,7 @@ input PatternUpdateManyDataInput {
   expenseWeight: Int
   networkEffectWeight: Int
   regulatoryWeight: Int
-  technicalInfrastractureWeight: Int
+  technicalInfrastructureWeight: Int
 }
 
 input PatternUpdateManyMutationInput {
@@ -1999,7 +1999,7 @@ input PatternUpdateManyMutationInput {
   expenseWeight: Int
   networkEffectWeight: Int
   regulatoryWeight: Int
-  technicalInfrastractureWeight: Int
+  technicalInfrastructureWeight: Int
 }
 
 input PatternUpdateManyWithoutCanvas_idsInput {
@@ -2052,7 +2052,7 @@ input PatternUpdateWithoutCanvas_idsDataInput {
   expenseWeight: Int
   networkEffectWeight: Int
   regulatoryWeight: Int
-  technicalInfrastractureWeight: Int
+  technicalInfrastructureWeight: Int
   createdBy: UserUpdateOneRequiredInput
   updatedBy: UserUpdateOneRequiredInput
 }
@@ -2071,7 +2071,7 @@ input PatternUpdateWithoutCompany_idsDataInput {
   expenseWeight: Int
   networkEffectWeight: Int
   regulatoryWeight: Int
-  technicalInfrastractureWeight: Int
+  technicalInfrastructureWeight: Int
   createdBy: UserUpdateOneRequiredInput
   updatedBy: UserUpdateOneRequiredInput
 }
@@ -2090,7 +2090,7 @@ input PatternUpdateWithoutStrategy_pattern_idsDataInput {
   expenseWeight: Int
   networkEffectWeight: Int
   regulatoryWeight: Int
-  technicalInfrastractureWeight: Int
+  technicalInfrastructureWeight: Int
   createdBy: UserUpdateOneRequiredInput
   updatedBy: UserUpdateOneRequiredInput
 }
@@ -2239,14 +2239,14 @@ input PatternWhereInput {
   regulatoryWeight_lte: Int
   regulatoryWeight_gt: Int
   regulatoryWeight_gte: Int
-  technicalInfrastractureWeight: Int
-  technicalInfrastractureWeight_not: Int
-  technicalInfrastractureWeight_in: [Int!]
-  technicalInfrastractureWeight_not_in: [Int!]
-  technicalInfrastractureWeight_lt: Int
-  technicalInfrastractureWeight_lte: Int
-  technicalInfrastractureWeight_gt: Int
-  technicalInfrastractureWeight_gte: Int
+  technicalInfrastructureWeight: Int
+  technicalInfrastructureWeight_not: Int
+  technicalInfrastructureWeight_in: [Int!]
+  technicalInfrastructureWeight_not_in: [Int!]
+  technicalInfrastructureWeight_lt: Int
+  technicalInfrastructureWeight_lte: Int
+  technicalInfrastructureWeight_gt: Int
+  technicalInfrastructureWeight_gte: Int
   createdBy: UserWhereInput
   updatedBy: UserWhereInput
   createdAt: DateTime
@@ -2584,9 +2584,9 @@ type Query {
   table(where: TableWhereUniqueInput!): Table
   tables(where: TableWhereInput, orderBy: TableOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Table]!
   tablesConnection(where: TableWhereInput, orderBy: TableOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): TableConnection!
-  technicalInfrastracture(where: TechnicalInfrastractureWhereUniqueInput!): TechnicalInfrastracture
-  technicalInfrastractures(where: TechnicalInfrastractureWhereInput, orderBy: TechnicalInfrastractureOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [TechnicalInfrastracture]!
-  technicalInfrastracturesConnection(where: TechnicalInfrastractureWhereInput, orderBy: TechnicalInfrastractureOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): TechnicalInfrastractureConnection!
+  technicalInfrastructure(where: TechnicalInfrastructureWhereUniqueInput!): TechnicalInfrastructure
+  technicalInfrastructures(where: TechnicalInfrastructureWhereInput, orderBy: TechnicalInfrastructureOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [TechnicalInfrastructure]!
+  technicalInfrastructuresConnection(where: TechnicalInfrastructureWhereInput, orderBy: TechnicalInfrastructureOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): TechnicalInfrastructureConnection!
   user(where: UserWhereUniqueInput!): User
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
@@ -3652,7 +3652,7 @@ type Subscription {
   strategy(where: StrategySubscriptionWhereInput): StrategySubscriptionPayload
   strategyPattern(where: StrategyPatternSubscriptionWhereInput): StrategyPatternSubscriptionPayload
   table(where: TableSubscriptionWhereInput): TableSubscriptionPayload
-  technicalInfrastracture(where: TechnicalInfrastractureSubscriptionWhereInput): TechnicalInfrastractureSubscriptionPayload
+  technicalInfrastructure(where: TechnicalInfrastructureSubscriptionWhereInput): TechnicalInfrastructureSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
   valueCreation(where: ValueCreationSubscriptionWhereInput): ValueCreationSubscriptionPayload
   valueDelivery(where: ValueDeliverySubscriptionWhereInput): ValueDeliverySubscriptionPayload
@@ -3668,7 +3668,7 @@ type Table {
   revenue_entry_ids(where: RevenueWhereInput, orderBy: RevenueOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Revenue!]
   expense_entry_ids(where: ExpenseWhereInput, orderBy: ExpenseOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Expense!]
   network_effect_entry_ids(where: NetworkEffectWhereInput, orderBy: NetworkEffectOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [NetworkEffect!]
-  technical_infrastructure_entry_ids(where: TechnicalInfrastractureWhereInput, orderBy: TechnicalInfrastractureOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [TechnicalInfrastracture!]
+  technical_infrastructure_entry_ids(where: TechnicalInfrastructureWhereInput, orderBy: TechnicalInfrastructureOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [TechnicalInfrastructure!]
   regulatory_entry_ids(where: RegulatoryWhereInput, orderBy: RegulatoryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Regulatory!]
 }
 
@@ -3687,7 +3687,7 @@ input TableCreateInput {
   revenue_entry_ids: RevenueCreateManyWithoutTable_idsInput
   expense_entry_ids: ExpenseCreateManyWithoutTable_idsInput
   network_effect_entry_ids: NetworkEffectCreateManyWithoutTable_idsInput
-  technical_infrastructure_entry_ids: TechnicalInfrastractureCreateManyWithoutTable_idsInput
+  technical_infrastructure_entry_ids: TechnicalInfrastructureCreateManyWithoutTable_idsInput
   regulatory_entry_ids: RegulatoryCreateManyWithoutTable_idsInput
 }
 
@@ -3749,7 +3749,7 @@ input TableCreateWithoutActor_entry_idsInput {
   revenue_entry_ids: RevenueCreateManyWithoutTable_idsInput
   expense_entry_ids: ExpenseCreateManyWithoutTable_idsInput
   network_effect_entry_ids: NetworkEffectCreateManyWithoutTable_idsInput
-  technical_infrastructure_entry_ids: TechnicalInfrastractureCreateManyWithoutTable_idsInput
+  technical_infrastructure_entry_ids: TechnicalInfrastructureCreateManyWithoutTable_idsInput
   regulatory_entry_ids: RegulatoryCreateManyWithoutTable_idsInput
 }
 
@@ -3761,7 +3761,7 @@ input TableCreateWithoutExpense_entry_idsInput {
   value_delivery_entry_ids: ValueDeliveryCreateManyWithoutTable_idsInput
   revenue_entry_ids: RevenueCreateManyWithoutTable_idsInput
   network_effect_entry_ids: NetworkEffectCreateManyWithoutTable_idsInput
-  technical_infrastructure_entry_ids: TechnicalInfrastractureCreateManyWithoutTable_idsInput
+  technical_infrastructure_entry_ids: TechnicalInfrastructureCreateManyWithoutTable_idsInput
   regulatory_entry_ids: RegulatoryCreateManyWithoutTable_idsInput
 }
 
@@ -3773,7 +3773,7 @@ input TableCreateWithoutNetwork_effect_entry_idsInput {
   value_delivery_entry_ids: ValueDeliveryCreateManyWithoutTable_idsInput
   revenue_entry_ids: RevenueCreateManyWithoutTable_idsInput
   expense_entry_ids: ExpenseCreateManyWithoutTable_idsInput
-  technical_infrastructure_entry_ids: TechnicalInfrastractureCreateManyWithoutTable_idsInput
+  technical_infrastructure_entry_ids: TechnicalInfrastructureCreateManyWithoutTable_idsInput
   regulatory_entry_ids: RegulatoryCreateManyWithoutTable_idsInput
 }
 
@@ -3786,7 +3786,7 @@ input TableCreateWithoutRegulatory_entry_idsInput {
   revenue_entry_ids: RevenueCreateManyWithoutTable_idsInput
   expense_entry_ids: ExpenseCreateManyWithoutTable_idsInput
   network_effect_entry_ids: NetworkEffectCreateManyWithoutTable_idsInput
-  technical_infrastructure_entry_ids: TechnicalInfrastractureCreateManyWithoutTable_idsInput
+  technical_infrastructure_entry_ids: TechnicalInfrastructureCreateManyWithoutTable_idsInput
 }
 
 input TableCreateWithoutRevenue_entry_idsInput {
@@ -3797,7 +3797,7 @@ input TableCreateWithoutRevenue_entry_idsInput {
   value_delivery_entry_ids: ValueDeliveryCreateManyWithoutTable_idsInput
   expense_entry_ids: ExpenseCreateManyWithoutTable_idsInput
   network_effect_entry_ids: NetworkEffectCreateManyWithoutTable_idsInput
-  technical_infrastructure_entry_ids: TechnicalInfrastractureCreateManyWithoutTable_idsInput
+  technical_infrastructure_entry_ids: TechnicalInfrastructureCreateManyWithoutTable_idsInput
   regulatory_entry_ids: RegulatoryCreateManyWithoutTable_idsInput
 }
 
@@ -3821,7 +3821,7 @@ input TableCreateWithoutValue_creation_entry_idsInput {
   revenue_entry_ids: RevenueCreateManyWithoutTable_idsInput
   expense_entry_ids: ExpenseCreateManyWithoutTable_idsInput
   network_effect_entry_ids: NetworkEffectCreateManyWithoutTable_idsInput
-  technical_infrastructure_entry_ids: TechnicalInfrastractureCreateManyWithoutTable_idsInput
+  technical_infrastructure_entry_ids: TechnicalInfrastructureCreateManyWithoutTable_idsInput
   regulatory_entry_ids: RegulatoryCreateManyWithoutTable_idsInput
 }
 
@@ -3833,7 +3833,7 @@ input TableCreateWithoutValue_delivery_entry_idsInput {
   revenue_entry_ids: RevenueCreateManyWithoutTable_idsInput
   expense_entry_ids: ExpenseCreateManyWithoutTable_idsInput
   network_effect_entry_ids: NetworkEffectCreateManyWithoutTable_idsInput
-  technical_infrastructure_entry_ids: TechnicalInfrastractureCreateManyWithoutTable_idsInput
+  technical_infrastructure_entry_ids: TechnicalInfrastructureCreateManyWithoutTable_idsInput
   regulatory_entry_ids: RegulatoryCreateManyWithoutTable_idsInput
 }
 
@@ -3845,7 +3845,7 @@ input TableCreateWithoutValue_proposition_entry_idsInput {
   revenue_entry_ids: RevenueCreateManyWithoutTable_idsInput
   expense_entry_ids: ExpenseCreateManyWithoutTable_idsInput
   network_effect_entry_ids: NetworkEffectCreateManyWithoutTable_idsInput
-  technical_infrastructure_entry_ids: TechnicalInfrastractureCreateManyWithoutTable_idsInput
+  technical_infrastructure_entry_ids: TechnicalInfrastructureCreateManyWithoutTable_idsInput
   regulatory_entry_ids: RegulatoryCreateManyWithoutTable_idsInput
 }
 
@@ -3909,7 +3909,7 @@ input TableUpdateDataInput {
   revenue_entry_ids: RevenueUpdateManyWithoutTable_idsInput
   expense_entry_ids: ExpenseUpdateManyWithoutTable_idsInput
   network_effect_entry_ids: NetworkEffectUpdateManyWithoutTable_idsInput
-  technical_infrastructure_entry_ids: TechnicalInfrastractureUpdateManyWithoutTable_idsInput
+  technical_infrastructure_entry_ids: TechnicalInfrastructureUpdateManyWithoutTable_idsInput
   regulatory_entry_ids: RegulatoryUpdateManyWithoutTable_idsInput
 }
 
@@ -3921,7 +3921,7 @@ input TableUpdateInput {
   revenue_entry_ids: RevenueUpdateManyWithoutTable_idsInput
   expense_entry_ids: ExpenseUpdateManyWithoutTable_idsInput
   network_effect_entry_ids: NetworkEffectUpdateManyWithoutTable_idsInput
-  technical_infrastructure_entry_ids: TechnicalInfrastractureUpdateManyWithoutTable_idsInput
+  technical_infrastructure_entry_ids: TechnicalInfrastructureUpdateManyWithoutTable_idsInput
   regulatory_entry_ids: RegulatoryUpdateManyWithoutTable_idsInput
 }
 
@@ -4038,7 +4038,7 @@ input TableUpdateWithoutActor_entry_idsDataInput {
   revenue_entry_ids: RevenueUpdateManyWithoutTable_idsInput
   expense_entry_ids: ExpenseUpdateManyWithoutTable_idsInput
   network_effect_entry_ids: NetworkEffectUpdateManyWithoutTable_idsInput
-  technical_infrastructure_entry_ids: TechnicalInfrastractureUpdateManyWithoutTable_idsInput
+  technical_infrastructure_entry_ids: TechnicalInfrastructureUpdateManyWithoutTable_idsInput
   regulatory_entry_ids: RegulatoryUpdateManyWithoutTable_idsInput
 }
 
@@ -4049,7 +4049,7 @@ input TableUpdateWithoutExpense_entry_idsDataInput {
   value_delivery_entry_ids: ValueDeliveryUpdateManyWithoutTable_idsInput
   revenue_entry_ids: RevenueUpdateManyWithoutTable_idsInput
   network_effect_entry_ids: NetworkEffectUpdateManyWithoutTable_idsInput
-  technical_infrastructure_entry_ids: TechnicalInfrastractureUpdateManyWithoutTable_idsInput
+  technical_infrastructure_entry_ids: TechnicalInfrastructureUpdateManyWithoutTable_idsInput
   regulatory_entry_ids: RegulatoryUpdateManyWithoutTable_idsInput
 }
 
@@ -4060,7 +4060,7 @@ input TableUpdateWithoutNetwork_effect_entry_idsDataInput {
   value_delivery_entry_ids: ValueDeliveryUpdateManyWithoutTable_idsInput
   revenue_entry_ids: RevenueUpdateManyWithoutTable_idsInput
   expense_entry_ids: ExpenseUpdateManyWithoutTable_idsInput
-  technical_infrastructure_entry_ids: TechnicalInfrastractureUpdateManyWithoutTable_idsInput
+  technical_infrastructure_entry_ids: TechnicalInfrastructureUpdateManyWithoutTable_idsInput
   regulatory_entry_ids: RegulatoryUpdateManyWithoutTable_idsInput
 }
 
@@ -4072,7 +4072,7 @@ input TableUpdateWithoutRegulatory_entry_idsDataInput {
   revenue_entry_ids: RevenueUpdateManyWithoutTable_idsInput
   expense_entry_ids: ExpenseUpdateManyWithoutTable_idsInput
   network_effect_entry_ids: NetworkEffectUpdateManyWithoutTable_idsInput
-  technical_infrastructure_entry_ids: TechnicalInfrastractureUpdateManyWithoutTable_idsInput
+  technical_infrastructure_entry_ids: TechnicalInfrastructureUpdateManyWithoutTable_idsInput
 }
 
 input TableUpdateWithoutRevenue_entry_idsDataInput {
@@ -4082,7 +4082,7 @@ input TableUpdateWithoutRevenue_entry_idsDataInput {
   value_delivery_entry_ids: ValueDeliveryUpdateManyWithoutTable_idsInput
   expense_entry_ids: ExpenseUpdateManyWithoutTable_idsInput
   network_effect_entry_ids: NetworkEffectUpdateManyWithoutTable_idsInput
-  technical_infrastructure_entry_ids: TechnicalInfrastractureUpdateManyWithoutTable_idsInput
+  technical_infrastructure_entry_ids: TechnicalInfrastructureUpdateManyWithoutTable_idsInput
   regulatory_entry_ids: RegulatoryUpdateManyWithoutTable_idsInput
 }
 
@@ -4104,7 +4104,7 @@ input TableUpdateWithoutValue_creation_entry_idsDataInput {
   revenue_entry_ids: RevenueUpdateManyWithoutTable_idsInput
   expense_entry_ids: ExpenseUpdateManyWithoutTable_idsInput
   network_effect_entry_ids: NetworkEffectUpdateManyWithoutTable_idsInput
-  technical_infrastructure_entry_ids: TechnicalInfrastractureUpdateManyWithoutTable_idsInput
+  technical_infrastructure_entry_ids: TechnicalInfrastructureUpdateManyWithoutTable_idsInput
   regulatory_entry_ids: RegulatoryUpdateManyWithoutTable_idsInput
 }
 
@@ -4115,7 +4115,7 @@ input TableUpdateWithoutValue_delivery_entry_idsDataInput {
   revenue_entry_ids: RevenueUpdateManyWithoutTable_idsInput
   expense_entry_ids: ExpenseUpdateManyWithoutTable_idsInput
   network_effect_entry_ids: NetworkEffectUpdateManyWithoutTable_idsInput
-  technical_infrastructure_entry_ids: TechnicalInfrastractureUpdateManyWithoutTable_idsInput
+  technical_infrastructure_entry_ids: TechnicalInfrastructureUpdateManyWithoutTable_idsInput
   regulatory_entry_ids: RegulatoryUpdateManyWithoutTable_idsInput
 }
 
@@ -4126,7 +4126,7 @@ input TableUpdateWithoutValue_proposition_entry_idsDataInput {
   revenue_entry_ids: RevenueUpdateManyWithoutTable_idsInput
   expense_entry_ids: ExpenseUpdateManyWithoutTable_idsInput
   network_effect_entry_ids: NetworkEffectUpdateManyWithoutTable_idsInput
-  technical_infrastructure_entry_ids: TechnicalInfrastractureUpdateManyWithoutTable_idsInput
+  technical_infrastructure_entry_ids: TechnicalInfrastructureUpdateManyWithoutTable_idsInput
   regulatory_entry_ids: RegulatoryUpdateManyWithoutTable_idsInput
 }
 
@@ -4270,9 +4270,9 @@ input TableWhereInput {
   network_effect_entry_ids_every: NetworkEffectWhereInput
   network_effect_entry_ids_some: NetworkEffectWhereInput
   network_effect_entry_ids_none: NetworkEffectWhereInput
-  technical_infrastructure_entry_ids_every: TechnicalInfrastractureWhereInput
-  technical_infrastructure_entry_ids_some: TechnicalInfrastractureWhereInput
-  technical_infrastructure_entry_ids_none: TechnicalInfrastractureWhereInput
+  technical_infrastructure_entry_ids_every: TechnicalInfrastructureWhereInput
+  technical_infrastructure_entry_ids_some: TechnicalInfrastructureWhereInput
+  technical_infrastructure_entry_ids_none: TechnicalInfrastructureWhereInput
   regulatory_entry_ids_every: RegulatoryWhereInput
   regulatory_entry_ids_some: RegulatoryWhereInput
   regulatory_entry_ids_none: RegulatoryWhereInput
@@ -4285,7 +4285,7 @@ input TableWhereUniqueInput {
   id: ID
 }
 
-type TechnicalInfrastracture {
+type TechnicalInfrastructure {
   id: ID!
   table_ids(where: TableWhereInput, orderBy: TableOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Table!]
   text: String!
@@ -4296,13 +4296,13 @@ type TechnicalInfrastracture {
   updatedAt: DateTime!
 }
 
-type TechnicalInfrastractureConnection {
+type TechnicalInfrastructureConnection {
   pageInfo: PageInfo!
-  edges: [TechnicalInfrastractureEdge]!
-  aggregate: AggregateTechnicalInfrastracture!
+  edges: [TechnicalInfrastructureEdge]!
+  aggregate: AggregateTechnicalInfrastructure!
 }
 
-input TechnicalInfrastractureCreateInput {
+input TechnicalInfrastructureCreateInput {
   id: ID
   table_ids: TableCreateManyWithoutTechnical_infrastructure_entry_idsInput
   text: String!
@@ -4311,12 +4311,12 @@ input TechnicalInfrastractureCreateInput {
   updatedBy: UserCreateOneInput!
 }
 
-input TechnicalInfrastractureCreateManyWithoutTable_idsInput {
-  create: [TechnicalInfrastractureCreateWithoutTable_idsInput!]
-  connect: [TechnicalInfrastractureWhereUniqueInput!]
+input TechnicalInfrastructureCreateManyWithoutTable_idsInput {
+  create: [TechnicalInfrastructureCreateWithoutTable_idsInput!]
+  connect: [TechnicalInfrastructureWhereUniqueInput!]
 }
 
-input TechnicalInfrastractureCreateWithoutTable_idsInput {
+input TechnicalInfrastructureCreateWithoutTable_idsInput {
   id: ID
   text: String!
   note: String
@@ -4324,12 +4324,12 @@ input TechnicalInfrastractureCreateWithoutTable_idsInput {
   updatedBy: UserCreateOneInput!
 }
 
-type TechnicalInfrastractureEdge {
-  node: TechnicalInfrastracture!
+type TechnicalInfrastructureEdge {
+  node: TechnicalInfrastructure!
   cursor: String!
 }
 
-enum TechnicalInfrastractureOrderByInput {
+enum TechnicalInfrastructureOrderByInput {
   id_ASC
   id_DESC
   text_ASC
@@ -4342,7 +4342,7 @@ enum TechnicalInfrastractureOrderByInput {
   updatedAt_DESC
 }
 
-type TechnicalInfrastracturePreviousValues {
+type TechnicalInfrastructurePreviousValues {
   id: ID!
   text: String!
   note: String
@@ -4350,7 +4350,7 @@ type TechnicalInfrastracturePreviousValues {
   updatedAt: DateTime!
 }
 
-input TechnicalInfrastractureScalarWhereInput {
+input TechnicalInfrastructureScalarWhereInput {
   id: ID
   id_not: ID
   id_in: [ID!]
@@ -4409,30 +4409,30 @@ input TechnicalInfrastractureScalarWhereInput {
   updatedAt_lte: DateTime
   updatedAt_gt: DateTime
   updatedAt_gte: DateTime
-  AND: [TechnicalInfrastractureScalarWhereInput!]
-  OR: [TechnicalInfrastractureScalarWhereInput!]
-  NOT: [TechnicalInfrastractureScalarWhereInput!]
+  AND: [TechnicalInfrastructureScalarWhereInput!]
+  OR: [TechnicalInfrastructureScalarWhereInput!]
+  NOT: [TechnicalInfrastructureScalarWhereInput!]
 }
 
-type TechnicalInfrastractureSubscriptionPayload {
+type TechnicalInfrastructureSubscriptionPayload {
   mutation: MutationType!
-  node: TechnicalInfrastracture
+  node: TechnicalInfrastructure
   updatedFields: [String!]
-  previousValues: TechnicalInfrastracturePreviousValues
+  previousValues: TechnicalInfrastructurePreviousValues
 }
 
-input TechnicalInfrastractureSubscriptionWhereInput {
+input TechnicalInfrastructureSubscriptionWhereInput {
   mutation_in: [MutationType!]
   updatedFields_contains: String
   updatedFields_contains_every: [String!]
   updatedFields_contains_some: [String!]
-  node: TechnicalInfrastractureWhereInput
-  AND: [TechnicalInfrastractureSubscriptionWhereInput!]
-  OR: [TechnicalInfrastractureSubscriptionWhereInput!]
-  NOT: [TechnicalInfrastractureSubscriptionWhereInput!]
+  node: TechnicalInfrastructureWhereInput
+  AND: [TechnicalInfrastructureSubscriptionWhereInput!]
+  OR: [TechnicalInfrastructureSubscriptionWhereInput!]
+  NOT: [TechnicalInfrastructureSubscriptionWhereInput!]
 }
 
-input TechnicalInfrastractureUpdateInput {
+input TechnicalInfrastructureUpdateInput {
   table_ids: TableUpdateManyWithoutTechnical_infrastructure_entry_idsInput
   text: String
   note: String
@@ -4440,52 +4440,52 @@ input TechnicalInfrastractureUpdateInput {
   updatedBy: UserUpdateOneRequiredInput
 }
 
-input TechnicalInfrastractureUpdateManyDataInput {
+input TechnicalInfrastructureUpdateManyDataInput {
   text: String
   note: String
 }
 
-input TechnicalInfrastractureUpdateManyMutationInput {
+input TechnicalInfrastructureUpdateManyMutationInput {
   text: String
   note: String
 }
 
-input TechnicalInfrastractureUpdateManyWithoutTable_idsInput {
-  create: [TechnicalInfrastractureCreateWithoutTable_idsInput!]
-  delete: [TechnicalInfrastractureWhereUniqueInput!]
-  connect: [TechnicalInfrastractureWhereUniqueInput!]
-  set: [TechnicalInfrastractureWhereUniqueInput!]
-  disconnect: [TechnicalInfrastractureWhereUniqueInput!]
-  update: [TechnicalInfrastractureUpdateWithWhereUniqueWithoutTable_idsInput!]
-  upsert: [TechnicalInfrastractureUpsertWithWhereUniqueWithoutTable_idsInput!]
-  deleteMany: [TechnicalInfrastractureScalarWhereInput!]
-  updateMany: [TechnicalInfrastractureUpdateManyWithWhereNestedInput!]
+input TechnicalInfrastructureUpdateManyWithoutTable_idsInput {
+  create: [TechnicalInfrastructureCreateWithoutTable_idsInput!]
+  delete: [TechnicalInfrastructureWhereUniqueInput!]
+  connect: [TechnicalInfrastructureWhereUniqueInput!]
+  set: [TechnicalInfrastructureWhereUniqueInput!]
+  disconnect: [TechnicalInfrastructureWhereUniqueInput!]
+  update: [TechnicalInfrastructureUpdateWithWhereUniqueWithoutTable_idsInput!]
+  upsert: [TechnicalInfrastructureUpsertWithWhereUniqueWithoutTable_idsInput!]
+  deleteMany: [TechnicalInfrastructureScalarWhereInput!]
+  updateMany: [TechnicalInfrastructureUpdateManyWithWhereNestedInput!]
 }
 
-input TechnicalInfrastractureUpdateManyWithWhereNestedInput {
-  where: TechnicalInfrastractureScalarWhereInput!
-  data: TechnicalInfrastractureUpdateManyDataInput!
+input TechnicalInfrastructureUpdateManyWithWhereNestedInput {
+  where: TechnicalInfrastructureScalarWhereInput!
+  data: TechnicalInfrastructureUpdateManyDataInput!
 }
 
-input TechnicalInfrastractureUpdateWithoutTable_idsDataInput {
+input TechnicalInfrastructureUpdateWithoutTable_idsDataInput {
   text: String
   note: String
   createdBy: UserUpdateOneRequiredInput
   updatedBy: UserUpdateOneRequiredInput
 }
 
-input TechnicalInfrastractureUpdateWithWhereUniqueWithoutTable_idsInput {
-  where: TechnicalInfrastractureWhereUniqueInput!
-  data: TechnicalInfrastractureUpdateWithoutTable_idsDataInput!
+input TechnicalInfrastructureUpdateWithWhereUniqueWithoutTable_idsInput {
+  where: TechnicalInfrastructureWhereUniqueInput!
+  data: TechnicalInfrastructureUpdateWithoutTable_idsDataInput!
 }
 
-input TechnicalInfrastractureUpsertWithWhereUniqueWithoutTable_idsInput {
-  where: TechnicalInfrastractureWhereUniqueInput!
-  update: TechnicalInfrastractureUpdateWithoutTable_idsDataInput!
-  create: TechnicalInfrastractureCreateWithoutTable_idsInput!
+input TechnicalInfrastructureUpsertWithWhereUniqueWithoutTable_idsInput {
+  where: TechnicalInfrastructureWhereUniqueInput!
+  update: TechnicalInfrastructureUpdateWithoutTable_idsDataInput!
+  create: TechnicalInfrastructureCreateWithoutTable_idsInput!
 }
 
-input TechnicalInfrastractureWhereInput {
+input TechnicalInfrastructureWhereInput {
   id: ID
   id_not: ID
   id_in: [ID!]
@@ -4549,12 +4549,12 @@ input TechnicalInfrastractureWhereInput {
   updatedAt_lte: DateTime
   updatedAt_gt: DateTime
   updatedAt_gte: DateTime
-  AND: [TechnicalInfrastractureWhereInput!]
-  OR: [TechnicalInfrastractureWhereInput!]
-  NOT: [TechnicalInfrastractureWhereInput!]
+  AND: [TechnicalInfrastructureWhereInput!]
+  OR: [TechnicalInfrastructureWhereInput!]
+  NOT: [TechnicalInfrastructureWhereInput!]
 }
 
-input TechnicalInfrastractureWhereUniqueInput {
+input TechnicalInfrastructureWhereUniqueInput {
   id: ID
 }
 

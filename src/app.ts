@@ -53,8 +53,8 @@ const server: ApolloServer = new ApolloServer({
             header.authToken = req.headers.authorization;
         } 
         // auth disabled for development
-        // const authRequired = false;
-        const authRequired = (connection) ? operationAuthorized(connection.query) : operationAuthorized(req.body.query);
+        const authRequired = false;
+        // const authRequired = (connection) ? operationAuthorized(connection.query) : operationAuthorized(req.body.query);
         console.log("auth required?: " + authRequired);
         const response = {
             db: prisma,

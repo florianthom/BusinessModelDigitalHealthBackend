@@ -74,7 +74,7 @@ type Pattern{
   expenseWeight: Int
   networkEffectWeight: Int
   regulatoryWeight: Int
-  technicalInfrastractureWeight: Int
+  technicalInfrastructureWeight: Int
 
 
 
@@ -123,7 +123,7 @@ type Table{
   revenue_entry_ids: [Revenue!]! @relation(name: "RevenueByTable", onDelete: SET_NULL)
   expense_entry_ids: [Expense!]! @relation(name: "ExpenseByTable", onDelete: SET_NULL)
   network_effect_entry_ids: [NetworkEffect!]! @relation(name: "NetworkEffectByTable", onDelete: SET_NULL)
-  technical_infrastructure_entry_ids: [TechnicalInfrastracture!]! @relation(name: "TechnicalInfrastractureByTable", onDelete: SET_NULL)
+  technical_infrastructure_entry_ids: [TechnicalInfrastructure!]! @relation(name: "TechnicalInfrastructureByTable", onDelete: SET_NULL)
   regulatory_entry_ids: [Regulatory!]! @relation(name: "RegulatoryByTable", onDelete: SET_NULL)
 }
 
@@ -243,16 +243,16 @@ type NetworkEffect{
   updatedAt:  DateTime! @updatedAt
 }
 
-type TechnicalInfrastracture{
+type TechnicalInfrastructure{
   id: ID! @id
 
-  table_ids: [Table!]! @relation(name: "TechnicalInfrastractureByTable", onDelete: SET_NULL)
+  table_ids: [Table!]! @relation(name: "TechnicalInfrastructureByTable", onDelete: SET_NULL)
 
   text: String!
   note: String
 
   createdBy: User! @relation(name: "TechnicalInfrastrctureEntryCreatedBy", link: INLINE)
-  updatedBy: User! @relation(name: "TechnicalInfrastractureEntryUpdatedBy", link: INLINE)
+  updatedBy: User! @relation(name: "TechnicalInfrastructureEntryUpdatedBy", link: INLINE)
   createdAt: DateTime! @createdAt
   updatedAt:  DateTime! @updatedAt
 }

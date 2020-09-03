@@ -1,19 +1,51 @@
-export const StrategyQuery = {
-    getStrategy: {
+import { Prisma} from '../generated/prisma-client';
+export interface Context{
+    db: Prisma;
+  }
+
+export const StrategyPatternQuery = {
+    getStrategyPattern: {
         resolve: (root, args, ctx, info) => {
-            return ctx.db.strategy({ id: args.id });;
+            return ctx.db.strategyPattern({ id: args.id });;
         }
     },
 
-    getAllStrategies: {
+    getAllStrategyPatterns: {
         resolve: (root, args, ctx, info) => {
-            return ctx.db.strategies();
+            return ctx.db.strategyPatterns();
+        }
+    },
+
+    
+    // query {
+    //     getWeightBetweenStrategyAndPattern(
+    //       strategy_id: "ckel5xwak0eah078469c9j7cl",
+    //       pattern_id: "ckel5xxfu0eda0784w8nmavl9"
+    //     ){
+    //       weight
+    //     }
+    //   }
+    getWeightBetweenStrategyAndPattern: {
+        resolve: (root, args, ctx : Context, info) => {
+            return ctx.db.strategyPatterns({
+                where: {
+                    AND: [
+                        {
+                            strategy_id: {id: args.strategy_id},
+                        },
+                        {
+                            pattern_id: {id: args.pattern_id},
+                        },
+                    ],
+                },
+            });
         }
     }
+
 };
 
 
-export const StrategyMutation = {
+export const StrategyPatternMutation = {
 
     /* 
         mutation{
@@ -58,29 +90,29 @@ export const StrategyMutation = {
         }
     */
 
-   createStrategy: {
+   createStrategyPattern: {
     resolve: async (root, args, ctx, info) => {
         const userId = ctx.userId;
-        return await ctx.db.createStrategy(args.data);
+        return await ctx.db.createStrategyPattern(args.data);
     }
     },
 
 
-    updateStrategy: {
+    updateStrategyPattern: {
         resolve: async (root, args, ctx, info) => {
             const userId = ctx.userId;
-            return await ctx.db.updateStrategy({
-                where: {id: args.strategyId},
+            return await ctx.db.updateStrategyPattern({
+                where: {id: args.strategyPatternId},
                 data: args.data
             });
         }
     },
 
 
-    deleteStrategy: {
+    deleteStrategyPattern: {
         resolve: async (root, args,ctx, info) => {
-            return await ctx.db.deleteStrategy({
-                id: args.strategyId
+            return await ctx.db.deleteStrategyPattern({
+                id: args.strategyPatternId
             });
 
         }

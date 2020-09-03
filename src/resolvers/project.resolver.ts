@@ -1,6 +1,12 @@
+// only for getting intellisence -> does work without this 
+import { Prisma} from '../generated/prisma-client';
+export interface Context{
+    db: Prisma;
+  }
+
 export const ProjectQuery = {
     getProject: {
-        resolve: (root, args, ctx, info) => {
+        resolve: (root, args, ctx: Context, info) => {
             return ctx.db.project({id: args.id})
         }
     },
@@ -11,7 +17,7 @@ export const ProjectQuery = {
     // just request a field that resolves to a type without also indicating which fields of that type you want to get back.
     // solution: just speficy the field you want to have till it is a scalar/enum/string
     getAllProjects: {
-        resolve: (root, args, ctx, info) => {
+        resolve: (root, args, ctx: Context, info) => {
             return ctx.db.projects();
         }
     }

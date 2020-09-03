@@ -32,56 +32,109 @@ type Query {
   getAllCompanies: [Company!]!
 
 
+  getStrategy(id: ID!): Strategy!
+  getAllStrategies: [Strategy!]!
+
+  getStrategyPattern (id: ID!): Strategy!
+  getAllStrategyPatterns: [StrategyPattern!]!
+  getWeightBetweenStrategyAndPattern (strategy_id: ID!, pattern_id: ID!): [StrategyPattern!]!
+
+
+
 
   getActor(id: ID!): Actor!
   getAllActors: [Actor!]!
 
-
   getValueProposition(id: ID!): ValueProposition!
   getAllValuePropositions: [ValueProposition!]!
 
-  getStrategy(id: ID!): Strategy!
-  getAllStrategys: [Strategy!]!
+  getValueCreation(id: ID!): ValueCreation!
+  getAllValueCreations: [ValueCreation!]!
+
+  getValueDelivery(id: ID!): ValueDelivery!
+  getAllValueDeliveries: [ValueDelivery!]!
+
+  getRevenue(id: ID!): Revenue!
+  getAllRevenues: [Revenue!]!
+
+  getExpense(id: ID!): Expense!
+  getAllExpenses: [Expense!]!
+
+  getNetworkEffect(id: ID!): NetworkEffect!
+  getAllNetworkEffects: [NetworkEffect!]!
+
+  getRegulatory(id: ID!): Regulatory!
+  getAllRegulatories: [Regulatory!]!
+
+  getTechnicalInfrastructure(id: ID!): TechnicalInfrastructure!
+  getAllTechnicalInfrastructures: [TechnicalInfrastructure!]!
 
 }
 
 type Mutation {
-  """User registration"""
+
   registrate(data: NewUser!): User!
-  
-  """Delete User"""
   deleteUser: User
 
   createProject(name: String): Project!
-
   updateProject(projectId: ID!, data: ProjectUpdateInput!): Project!
-
   deleteProject(projectId: ID!): Project!
 
   createCanvas(data: CanvasCreateInput!): Canvas!
-
   updateCanvas(canvasId: ID!, data: CanvasUpdateInput!): Canvas!
-
   deleteCanvas(canvasId: ID!): Canvas!
 
+  createPattern(data: PatternCreateInput!): Pattern!
+  updatePattern(patternId: ID!, data: PatternUpdateInput!):Pattern!
+  deletePattern(patternId: ID!):Pattern!
+  
+  createStrategy(data: StrategyCreateInput!): Strategy!
+  updateStrategy(strategyId: ID!, data: StrategyUpdateInput!):Strategy!
+  deleteStrategy(strategyId: ID!):Strategy!
+
+  createStrategyPattern(data: StrategyPatternCreateInput!): StrategyPattern!
+  updateStrategyPattern(strategyPatternId: ID!, data: StrategyPatternUpdateInput!):StrategyPattern!
+  deleteStrategyPattern(strategyPatternId: ID!):StrategyPattern!
+
+
+
+
   createActor(data: ActorCreateInput!): Actor!
-
   updateActor(actorId: ID!, data: ActorUpdateInput!): Actor!
-
   deleteActor(actorId: ID!): Actor!
 
   createValueProposition(data: ValuePropositionCreateInput!): ValueProposition!
-  
   updateValueProposition(valuePropositionId: ID!, data: ValuePropositionUpdateInput!): ValueProposition!
-
   deleteValueProposition(valuePropositionId: ID!):ValueProposition!
 
-  createPattern(data: PatternCreateInput!): Pattern!
+  createValueCreation(data: ValueCreationCreateInput!): ValueCreation!
+  updateValueCreation(Id: ID!, data: ValueCreationUpdateInput!): ValueCreation!
+  deleteValueCreation(valueCreationId: ID!): ValueCreation!
 
-  updatePattern(patternId: ID!, data: PatternUpdateInput!):Pattern!
+  createValueDelivery(data: ValueDeliveryCreateInput!): ValueDelivery!
+  updateValueDelivery(Id: ID!, data: ValueDeliveryUpdateInput!): ValueDelivery!
+  deleteValueDelivery(Id: ID!): ValueDelivery!
 
-  deletePattern(patternId: ID!):Pattern!
-  
+  createRevenue(data: RevenueCreateInput!): Revenue!
+  updateRevenue(Id: ID!, data: RevenueUpdateInput!): Revenue!
+  deletRevenuee(Id: ID!): Revenue!
+
+  createExpense(data: ExpenseCreateInput!): Expense!
+  updateExpense(Id: ID!, data: ExpenseUpdateInput!): Expense!
+  deleteExpense(Id: ID!): Expense!
+
+  createNetworkEffect(data: NetworkEffectCreateInput!): NetworkEffect!
+  updateNetworkEffect(Id: ID!, data: NetworkEffectUpdateInput!): NetworkEffect!
+  deleteNetworkEffect(Id: ID!): NetworkEffect!
+
+  createRegulatory(data: RegulatoryCreateInput!): Regulatory!
+  updateRegulatory(Id: ID!, data: RegulatoryUpdateInput!): Regulatory!
+  deleteRegulatory(Id: ID!): Regulatory!
+
+  createTechnicalInfrastructure(data: TechnicalInfrastructureCreateInput!): TechnicalInfrastructure!
+  updateTechnicalInfrastructure(Id: ID!, data: TechnicalInfrastructureUpdateInput!): TechnicalInfrastructure!
+  deleteTechnicalInfrastructure(Id: ID!): TechnicalInfrastructure!
+
 }
 
 """

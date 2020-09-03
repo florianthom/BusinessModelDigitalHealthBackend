@@ -148,7 +148,7 @@ let testPatternUser1 = await prisma.createPattern({
   expenseWeight: 0,
   networkEffectWeight: 0,
   regulatoryWeight: 0,
-  technicalInfrastractureWeight: 0,
+  technicalInfrastructureWeight: 0,
 
   createdBy: {connect: {id: testUser1.id}},
   updatedBy: {connect: {id: testUser1.id}}
@@ -192,7 +192,7 @@ for (let i = 0; i < bmodelData.length; i++)
             expenseWeight: Number(bmodelData[i]["Ausgaben"]),
             networkEffectWeight: Number(bmodelData[i]["Netzwerkeffekte"]),
             regulatoryWeight: Number(bmodelData[i]["Regulatorisches"]),
-            technicalInfrastractureWeight: Number(bmodelData[i]["Technische Infrastruktur"]),
+            technicalInfrastructureWeight: Number(bmodelData[i]["Technische Infrastruktur"]),
             createdBy: {connect: {id: testUser1.id}},
             updatedBy: {connect: {id: testUser1.id}}
         })

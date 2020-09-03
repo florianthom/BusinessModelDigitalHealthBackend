@@ -28,8 +28,8 @@ export interface Exists {
   strategy: (where?: StrategyWhereInput) => Promise<boolean>;
   strategyPattern: (where?: StrategyPatternWhereInput) => Promise<boolean>;
   table: (where?: TableWhereInput) => Promise<boolean>;
-  technicalInfrastracture: (
-    where?: TechnicalInfrastractureWhereInput
+  technicalInfrastructure: (
+    where?: TechnicalInfrastructureWhereInput
   ) => Promise<boolean>;
   user: (where?: UserWhereInput) => Promise<boolean>;
   valueCreation: (where?: ValueCreationWhereInput) => Promise<boolean>;
@@ -288,27 +288,27 @@ export interface Prisma {
     first?: Int;
     last?: Int;
   }) => TableConnectionPromise;
-  technicalInfrastracture: (
-    where: TechnicalInfrastractureWhereUniqueInput
-  ) => TechnicalInfrastractureNullablePromise;
-  technicalInfrastractures: (args?: {
-    where?: TechnicalInfrastractureWhereInput;
-    orderBy?: TechnicalInfrastractureOrderByInput;
+  technicalInfrastructure: (
+    where: TechnicalInfrastructureWhereUniqueInput
+  ) => TechnicalInfrastructureNullablePromise;
+  technicalInfrastructures: (args?: {
+    where?: TechnicalInfrastructureWhereInput;
+    orderBy?: TechnicalInfrastructureOrderByInput;
     skip?: Int;
     after?: String;
     before?: String;
     first?: Int;
     last?: Int;
-  }) => FragmentableArray<TechnicalInfrastracture>;
-  technicalInfrastracturesConnection: (args?: {
-    where?: TechnicalInfrastractureWhereInput;
-    orderBy?: TechnicalInfrastractureOrderByInput;
+  }) => FragmentableArray<TechnicalInfrastructure>;
+  technicalInfrastructuresConnection: (args?: {
+    where?: TechnicalInfrastructureWhereInput;
+    orderBy?: TechnicalInfrastructureOrderByInput;
     skip?: Int;
     after?: String;
     before?: String;
     first?: Int;
     last?: Int;
-  }) => TechnicalInfrastractureConnectionPromise;
+  }) => TechnicalInfrastructureConnectionPromise;
   user: (where: UserWhereUniqueInput) => UserNullablePromise;
   users: (args?: {
     where?: UserWhereInput;
@@ -595,27 +595,27 @@ export interface Prisma {
   }) => TablePromise;
   deleteTable: (where: TableWhereUniqueInput) => TablePromise;
   deleteManyTables: (where?: TableWhereInput) => BatchPayloadPromise;
-  createTechnicalInfrastracture: (
-    data: TechnicalInfrastractureCreateInput
-  ) => TechnicalInfrastracturePromise;
-  updateTechnicalInfrastracture: (args: {
-    data: TechnicalInfrastractureUpdateInput;
-    where: TechnicalInfrastractureWhereUniqueInput;
-  }) => TechnicalInfrastracturePromise;
-  updateManyTechnicalInfrastractures: (args: {
-    data: TechnicalInfrastractureUpdateManyMutationInput;
-    where?: TechnicalInfrastractureWhereInput;
+  createTechnicalInfrastructure: (
+    data: TechnicalInfrastructureCreateInput
+  ) => TechnicalInfrastructurePromise;
+  updateTechnicalInfrastructure: (args: {
+    data: TechnicalInfrastructureUpdateInput;
+    where: TechnicalInfrastructureWhereUniqueInput;
+  }) => TechnicalInfrastructurePromise;
+  updateManyTechnicalInfrastructures: (args: {
+    data: TechnicalInfrastructureUpdateManyMutationInput;
+    where?: TechnicalInfrastructureWhereInput;
   }) => BatchPayloadPromise;
-  upsertTechnicalInfrastracture: (args: {
-    where: TechnicalInfrastractureWhereUniqueInput;
-    create: TechnicalInfrastractureCreateInput;
-    update: TechnicalInfrastractureUpdateInput;
-  }) => TechnicalInfrastracturePromise;
-  deleteTechnicalInfrastracture: (
-    where: TechnicalInfrastractureWhereUniqueInput
-  ) => TechnicalInfrastracturePromise;
-  deleteManyTechnicalInfrastractures: (
-    where?: TechnicalInfrastractureWhereInput
+  upsertTechnicalInfrastructure: (args: {
+    where: TechnicalInfrastructureWhereUniqueInput;
+    create: TechnicalInfrastructureCreateInput;
+    update: TechnicalInfrastructureUpdateInput;
+  }) => TechnicalInfrastructurePromise;
+  deleteTechnicalInfrastructure: (
+    where: TechnicalInfrastructureWhereUniqueInput
+  ) => TechnicalInfrastructurePromise;
+  deleteManyTechnicalInfrastructures: (
+    where?: TechnicalInfrastructureWhereInput
   ) => BatchPayloadPromise;
   createUser: (data: UserCreateInput) => UserPromise;
   updateUser: (args: {
@@ -740,9 +740,9 @@ export interface Subscription {
   table: (
     where?: TableSubscriptionWhereInput
   ) => TableSubscriptionPayloadSubscription;
-  technicalInfrastracture: (
-    where?: TechnicalInfrastractureSubscriptionWhereInput
-  ) => TechnicalInfrastractureSubscriptionPayloadSubscription;
+  technicalInfrastructure: (
+    where?: TechnicalInfrastructureSubscriptionWhereInput
+  ) => TechnicalInfrastructureSubscriptionPayloadSubscription;
   user: (
     where?: UserSubscriptionWhereInput
   ) => UserSubscriptionPayloadSubscription;
@@ -858,8 +858,8 @@ export type PatternOrderByInput =
   | "networkEffectWeight_DESC"
   | "regulatoryWeight_ASC"
   | "regulatoryWeight_DESC"
-  | "technicalInfrastractureWeight_ASC"
-  | "technicalInfrastractureWeight_DESC"
+  | "technicalInfrastructureWeight_ASC"
+  | "technicalInfrastructureWeight_DESC"
   | "createdAt_ASC"
   | "createdAt_DESC"
   | "updatedAt_ASC"
@@ -925,7 +925,7 @@ export type NetworkEffectOrderByInput =
   | "updatedAt_ASC"
   | "updatedAt_DESC";
 
-export type TechnicalInfrastractureOrderByInput =
+export type TechnicalInfrastructureOrderByInput =
   | "id_ASC"
   | "id_DESC"
   | "text_ASC"
@@ -1028,13 +1028,13 @@ export interface TableWhereInput {
   network_effect_entry_ids_some?: Maybe<NetworkEffectWhereInput>;
   network_effect_entry_ids_none?: Maybe<NetworkEffectWhereInput>;
   technical_infrastructure_entry_ids_every?: Maybe<
-    TechnicalInfrastractureWhereInput
+    TechnicalInfrastructureWhereInput
   >;
   technical_infrastructure_entry_ids_some?: Maybe<
-    TechnicalInfrastractureWhereInput
+    TechnicalInfrastructureWhereInput
   >;
   technical_infrastructure_entry_ids_none?: Maybe<
-    TechnicalInfrastractureWhereInput
+    TechnicalInfrastructureWhereInput
   >;
   regulatory_entry_ids_every?: Maybe<RegulatoryWhereInput>;
   regulatory_entry_ids_some?: Maybe<RegulatoryWhereInput>;
@@ -1592,14 +1592,14 @@ export interface PatternWhereInput {
   regulatoryWeight_lte?: Maybe<Int>;
   regulatoryWeight_gt?: Maybe<Int>;
   regulatoryWeight_gte?: Maybe<Int>;
-  technicalInfrastractureWeight?: Maybe<Int>;
-  technicalInfrastractureWeight_not?: Maybe<Int>;
-  technicalInfrastractureWeight_in?: Maybe<Int[] | Int>;
-  technicalInfrastractureWeight_not_in?: Maybe<Int[] | Int>;
-  technicalInfrastractureWeight_lt?: Maybe<Int>;
-  technicalInfrastractureWeight_lte?: Maybe<Int>;
-  technicalInfrastractureWeight_gt?: Maybe<Int>;
-  technicalInfrastractureWeight_gte?: Maybe<Int>;
+  technicalInfrastructureWeight?: Maybe<Int>;
+  technicalInfrastructureWeight_not?: Maybe<Int>;
+  technicalInfrastructureWeight_in?: Maybe<Int[] | Int>;
+  technicalInfrastructureWeight_not_in?: Maybe<Int[] | Int>;
+  technicalInfrastructureWeight_lt?: Maybe<Int>;
+  technicalInfrastructureWeight_lte?: Maybe<Int>;
+  technicalInfrastructureWeight_gt?: Maybe<Int>;
+  technicalInfrastructureWeight_gte?: Maybe<Int>;
   createdBy?: Maybe<UserWhereInput>;
   updatedBy?: Maybe<UserWhereInput>;
   createdAt?: Maybe<DateTimeInput>;
@@ -2104,7 +2104,7 @@ export interface NetworkEffectWhereInput {
   NOT?: Maybe<NetworkEffectWhereInput[] | NetworkEffectWhereInput>;
 }
 
-export interface TechnicalInfrastractureWhereInput {
+export interface TechnicalInfrastructureWhereInput {
   id?: Maybe<ID_Input>;
   id_not?: Maybe<ID_Input>;
   id_in?: Maybe<ID_Input[] | ID_Input>;
@@ -2169,13 +2169,13 @@ export interface TechnicalInfrastractureWhereInput {
   updatedAt_gt?: Maybe<DateTimeInput>;
   updatedAt_gte?: Maybe<DateTimeInput>;
   AND?: Maybe<
-    TechnicalInfrastractureWhereInput[] | TechnicalInfrastractureWhereInput
+    TechnicalInfrastructureWhereInput[] | TechnicalInfrastructureWhereInput
   >;
   OR?: Maybe<
-    TechnicalInfrastractureWhereInput[] | TechnicalInfrastractureWhereInput
+    TechnicalInfrastructureWhereInput[] | TechnicalInfrastructureWhereInput
   >;
   NOT?: Maybe<
-    TechnicalInfrastractureWhereInput[] | TechnicalInfrastractureWhereInput
+    TechnicalInfrastructureWhereInput[] | TechnicalInfrastructureWhereInput
   >;
 }
 
@@ -2292,7 +2292,7 @@ export type TableWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
 }>;
 
-export type TechnicalInfrastractureWhereUniqueInput = AtLeastOne<{
+export type TechnicalInfrastructureWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
 }>;
 
@@ -2347,7 +2347,7 @@ export interface TableCreateWithoutActor_entry_idsInput {
     NetworkEffectCreateManyWithoutTable_idsInput
   >;
   technical_infrastructure_entry_ids?: Maybe<
-    TechnicalInfrastractureCreateManyWithoutTable_idsInput
+    TechnicalInfrastructureCreateManyWithoutTable_idsInput
   >;
   regulatory_entry_ids?: Maybe<RegulatoryCreateManyWithoutTable_idsInput>;
 }
@@ -2473,7 +2473,7 @@ export interface PatternCreateWithoutStrategy_pattern_idsInput {
   expenseWeight?: Maybe<Int>;
   networkEffectWeight?: Maybe<Int>;
   regulatoryWeight?: Maybe<Int>;
-  technicalInfrastractureWeight?: Maybe<Int>;
+  technicalInfrastructureWeight?: Maybe<Int>;
   createdBy: UserCreateOneInput;
   updatedBy: UserCreateOneInput;
 }
@@ -2567,7 +2567,7 @@ export interface TableCreateInput {
     NetworkEffectCreateManyWithoutTable_idsInput
   >;
   technical_infrastructure_entry_ids?: Maybe<
-    TechnicalInfrastractureCreateManyWithoutTable_idsInput
+    TechnicalInfrastructureCreateManyWithoutTable_idsInput
   >;
   regulatory_entry_ids?: Maybe<RegulatoryCreateManyWithoutTable_idsInput>;
 }
@@ -2671,18 +2671,18 @@ export interface NetworkEffectCreateWithoutTable_idsInput {
   updatedBy: UserCreateOneInput;
 }
 
-export interface TechnicalInfrastractureCreateManyWithoutTable_idsInput {
+export interface TechnicalInfrastructureCreateManyWithoutTable_idsInput {
   create?: Maybe<
-    | TechnicalInfrastractureCreateWithoutTable_idsInput[]
-    | TechnicalInfrastractureCreateWithoutTable_idsInput
+    | TechnicalInfrastructureCreateWithoutTable_idsInput[]
+    | TechnicalInfrastructureCreateWithoutTable_idsInput
   >;
   connect?: Maybe<
-    | TechnicalInfrastractureWhereUniqueInput[]
-    | TechnicalInfrastractureWhereUniqueInput
+    | TechnicalInfrastructureWhereUniqueInput[]
+    | TechnicalInfrastructureWhereUniqueInput
   >;
 }
 
-export interface TechnicalInfrastractureCreateWithoutTable_idsInput {
+export interface TechnicalInfrastructureCreateWithoutTable_idsInput {
   id?: Maybe<ID_Input>;
   text: String;
   note?: Maybe<String>;
@@ -2742,7 +2742,7 @@ export interface PatternCreateWithoutCanvas_idsInput {
   expenseWeight?: Maybe<Int>;
   networkEffectWeight?: Maybe<Int>;
   regulatoryWeight?: Maybe<Int>;
-  technicalInfrastractureWeight?: Maybe<Int>;
+  technicalInfrastructureWeight?: Maybe<Int>;
   createdBy: UserCreateOneInput;
   updatedBy: UserCreateOneInput;
 }
@@ -2843,7 +2843,7 @@ export interface TableUpdateWithoutActor_entry_idsDataInput {
     NetworkEffectUpdateManyWithoutTable_idsInput
   >;
   technical_infrastructure_entry_ids?: Maybe<
-    TechnicalInfrastractureUpdateManyWithoutTable_idsInput
+    TechnicalInfrastructureUpdateManyWithoutTable_idsInput
   >;
   regulatory_entry_ids?: Maybe<RegulatoryUpdateManyWithoutTable_idsInput>;
 }
@@ -3070,7 +3070,7 @@ export interface PatternUpdateWithoutStrategy_pattern_idsDataInput {
   expenseWeight?: Maybe<Int>;
   networkEffectWeight?: Maybe<Int>;
   regulatoryWeight?: Maybe<Int>;
-  technicalInfrastractureWeight?: Maybe<Int>;
+  technicalInfrastructureWeight?: Maybe<Int>;
   createdBy?: Maybe<UserUpdateOneRequiredInput>;
   updatedBy?: Maybe<UserUpdateOneRequiredInput>;
 }
@@ -3205,7 +3205,7 @@ export interface TableUpdateDataInput {
     NetworkEffectUpdateManyWithoutTable_idsInput
   >;
   technical_infrastructure_entry_ids?: Maybe<
-    TechnicalInfrastractureUpdateManyWithoutTable_idsInput
+    TechnicalInfrastructureUpdateManyWithoutTable_idsInput
   >;
   regulatory_entry_ids?: Maybe<RegulatoryUpdateManyWithoutTable_idsInput>;
 }
@@ -3926,64 +3926,64 @@ export interface NetworkEffectUpdateManyDataInput {
   note?: Maybe<String>;
 }
 
-export interface TechnicalInfrastractureUpdateManyWithoutTable_idsInput {
+export interface TechnicalInfrastructureUpdateManyWithoutTable_idsInput {
   create?: Maybe<
-    | TechnicalInfrastractureCreateWithoutTable_idsInput[]
-    | TechnicalInfrastractureCreateWithoutTable_idsInput
+    | TechnicalInfrastructureCreateWithoutTable_idsInput[]
+    | TechnicalInfrastructureCreateWithoutTable_idsInput
   >;
   delete?: Maybe<
-    | TechnicalInfrastractureWhereUniqueInput[]
-    | TechnicalInfrastractureWhereUniqueInput
+    | TechnicalInfrastructureWhereUniqueInput[]
+    | TechnicalInfrastructureWhereUniqueInput
   >;
   connect?: Maybe<
-    | TechnicalInfrastractureWhereUniqueInput[]
-    | TechnicalInfrastractureWhereUniqueInput
+    | TechnicalInfrastructureWhereUniqueInput[]
+    | TechnicalInfrastructureWhereUniqueInput
   >;
   set?: Maybe<
-    | TechnicalInfrastractureWhereUniqueInput[]
-    | TechnicalInfrastractureWhereUniqueInput
+    | TechnicalInfrastructureWhereUniqueInput[]
+    | TechnicalInfrastructureWhereUniqueInput
   >;
   disconnect?: Maybe<
-    | TechnicalInfrastractureWhereUniqueInput[]
-    | TechnicalInfrastractureWhereUniqueInput
+    | TechnicalInfrastructureWhereUniqueInput[]
+    | TechnicalInfrastructureWhereUniqueInput
   >;
   update?: Maybe<
-    | TechnicalInfrastractureUpdateWithWhereUniqueWithoutTable_idsInput[]
-    | TechnicalInfrastractureUpdateWithWhereUniqueWithoutTable_idsInput
+    | TechnicalInfrastructureUpdateWithWhereUniqueWithoutTable_idsInput[]
+    | TechnicalInfrastructureUpdateWithWhereUniqueWithoutTable_idsInput
   >;
   upsert?: Maybe<
-    | TechnicalInfrastractureUpsertWithWhereUniqueWithoutTable_idsInput[]
-    | TechnicalInfrastractureUpsertWithWhereUniqueWithoutTable_idsInput
+    | TechnicalInfrastructureUpsertWithWhereUniqueWithoutTable_idsInput[]
+    | TechnicalInfrastructureUpsertWithWhereUniqueWithoutTable_idsInput
   >;
   deleteMany?: Maybe<
-    | TechnicalInfrastractureScalarWhereInput[]
-    | TechnicalInfrastractureScalarWhereInput
+    | TechnicalInfrastructureScalarWhereInput[]
+    | TechnicalInfrastructureScalarWhereInput
   >;
   updateMany?: Maybe<
-    | TechnicalInfrastractureUpdateManyWithWhereNestedInput[]
-    | TechnicalInfrastractureUpdateManyWithWhereNestedInput
+    | TechnicalInfrastructureUpdateManyWithWhereNestedInput[]
+    | TechnicalInfrastructureUpdateManyWithWhereNestedInput
   >;
 }
 
-export interface TechnicalInfrastractureUpdateWithWhereUniqueWithoutTable_idsInput {
-  where: TechnicalInfrastractureWhereUniqueInput;
-  data: TechnicalInfrastractureUpdateWithoutTable_idsDataInput;
+export interface TechnicalInfrastructureUpdateWithWhereUniqueWithoutTable_idsInput {
+  where: TechnicalInfrastructureWhereUniqueInput;
+  data: TechnicalInfrastructureUpdateWithoutTable_idsDataInput;
 }
 
-export interface TechnicalInfrastractureUpdateWithoutTable_idsDataInput {
+export interface TechnicalInfrastructureUpdateWithoutTable_idsDataInput {
   text?: Maybe<String>;
   note?: Maybe<String>;
   createdBy?: Maybe<UserUpdateOneRequiredInput>;
   updatedBy?: Maybe<UserUpdateOneRequiredInput>;
 }
 
-export interface TechnicalInfrastractureUpsertWithWhereUniqueWithoutTable_idsInput {
-  where: TechnicalInfrastractureWhereUniqueInput;
-  update: TechnicalInfrastractureUpdateWithoutTable_idsDataInput;
-  create: TechnicalInfrastractureCreateWithoutTable_idsInput;
+export interface TechnicalInfrastructureUpsertWithWhereUniqueWithoutTable_idsInput {
+  where: TechnicalInfrastructureWhereUniqueInput;
+  update: TechnicalInfrastructureUpdateWithoutTable_idsDataInput;
+  create: TechnicalInfrastructureCreateWithoutTable_idsInput;
 }
 
-export interface TechnicalInfrastractureScalarWhereInput {
+export interface TechnicalInfrastructureScalarWhereInput {
   id?: Maybe<ID_Input>;
   id_not?: Maybe<ID_Input>;
   id_in?: Maybe<ID_Input[] | ID_Input>;
@@ -4043,25 +4043,25 @@ export interface TechnicalInfrastractureScalarWhereInput {
   updatedAt_gt?: Maybe<DateTimeInput>;
   updatedAt_gte?: Maybe<DateTimeInput>;
   AND?: Maybe<
-    | TechnicalInfrastractureScalarWhereInput[]
-    | TechnicalInfrastractureScalarWhereInput
+    | TechnicalInfrastructureScalarWhereInput[]
+    | TechnicalInfrastructureScalarWhereInput
   >;
   OR?: Maybe<
-    | TechnicalInfrastractureScalarWhereInput[]
-    | TechnicalInfrastractureScalarWhereInput
+    | TechnicalInfrastructureScalarWhereInput[]
+    | TechnicalInfrastructureScalarWhereInput
   >;
   NOT?: Maybe<
-    | TechnicalInfrastractureScalarWhereInput[]
-    | TechnicalInfrastractureScalarWhereInput
+    | TechnicalInfrastructureScalarWhereInput[]
+    | TechnicalInfrastructureScalarWhereInput
   >;
 }
 
-export interface TechnicalInfrastractureUpdateManyWithWhereNestedInput {
-  where: TechnicalInfrastractureScalarWhereInput;
-  data: TechnicalInfrastractureUpdateManyDataInput;
+export interface TechnicalInfrastructureUpdateManyWithWhereNestedInput {
+  where: TechnicalInfrastructureScalarWhereInput;
+  data: TechnicalInfrastructureUpdateManyDataInput;
 }
 
-export interface TechnicalInfrastractureUpdateManyDataInput {
+export interface TechnicalInfrastructureUpdateManyDataInput {
   text?: Maybe<String>;
   note?: Maybe<String>;
 }
@@ -4483,7 +4483,7 @@ export interface PatternUpdateWithoutCanvas_idsDataInput {
   expenseWeight?: Maybe<Int>;
   networkEffectWeight?: Maybe<Int>;
   regulatoryWeight?: Maybe<Int>;
-  technicalInfrastractureWeight?: Maybe<Int>;
+  technicalInfrastructureWeight?: Maybe<Int>;
   createdBy?: Maybe<UserUpdateOneRequiredInput>;
   updatedBy?: Maybe<UserUpdateOneRequiredInput>;
 }
@@ -4716,14 +4716,14 @@ export interface PatternScalarWhereInput {
   regulatoryWeight_lte?: Maybe<Int>;
   regulatoryWeight_gt?: Maybe<Int>;
   regulatoryWeight_gte?: Maybe<Int>;
-  technicalInfrastractureWeight?: Maybe<Int>;
-  technicalInfrastractureWeight_not?: Maybe<Int>;
-  technicalInfrastractureWeight_in?: Maybe<Int[] | Int>;
-  technicalInfrastractureWeight_not_in?: Maybe<Int[] | Int>;
-  technicalInfrastractureWeight_lt?: Maybe<Int>;
-  technicalInfrastractureWeight_lte?: Maybe<Int>;
-  technicalInfrastractureWeight_gt?: Maybe<Int>;
-  technicalInfrastractureWeight_gte?: Maybe<Int>;
+  technicalInfrastructureWeight?: Maybe<Int>;
+  technicalInfrastructureWeight_not?: Maybe<Int>;
+  technicalInfrastructureWeight_in?: Maybe<Int[] | Int>;
+  technicalInfrastructureWeight_not_in?: Maybe<Int[] | Int>;
+  technicalInfrastructureWeight_lt?: Maybe<Int>;
+  technicalInfrastructureWeight_lte?: Maybe<Int>;
+  technicalInfrastructureWeight_gt?: Maybe<Int>;
+  technicalInfrastructureWeight_gte?: Maybe<Int>;
   createdAt?: Maybe<DateTimeInput>;
   createdAt_not?: Maybe<DateTimeInput>;
   createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
@@ -4761,7 +4761,7 @@ export interface PatternUpdateManyDataInput {
   expenseWeight?: Maybe<Int>;
   networkEffectWeight?: Maybe<Int>;
   regulatoryWeight?: Maybe<Int>;
-  technicalInfrastractureWeight?: Maybe<Int>;
+  technicalInfrastructureWeight?: Maybe<Int>;
 }
 
 export interface CanvasUpsertWithWhereUniqueWithoutProject_idInput {
@@ -5012,7 +5012,7 @@ export interface PatternCreateWithoutCompany_idsInput {
   expenseWeight?: Maybe<Int>;
   networkEffectWeight?: Maybe<Int>;
   regulatoryWeight?: Maybe<Int>;
-  technicalInfrastractureWeight?: Maybe<Int>;
+  technicalInfrastructureWeight?: Maybe<Int>;
   createdBy: UserCreateOneInput;
   updatedBy: UserCreateOneInput;
 }
@@ -5066,7 +5066,7 @@ export interface PatternUpdateWithoutCompany_idsDataInput {
   expenseWeight?: Maybe<Int>;
   networkEffectWeight?: Maybe<Int>;
   regulatoryWeight?: Maybe<Int>;
-  technicalInfrastractureWeight?: Maybe<Int>;
+  technicalInfrastructureWeight?: Maybe<Int>;
   createdBy?: Maybe<UserUpdateOneRequiredInput>;
   updatedBy?: Maybe<UserUpdateOneRequiredInput>;
 }
@@ -5116,7 +5116,7 @@ export interface TableCreateWithoutExpense_entry_idsInput {
     NetworkEffectCreateManyWithoutTable_idsInput
   >;
   technical_infrastructure_entry_ids?: Maybe<
-    TechnicalInfrastractureCreateManyWithoutTable_idsInput
+    TechnicalInfrastructureCreateManyWithoutTable_idsInput
   >;
   regulatory_entry_ids?: Maybe<RegulatoryCreateManyWithoutTable_idsInput>;
 }
@@ -5170,7 +5170,7 @@ export interface TableUpdateWithoutExpense_entry_idsDataInput {
     NetworkEffectUpdateManyWithoutTable_idsInput
   >;
   technical_infrastructure_entry_ids?: Maybe<
-    TechnicalInfrastractureUpdateManyWithoutTable_idsInput
+    TechnicalInfrastructureUpdateManyWithoutTable_idsInput
   >;
   regulatory_entry_ids?: Maybe<RegulatoryUpdateManyWithoutTable_idsInput>;
 }
@@ -5218,7 +5218,7 @@ export interface TableCreateWithoutNetwork_effect_entry_idsInput {
   revenue_entry_ids?: Maybe<RevenueCreateManyWithoutTable_idsInput>;
   expense_entry_ids?: Maybe<ExpenseCreateManyWithoutTable_idsInput>;
   technical_infrastructure_entry_ids?: Maybe<
-    TechnicalInfrastractureCreateManyWithoutTable_idsInput
+    TechnicalInfrastructureCreateManyWithoutTable_idsInput
   >;
   regulatory_entry_ids?: Maybe<RegulatoryCreateManyWithoutTable_idsInput>;
 }
@@ -5270,7 +5270,7 @@ export interface TableUpdateWithoutNetwork_effect_entry_idsDataInput {
   revenue_entry_ids?: Maybe<RevenueUpdateManyWithoutTable_idsInput>;
   expense_entry_ids?: Maybe<ExpenseUpdateManyWithoutTable_idsInput>;
   technical_infrastructure_entry_ids?: Maybe<
-    TechnicalInfrastractureUpdateManyWithoutTable_idsInput
+    TechnicalInfrastructureUpdateManyWithoutTable_idsInput
   >;
   regulatory_entry_ids?: Maybe<RegulatoryUpdateManyWithoutTable_idsInput>;
 }
@@ -5302,7 +5302,7 @@ export interface PatternCreateInput {
   expenseWeight?: Maybe<Int>;
   networkEffectWeight?: Maybe<Int>;
   regulatoryWeight?: Maybe<Int>;
-  technicalInfrastractureWeight?: Maybe<Int>;
+  technicalInfrastructureWeight?: Maybe<Int>;
   createdBy: UserCreateOneInput;
   updatedBy: UserCreateOneInput;
 }
@@ -5322,7 +5322,7 @@ export interface PatternUpdateInput {
   expenseWeight?: Maybe<Int>;
   networkEffectWeight?: Maybe<Int>;
   regulatoryWeight?: Maybe<Int>;
-  technicalInfrastractureWeight?: Maybe<Int>;
+  technicalInfrastructureWeight?: Maybe<Int>;
   createdBy?: Maybe<UserUpdateOneRequiredInput>;
   updatedBy?: Maybe<UserUpdateOneRequiredInput>;
 }
@@ -5338,7 +5338,7 @@ export interface PatternUpdateManyMutationInput {
   expenseWeight?: Maybe<Int>;
   networkEffectWeight?: Maybe<Int>;
   regulatoryWeight?: Maybe<Int>;
-  technicalInfrastractureWeight?: Maybe<Int>;
+  technicalInfrastructureWeight?: Maybe<Int>;
 }
 
 export interface ProjectCreateInput {
@@ -5397,7 +5397,7 @@ export interface TableCreateWithoutRegulatory_entry_idsInput {
     NetworkEffectCreateManyWithoutTable_idsInput
   >;
   technical_infrastructure_entry_ids?: Maybe<
-    TechnicalInfrastractureCreateManyWithoutTable_idsInput
+    TechnicalInfrastructureCreateManyWithoutTable_idsInput
   >;
 }
 
@@ -5451,7 +5451,7 @@ export interface TableUpdateWithoutRegulatory_entry_idsDataInput {
     NetworkEffectUpdateManyWithoutTable_idsInput
   >;
   technical_infrastructure_entry_ids?: Maybe<
-    TechnicalInfrastractureUpdateManyWithoutTable_idsInput
+    TechnicalInfrastructureUpdateManyWithoutTable_idsInput
   >;
 }
 
@@ -5500,7 +5500,7 @@ export interface TableCreateWithoutRevenue_entry_idsInput {
     NetworkEffectCreateManyWithoutTable_idsInput
   >;
   technical_infrastructure_entry_ids?: Maybe<
-    TechnicalInfrastractureCreateManyWithoutTable_idsInput
+    TechnicalInfrastructureCreateManyWithoutTable_idsInput
   >;
   regulatory_entry_ids?: Maybe<RegulatoryCreateManyWithoutTable_idsInput>;
 }
@@ -5554,7 +5554,7 @@ export interface TableUpdateWithoutRevenue_entry_idsDataInput {
     NetworkEffectUpdateManyWithoutTable_idsInput
   >;
   technical_infrastructure_entry_ids?: Maybe<
-    TechnicalInfrastractureUpdateManyWithoutTable_idsInput
+    TechnicalInfrastructureUpdateManyWithoutTable_idsInput
   >;
   regulatory_entry_ids?: Maybe<RegulatoryUpdateManyWithoutTable_idsInput>;
 }
@@ -5634,12 +5634,12 @@ export interface TableUpdateInput {
     NetworkEffectUpdateManyWithoutTable_idsInput
   >;
   technical_infrastructure_entry_ids?: Maybe<
-    TechnicalInfrastractureUpdateManyWithoutTable_idsInput
+    TechnicalInfrastructureUpdateManyWithoutTable_idsInput
   >;
   regulatory_entry_ids?: Maybe<RegulatoryUpdateManyWithoutTable_idsInput>;
 }
 
-export interface TechnicalInfrastractureCreateInput {
+export interface TechnicalInfrastructureCreateInput {
   id?: Maybe<ID_Input>;
   table_ids?: Maybe<
     TableCreateManyWithoutTechnical_infrastructure_entry_idsInput
@@ -5678,7 +5678,7 @@ export interface TableCreateWithoutTechnical_infrastructure_entry_idsInput {
   regulatory_entry_ids?: Maybe<RegulatoryCreateManyWithoutTable_idsInput>;
 }
 
-export interface TechnicalInfrastractureUpdateInput {
+export interface TechnicalInfrastructureUpdateInput {
   table_ids?: Maybe<
     TableUpdateManyWithoutTechnical_infrastructure_entry_idsInput
   >;
@@ -5738,7 +5738,7 @@ export interface TableUpsertWithWhereUniqueWithoutTechnical_infrastructure_entry
   create: TableCreateWithoutTechnical_infrastructure_entry_idsInput;
 }
 
-export interface TechnicalInfrastractureUpdateManyMutationInput {
+export interface TechnicalInfrastructureUpdateManyMutationInput {
   text?: Maybe<String>;
   note?: Maybe<String>;
 }
@@ -5799,7 +5799,7 @@ export interface TableCreateWithoutValue_creation_entry_idsInput {
     NetworkEffectCreateManyWithoutTable_idsInput
   >;
   technical_infrastructure_entry_ids?: Maybe<
-    TechnicalInfrastractureCreateManyWithoutTable_idsInput
+    TechnicalInfrastructureCreateManyWithoutTable_idsInput
   >;
   regulatory_entry_ids?: Maybe<RegulatoryCreateManyWithoutTable_idsInput>;
 }
@@ -5851,7 +5851,7 @@ export interface TableUpdateWithoutValue_creation_entry_idsDataInput {
     NetworkEffectUpdateManyWithoutTable_idsInput
   >;
   technical_infrastructure_entry_ids?: Maybe<
-    TechnicalInfrastractureUpdateManyWithoutTable_idsInput
+    TechnicalInfrastructureUpdateManyWithoutTable_idsInput
   >;
   regulatory_entry_ids?: Maybe<RegulatoryUpdateManyWithoutTable_idsInput>;
 }
@@ -5899,7 +5899,7 @@ export interface TableCreateWithoutValue_delivery_entry_idsInput {
     NetworkEffectCreateManyWithoutTable_idsInput
   >;
   technical_infrastructure_entry_ids?: Maybe<
-    TechnicalInfrastractureCreateManyWithoutTable_idsInput
+    TechnicalInfrastructureCreateManyWithoutTable_idsInput
   >;
   regulatory_entry_ids?: Maybe<RegulatoryCreateManyWithoutTable_idsInput>;
 }
@@ -5951,7 +5951,7 @@ export interface TableUpdateWithoutValue_delivery_entry_idsDataInput {
     NetworkEffectUpdateManyWithoutTable_idsInput
   >;
   technical_infrastructure_entry_ids?: Maybe<
-    TechnicalInfrastractureUpdateManyWithoutTable_idsInput
+    TechnicalInfrastructureUpdateManyWithoutTable_idsInput
   >;
   regulatory_entry_ids?: Maybe<RegulatoryUpdateManyWithoutTable_idsInput>;
 }
@@ -5999,7 +5999,7 @@ export interface TableCreateWithoutValue_proposition_entry_idsInput {
     NetworkEffectCreateManyWithoutTable_idsInput
   >;
   technical_infrastructure_entry_ids?: Maybe<
-    TechnicalInfrastractureCreateManyWithoutTable_idsInput
+    TechnicalInfrastructureCreateManyWithoutTable_idsInput
   >;
   regulatory_entry_ids?: Maybe<RegulatoryCreateManyWithoutTable_idsInput>;
 }
@@ -6051,7 +6051,7 @@ export interface TableUpdateWithoutValue_proposition_entry_idsDataInput {
     NetworkEffectUpdateManyWithoutTable_idsInput
   >;
   technical_infrastructure_entry_ids?: Maybe<
-    TechnicalInfrastractureUpdateManyWithoutTable_idsInput
+    TechnicalInfrastructureUpdateManyWithoutTable_idsInput
   >;
   regulatory_entry_ids?: Maybe<RegulatoryUpdateManyWithoutTable_idsInput>;
 }
@@ -6224,23 +6224,23 @@ export interface TableSubscriptionWhereInput {
   NOT?: Maybe<TableSubscriptionWhereInput[] | TableSubscriptionWhereInput>;
 }
 
-export interface TechnicalInfrastractureSubscriptionWhereInput {
+export interface TechnicalInfrastructureSubscriptionWhereInput {
   mutation_in?: Maybe<MutationType[] | MutationType>;
   updatedFields_contains?: Maybe<String>;
   updatedFields_contains_every?: Maybe<String[] | String>;
   updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<TechnicalInfrastractureWhereInput>;
+  node?: Maybe<TechnicalInfrastructureWhereInput>;
   AND?: Maybe<
-    | TechnicalInfrastractureSubscriptionWhereInput[]
-    | TechnicalInfrastractureSubscriptionWhereInput
+    | TechnicalInfrastructureSubscriptionWhereInput[]
+    | TechnicalInfrastructureSubscriptionWhereInput
   >;
   OR?: Maybe<
-    | TechnicalInfrastractureSubscriptionWhereInput[]
-    | TechnicalInfrastractureSubscriptionWhereInput
+    | TechnicalInfrastructureSubscriptionWhereInput[]
+    | TechnicalInfrastructureSubscriptionWhereInput
   >;
   NOT?: Maybe<
-    | TechnicalInfrastractureSubscriptionWhereInput[]
-    | TechnicalInfrastractureSubscriptionWhereInput
+    | TechnicalInfrastructureSubscriptionWhereInput[]
+    | TechnicalInfrastructureSubscriptionWhereInput
   >;
 }
 
@@ -6454,10 +6454,10 @@ export interface TablePromise extends Promise<Table>, Fragmentable {
     last?: Int;
   }) => T;
   technical_infrastructure_entry_ids: <
-    T = FragmentableArray<TechnicalInfrastracture>
+    T = FragmentableArray<TechnicalInfrastructure>
   >(args?: {
-    where?: TechnicalInfrastractureWhereInput;
-    orderBy?: TechnicalInfrastractureOrderByInput;
+    where?: TechnicalInfrastructureWhereInput;
+    orderBy?: TechnicalInfrastructureOrderByInput;
     skip?: Int;
     after?: String;
     before?: String;
@@ -6551,10 +6551,10 @@ export interface TableSubscription
     last?: Int;
   }) => T;
   technical_infrastructure_entry_ids: <
-    T = Promise<AsyncIterator<TechnicalInfrastractureSubscription>>
+    T = Promise<AsyncIterator<TechnicalInfrastructureSubscription>>
   >(args?: {
-    where?: TechnicalInfrastractureWhereInput;
-    orderBy?: TechnicalInfrastractureOrderByInput;
+    where?: TechnicalInfrastructureWhereInput;
+    orderBy?: TechnicalInfrastructureOrderByInput;
     skip?: Int;
     after?: String;
     before?: String;
@@ -6644,10 +6644,10 @@ export interface TableNullablePromise
     last?: Int;
   }) => T;
   technical_infrastructure_entry_ids: <
-    T = FragmentableArray<TechnicalInfrastracture>
+    T = FragmentableArray<TechnicalInfrastructure>
   >(args?: {
-    where?: TechnicalInfrastractureWhereInput;
-    orderBy?: TechnicalInfrastractureOrderByInput;
+    where?: TechnicalInfrastructureWhereInput;
+    orderBy?: TechnicalInfrastructureOrderByInput;
     skip?: Int;
     after?: String;
     before?: String;
@@ -7118,7 +7118,7 @@ export interface Pattern {
   expenseWeight?: Int;
   networkEffectWeight?: Int;
   regulatoryWeight?: Int;
-  technicalInfrastractureWeight?: Int;
+  technicalInfrastructureWeight?: Int;
   createdAt: DateTimeOutput;
   updatedAt: DateTimeOutput;
 }
@@ -7163,7 +7163,7 @@ export interface PatternPromise extends Promise<Pattern>, Fragmentable {
   expenseWeight: () => Promise<Int>;
   networkEffectWeight: () => Promise<Int>;
   regulatoryWeight: () => Promise<Int>;
-  technicalInfrastractureWeight: () => Promise<Int>;
+  technicalInfrastructureWeight: () => Promise<Int>;
   createdBy: <T = UserPromise>() => T;
   updatedBy: <T = UserPromise>() => T;
   createdAt: () => Promise<DateTimeOutput>;
@@ -7214,7 +7214,7 @@ export interface PatternSubscription
   expenseWeight: () => Promise<AsyncIterator<Int>>;
   networkEffectWeight: () => Promise<AsyncIterator<Int>>;
   regulatoryWeight: () => Promise<AsyncIterator<Int>>;
-  technicalInfrastractureWeight: () => Promise<AsyncIterator<Int>>;
+  technicalInfrastructureWeight: () => Promise<AsyncIterator<Int>>;
   createdBy: <T = UserSubscription>() => T;
   updatedBy: <T = UserSubscription>() => T;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
@@ -7263,7 +7263,7 @@ export interface PatternNullablePromise
   expenseWeight: () => Promise<Int>;
   networkEffectWeight: () => Promise<Int>;
   regulatoryWeight: () => Promise<Int>;
-  technicalInfrastractureWeight: () => Promise<Int>;
+  technicalInfrastructureWeight: () => Promise<Int>;
   createdBy: <T = UserPromise>() => T;
   updatedBy: <T = UserPromise>() => T;
   createdAt: () => Promise<DateTimeOutput>;
@@ -7684,7 +7684,7 @@ export interface NetworkEffectNullablePromise
   updatedAt: () => Promise<DateTimeOutput>;
 }
 
-export interface TechnicalInfrastracture {
+export interface TechnicalInfrastructure {
   id: ID_Output;
   text: String;
   note?: String;
@@ -7692,8 +7692,8 @@ export interface TechnicalInfrastracture {
   updatedAt: DateTimeOutput;
 }
 
-export interface TechnicalInfrastracturePromise
-  extends Promise<TechnicalInfrastracture>,
+export interface TechnicalInfrastructurePromise
+  extends Promise<TechnicalInfrastructure>,
     Fragmentable {
   id: () => Promise<ID_Output>;
   table_ids: <T = FragmentableArray<Table>>(args?: {
@@ -7713,8 +7713,8 @@ export interface TechnicalInfrastracturePromise
   updatedAt: () => Promise<DateTimeOutput>;
 }
 
-export interface TechnicalInfrastractureSubscription
-  extends Promise<AsyncIterator<TechnicalInfrastracture>>,
+export interface TechnicalInfrastructureSubscription
+  extends Promise<AsyncIterator<TechnicalInfrastructure>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   table_ids: <T = Promise<AsyncIterator<TableSubscription>>>(args?: {
@@ -7734,8 +7734,8 @@ export interface TechnicalInfrastractureSubscription
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
-export interface TechnicalInfrastractureNullablePromise
-  extends Promise<TechnicalInfrastracture | null>,
+export interface TechnicalInfrastructureNullablePromise
+  extends Promise<TechnicalInfrastructure | null>,
     Fragmentable {
   id: () => Promise<ID_Output>;
   table_ids: <T = FragmentableArray<Table>>(args?: {
@@ -8503,60 +8503,60 @@ export interface AggregateTableSubscription
   count: () => Promise<AsyncIterator<Int>>;
 }
 
-export interface TechnicalInfrastractureConnection {
+export interface TechnicalInfrastructureConnection {
   pageInfo: PageInfo;
-  edges: TechnicalInfrastractureEdge[];
+  edges: TechnicalInfrastructureEdge[];
 }
 
-export interface TechnicalInfrastractureConnectionPromise
-  extends Promise<TechnicalInfrastractureConnection>,
+export interface TechnicalInfrastructureConnectionPromise
+  extends Promise<TechnicalInfrastructureConnection>,
     Fragmentable {
   pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<TechnicalInfrastractureEdge>>() => T;
-  aggregate: <T = AggregateTechnicalInfrastracturePromise>() => T;
+  edges: <T = FragmentableArray<TechnicalInfrastructureEdge>>() => T;
+  aggregate: <T = AggregateTechnicalInfrastructurePromise>() => T;
 }
 
-export interface TechnicalInfrastractureConnectionSubscription
-  extends Promise<AsyncIterator<TechnicalInfrastractureConnection>>,
+export interface TechnicalInfrastructureConnectionSubscription
+  extends Promise<AsyncIterator<TechnicalInfrastructureConnection>>,
     Fragmentable {
   pageInfo: <T = PageInfoSubscription>() => T;
   edges: <
-    T = Promise<AsyncIterator<TechnicalInfrastractureEdgeSubscription>>
+    T = Promise<AsyncIterator<TechnicalInfrastructureEdgeSubscription>>
   >() => T;
-  aggregate: <T = AggregateTechnicalInfrastractureSubscription>() => T;
+  aggregate: <T = AggregateTechnicalInfrastructureSubscription>() => T;
 }
 
-export interface TechnicalInfrastractureEdge {
-  node: TechnicalInfrastracture;
+export interface TechnicalInfrastructureEdge {
+  node: TechnicalInfrastructure;
   cursor: String;
 }
 
-export interface TechnicalInfrastractureEdgePromise
-  extends Promise<TechnicalInfrastractureEdge>,
+export interface TechnicalInfrastructureEdgePromise
+  extends Promise<TechnicalInfrastructureEdge>,
     Fragmentable {
-  node: <T = TechnicalInfrastracturePromise>() => T;
+  node: <T = TechnicalInfrastructurePromise>() => T;
   cursor: () => Promise<String>;
 }
 
-export interface TechnicalInfrastractureEdgeSubscription
-  extends Promise<AsyncIterator<TechnicalInfrastractureEdge>>,
+export interface TechnicalInfrastructureEdgeSubscription
+  extends Promise<AsyncIterator<TechnicalInfrastructureEdge>>,
     Fragmentable {
-  node: <T = TechnicalInfrastractureSubscription>() => T;
+  node: <T = TechnicalInfrastructureSubscription>() => T;
   cursor: () => Promise<AsyncIterator<String>>;
 }
 
-export interface AggregateTechnicalInfrastracture {
+export interface AggregateTechnicalInfrastructure {
   count: Int;
 }
 
-export interface AggregateTechnicalInfrastracturePromise
-  extends Promise<AggregateTechnicalInfrastracture>,
+export interface AggregateTechnicalInfrastructurePromise
+  extends Promise<AggregateTechnicalInfrastructure>,
     Fragmentable {
   count: () => Promise<Int>;
 }
 
-export interface AggregateTechnicalInfrastractureSubscription
-  extends Promise<AsyncIterator<AggregateTechnicalInfrastracture>>,
+export interface AggregateTechnicalInfrastructureSubscription
+  extends Promise<AsyncIterator<AggregateTechnicalInfrastructure>>,
     Fragmentable {
   count: () => Promise<AsyncIterator<Int>>;
 }
@@ -9098,7 +9098,7 @@ export interface PatternPreviousValues {
   expenseWeight?: Int;
   networkEffectWeight?: Int;
   regulatoryWeight?: Int;
-  technicalInfrastractureWeight?: Int;
+  technicalInfrastructureWeight?: Int;
   createdAt: DateTimeOutput;
   updatedAt: DateTimeOutput;
 }
@@ -9117,7 +9117,7 @@ export interface PatternPreviousValuesPromise
   expenseWeight: () => Promise<Int>;
   networkEffectWeight: () => Promise<Int>;
   regulatoryWeight: () => Promise<Int>;
-  technicalInfrastractureWeight: () => Promise<Int>;
+  technicalInfrastructureWeight: () => Promise<Int>;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
 }
@@ -9136,7 +9136,7 @@ export interface PatternPreviousValuesSubscription
   expenseWeight: () => Promise<AsyncIterator<Int>>;
   networkEffectWeight: () => Promise<AsyncIterator<Int>>;
   regulatoryWeight: () => Promise<AsyncIterator<Int>>;
-  technicalInfrastractureWeight: () => Promise<AsyncIterator<Int>>;
+  technicalInfrastructureWeight: () => Promise<AsyncIterator<Int>>;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
@@ -9441,34 +9441,34 @@ export interface TablePreviousValuesSubscription
   id: () => Promise<AsyncIterator<ID_Output>>;
 }
 
-export interface TechnicalInfrastractureSubscriptionPayload {
+export interface TechnicalInfrastructureSubscriptionPayload {
   mutation: MutationType;
-  node: TechnicalInfrastracture;
+  node: TechnicalInfrastructure;
   updatedFields: String[];
-  previousValues: TechnicalInfrastracturePreviousValues;
+  previousValues: TechnicalInfrastructurePreviousValues;
 }
 
-export interface TechnicalInfrastractureSubscriptionPayloadPromise
-  extends Promise<TechnicalInfrastractureSubscriptionPayload>,
+export interface TechnicalInfrastructureSubscriptionPayloadPromise
+  extends Promise<TechnicalInfrastructureSubscriptionPayload>,
     Fragmentable {
   mutation: () => Promise<MutationType>;
-  node: <T = TechnicalInfrastracturePromise>() => T;
+  node: <T = TechnicalInfrastructurePromise>() => T;
   updatedFields: () => Promise<String[]>;
-  previousValues: <T = TechnicalInfrastracturePreviousValuesPromise>() => T;
+  previousValues: <T = TechnicalInfrastructurePreviousValuesPromise>() => T;
 }
 
-export interface TechnicalInfrastractureSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<TechnicalInfrastractureSubscriptionPayload>>,
+export interface TechnicalInfrastructureSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<TechnicalInfrastructureSubscriptionPayload>>,
     Fragmentable {
   mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = TechnicalInfrastractureSubscription>() => T;
+  node: <T = TechnicalInfrastructureSubscription>() => T;
   updatedFields: () => Promise<AsyncIterator<String[]>>;
   previousValues: <
-    T = TechnicalInfrastracturePreviousValuesSubscription
+    T = TechnicalInfrastructurePreviousValuesSubscription
   >() => T;
 }
 
-export interface TechnicalInfrastracturePreviousValues {
+export interface TechnicalInfrastructurePreviousValues {
   id: ID_Output;
   text: String;
   note?: String;
@@ -9476,8 +9476,8 @@ export interface TechnicalInfrastracturePreviousValues {
   updatedAt: DateTimeOutput;
 }
 
-export interface TechnicalInfrastracturePreviousValuesPromise
-  extends Promise<TechnicalInfrastracturePreviousValues>,
+export interface TechnicalInfrastructurePreviousValuesPromise
+  extends Promise<TechnicalInfrastructurePreviousValues>,
     Fragmentable {
   id: () => Promise<ID_Output>;
   text: () => Promise<String>;
@@ -9486,8 +9486,8 @@ export interface TechnicalInfrastracturePreviousValuesPromise
   updatedAt: () => Promise<DateTimeOutput>;
 }
 
-export interface TechnicalInfrastracturePreviousValuesSubscription
-  extends Promise<AsyncIterator<TechnicalInfrastracturePreviousValues>>,
+export interface TechnicalInfrastructurePreviousValuesSubscription
+  extends Promise<AsyncIterator<TechnicalInfrastructurePreviousValues>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   text: () => Promise<AsyncIterator<String>>;
@@ -9829,7 +9829,7 @@ export const models: Model[] = [
     embedded: false
   },
   {
-    name: "TechnicalInfrastracture",
+    name: "TechnicalInfrastructure",
     embedded: false
   },
   {
