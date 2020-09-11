@@ -2,22 +2,7 @@
 query {
 	getAllCanvases{
     table_id{
-      key_partner_entry_ids{
-        text
-        note
-        createdAt
-      }
-      reventue_stream_entry_ids{
-        text
-        note
-        createdAt
-      }
-      key_activity_entry_ids{
-        text
-        note
-        createdAt
-      }
-      customer_relationship_entry_ids{
+      actor_entry_ids{
         text
         note
         createdAt
@@ -27,22 +12,37 @@ query {
         note
         createdAt
       }
-      cost_structure_entry_ids{
+      value_creation_entry_ids{
         text
         note
         createdAt
       }
-      customer_segment_entry_ids{
+      value_delivery_entry_ids{
         text
         note
         createdAt
       }
-      key_resource_entry_ids{
+      revenue_entry_ids{
         text
         note
         createdAt
       }
-      channel_entry_ids{
+      expense_entry_ids{
+        text
+        note
+        createdAt
+      }
+      network_effect_entry_ids{
+        text
+        note
+        createdAt
+      }
+      technical_infrastructure_entry_ids{
+        text
+        note
+        createdAt
+      }
+      regulatory_entry_ids{
         text
         note
         createdAt
@@ -53,6 +53,7 @@ query {
 }
  */
 
+ 
 export const Table = {
     actor_entry_ids: (parent, args, ctx, info) => {
         return ctx.db.table({id: parent.id}).actor_entry_ids();

@@ -18,6 +18,15 @@ let testUser1 =  await prisma.createUser({
     project_ids: {}
 })
 
+let testUser2 =  await prisma.createUser({
+  firstName: 'firstnameTest2',
+  lastName: 'lastnameTest2',
+  email: 'test2@test2.de',
+  password: generateSHA512Hash('test1'),
+  role: "USER",
+  project_ids: {}
+})
+
 
 let testProjectUser1 = await prisma.createProject({
   user_id: {connect: {id: testUser1.id}},
@@ -32,6 +41,14 @@ let testProjectUser2 = await prisma.createProject({
   name: "TestProject2",
   createdBy: {connect: {id: testUser1.id}},
   updatedBy: {connect: {id: testUser1.id}}
+
+})
+
+let testProjectUser3 = await prisma.createProject({
+  user_id: {connect: {id: testUser2.id}},
+  name: "TestProject3",
+  createdBy: {connect: {id: testUser2.id}},
+  updatedBy: {connect: {id: testUser2.id}}
 
 })
 
@@ -84,16 +101,6 @@ for (let a = 1; a < strategyNames.length; a++)
   });
   tmpStrategies.push(tmpStrat);
 }
-
-// create Canvas and assign one random strategy to it
-let testCanvas1Project1 = await prisma.createCanvas({
-  name: "TestCanvas1",
-  project_id: {connect: {id: testProjectUser1.id}},
-  table_id: {connect: {id: testTableProject1.id}},
-  strategy_id: {connect: {id: tmpStrategies[0].id}},
-  createdBy: {connect: {id: testUser1.id}},
-  updatedBy: {connect: {id: testUser1.id}}
-})
 
 
 // start pattern definition
@@ -200,6 +207,8 @@ for (let i = 0; i < bmodelData.length; i++)
     );
 }
 
+
+
 // create StrategyPattern
 for (let a = 0; a < tmpPattern.length; a++)
 {
@@ -215,8 +224,17 @@ for (let a = 0; a < tmpPattern.length; a++)
   }
 }
 
-// strategy dem nutzer zuweisen
-
+// create Canvas and assign one random strategy to it
+// create canvas and assign one random pattern to it
+let testCanvas1Project1 = await prisma.createCanvas({
+  name: "TestCanvas1",
+  project_id: {connect: {id: testProjectUser1.id}},
+  table_id: {connect: {id: testTableProject1.id}},
+  pattern_ids: {connect:[ {id: tmpPattern[0].patternObject.id} ]},
+  strategy_id: {connect: {id: tmpStrategies[0].id}},
+  createdBy: {connect: {id: testUser1.id}},
+  updatedBy: {connect: {id: testUser1.id}}
+})
 
 
 // --------------------------------------------------------------------

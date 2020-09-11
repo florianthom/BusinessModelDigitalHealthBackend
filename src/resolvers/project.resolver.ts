@@ -1,8 +1,12 @@
 // only for getting intellisence -> does work without this 
-import { Prisma} from '../generated/prisma-client';
-export interface Context{
+import { Prisma, ID_Input} from '../generated/prisma-client';
+import { argsToArgsConfig } from 'graphql/type/definition';
+
+export interface Context
+{
     db: Prisma;
-  }
+    userId: ID_Input
+}
 
 export const ProjectQuery = {
     getProject: {
@@ -20,7 +24,22 @@ export const ProjectQuery = {
         resolve: (root, args, ctx: Context, info) => {
             return ctx.db.projects();
         }
-    }
+    },
+
+
+    getProjectOfUser: {
+        resolve: (root, args, ctx: Context, info) => {
+            const userId = ctx.userId;
+            return ctx.db.projects({where: {id: args.id, user_id: {id: userId}}}).then(a => a[0]);
+        }
+    },
+
+    getAllProjectsOfUser: {
+        resolve: (root, args, ctx, info) => {
+            const userId = ctx.userId;
+            return ctx.db.projects({where: {user_id: {id: userId}}});
+        }
+    },
 };
 
 

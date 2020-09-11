@@ -10,3 +10,4 @@ BusinessModelDigitalHealth-Backend
 // prisma reset
 // prisma deploy
 // prisma generate
+// prisma seed -r

@@ -5,6 +5,13 @@ import { generateSHA512Hash } from '../auth/Cryptography';
 import { createHtml, createVerification } from '../email/mailCreator';
 import { sendMail } from '../email/email';
 
+import { Prisma, ID_Input} from '../generated/prisma-client';
+
+export interface Context
+{
+    db: Prisma;
+    userId: ID_Input
+}
 
 export const UserQuery = {
     
@@ -56,7 +63,17 @@ export const UserQuery = {
         resolve: (root, args, ctx, info) => {
             return ctx.db.users();
         }
-    }
+    },
+
+    
+    // can be used, if current user is loggedin (and because of that, we can find his userId in the jwt)
+    // e.g. he will take a look at his profile, when he is logged in
+    getUserOfUser: {
+        resolve: (root, args, ctx: Context, info) => {
+            const userId = ctx.userId;
+            return ctx.db.user({id: userId})
+        }
+    },
 };
 
 

@@ -10,14 +10,20 @@ type Query {
 
   getUser(id: ID!) : User!
   getAllUsers: [User!]!
+  getUserOfUser: User!
 
 
-  getProject(id: ID!) : Project!
+  getProject(id: ID!): Project!
   getAllProjects: [Project!]!
+  getProjectOfUser(id: ID!): Project!
+  getAllProjectsOfUser: [Project!]!
 
 
   getCanvas(id: ID!) : Canvas!
   getAllCanvases: [Canvas!]!
+  getCanvasOfUser(id: ID!) : Canvas!
+  getAllCanvasesOfUser: [Canvas!]!
+  getCanvasesOfUserOfProject(project_id: ID!) : [Canvas!]!
 
 
   getPattern(id: ID!) : Pattern!
@@ -37,7 +43,9 @@ type Query {
 
   getStrategyPattern (id: ID!): Strategy!
   getAllStrategyPatterns: [StrategyPattern!]!
-  getWeightBetweenStrategyAndPattern (strategy_id: ID!, pattern_id: ID!): [StrategyPattern!]!
+  getWeightBetweenStrategyAndPatternByStrategyIdAndPatternId (strategy_id: ID!, pattern_id: ID!): StrategyPattern!
+  getWeightBetweenStrategyAndPatternByStrategyId(strategy_id: ID!): [StrategyPattern!]!
+  getWeightBetweenStrategyAndPatternByPatternId(pattern_id: ID!): [StrategyPattern!]!
 
 
 

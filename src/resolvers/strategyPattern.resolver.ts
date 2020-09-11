@@ -1,7 +1,8 @@
 import { Prisma} from '../generated/prisma-client';
-export interface Context{
+export interface Context
+{
     db: Prisma;
-  }
+}
 
 export const StrategyPatternQuery = {
     getStrategyPattern: {
@@ -16,16 +17,19 @@ export const StrategyPatternQuery = {
         }
     },
 
-    
+
+
+
+
     // query {
-    //     getWeightBetweenStrategyAndPattern(
+    //     getWeightBetweenStrategyAndPatternByStrategyIdAndPatternId(
     //       strategy_id: "ckel5xwak0eah078469c9j7cl",
     //       pattern_id: "ckel5xxfu0eda0784w8nmavl9"
     //     ){
     //       weight
     //     }
     //   }
-    getWeightBetweenStrategyAndPattern: {
+    getWeightBetweenStrategyAndPatternByStrategyIdAndPatternId: {
         resolve: (root, args, ctx : Context, info) => {
             return ctx.db.strategyPatterns({
                 where: {
@@ -38,7 +42,54 @@ export const StrategyPatternQuery = {
                         },
                     ],
                 },
-            });
+            })[0];
+        }
+    },
+
+    // query
+    // {
+    //   getWeightBetweenStrategyAndPatternByStrategyId(
+    //       strategy_id: "ckemqeh21002707341jm0yoxg"
+    //   )
+    //   {
+    //       pattern_id
+    //       {
+    //         name
+    //       }
+    //       strategy_id
+    //       {
+    //         name
+    //       }
+    //       weight
+    //   }
+    // }
+    getWeightBetweenStrategyAndPatternByStrategyId: {
+        resolve: (root, args, ctx : Context, info) => {
+            return ctx.db.strategyPatterns({where: {strategy_id: {id: args.strategy_id}}})
+        }
+    },
+
+
+    // query
+    // {
+    // getWeightBetweenStrategyAndPatternByPatternId(
+    //     pattern_id: "ckemqemma00be07344tleoml1"
+    // )
+    // {
+    //     pattern_id
+    //     {
+    //         name
+    //     }
+    //     strategy_id
+    //     {
+    //         name
+    //     }
+    //     weight
+    // }
+    // }
+    getWeightBetweenStrategyAndPatternByPatternId: {
+        resolve: (root, args, ctx : Context, info) => {
+            return ctx.db.strategyPatterns({where: {pattern_id: {id: args.pattern_id}}})
         }
     }
 

@@ -13,8 +13,7 @@
 // prisma token -> funktioniert nicht -> token muss mit "richtiger query geholt werden"
 
 // "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJja2VsNXh2ZXIwZTg2MDc4NHJlbGw0OXJpIiwiaWF0IjoxNTk5MDQzMzc1LCJleHAiOjE1OTkwODY1NzV9.NFzJZwxHZGo6SEaEpMjg5D1_K4gedFrnpxdU16CGIWw"
-// {"Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJja2VsNXh2ZXIwZTg2MDc4NHJlbGw0OXJpIiwiaWF0IjoxNTk5MTEzMzQzLCJleHAiOjE1OTkxNTY1NDN9.E19Dy2PLOoBqp6r89EJOhL_lJCxNIeqCj5S1fY7Pq50"}
-
+// {"Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJja2VtcWVnaHcwMDB2MDczNGFhem83N3QxIiwiaWF0IjoxNTk5NTYwNTc4LCJleHAiOjE1OTk2MDM3Nzh9.FY8bZp2uCX4wii8aSdDJwNvL67xt1Xbjc0fGFRsdp-o"}
 
 // query {
 //   getAllPattern
@@ -59,7 +58,7 @@ const server: ApolloServer = new ApolloServer({
         const response = {
             db: prisma,
             req: req,
-            userId: verifyToken(header, authRequired) // "ckarcrczl00080776jzr3qcyh" // verifyToken(header, authRequired)
+            userId: "ckex4pay500080798rhg5xtwk" //verifyToken(header, authRequired) // "ckarcrczl00080776jzr3qcyh" // verifyToken(header, authRequired)
         };
         return response;
     },

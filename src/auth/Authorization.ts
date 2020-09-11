@@ -14,15 +14,17 @@ const WHITELIST = [
  */    ];
 
 export const verifyToken = (authHeader: {authToken: string}, tokenRequired = true) => {
+    // console.log("hi");
     if (authHeader.authToken) {
+        console.log("hi2");
         const token = authHeader.authToken.replace('Bearer ', '');
         try {
             const decoded = jwt.verify(token, TOKEN_SECRET);
+            console.log(decoded.userId);
             return decoded.userId;
         }
         catch (err)
         {
-            console.log()
             if (tokenRequired)
             {
                 throw new AuthenticationError('Failed to verify token');
