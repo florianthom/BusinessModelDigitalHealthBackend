@@ -52,13 +52,13 @@ const server: ApolloServer = new ApolloServer({
             header.authToken = req.headers.authorization;
         } 
         // auth disabled for development
-        const authRequired = false;
-        // const authRequired = (connection) ? operationAuthorized(connection.query) : operationAuthorized(req.body.query);
+        // const authRequired = false;
+        const authRequired = (connection) ? operationAuthorized(connection.query) : operationAuthorized(req.body.query);
         console.log("auth required?: " + authRequired);
         const response = {
             db: prisma,
             req: req,
-            userId: "ckex4pay500080798rhg5xtwk" //verifyToken(header, authRequired) // "ckarcrczl00080776jzr3qcyh" // verifyToken(header, authRequired)
+            userId: verifyToken(header, authRequired) //"ckex4pay500080798rhg5xtwk" //verifyToken(header, authRequired) // "ckarcrczl00080776jzr3qcyh" // verifyToken(header, authRequired)
         };
         return response;
     },
@@ -78,11 +78,6 @@ const server: ApolloServer = new ApolloServer({
     introspection: true
 });
 
-// request without router class
-//app.get('/', function (req, res) {res.send('GET request to the homepage');});
-
-//app.use("/api/v1/tests", testRoutes);
-
 server.applyMiddleware({ app });
 
 // httpServer is created in app.listen(PORT, () => console.log("Server started on port " + PORT)); aswell
@@ -91,26 +86,4 @@ const httpServer = http.createServer(app);
 
 server.installSubscriptionHandlers(httpServer);
 
-// http://localhost:5000/graphql
-// {
-//     "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNqcDl2ZzY3YzAwMGkwOTUxMWo5cWlveXAiLCJpYXQiOjE1NDM5MzU5MjMsImV4cCI6MTU0NjUyNzkyM30.jzJTQdS2EDQdMF2gFiMrC2xboHXbSBB5lQQ0mOVLTcg"
-// }
 httpServer.listen(PORT, () => console.log("Server started on port " + PORT));
-
-/*
-
-query {
-  login (email: "hi", password: "asdf"){
-    user {
-      firstName
-    }
-  }
-}
-
-query {
-	getProject(id: "ckarcrd6q000g0776u88x800o"){
-    
-  }
-}
-
-*/
