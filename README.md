@@ -20,7 +20,7 @@ Web-App to explore and build business-model-pattern for your business in public 
 
 ```$ npm install -g ts-node```
 
-## Documentation: Angular Modules and Componentes
+## Documentation: Modules
 
 
 - src/
