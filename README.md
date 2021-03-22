@@ -2,6 +2,8 @@
 
 Web-App to explore and build business-model-pattern for your business in public health care. Create projects, manage your business-model-canvases and get inspired by existing patterns to support you in creating your own new business or scale / expand your current business. This Project is all about the back-end part of the project. The front-end part can be found  [here].
 
+![alt text](.github/images/image9.png)
+
 ## Prerequisites
 * Node v12+
 * a sense of Typescript
